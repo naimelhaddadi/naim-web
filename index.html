@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Naim El Haddadi — Ingeniería de Eficiencia Operativa</title>
+<meta name="description" content="Automatizo procesos complejos con Agentes de IA y desarrollo a medida. Recupera 20 horas semanales y duplica tu pipeline de ventas.">
+<meta name="author" content="Naim El Haddadi">
+<link rel="canonical" href="https://naimelhaddadi.com/">
+<meta property="og:title" content="Naim El Haddadi — Ingeniería de Eficiencia Operativa">
+<meta property="og:description" content="Automatizo procesos complejos con Agentes de IA y desarrollo a medida.">
+<meta property="og:url" content="https://naimelhaddadi.com/">
+<meta property="og:type" content="website">
+<meta property="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --white:#ffffff; --stone:#f7f6f3; --stone-2:#efeee9; --stone-3:#e0dfd8;
+  --ink:#12110f; --ink-2:#44423d; --ink-3:#908d86; --ink-4:#bfbdb8;
+  --blue:#1d4ed8; --blue-2:#2563eb; --blue-3:#3b82f6;
+  --blue-bg:#eff6ff; --blue-bd:#bfdbfe;
+  --green:#059669; --amber:#d97706;
+  --f-display:'Fraunces',serif; --f-body:'DM Sans',sans-serif; --f-mono:'JetBrains Mono',monospace;
+  --max:1120px; --r-sm:6px; --r-md:10px; --r-lg:16px; --r-xl:24px;
+  --sh-sm:0 1px 3px rgba(18,17,15,.07),0 1px 5px rgba(18,17,15,.04);
+  --sh-md:0 2px 10px rgba(18,17,15,.08),0 4px 24px rgba(18,17,15,.05);
+  --sh-lg:0 8px 36px rgba(18,17,15,.1),0 2px 8px rgba(18,17,15,.06);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:var(--f-body);border:none;background:none}
+::selection{background:var(--blue);color:#fff}
+
+.w{max-width:var(--max);margin:0 auto;padding:0 28px}
+.section{padding:88px 0}
+hr.rule{border:none;height:1px;background:var(--stone-3);margin:0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--stone-3);height:60px}
+.nav-i{max-width:var(--max);margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:-.01em}
+.nav-logo em{font-style:normal;color:var(--blue)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-size:14px;color:var(--ink-2);transition:color .15s}
+.nav-links a:hover{color:var(--blue)}
+.nav-btn{background:var(--blue);color:#fff;padding:8px 18px;border-radius:var(--r-md);font-size:14px;font-weight:500;transition:all .15s;box-shadow:0 1px 4px rgba(29,78,216,.3)}
+.nav-btn:hover{background:var(--blue-2);transform:translateY(-1px)}
+@media(max-width:768px){.nav-links{display:none}}
+
+/* HERO */
+#hero{padding:120px 0 80px;background:linear-gradient(160deg,var(--white) 55%,var(--stone) 100%);position:relative;overflow:hidden}
+#hero::after{content:'';position:absolute;top:-100px;right:-80px;width:460px;height:460px;background:radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none}
+.hero-grid{display:grid;grid-template-columns:1fr 460px;gap:64px;align-items:center}
+@media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
+
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-bd);padding:5px 13px;border-radius:40px;font-size:12px;font-weight:500;color:var(--blue-2);font-family:var(--f-mono);letter-spacing:.03em;margin-bottom:22px}
+.hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+h1.hero-name{font-family:var(--f-display);font-size:clamp(38px,5vw,64px);font-weight:700;line-height:1.0;letter-spacing:-.025em;margin-bottom:8px}
+.hero-role{font-family:var(--f-display);font-size:clamp(18px,2.2vw,26px);font-weight:300;font-style:italic;color:var(--blue);margin-bottom:20px}
+.hero-sub{font-size:17px;font-weight:300;color:var(--ink-2);line-height:1.75;max-width:520px;margin-bottom:34px}
+.hero-sub strong{color:var(--ink);font-weight:500}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-p{background:var(--blue);color:#fff;padding:13px 26px;border-radius:var(--r-md);font-weight:500;font-size:15px;transition:all .18s;box-shadow:0 2px 8px rgba(29,78,216,.25)}
+.btn-p:hover{background:var(--blue-2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(29,78,216,.3)}
+.btn-o{background:transparent;color:var(--ink-2);padding:13px 26px;border-radius:var(--r-md);font-size:15px;border:1px solid var(--stone-3);transition:all .18s}
+.btn-o:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid var(--stone-3);flex-wrap:wrap}
+.stat-n{font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--blue);letter-spacing:-.02em;line-height:1}
+.stat-l{font-size:13px;color:var(--ink-3);margin-top:3px}
+
+/* Hero card */
+.hero-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);padding:32px;box-shadow:var(--sh-lg);position:relative}
+.hero-card-lbl{position:absolute;top:-13px;left:26px;background:var(--white);border:1px solid var(--stone-3);border-radius:40px;padding:4px 14px;font-size:11px;font-family:var(--f-mono);color:var(--ink-3);box-shadow:var(--sh-sm)}
+.p-step{display:flex;gap:14px;align-items:flex-start}
+.p-num{width:30px;height:30px;flex-shrink:0;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--blue)}
+.p-label{font-size:14px;font-weight:500}
+.p-desc{font-size:13px;color:var(--ink-3);margin-top:1px}
+.p-line{width:1px;height:14px;background:var(--stone-3);margin:0 14px 0 14px}
+.stack-row{margin-top:24px;padding-top:18px;border-top:1px solid var(--stone-3)}
+.stack-lbl{font-size:12px;color:var(--ink-3);font-family:var(--f-mono);margin-bottom:8px}
+.tags-row{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:11px;font-family:var(--f-mono);background:var(--stone);border:1px solid var(--stone-3);padding:3px 9px;border-radius:20px;color:var(--ink-3)}
+.tag.b{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue-2)}
+
+/* TICKER */
+.ticker{border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3);padding:14px 0;overflow:hidden;background:var(--stone)}
+.ticker-i{display:flex;gap:0;animation:tick 32s linear infinite;width:max-content}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{font-family:var(--f-mono);font-size:12px;color:var(--ink-4);white-space:nowrap;padding:0 26px;border-right:1px solid var(--stone-3);display:flex;align-items:center;gap:8px}
+.tk::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue-3);flex-shrink:0}
+.tk.hi{color:var(--ink-3)}
+
+/* SECTION HEADER */
+.eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.eyebrow::before{content:'';width:18px;height:1px;background:var(--blue);flex-shrink:0}
+.h2-d{font-family:var(--f-display);font-size:clamp(32px,4.2vw,52px);font-weight:700;line-height:1.05;letter-spacing:-.025em}
+.s-lead{font-size:16px;font-weight:300;color:var(--ink-2);max-width:500px;margin-top:12px;line-height:1.75}
+
+/* PAIN */
+#pain{background:var(--stone)}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--stone-3);border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;margin-top:44px}
+@media(max-width:768px){.pain-grid{grid-template-columns:1fr}}
+.pi{background:var(--stone);padding:26px 22px;transition:background .2s}
+.pi:hover{background:var(--white)}
+.pi-icon{font-size:20px;margin-bottom:10px}
+.pi-t{font-size:14px;font-weight:600;margin-bottom:5px}
+.pi-d{font-size:13px;color:var(--ink-3);line-height:1.6}
+
+/* ROI */
+#roi{background:var(--white)}
+.roi-wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+@media(max-width:860px){.roi-wrap{grid-template-columns:1fr}}
+.roi-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);padding:34px;box-shadow:var(--sh-md)}
+.sl-lbl{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-2);margin-bottom:8px}
+.sl-val{font-family:var(--f-mono);font-size:12px;font-weight:500;color:var(--blue);background:var(--blue-bg);padding:2px 9px;border-radius:var(--r-sm)}
+.sg{margin-bottom:24px}
+input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:4px;background:var(--stone-3);border-radius:2px;outline:none;border:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--blue);cursor:pointer;border:3px solid var(--white);box-shadow:0 0 0 2px var(--blue),0 2px 6px rgba(29,78,216,.3);transition:transform .15s}
+input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
+.roi-bkdn{margin-top:20px;border-top:1px solid var(--stone-3);padding-top:16px;display:flex;flex-direction:column;gap:9px}
+.br{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.br-k{color:var(--ink-3)}
+.br-v{font-weight:500;font-family:var(--f-mono);font-size:12px}
+.br-v.pos{color:var(--green)}
+
+.roi-res{background:linear-gradient(135deg,var(--ink) 0%,#1e2535 100%);border-radius:var(--r-xl);padding:38px;color:#fff;position:relative;overflow:hidden}
+.roi-res::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,.2) 0%,transparent 70%)}
+.roi-res-lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
+.roi-res-n{font-family:var(--f-display);font-size:clamp(56px,8vw,88px);font-weight:700;line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:4px;transition:all .3s}
+.roi-res-sub{font-size:13px;color:rgba(255,255,255,.45);margin-bottom:24px}
+.roi-note{background:rgba(255,255,255,.07);border-radius:var(--r-md);padding:13px 15px;font-size:13px;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:22px}
+.roi-cta{display:block;text-align:center;background:var(--blue);color:#fff;padding:13px;border-radius:var(--r-md);font-weight:500;font-size:14px;transition:all .18s;box-shadow:0 2px 10px rgba(29,78,216,.4)}
+.roi-cta:hover{background:var(--blue-2);transform:translateY(-1px)}
+
+/* SERVICES */
+#services{background:var(--stone)}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:768px){.svc-grid{grid-template-columns:1fr}}
+.svc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:26px;transition:all .22s}
+.svc:hover{box-shadow:var(--sh-md);transform:translateY(-3px);border-color:var(--blue-bd)}
+.svc-num{font-family:var(--f-mono);font-size:11px;color:var(--ink-4);margin-bottom:16px}
+.svc-icon{width:42px;height:42px;border-radius:var(--r-md);background:var(--blue-bg);border:1px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px}
+.svc-t{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
+.svc-d{font-size:14px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
+
+/* CASES */
+#cases{background:var(--white)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:768px){.cases-grid{grid-template-columns:1fr}}
+.cc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;transition:all .22s}
+.cc:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+.cc-tag{font-size:11px;font-family:var(--f-mono);background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue-2);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:16px}
+.cc-n{font-family:var(--f-display);font-size:clamp(42px,5vw,58px);font-weight:700;color:var(--blue);line-height:1;letter-spacing:-.03em;margin-bottom:4px}
+.cc-m{font-size:11px;font-family:var(--f-mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
+.cc-d{font-size:13px;color:var(--ink-2);line-height:1.65;flex:1}
+.cc-f{margin-top:12px;padding-top:10px;border-top:1px solid var(--stone-3);font-size:11px;font-family:var(--f-mono);color:var(--ink-4)}
+
+/* PROCESS */
+#process{background:var(--stone)}
+.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;margin-top:44px}
+@media(max-width:768px){.proc-grid{grid-template-columns:1fr}}
+.proc{padding:30px 26px;background:var(--white);border-right:1px solid var(--stone-3);position:relative;transition:background .2s}
+.proc:last-child{border-right:none}
+.proc:hover{background:var(--stone)}
+.proc-n-bg{position:absolute;top:18px;right:20px;font-family:var(--f-display);font-size:58px;font-weight:700;color:var(--stone-2);line-height:1;letter-spacing:-.04em}
+.proc-badge{display:inline-flex;align-items:center;gap:5px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:20px;padding:3px 10px;font-family:var(--f-mono);font-size:11px;color:var(--blue-2);margin-bottom:12px}
+.proc-t{font-size:17px;font-weight:600;margin-bottom:7px;letter-spacing:-.01em}
+.proc-d{font-size:13px;color:var(--ink-2);line-height:1.65}
+.proc-items{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.proc-item{font-size:12px;color:var(--ink-3);display:flex;gap:7px;align-items:flex-start}
+.proc-item::before{content:'→';color:var(--blue);flex-shrink:0;font-weight:500}
+
+/* AI PLAYGROUND */
+#playground{background:var(--white)}
+.pg-grid{display:grid;grid-template-columns:1fr 470px;gap:48px;align-items:start}
+@media(max-width:960px){.pg-grid{grid-template-columns:1fr}}
+.pg-info{position:static}
+.pg-badge-live{display:inline-flex;align-items:center;gap:7px;background:#ecfdf5;border:1px solid #a7f3d0;padding:5px 13px;border-radius:40px;font-family:var(--f-mono);font-size:12px;color:var(--green);margin-bottom:18px}
+.pg-badge-live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite}
+.pg-h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,42px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1}
+.pg-desc{font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:22px}
+.code-box{background:var(--ink);border-radius:var(--r-lg);padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.8}
+.kw{color:#7dd3fc}.str{color:#86efac}.fn{color:#fbbf24}.cm{color:#475569;font-style:italic}
+.pg-pills{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.pg-pill{background:var(--stone);border:1px solid var(--stone-3);border-radius:var(--r-md);padding:10px 13px;font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
+.pg-pill::before{content:'✓';color:var(--green);font-weight:700;font-size:12px}
+
+.chat-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
+.chat-hd{background:var(--ink);padding:15px 18px;display:flex;align-items:center;gap:12px}
+.chat-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-3),#60a5fa);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.chat-nm{font-weight:600;font-size:14px;color:#fff}
+.chat-st{font-size:11px;color:#86efac;display:flex;align-items:center;gap:5px;font-family:var(--f-mono)}
+.chat-st::before{content:'';width:6px;height:6px;border-radius:50%;background:#10b981}
+.chat-msgs{height:300px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth;background:var(--stone)}
+.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-msgs::-webkit-scrollbar-thumb{background:var(--stone-3);border-radius:2px}
+.msg{display:flex;gap:8px;animation:mi .25s ease}
+@keyframes mi{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.msg.u{flex-direction:row-reverse}
+.bbl{max-width:80%;padding:10px 13px;border-radius:13px;font-size:14px;line-height:1.55}
+.msg.b .bbl{background:var(--white);color:var(--ink);border:1px solid var(--stone-3);border-bottom-left-radius:4px;box-shadow:var(--sh-sm)}
+.msg.u .bbl{background:var(--blue);color:#fff;border-bottom-right-radius:4px}
+.m-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;align-self:flex-end}
+.m-av.bot{background:linear-gradient(135deg,var(--blue-3),#60a5fa)}
+.m-av.usr{background:var(--stone-3);color:var(--ink-3)}
+.ty-b{background:var(--white);border:1px solid var(--stone-3);border-radius:13px;border-bottom-left-radius:4px;padding:11px 15px;display:flex;gap:4px;align-items:center;box-shadow:var(--sh-sm)}
+.ty-b span{width:6px;height:6px;border-radius:50%;background:var(--ink-4);animation:bl 1.2s ease infinite}
+.ty-b span:nth-child(2){animation-delay:.2s}
+.ty-b span:nth-child(3){animation-delay:.4s}
+@keyframes bl{0%,60%,100%{transform:none}30%{transform:translateY(-5px)}}
+.chat-opts{padding:9px 15px;background:var(--white);border-top:1px solid var(--stone-3);display:flex;flex-wrap:wrap;gap:6px}
+.co{font-size:12px;padding:5px 11px;border:1px solid var(--stone-3);border-radius:20px;color:var(--ink-2);background:transparent;transition:all .15s;cursor:pointer;font-family:var(--f-body)}
+.co:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
+.chat-in-r{padding:13px 15px;background:var(--white);border-top:1px solid var(--stone-3);display:flex;gap:8px;align-items:center}
+.ci{flex:1;background:var(--stone);border:1px solid var(--stone-3);color:var(--ink);padding:9px 13px;border-radius:var(--r-md);font-size:14px;font-family:var(--f-body);outline:none;transition:border-color .15s}
+.ci:focus{border-color:var(--blue);background:var(--white)}
+.ci::placeholder{color:var(--ink-4)}
+.cs{background:var(--blue);color:#fff;width:37px;height:37px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all .15s;cursor:pointer;border:none}
+.cs:hover{background:var(--blue-2)}
+.cs:disabled{opacity:.35;cursor:default}
+.chat-mdl{padding:8px 15px;background:var(--stone);border-top:1px solid var(--stone-3);font-size:11px;font-family:var(--f-mono);color:var(--ink-4);display:flex;align-items:center;gap:5px}
+.chat-mdl::before{content:'⚡'}
+
+/* CONTACT */
+#contact{background:var(--stone)}
+.ct-wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+@media(max-width:900px){.ct-wrap{grid-template-columns:1fr}}
+.ct-hl{margin:22px 0;padding:16px 18px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r-md);border-left:3px solid var(--blue);font-size:14px;color:var(--ink-2);line-height:1.7}
+.ct-hl strong{color:var(--ink)}
+.c-links{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.cl{display:flex;align-items:center;gap:11px;padding:12px 15px;background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-md);font-size:14px;color:var(--ink-2);transition:all .15s}
+.cl:hover{border-color:var(--blue);color:var(--blue)}
+.cl-ico{width:30px;height:30px;border-radius:var(--r-sm);background:var(--stone);border:1px solid var(--stone-3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.fc-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);padding:34px;box-shadow:var(--sh-md)}
+.fg{margin-bottom:14px;display:flex;flex-direction:column;gap:5px}
+.fg label{font-size:13px;font-weight:500;color:var(--ink-2)}
+.fc{background:var(--stone);border:1px solid var(--stone-3);color:var(--ink);padding:10px 13px;border-radius:var(--r-md);font-size:14px;font-family:var(--f-body);outline:none;width:100%;transition:all .15s}
+.fc:focus{border-color:var(--blue);background:var(--white);box-shadow:0 0 0 3px rgba(29,78,216,.08)}
+.fc::placeholder{color:var(--ink-4)}
+textarea.fc{resize:vertical;min-height:86px}
+select.fc option{background:var(--white)}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+@media(max-width:600px){.f2{grid-template-columns:1fr}}
+.f-btn{width:100%;background:var(--blue);color:#fff;padding:13px;border-radius:var(--r-md);font-weight:500;font-size:15px;font-family:var(--f-body);cursor:pointer;border:none;transition:all .18s;box-shadow:0 2px 8px rgba(29,78,216,.25);margin-top:4px}
+.f-btn:hover{background:var(--blue-2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,78,216,.3)}
+.f-note{text-align:center;font-size:12px;color:var(--ink-4);margin-top:9px;font-family:var(--f-mono)}
+
+/* FOOTER */
+footer{background:var(--ink);color:#fff;padding:44px 0 32px}
+.ft-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.1)}
+.ft-logo{font-family:var(--f-display);font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:5px}
+.ft-logo span{color:var(--blue-3)}
+.ft-domain{font-family:var(--f-mono);font-size:14px;font-weight:500;color:var(--blue-3);margin-bottom:8px;letter-spacing:.01em}
+.ft-tagline{font-size:13px;color:rgba(255,255,255,.4);max-width:300px;line-height:1.6}
+.ft-links{display:flex;gap:12px;flex-wrap:wrap}
+.ftl{display:flex;align-items:center;gap:6px;font-size:13px;color:rgba(255,255,255,.45);padding:7px 13px;border:1px solid rgba(255,255,255,.1);border-radius:var(--r-md);transition:all .15s}
+.ftl:hover{color:#fff;border-color:rgba(255,255,255,.3)}
+.ft-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap;gap:10px}
+.ft-copy{font-size:12px;color:rgba(255,255,255,.28);font-family:var(--f-mono)}
+.ft-stack{font-size:12px;color:rgba(255,255,255,.2);font-family:var(--f-mono)}
+
+/* REVEAL — visible by default, animates in on scroll */
+.rv{opacity:1;transform:none}
+.rv.rv-hidden{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+.rv.rv-hidden[data-d="1"]{transition-delay:.1s}
+.rv.rv-hidden[data-d="2"]{transition-delay:.2s}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-i">
+    <a href="/" class="nav-logo">Naim<em>.</em></a>
+    <ul class="nav-links">
+      <li><a href="#roi">ROI</a></li>
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#playground">AI Demo</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="w">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-badge">Disponible · Madrid &amp; Remoto · 2025</div>
+        <h1 class="hero-name">Naim El Haddadi</h1>
+        <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
+        <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong> y desarrollo a medida. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
+        <div class="hero-btns">
+          <a href="#contact" class="btn-p">Agendar diagnóstico gratis →</a>
+          <a href="#roi" class="btn-o">Calcular mi ROI</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
+          <div><div class="stat-n">72h</div><div class="stat-l">hasta primer piloto</div></div>
+          <div><div class="stat-n">3×</div><div class="stat-l">ROI promedio</div></div>
+          <div><div class="stat-n">€15k</div><div class="stat-l">ahorro/mes real</div></div>
+        </div>
+      </div>
+      <div class="hero-card rv" data-d="1">
+        <div class="hero-card-lbl">Metodología probada</div>
+        <div style="display:flex;flex-direction:column;gap:0">
+          <div class="p-step"><div class="p-num">01</div><div><div class="p-label">Descubrimiento</div><div class="p-desc">Auditoría de procesos y ROI real</div></div></div>
+          <div class="p-line"></div>
+          <div class="p-step"><div class="p-num">02</div><div><div class="p-label">Piloto en 72h</div><div class="p-desc">MVP funcional y medible</div></div></div>
+          <div class="p-line"></div>
+          <div class="p-step"><div class="p-num">03</div><div><div class="p-label">Implementación</div><div class="p-desc">Deploy, formación y soporte</div></div></div>
+          <div class="p-line"></div>
+          <div class="p-step"><div class="p-num">04</div><div><div class="p-label">Optimización</div><div class="p-desc">El sistema mejora cada semana</div></div></div>
+        </div>
+        <div class="stack-row">
+          <div class="stack-lbl">Stack técnico</div>
+          <div class="tags-row">
+            <span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag b">LangChain</span><span class="tag">Supabase</span><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">Tailwind</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-i">
+    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Radix UI</span><span class="tk hi">Vercel Edge</span><span class="tk">PostgreSQL</span><span class="tk hi">n8n</span><span class="tk">Lighthouse 100/100</span><span class="tk hi">App Router</span><span class="tk">Zod</span>
+    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Radix UI</span><span class="tk hi">Vercel Edge</span><span class="tk">PostgreSQL</span><span class="tk hi">n8n</span><span class="tk">Lighthouse 100/100</span><span class="tk hi">App Router</span><span class="tk">Zod</span>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section id="pain" class="section">
+  <div class="w">
+    <div class="rv"><div class="eyebrow">El Problema</div><h2 class="h2-d">¿Cuánto te cuesta operar a mano?</h2><p class="s-lead">Cada hora en tareas repetitivas es dinero que no se invierte en crecer.</p></div>
+    <div class="pain-grid rv" data-d="1">
+      <div class="pi"><div class="pi-icon">📋</div><div class="pi-t">Tareas manuales interminables</div><div class="pi-d">Tu equipo copia datos entre sistemas y responde las mismas preguntas cada día.</div></div>
+      <div class="pi"><div class="pi-icon">💀</div><div class="pi-t">CRM desactualizado</div><div class="pi-d">Los leads caen en el vacío. No sabes quién está listo para comprar.</div></div>
+      <div class="pi"><div class="pi-icon">⏳</div><div class="pi-t">Soporte lento y costoso</div><div class="pi-d">El 80% de preguntas son siempre las mismas. Tu equipo las responde una a una.</div></div>
+      <div class="pi"><div class="pi-icon">📉</div><div class="pi-t">Pipeline estancado</div><div class="pi-d">Nadie hace seguimiento en las primeras 2 horas. La oportunidad se pierde.</div></div>
+      <div class="pi"><div class="pi-icon">🔌</div><div class="pi-t">Herramientas desconectadas</div><div class="pi-d">Tu web, CRM y facturación no se hablan. Los datos viven en silos.</div></div>
+      <div class="pi"><div class="pi-icon">🔥</div><div class="pi-t">Siempre apagando incendios</div><div class="pi-d">Sin sistemas automáticos el día a día absorbe todo. No hay margen para escalar.</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ROI CALCULATOR -->
+<section id="roi" class="section">
+  <div class="w">
+    <div class="rv"><div class="eyebrow">Calculadora de ROI</div><h2 class="h2-d">Cuánto dinero estás<br>dejando sobre la mesa</h2><p class="s-lead">Desliza los sliders y ve el impacto económico real de automatizar tus operaciones.</p></div>
+    <div class="roi-wrap" style="margin-top:44px">
+      <div class="roi-card rv" data-d="1">
+        <div class="sg"><div class="sl-lbl"><span>Horas manuales al día</span><span class="sl-val" id="vH">4h</span></div><input type="range" id="sH" min="1" max="12" value="4" step="0.5" oninput="calcROI()"></div>
+        <div class="sg"><div class="sl-lbl"><span>Coste por hora (€)</span><span class="sl-val" id="vR">25€/h</span></div><input type="range" id="sR" min="10" max="100" value="25" step="5" oninput="calcROI()"></div>
+        <div class="sg"><div class="sl-lbl"><span>Personas en el equipo</span><span class="sl-val" id="vT">3</span></div><input type="range" id="sT" min="1" max="20" value="3" step="1" oninput="calcROI()"></div>
+        <div class="sg"><div class="sl-lbl"><span>% tareas automatizables</span><span class="sl-val" id="vA">70%</span></div><input type="range" id="sA" min="30" max="95" value="70" step="5" oninput="calcROI()"></div>
+        <div class="roi-bkdn">
+          <div class="br"><span class="br-k">Coste manual anual</span><span class="br-v" id="bM">—</span></div>
+          <div class="br"><span class="br-k">Inversión piloto (est.)</span><span class="br-v" id="bI">—</span></div>
+          <div class="br"><span class="br-k">Ahorro neto año 1</span><span class="br-v pos" id="bN">—</span></div>
+        </div>
+      </div>
+      <div class="rv" data-d="2">
+        <div class="roi-res">
+          <div class="roi-res-lbl">Ahorro anual estimado</div>
+          <div class="roi-res-n" id="roiN">€0</div>
+          <div class="roi-res-sub">recuperados automatizando</div>
+          <div class="roi-note">💡 <strong>Estimación conservadora.</strong> El ROI real incluye reducción de errores y capacidad de escala sin contratar más personal.</div>
+          <a href="#contact" class="roi-cta">Quiero recuperar este dinero →</a>
+        </div>
+        <div style="margin-top:16px;padding:14px 18px;background:var(--stone);border:1px solid var(--stone-3);border-radius:var(--r-lg)">
+          <div style="font-size:13px;color:var(--ink-2);line-height:1.65">📊 El diagnóstico incluye un <strong>análisis de ROI detallado</strong> para tu caso específico.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- SERVICES -->
+<section id="services" class="section">
+  <div class="w">
+    <div class="rv"><div class="eyebrow">La Solución</div><h2 class="h2-d">Sistemas que trabajan<br>mientras tú creces</h2></div>
+    <div class="svc-grid">
+      <article class="svc rv" data-d="1">
+        <div class="svc-num">01 / 03</div>
+        <div class="svc-icon">🤖</div>
+        <h3 class="svc-t">Sistemas de IA Agéntica</h3>
+        <p class="svc-d">Agentes que <strong>ejecutan tareas</strong>, no solo responden. Cualifican leads, agendan citas y actualizan el CRM — autónomos, 24/7.</p>
+        <div class="tags-row"><span class="tag b">LangChain</span><span class="tag b">OpenAI</span><span class="tag">n8n</span><span class="tag">Webhooks</span></div>
+      </article>
+      <article class="svc rv" data-d="2">
+        <div class="svc-num">02 / 03</div>
+        <div class="svc-icon">⚡</div>
+        <h3 class="svc-t">Desarrollo Web de Alto Rendimiento</h3>
+        <p class="svc-d">Dashboards y herramientas con Next.js 14 y TypeScript. <strong>100/100 en Lighthouse.</strong> Diseño que convierte.</p>
+        <div class="tags-row"><span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag">Tailwind</span><span class="tag">Supabase</span></div>
+      </article>
+      <article class="svc rv" data-d="1">
+        <div class="svc-num">03 / 03</div>
+        <div class="svc-icon">🔗</div>
+        <h3 class="svc-t">Integración de Ecosistemas</h3>
+        <p class="svc-d">CRM, ERP, WhatsApp y calendarios conectados. Un dato entra una vez y <strong>fluye automáticamente</strong> por todo tu stack.</p>
+        <div class="tags-row"><span class="tag b">REST API</span><span class="tag">Google APIs</span><span class="tag">Stripe</span><span class="tag">Zapier</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CASES -->
+<section id="cases" class="section" style="background:var(--stone)">
+  <div class="w">
+    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:0">
+      <div><div class="eyebrow">Casos Reales</div><h2 class="h2-d">Resultados medibles,<br>no promesas</h2></div>
+      <p style="font-size:14px;color:var(--ink-2);max-width:300px;line-height:1.7">Referencias disponibles bajo petición. Nombres anonimizados por NDA.</p>
+    </div>
+    <div class="cases-grid">
+      <article class="cc rv" data-d="1"><span class="cc-tag">SaaS B2B</span><div class="cc-n">€15k</div><div class="cc-m">ahorro mensual</div><p class="cc-d">Pipeline automatizado con agente IA que cualifica leads en tiempo real y agenda demos sin intervención comercial.</p><div class="cc-f">// Empresa X · Madrid · 2024</div></article>
+      <article class="cc rv" data-d="2"><span class="cc-tag">E-commerce</span><div class="cc-n">+340%</div><div class="cc-m">conversión leads</div><p class="cc-d">Follow-up automático post-visita con secuencias personalizadas basadas en comportamiento de navegación.</p><div class="cc-f">// Empresa Y · Barcelona · 2024</div></article>
+      <article class="cc rv" data-d="1"><span class="cc-tag">Consultoría</span><div class="cc-n">22h</div><div class="cc-m">recuperadas / semana</div><p class="cc-d">Dashboard integrado con Notion, Slack y facturación automática. El equipo eliminó todos los reportes manuales.</p><div class="cc-f">// Empresa Z · Remoto · 2024</div></article>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- PROCESS -->
+<section id="process" class="section">
+  <div class="w">
+    <div class="rv"><div class="eyebrow">Cómo Trabajo</div><h2 class="h2-d">Sin cajas negras,<br>sin sorpresas</h2></div>
+    <div class="proc-grid rv" data-d="1">
+      <div class="proc"><div class="proc-n-bg">01</div><div class="proc-badge">Semana 1</div><h3 class="proc-t">Descubrimiento</h3><p class="proc-d">Auditoría de procesos, cuellos de botella y estimación de ROI real.</p><div class="proc-items"><div class="proc-item">Entrevistas con el equipo</div><div class="proc-item">Mapeo de flujos</div><div class="proc-item">Propuesta técnica</div></div></div>
+      <div class="proc"><div class="proc-n-bg">02</div><div class="proc-badge">Semana 2–3</div><h3 class="proc-t">Piloto</h3><p class="proc-d">MVP funcional en 72h. Real, medible y ajustable desde el primer día.</p><div class="proc-items"><div class="proc-item">Prototipo en 72h</div><div class="proc-item">Iteración rápida</div><div class="proc-item">Métricas desde día 1</div></div></div>
+      <div class="proc" style="border-right:none"><div class="proc-n-bg">03</div><div class="proc-badge">Semana 4+</div><h3 class="proc-t">Implementación</h3><p class="proc-d">Deploy, formación del equipo y monitoreo continuo. El sistema mejora con el tiempo.</p><div class="proc-items"><div class="proc-item">Deploy en producción</div><div class="proc-item">Formación del equipo</div><div class="proc-item">Soporte continuo</div></div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- AI PLAYGROUND -->
+<section id="playground" class="section">
+  <div class="w">
+    <!-- Header: full width, above the grid -->
+    <div class="rv" style="margin-bottom:40px">
+      <div class="pg-badge-live">AI Playground — Demo en vivo</div>
+      <h2 class="pg-h2">Habla con el agente.<br>Ve cómo funciona.</h2>
+      <p class="pg-desc" style="max-width:600px">Este chat demuestra cómo construyo sistemas de IA conversacional: streaming token a token, manejo de estados y prompt engineering — el mismo patrón que implemento en proyectos reales.</p>
+    </div>
+
+    <!-- Two columns: code info left, chat right -->
+    <div class="pg-grid">
+      <div class="pg-info rv">
+        <div class="code-box">
+<span class="cm">// app/api/chat/route.ts — Edge Runtime</span>
+<span class="kw">export const</span> runtime = <span class="str">'edge'</span>
+
+<span class="kw">export async function</span> <span class="fn">POST</span>(req: Request) {
+  <span class="kw">const</span> { messages } = <span class="kw">await</span> req.json()
+  <span class="cm">// System prompt inyectado server-side</span>
+  <span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">streamText</span>({
+    model: <span class="fn">openai</span>(<span class="str">'gpt-4o-mini'</span>),
+    system: SYSTEM_PROMPT, messages,
+  })
+  <span class="kw">return</span> result.<span class="fn">toAIStreamResponse</span>()
+}</div>
+        <div class="pg-pills">
+          <div class="pg-pill">Edge Runtime</div>
+          <div class="pg-pill">Streaming real</div>
+          <div class="pg-pill">Prompt engineering</div>
+          <div class="pg-pill">Historial de sesión</div>
+        </div>
+        <div style="margin-top:20px;padding:16px 18px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r-md)">
+          <p style="font-size:13px;color:var(--ink-2);line-height:1.7">💡 En producción, el <code style="background:var(--stone);padding:1px 5px;border-radius:4px;font-family:var(--f-mono);font-size:12px">SYSTEM_PROMPT</code> con el contexto de negocio se inyecta en el servidor — nunca expuesto al cliente. La clave de API vive solo en <code style="background:var(--stone);padding:1px 5px;border-radius:4px;font-family:var(--f-mono);font-size:12px">process.env</code>.</p>
+        </div>
+      </div>
+
+      <div class="rv" data-d="1">
+        <div class="chat-card">
+          <div class="chat-hd">
+            <div class="chat-av">🤖</div>
+            <div><div class="chat-nm">Asistente de Naim</div><div class="chat-st" id="cSt">Activo ahora</div></div>
+          </div>
+          <div class="chat-msgs" id="cMsgs" role="log" aria-live="polite">
+            <div class="msg b"><div class="m-av bot">🤖</div><div class="bbl">Hola 👋 Soy el asistente de Naim El Haddadi. Puedo contarte sobre sus servicios de automatización con IA, su stack técnico o cómo podría ayudar a tu empresa. ¿Qué necesitas saber?</div></div>
+          </div>
+          <div class="chat-opts" id="cOpts">
+            <button class="co" onclick="cs('¿Qué servicios ofrece Naim?')">🔍 Servicios</button>
+            <button class="co" onclick="cs('¿Cuánto cuesta trabajar con él?')">💰 Precios</button>
+            <button class="co" onclick="cs('¿Qué stack técnico usa?')">⚡ Stack</button>
+            <button class="co" onclick="cs('¿Cómo es el proceso de trabajo?')">🗓️ Proceso</button>
+          </div>
+          <div class="chat-in-r">
+            <input class="ci" id="cIn" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();cSend()}">
+            <button class="cs" id="cBtn" onclick="cSend()" aria-label="Enviar">↑</button>
+          </div>
+          <div class="chat-mdl">Simulación de streaming · Listo para conectar OpenAI / Anthropic</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- CONTACT -->
+<section id="contact" class="section">
+  <div class="w">
+    <div class="ct-wrap">
+      <div>
+        <div class="eyebrow rv">Trabaja con Naim</div>
+        <h2 class="h2-d rv" style="margin-bottom:12px">Hablemos de<br>tu negocio</h2>
+        <p class="s-lead rv">Una conversación de 30 minutos puede revelarte cuántas horas y euros estás dejando sobre la mesa cada semana.</p>
+        <div class="ct-hl rv"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Análisis de tus 3 mayores ineficiencias, estimación de ROI y propuesta de piloto con coste fijo y entregable claro.</div>
+        <div class="c-links rv">
+          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>GitHub — naimelhaddadi</a>
+          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.79２ ２４ １．７７１ ２４h２０．４５１C２３．２ ２４ ２４ ２３．２２７ ２４ ２２．２７１V１．７２９C２４ .774 ２３．２ ０ ２２．２２５ ０z"/></svg></span>LinkedIn — Naim El Haddadi</a>
+        </div>
+      </div>
+      <div class="fc-card rv" data-d="1">
+        <h3 style="font-family:var(--f-display);font-size: 22px;font-weight: 700;letter-spacing: -0.02em;margin-bottom: 4px">Solicitar diagnóstico</h3>
+        <p style="font-size:13px;color:var(--ink-4);margin-bottom:22px;font-family:var(--f-mono)">Respondo en menos de 24h. Sin spam.</p>
+        <form action="https://formspree.io/f/meeryawq" method="POST" id="cForm">
+          <div class="f2">
+            <div class="fg"><label>Nombre *</label><input class="fc" name="name" type="text" placeholder="Tu nombre" required></div>
+            <div class="fg"><label>Empresa *</label><input class="fc" name="company" type="text" placeholder="Tu empresa" required></div>
+          </div>
+          <div class="fg"><label>Email *</label><input class="fc" name="email" type="email" placeholder="tu@empresa.com" required></div>
+          <div class="fg"><label>Sector</label><select class="fc" name="sector"><option value="">Selecciona tu sector</option><option>SaaS / Software</option><option>E-commerce</option><option>Consultoría</option><option>Salud</option><option>Finanzas</option><option>Manufactura</option><option>Otro</option></select></div>
+          <div class="fg"><label>¿Cuál es tu mayor reto operativo?</label><textarea class="fc" name="challenge" placeholder="Describe el proceso que más tiempo o dinero te cuesta hoy..."></textarea></div>
+          <button type="submit" class="f-btn" id="fBtn">Solicitar diagnóstico gratuito →</button>
+          <p class="f-note">🔒 Tus datos nunca se comparten con terceros.</p>
+        </form>
+        <div id="fOk" style="display:none;text-align:center;padding:40px 20px">
+          <div style="font-size:42px;margin-bottom:13px">✅</div>
+          <h3 style="font-family:var(--f-display);font-size:20px;font-weight:700;margin-bottom:7px">Solicitud enviada</h3>
+          <p style="font-size:14px;color:var(--ink-2)">Naim te contactará en menos de 24h para confirmar el diagnóstico.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="w">
+    <div class="ft-top">
+      <div>
+        <div class="ft-logo">Naim<span> El Haddadi</span></div>
+        <div class="ft-domain">naimelhaddadi.com</div>
+        <p class="ft-tagline">Ingeniería de Eficiencia Operativa · IA + Desarrollo Web · Madrid &amp; Remoto</p>
+      </div>
+      <div class="ft-links">
+        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.
+            771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="ftl">✉ Email</a>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span class="ft-copy">© 2025 Naim El Haddadi · naimelhaddadi.com · Todos los derechos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* 1. SCROLL REVEAL */
+document.querySelectorAll('.rv').forEach(el => el.classList.add('rv-hidden'));
+const ro = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting){
+    e.target.classList.remove('rv-hidden');
+    e.target.classList.add('in');
+    ro.unobserve(e.target);
+  }
+}), {threshold:.08, rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.rv').forEach(el => ro.observe(el));
+
+/* 2. CALCULADORA ROI (Forzada a iniciar) */
+function calcROI(){
+  try {
+    const el = id => document.getElementById(id);
+    if(!el('sH') || !el('sR') || !el('sT') || !el('sA')) return;
+    
+    const h = parseFloat(el('sH').value);
+    const r = parseFloat(el('sR').value);
+    const t = parseInt(el('sT').value);
+    const a = parseFloat(el('sA').value) / 100;
+    
+    el('vH').textContent = h + 'h';
+    el('vR').textContent = r + '€/h';
+    el('vT').textContent = t;
+    el('vA').textContent = Math.round(a * 100) + '%';
+    
+    const manual = h * r * t * 220;
+    const savings = manual * a;
+    const pilot = Math.min(Math.max(t * 600, 2500), 12000);
+    const net = savings - pilot;
+    
+    el('bM').textContent = '€' + Math.round(manual).toLocaleString('es-ES');
+    el('bI').textContent = '–€' + Math.round(pilot).toLocaleString('es-ES');
+    el('bN').textContent = '€' + Math.round(Math.max(net, 0)).toLocaleString('es-ES');
+    el('roiN').textContent = '€' + Math.round(Math.max(savings, 0)).toLocaleString('es-ES');
+  } catch (err) {
+    console.error('Error calcROI', err);
+  }
+}
+
+// Ejecución inmediata (Sin esperar a DOMContentLoaded)
+calcROI();
+document.querySelectorAll('#roi input[type=range]').forEach(i => i.addEventListener('input', calcROI));
+
+/* 3. FORMULARIO DE CONTACTO */
+function hf(e){
+  e.preventDefault();
+  const b = document.getElementById('fBtn');
+  b.textContent = 'Enviando...'; 
+  b.disabled = true;
+  setTimeout(() => {
+    document.getElementById('cForm').style.display = 'none';
+    document.getElementById('fOk').style.display = 'block';
+  }, 1100);
+}
+
+/* 4. CHAT SIMULADO DE IA */
+const KB={
+  servicio:`Naim ofrece 3 servicios principales:\n\n**1. Sistemas de IA Agéntica** — Agentes que cualifican leads, agendan citas y actualizan el CRM autónomamente, 24/7.\n\n**2. Desarrollo Web de Alto Rendimiento** — Dashboards y herramientas con Next.js 14, TypeScript y Lighthouse 100/100.\n\n**3. Integración de Ecosistemas** — CRM, ERP, WhatsApp y calendarios en un flujo coherente.\n\n¿Cuál encaja mejor con tu situación?`,
+  precio:`El modelo de trabajo de Naim:\n\n**Proyecto piloto** — Desde €2.500 para un MVP de 4 semanas. Alcance fijo, precio fijo.\n\n**Retainer mensual** — Desde €800/mes para optimización continua.\n\n**El diagnóstico inicial es siempre gratuito** y sin compromiso.\n\n¿Quieres calcular el ROI para tu caso específico?`,
+  stack:`Stack técnico completo de Naim:\n\n**Frontend:** Next.js 14 (App Router), TypeScript strict, Tailwind CSS, Shadcn/UI\n**Backend:** Supabase, PostgreSQL, Edge Runtime\n**IA:** LangChain.js, OpenAI GPT-4o, Anthropic Claude, Vercel AI SDK\n**Automatización:** n8n, Webhooks, REST APIs, Google APIs\n**Testing:** Jest, React Testing Library, Lighthouse CI`,
+  proceso:`Proceso de trabajo de Naim en 4 pasos:\n\n**Semana 1 — Descubrimiento:** Auditoría de procesos y estimación de ROI real.\n\n**Semanas 2–3 — Piloto:** MVP funcional en 72h, medible desde el primer día.\n\n**Semana 4+ — Implementación:** Deploy en producción y formación del equipo.\n\n**Ongoing — Optimización:** El sistema aprende y mejora continuamente.\n\n¿Te interesa agendar el diagnóstico gratuito?`,
+}
+let busy=false;
+
+function rt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
+
+function addM(role,text){
+  const c = document.getElementById('cMsgs');
+  const d = document.createElement('div'); d.className = 'msg ' + role;
+  const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.textContent = role === 'u' ? '👤' : '🤖';
+  const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = rt(text);
+  d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
+  return b;
+}
+function showTy(){
+  const c = document.getElementById('cMsgs');
+  const d = document.createElement('div'); d.className = 'msg b'; d.id = 'tyEl';
+  d.innerHTML = '<div class="m-av bot">🤖</div><div class="ty-b"><span></span><span></span><span></span></div>';
+  c.appendChild(d); c.scrollTop = c.scrollHeight;
+}
+function rmTy(){const e=document.getElementById('tyEl');if(e)e.remove();}
+
+async function stream(text){
+  const c = document.getElementById('cMsgs');
+  const d = document.createElement('div'); d.className = 'msg b';
+  const av = document.createElement('div'); av.className = 'm-av bot'; av.textContent = '🤖';
+  const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = '';
+  d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
+  let acc = '';
+  for(const w of text.split(' ')){
+    acc += (acc ? ' ' : '') + w;
+    b.innerHTML = rt(acc);
+    c.scrollTop = c.scrollHeight;
+    await new Promise(r => setTimeout(r, 25 + Math.random() * 18));
+  }
+}
+
+async function cs(text){
+  if(!text.trim() || busy) return;
+  busy = true;
+  document.getElementById('cOpts').style.display = 'none';
+  document.getElementById('cBtn').disabled = true;
+  document.getElementById('cSt').textContent = 'Escribiendo…';
+  document.getElementById('cIn').value = '';
+  addM('u', text);
+  
+  const t = text.toLowerCase();
+  let reply = '';
+  if(t.includes('servicio') || t.includes('qué hace') || t.includes('ofrece')) reply = KB.servicio;
+  else if(t.includes('precio') || t.includes('cuesta') || t.includes('coste')) reply = KB.precio;
+  else if(t.includes('stack') || t.includes('tecnolog') || t.includes('técn')) reply = KB.stack;
+  else if(t.includes('proceso') || t.includes('cómo') || t.includes('trabaj')) reply = KB.proceso;
+  else reply = 'Para ayudarte mejor, ¿me puedes contar qué tipo de procesos quieres automatizar o qué problema específico estás intentando resolver?\n\nTambién puedes agendar directamente un diagnóstico gratuito de 30 minutos en naimelhaddadi.com 👇';
+  
+  showTy();
+  await new Promise(r => setTimeout(r, 700 + Math.random() * 300));
+  rmTy();
+  await stream(reply);
+  
+  busy = false;
+  document.getElementById('cBtn').disabled = false;
+  document.getElementById('cSt').textContent = 'Activo ahora';
+  
+  const opts = document.getElementById('cOpts');
+  opts.innerHTML = ''; opts.style.display = 'flex';
+  [['📅 Diagnóstico gratis','Quiero el diagnóstico gratuito'],['💰 Ver precios','¿Cuánto cuesta?'],['📖 Más info','Dame más información']].forEach(([lbl,val]) => {
+    const btn = document.createElement('button'); btn.className = 'co'; btn.textContent = lbl; btn.onclick = () => cs(val); opts.appendChild(btn);
+  });
+}
+</script>
+</body>
+</html>
