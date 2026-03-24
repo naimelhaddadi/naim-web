@@ -551,68 +551,46 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       </div>
     </div>
   </div>
- <section id="lead-magnet" class="section" style="background: #000; padding: 100px 0; border-top: 1px solid #1a1a1a;">
+ <section id="lead-magnet" class="section" style="background: var(--bg); border-top: 1px solid var(--border); padding: 120px 0;">
   <div class="w" style="max-width: 800px;">
-    <div style="border: 1px solid #333; background: #050505; position: relative; padding: 2px;">
-      <div style="background: #1a1a1a; padding: 8px 15px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333;">
-        <span style="font-family: var(--f-mono); font-size: 10px; color: var(--accent); letter-spacing: 2px;">SYSTEM_STATUS: ENCRYPTED_ACCESS</span>
-        <div style="display: flex; gap: 6px;">
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: #333;"></div>
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: #333;"></div>
-          <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent);"></div>
-        </div>
+    <div class="fc-card" id="lm-container" style="padding: 60px 40px; text-align: center; background: var(--surface); border: 1px solid var(--border);">
+      
+      <div id="lm-form-area">
+        <div class="hero-badge" style="margin-bottom: 20px; display: inline-block;">Recurso Exclusivo</div>
+        <h2 style="font-family: var(--f-display); font-size: clamp(32px, 4vw, 42px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #fff; letter-spacing: -0.03em;">
+          Auditoría de Eficiencia Operativa
+        </h2>
+        <p style="color: var(--text-muted); font-size: 18px; line-height: 1.6; margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto;">
+          Detecta los 5 puntos donde tu operativa está quemando <strong>más de 60.000€ al año</strong> en tareas manuales e ineficiencias de comunicación.
+        </p>
+
+        <form id="checklist-form" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 550px; margin: 0 auto;">
+          <input type="email" id="lead-email" placeholder="Tu email profesional" required 
+                 style="flex: 1; min-width: 280px; padding: 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: #fff; font-family: var(--f-body); outline: none; font-size: 16px;">
+          <button type="submit" id="lead-btn" class="f-btn" style="margin: 0; padding: 18px 32px; font-weight: 700; font-size: 16px;">
+            Descargar PDF →
+          </button>
+        </form>
+        <p style="font-size: 12px; color: var(--ink-4); margin-top: 20px; font-family: var(--f-mono); opacity: 0.6;">PDF Directo · Sin Spam · Acceso Instantáneo</p>
       </div>
 
-      <div id="lm-content-hub" style="padding: 50px 40px;">
-        <div id="lm-form-area">
-          <div style="margin-bottom: 30px;">
-            <h2 style="font-family: var(--f-display); font-size: 32px; color: #fff; line-height: 1; margin-bottom: 15px; text-transform: uppercase; letter-spacing: -1px;">
-              Auditoría de <span style="color: var(--accent);">Eficiencia Operativa</span>
-            </h2>
-            <p style="font-family: var(--f-mono); font-size: 13px; color: #888; line-height: 1.6;">
-              > Analizando 5 vectores de fuga de capital.<br>
-              > Impacto estimado: +60.000€/año en tareas manuales.<br>
-              > Introduce credenciales para desbloquear PDF.
-            </p>
-          </div>
-
-          <form id="checklist-form" style="display: flex; flex-direction: column; gap: 15px;">
-            <div style="position: relative;">
-              <span style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-family: var(--f-mono); color: var(--accent); font-size: 12px;">$</span>
-              <input type="email" id="lead-email" placeholder="EMAIL_PROFESIONAL" required 
-                     style="width: 100%; padding: 18px 18px 18px 35px; background: #000; border: 1px solid #333; color: var(--accent); font-family: var(--f-mono); outline: none; font-size: 14px; transition: border 0.3s;">
-            </div>
-            <button type="submit" id="lead-btn" class="f-btn" style="width: 100%; margin: 0; padding: 20px; background: var(--accent); color: #000; font-weight: 900; letter-spacing: 2px; border: none; cursor: pointer;">
-              DESBLOQUEAR RECURSO_
-            </button>
-          </form>
-        </div>
-
-        <div id="lm-success" style="display: none; text-align: center; animation: scan 1s ease-out;">
-          <div style="font-family: var(--f-mono); color: var(--accent); font-size: 14px; margin-bottom: 20px;">
-            [ ACCESS_GRANTED ]
-          </div>
-          <h3 style="font-family: var(--f-display); font-size: 24px; color: #fff; margin-bottom: 30px;">DESCARGA LISTA PARA INICIAR</h3>
-          <a id="download-link" href="#" class="f-btn" style="display: inline-block; padding: 20px 50px; background: #fff; color: #000; text-decoration: none; font-weight: 800; letter-spacing: 1px;">
-            ABRIR_AUDITORIA.PDF
-          </a>
-        </div>
+      <div id="lm-success" style="display: none; padding: 40px 0;">
+        <div style="font-size: 60px; margin-bottom: 20px;">📄</div>
+        <h3 style="font-family: var(--f-display); font-size: 32px; color: #fff; margin-bottom: 15px;">Documento Listo</h3>
+        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 18px;">Tu Auditoría de Eficiencia ya está disponible para descarga.</p>
+        <a id="download-link" href="#" class="f-btn" style="display: inline-block; padding: 20px 45px; text-decoration: none; font-size: 18px;">
+          Abrir Auditoría (PDF)
+        </a>
       </div>
+
     </div>
   </div>
 </section>
 
-<style>
-  #lead-email:focus { border-color: var(--accent) !important; box-shadow: 0 0 15px rgba(0, 229, 160, 0.1); }
-  @keyframes scan {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-</style>
-
 <script>
   (function() {
     const form = document.getElementById('checklist-form');
+    // Enlace de descarga directa (ya configurado con tu ID)
     const driveUrl = "https://drive.google.com/file/d/1x3ls1mA8hJ6YtGUPo-vikhbo-V8nqNfR/view?usp=sharing";
 
     form.onsubmit = async function(e) {
@@ -620,26 +598,29 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       const btn = document.getElementById('lead-btn');
       const email = document.getElementById('lead-email').value;
       
-      btn.innerText = "RUNNING_SCRIPTS...";
+      btn.innerText = "Preparando envío...";
       btn.disabled = true;
 
       try {
+        // Registro en Formspree
         await fetch("https://formspree.io/f/meeryawq", {
           method: "POST",
-          body: JSON.stringify({ email: email, category: "Audit Download" }),
+          body: JSON.stringify({ email: email, category: "Lead Magnet Download" }),
           headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }
         });
 
+        // Transición a éxito
         document.getElementById('lm-form-area').style.display = 'none';
         document.getElementById('lm-success').style.display = 'block';
         document.getElementById('download-link').href = driveUrl;
         
-        // Disparo automático
-        setTimeout(() => { window.location.href = driveUrl; }, 1000);
+        // Disparo de descarga
+        window.location.href = driveUrl;
 
       } catch (err) {
-        btn.innerText = "RETRY_REQUIRED";
+        btn.innerText = "Error. Reintentar";
         btn.disabled = false;
+        console.error(err);
       }
     };
   })();
