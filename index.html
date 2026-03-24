@@ -551,29 +551,34 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       </div>
     </div>
   </div>
-  <section id="lead-magnet" class="section" style="background: var(--stone); border-top: 1px solid var(--stone-3);">
-  <div class="w">
-    <div class="fc-card rv" style="max-width: 700px; margin: 0 auto; padding: 40px; text-align: center;">
-      <div class="hero-badge" style="margin-bottom: 12px;">Recurso Gratuito</div>
-      <h3 style="font-family:var(--f-display); font-size: clamp(24px, 3vw, 32px); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em;">¿Tu operativa aguanta el crecimiento?</h3>
-      <p style="font-size: 15px; color: var(--ink-2); margin-bottom: 28px; line-height: 1.6;">
-        Descarga mi <strong>Checklist de Auditoría de Eficiencia (PDF)</strong>. 5 puntos críticos para detectar dónde estás perdiendo más de 10 horas semanales por falta de automatización.
-      </p>
-      
-      <form action="https://formspree.io/f/meeryawq" method="POST" style="display: flex; flex-direction: column; gap: 12px;">
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-          <input type="email" name="email" placeholder="tu@empresa.com" required 
-                 style="flex: 1; min-width: 250px; padding: 14px; border-radius: var(--r-md); border: 1px solid var(--stone-3); background: var(--white); font-family: var(--f-body); outline: none;">
-          <button type="submit" class="f-btn" style="flex: 0; white-space: nowrap; margin-top: 0; padding: 14px 28px;">
-            Enviar Checklist →
-          </button>
-        </div>
-        <input type="hidden" name="_subject" value="Nueva solicitud de Checklist - Naim Web">
-        <p style="font-size: 11px; color: var(--ink-4); font-family: var(--f-mono);">Al solicitarlo, te enviaré el PDF y consejos semanales de automatización. Sin spam.</p>
-      </form>
+ <div id="lead-container">
+  <form id="checklist-form" action="https://formspree.io/f/meeryawq" method="POST" style="display: flex; flex-direction: column; gap: 12px;">
+    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+      <input type="email" name="email" placeholder="tu@empresa.com" required 
+             style="flex: 1; min-width: 250px; padding: 14px; border-radius: var(--r-md); border: 1px solid var(--stone-3); background: var(--white); outline: none;">
+      <button type="submit" class="f-btn" style="flex: 0; white-space: nowrap; margin-top: 0; padding: 14px 28px;">
+        Enviar Checklist →
+      </button>
     </div>
-  </div>
-</section>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('checklist-form');
+  form.onsubmit = function() {
+    // El formulario se envía a Formspree normalmente
+    // Pero mostramos el enlace de descarga inmediatamente
+    setTimeout(() => {
+      document.getElementById('lead-container').innerHTML = `
+        <div style="padding: 20px; background: rgba(0,229,160,0.1); border: 1px solid var(--accent); border-radius: 8px; text-align: center;">
+          <h4 style="color: var(--accent); margin-bottom: 10px;">¡Enviado con éxito!</h4>
+          <p style="margin-bottom: 15px;">Ya puedes descargar tu Checklist aquí:</p>
+          <a href="https://drive.google.com/file/d/1OrPu1uIaQiWYnmgR9jCEQtYEVyeqomXE/view?usp=drive_link" target="_blank" class="f-btn" style="display: inline-block; text-decoration: none;">📥 Descargar PDF</a>
+        </div>
+      `;
+    }, 500);
+  };
+</script>
 </section>
 
 <footer>
