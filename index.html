@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,9 +28,18 @@
   --sh-md:0 2px 10px rgba(18,17,15,.08),0 4px 24px rgba(18,17,15,.05);
   --sh-lg:0 8px 36px rgba(18,17,15,.1),0 2px 8px rgba(18,17,15,.06);
 }
+
+/* DARK MODE OVERRIDES */
+[data-theme="dark"] {
+  --white:#0f0f0f; --stone:#171717; --stone-2:#212121; --stone-3:#303030;
+  --ink:#fafafa; --ink-2:#d4d4d4; --ink-3:#a3a3a3; --ink-4:#737373;
+  --blue-bg:#1e3a8a25; --blue-bd:#1e3a8a80;
+  --sh-sm:0 1px 3px rgba(0,0,0,.4); --sh-md:0 4px 12px rgba(0,0,0,.5); --sh-lg:0 8px 36px rgba(0,0,0,.6);
+}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;overflow-x:hidden}
+body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.65;overflow-x:hidden;transition:background 0.3s, color 0.3s;}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:var(--f-body);border:none;background:none}
 ::selection{background:var(--blue);color:#fff}
@@ -40,15 +49,18 @@ button{cursor:pointer;font-family:var(--f-body);border:none;background:none}
 hr.rule{border:none;height:1px;background:var(--stone-3);margin:0}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--stone-3);height:60px}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb, var(--white) 90%, transparent);backdrop-filter:blur(16px);border-bottom:1px solid var(--stone-3);height:60px}
 .nav-i{max-width:var(--max);margin:0 auto;padding:0 28px;height:100%;display:flex;align-items:center;justify-content:space-between}
 .nav-logo{font-family:var(--f-display);font-size:18px;font-weight:700;letter-spacing:-.01em}
 .nav-logo em{font-style:normal;color:var(--blue)}
 .nav-links{display:flex;gap:28px;list-style:none}
 .nav-links a{font-size:14px;color:var(--ink-2);transition:color .15s}
 .nav-links a:hover{color:var(--blue)}
+.nav-actions{display:flex;align-items:center;gap:12px;}
 .nav-btn{background:var(--blue);color:#fff;padding:8px 18px;border-radius:var(--r-md);font-size:14px;font-weight:500;transition:all .15s;box-shadow:0 1px 4px rgba(29,78,216,.3)}
 .nav-btn:hover{background:var(--blue-2);transform:translateY(-1px)}
+.theme-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--stone-3);display:flex;align-items:center;justify-content:center;color:var(--ink-2);transition:all 0.2s;}
+.theme-btn:hover{background:var(--stone);color:var(--blue);border-color:var(--blue);}
 @media(max-width:768px){.nav-links{display:none}}
 
 /* HERO */
@@ -56,6 +68,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 #hero::after{content:'';position:absolute;top:-100px;right:-80px;width:460px;height:460px;background:radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none}
 .hero-grid{display:grid;grid-template-columns:1fr 460px;gap:64px;align-items:center}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
+
+.hero-avatar { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--white); box-shadow: var(--sh-md); margin-bottom: 22px; background: var(--stone); display: block; }
 
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-bd);padding:5px 13px;border-radius:40px;font-size:12px;font-weight:500;color:var(--blue-2);font-family:var(--f-mono);letter-spacing:.03em;margin-bottom:22px}
 .hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s ease infinite}
@@ -129,7 +143,7 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .br-v{font-weight:500;font-family:var(--f-mono);font-size:12px}
 .br-v.pos{color:var(--green)}
 
-.roi-res{background:linear-gradient(135deg,var(--ink) 0%,#1e2535 100%);border-radius:var(--r-xl);padding:38px;color:#fff;position:relative;overflow:hidden}
+.roi-res{background:linear-gradient(135deg,#0a0f1c 0%,#1e2535 100%);border-radius:var(--r-xl);padding:38px;color:#fff;position:relative;overflow:hidden}
 .roi-res::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,.2) 0%,transparent 70%)}
 .roi-res-lbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:6px}
 .roi-res-n{font-family:var(--f-display);font-size:clamp(56px,8vw,88px);font-weight:700;line-height:1;letter-spacing:-.03em;color:#fff;margin-bottom:4px;transition:all .3s}
@@ -181,18 +195,18 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .pg-grid{display:grid;grid-template-columns:1fr 470px;gap:48px;align-items:start}
 @media(max-width:960px){.pg-grid{grid-template-columns:1fr}}
 .pg-info{position:static}
-.pg-badge-live{display:inline-flex;align-items:center;gap:7px;background:#ecfdf5;border:1px solid #a7f3d0;padding:5px 13px;border-radius:40px;font-family:var(--f-mono);font-size:12px;color:var(--green);margin-bottom:18px}
+.pg-badge-live{display:inline-flex;align-items:center;gap:7px;background:#10b98115;border:1px solid #10b98150;padding:5px 13px;border-radius:40px;font-family:var(--f-mono);font-size:12px;color:var(--green);margin-bottom:18px}
 .pg-badge-live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite}
 .pg-h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,42px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1}
 .pg-desc{font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:22px}
-.code-box{background:var(--ink);border-radius:var(--r-lg);padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.8}
+.code-box{background:#0a0a0a;border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.8}
 .kw{color:#7dd3fc}.str{color:#86efac}.fn{color:#fbbf24}.cm{color:#475569;font-style:italic}
 .pg-pills{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
 .pg-pill{background:var(--stone);border:1px solid var(--stone-3);border-radius:var(--r-md);padding:10px 13px;font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
 .pg-pill::before{content:'✓';color:var(--green);font-weight:700;font-size:12px}
 
 .chat-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
-.chat-hd{background:var(--ink);padding:15px 18px;display:flex;align-items:center;gap:12px}
+.chat-hd{background:#0a0a0a;padding:15px 18px;display:flex;align-items:center;gap:12px}
 .chat-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-3),#60a5fa);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
 .chat-nm{font-weight:600;font-size:14px;color:#fff}
 .chat-st{font-size:11px;color:#86efac;display:flex;align-items:center;gap:5px;font-family:var(--f-mono)}
@@ -252,7 +266,7 @@ select.fc option{background:var(--white)}
 .f-note{text-align:center;font-size:12px;color:var(--ink-4);margin-top:9px;font-family:var(--f-mono)}
 
 /* FOOTER */
-footer{background:var(--ink);color:#fff;padding:44px 0 32px}
+footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 .ft-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.1)}
 .ft-logo{font-family:var(--f-display);font-size:21px;font-weight:700;letter-spacing:-.02em;margin-bottom:5px}
 .ft-logo span{color:var(--blue-3)}
@@ -265,7 +279,7 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 .ft-copy{font-size:12px;color:rgba(255,255,255,.28);font-family:var(--f-mono)}
 .ft-stack{font-size:12px;color:rgba(255,255,255,.2);font-family:var(--f-mono)}
 
-/* REVEAL — visible by default, animates in on scroll */
+/* REVEAL */
 .rv{opacity:1;transform:none}
 .rv.rv-hidden{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
 .rv.in{opacity:1;transform:none}
@@ -275,25 +289,28 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-i">
     <a href="/" class="nav-logo">Naim<em>.</em></a>
-    <ul class="nav-links">
-      <li><a href="#roi">ROI</a></li>
-      <li><a href="#services">Servicios</a></li>
-      <li><a href="#playground">AI Demo</a></li>
-      <li><a href="#contact">Contacto</a></li>
-    </ul>
-    <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
+    <div class="nav-actions">
+      <ul class="nav-links">
+        <li><a href="#roi">ROI</a></li>
+        <li><a href="#services">Servicios</a></li>
+        <li><a href="#playground">AI Demo</a></li>
+        <li><a href="#contact">Contacto</a></li>
+      </ul>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
+      <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
+    </div>
   </div>
 </nav>
 
-<!-- HERO -->
 <section id="hero">
   <div class="w">
     <div class="hero-grid">
       <div>
+        <img src="Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
+        
         <div class="hero-badge">Disponible · Madrid &amp; Remoto · 2025</div>
         <h1 class="hero-name">Naim El Haddadi</h1>
         <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
@@ -331,7 +348,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-i">
     <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Radix UI</span><span class="tk hi">Vercel Edge</span><span class="tk">PostgreSQL</span><span class="tk hi">n8n</span><span class="tk">Lighthouse 100/100</span><span class="tk hi">App Router</span><span class="tk">Zod</span>
@@ -339,7 +355,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
   </div>
 </div>
 
-<!-- PAIN -->
 <section id="pain" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">El Problema</div><h2 class="h2-d">¿Cuánto te cuesta operar a mano?</h2><p class="s-lead">Cada hora en tareas repetitivas es dinero que no se invierte en crecer.</p></div>
@@ -356,7 +371,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- ROI CALCULATOR -->
 <section id="roi" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">Calculadora de ROI</div><h2 class="h2-d">Cuánto dinero estás<br>dejando sobre la mesa</h2><p class="s-lead">Desliza los sliders y ve el impacto económico real de automatizar tus operaciones.</p></div>
@@ -390,7 +404,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- SERVICES -->
 <section id="services" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">La Solución</div><h2 class="h2-d">Sistemas que trabajan<br>mientras tú creces</h2></div>
@@ -422,7 +435,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- CASES -->
 <section id="cases" class="section" style="background:var(--stone)">
   <div class="w">
     <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:0">
@@ -439,7 +451,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- PROCESS -->
 <section id="process" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">Cómo Trabajo</div><h2 class="h2-d">Sin cajas negras,<br>sin sorpresas</h2></div>
@@ -453,17 +464,14 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- AI PLAYGROUND -->
 <section id="playground" class="section">
   <div class="w">
-    <!-- Header: full width, above the grid -->
     <div class="rv" style="margin-bottom:40px">
       <div class="pg-badge-live">AI Playground — Demo en vivo</div>
       <h2 class="pg-h2">Habla con el agente.<br>Ve cómo funciona.</h2>
       <p class="pg-desc" style="max-width:600px">Este chat demuestra cómo construyo sistemas de IA conversacional: streaming token a token, manejo de estados y prompt engineering — el mismo patrón que implemento en proyectos reales.</p>
     </div>
 
-    <!-- Two columns: code info left, chat right -->
     <div class="pg-grid">
       <div class="pg-info rv">
         <div class="code-box">
@@ -518,7 +526,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 
 <hr class="rule">
 
-<!-- CONTACT -->
 <section id="contact" class="section">
   <div class="w">
     <div class="ct-wrap">
@@ -529,7 +536,7 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
         <div class="ct-hl rv"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Análisis de tus 3 mayores ineficiencias, estimación de ROI y propuesta de piloto con coste fijo y entregable claro.</div>
         <div class="c-links rv">
           <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>GitHub — naimelhaddadi</a>
-          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.79２ ２４ １．７７１ ２４h２０．４５１C２３．２ ２４ ２４ ２３．２２７ ２４ ２２．２７１V１．７２９C２４ .774 ２３．２ ０ ２２．２２５ ０z"/></svg></span>LinkedIn — Naim El Haddadi</a>
+          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></span>LinkedIn — Naim El Haddadi</a>
         </div>
       </div>
       <div class="fc-card rv" data-d="1">
@@ -556,7 +563,6 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="w">
     <div class="ft-top">
@@ -567,8 +573,7 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
       </div>
       <div class="ft-links">
         <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
-        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.
-            771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg> LinkedIn</a>
         <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="ftl">✉ Email</a>
       </div>
     </div>
@@ -579,6 +584,22 @@ footer{background:var(--ink);color:#fff;padding:44px 0 32px}
 </footer>
 
 <script>
+/* 0. TEMA OSCURO/CLARO */
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+// Init theme
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+  document.documentElement.setAttribute('data-theme', savedTheme);
+} else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+  document.documentElement.setAttribute('data-theme', 'dark');
+}
+
 /* 1. SCROLL REVEAL */
 document.querySelectorAll('.rv').forEach(el => el.classList.add('rv-hidden'));
 const ro = new IntersectionObserver(es => es.forEach(e => {
@@ -620,7 +641,7 @@ function calcROI(){
   }
 }
 
-// Ejecución inmediata (Sin esperar a DOMContentLoaded)
+// Ejecución inmediata
 calcROI();
 document.querySelectorAll('#roi input[type=range]').forEach(i => i.addEventListener('input', calcROI));
 
