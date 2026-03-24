@@ -551,6 +551,16 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       </div>
     </div>
   </div>
+  <section class="section" style="background: var(--ink-1); border-top: 1px solid var(--ink-2);">
+  <div class="fc-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <h3 style="font-family:var(--f-display); font-size: 24px; margin-bottom: 12px;">¿No estás listo para una llamada?</h3>
+    <p style="color:var(--ink-4); margin-bottom: 20px;">Descarga mi <strong>Guía de Auditoría de Eficiencia</strong>: 5 procesos que puedes automatizar mañana mismo para recuperar 10h/semana.</p>
+    <form action="https://formspree.io/f/tu_id_de_formspree" method="POST" style="display: flex; gap: 10px;">
+      <input type="email" name="email" placeholder="Tu email profesional" required style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--ink-2); background: var(--paper);">
+      <button type="submit" class="f-btn" style="padding: 12px 24px;">Enviar Guía</button>
+    </form>
+  </div>
+</section>
 </section>
 
 <footer>
@@ -648,14 +658,10 @@ function hf(e){
 }
 
 /* 4. CHAT SIMULADO DE IA */
-const KB={
-  servicio:`Naim ofrece 3 servicios principales:\n\n**1. Sistemas de IA Agéntica** — Agentes que cualifican leads, agendan citas y actualizan el CRM autónomamente, 24/7.\n\n**2. Desarrollo Web de Alto Rendimiento** — Dashboards y herramientas con Next.js 14, TypeScript y Lighthouse 100/100.\n\n**3. Integración de Ecosistemas** — CRM, ERP, WhatsApp y calendarios en un flujo coherente.\n\n¿Cuál encaja mejor con tu situación?`,
-  precio:`El modelo de trabajo de Naim:\n\n**Proyecto piloto** — Desde €2.500 para un MVP de 4 semanas. Alcance fijo, precio fijo.\n\n**Retainer mensual** — Desde €800/mes para optimización continua.\n\n**El diagnóstico inicial es siempre gratuito** y sin compromiso.\n\n¿Quieres calcular el ROI para tu caso específico?`,
-  stack:`Stack técnico completo de Naim:\n\n**Frontend:** Next.js 14 (App Router), TypeScript strict, Tailwind CSS, Shadcn/UI\n**Backend:** Supabase, PostgreSQL, Edge Runtime\n**IA:** LangChain.js, OpenAI GPT-4o, Anthropic Claude, Vercel AI SDK\n**Automatización:** n8n, Webhooks, REST APIs, Google APIs\n**Testing:** Jest, React Testing Library, Lighthouse CI`,
-  proceso:`Proceso de trabajo de Naim en 4 pasos:\n\n**Semana 1 — Descubrimiento:** Auditoría de procesos y estimación de ROI real.\n\n**Semanas 2–3 — Piloto:** MVP funcional en 72h, medible desde el primer día.\n\n**Semana 4+ — Implementación:** Deploy en producción y formación del equipo.\n\n**Ongoing — Optimización:** El sistema aprende y mejora continuamente.\n\n¿Te interesa agendar el diagnóstico gratuito?`,
-}
-let busy=false;
+/* 4. CHAT IA REAL */
+let busy = false;
 
+// Mantenemos las funciones auxiliares de formato y visualización
 function rt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 
 function addM(role,text){
@@ -666,12 +672,14 @@ function addM(role,text){
   d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
   return b;
 }
+
 function showTy(){
   const c = document.getElementById('cMsgs');
   const d = document.createElement('div'); d.className = 'msg b'; d.id = 'tyEl';
   d.innerHTML = '<div class="m-av bot">🤖</div><div class="ty-b"><span></span><span></span><span></span></div>';
   c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
+
 function rmTy(){const e=document.getElementById('tyEl');if(e)e.remove();}
 
 async function stream(text){
@@ -689,8 +697,9 @@ async function stream(text){
   }
 }
 
-async function cs(text){
-  if(!text.trim() || busy) return;
+// ESTA ES LA FUNCIÓN QUE CONECTA CON TU API
+async function cs(text) {
+  if (!text.trim() || busy) return;
   busy = true;
   document.getElementById('cOpts').style.display = 'none';
   document.getElementById('cBtn').disabled = true;
@@ -698,26 +707,38 @@ async function cs(text){
   document.getElementById('cIn').value = '';
   addM('u', text);
   
-  const t = text.toLowerCase();
-  let reply = '';
-  if(t.includes('servicio') || t.includes('qué hace') || t.includes('ofrece')) reply = KB.servicio;
-  else if(t.includes('precio') || t.includes('cuesta') || t.includes('coste')) reply = KB.precio;
-  else if(t.includes('stack') || t.includes('tecnolog') || t.includes('técn')) reply = KB.stack;
-  else if(t.includes('proceso') || t.includes('cómo') || t.includes('trabaj')) reply = KB.proceso;
-  else reply = 'Para ayudarte mejor, ¿me puedes contar qué tipo de procesos quieres automatizar o qué problema específico estás intentando resolver?\n\nTambién puedes agendar directamente un diagnóstico gratuito de 30 minutos en naimelhaddadi.com 👇';
-  
   showTy();
-  await new Promise(r => setTimeout(r, 700 + Math.random() * 300));
-  rmTy();
-  await stream(reply);
+
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text }),
+    });
+    
+    const data = await response.json();
+    rmTy();
+    
+    if (data.text) {
+        await stream(data.text); 
+    } else {
+        throw new Error("Respuesta vacía");
+    }
+
+  } catch (error) {
+    rmTy();
+    await stream("Lo siento, he tenido un problema de conexión. ¿Puedes volver a intentarlo o agendar directamente en mi calendario?");
+    console.error("Error en el chat:", error);
+  }
   
   busy = false;
   document.getElementById('cBtn').disabled = false;
   document.getElementById('cSt').textContent = 'Activo ahora';
-  
+
+  // Mostrar opciones de nuevo para guiar al usuario
   const opts = document.getElementById('cOpts');
   opts.innerHTML = ''; opts.style.display = 'flex';
-  [['📅 Diagnóstico gratis','Quiero el diagnóstico gratuito'],['💰 Ver precios','¿Cuánto cuesta?'],['📖 Más info','Dame más información']].forEach(([lbl,val]) => {
+  [['📅 Agendar llamada','¿Cómo agendo?'],['💰 Precios','¿Qué precios manejas?'],['⚡ Otros servicios','Cuéntame más']].forEach(([lbl,val]) => {
     const btn = document.createElement('button'); btn.className = 'co'; btn.textContent = lbl; btn.onclick = () => cs(val); opts.appendChild(btn);
   });
 }
