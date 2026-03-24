@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     body: JSON.stringify({
       model: "gpt-4o-mini",
       messages: [
-        { role: "system", content: "Eres el asistente inteligente de Naim El Haddadi. Tu objetivo es convencer al usuario de que agende una consultoría de eficiencia. Sé directo, profesional y enfocado en ROI. Si preguntan por servicios, habla de automatización con n8n, Python y agentes de IA. El enlace para agendar es: https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" },
+        { role: "system", content: "Eres el Agente Comercial de Naim El Haddadi. Tu misión es detectar cuál de estos 3 problemas tiene el usuario: 1. Lentitud en responder leads, 2. Tareas manuales de datos (PDF/Excel), o 3. Falta de seguimiento comercial. Una vez detectado el dolor, explícale que Naim automatiza eso con agentes de IA y n8n para recuperar 20h/semana. NO des soluciones técnicas largas. Tu único éxito es que hagan clic aquí para agendar un diagnóstico: https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" },
         { role: "user", content: message }
       ],
     }),
