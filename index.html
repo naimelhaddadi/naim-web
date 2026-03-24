@@ -658,14 +658,14 @@ function hf(e){
 }
 
 /* 4. CHAT SIMULADO DE IA */
-/* 4. CHAT IA REAL */
+/* 4. CHAT IA REAL CONECTADO */
 let busy = false;
 
-// Mantenemos las funciones auxiliares de formato y visualización
 function rt(t){return t.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>').replace(/\n/g,'<br>')}
 
 function addM(role,text){
   const c = document.getElementById('cMsgs');
+  if(!c) return;
   const d = document.createElement('div'); d.className = 'msg ' + role;
   const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.textContent = role === 'u' ? '👤' : '🤖';
   const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = rt(text);
@@ -693,20 +693,23 @@ async function stream(text){
     acc += (acc ? ' ' : '') + w;
     b.innerHTML = rt(acc);
     c.scrollTop = c.scrollHeight;
-    await new Promise(r => setTimeout(r, 25 + Math.random() * 18));
+    await new Promise(r => setTimeout(r, 20));
   }
 }
 
-// ESTA ES LA FUNCIÓN QUE CONECTA CON TU API
-async function cs(text) {
+// ESTA FUNCIÓN ES EL BOTÓN DE ENVÍO
+async function cSend() {
+  const input = document.getElementById('cIn');
+  const text = input.value;
   if (!text.trim() || busy) return;
+  
   busy = true;
   document.getElementById('cOpts').style.display = 'none';
   document.getElementById('cBtn').disabled = true;
   document.getElementById('cSt').textContent = 'Escribiendo…';
-  document.getElementById('cIn').value = '';
-  addM('u', text);
+  input.value = '';
   
+  addM('u', text);
   showTy();
 
   try {
@@ -718,29 +721,26 @@ async function cs(text) {
     
     const data = await response.json();
     rmTy();
-    
     if (data.text) {
-        await stream(data.text); 
+      await stream(data.text);
     } else {
-        throw new Error("Respuesta vacía");
+      await stream("He recibido una respuesta vacía. Revisa tu saldo en OpenAI.");
     }
-
   } catch (error) {
     rmTy();
-    await stream("Lo siento, he tenido un problema de conexión. ¿Puedes volver a intentarlo o agendar directamente en mi calendario?");
-    console.error("Error en el chat:", error);
+    await stream("Error de conexión con el servidor. ¿Has subido la carpeta /api a Vercel?");
+    console.error("Error:", error);
   }
   
   busy = false;
   document.getElementById('cBtn').disabled = false;
   document.getElementById('cSt').textContent = 'Activo ahora';
+}
 
-  // Mostrar opciones de nuevo para guiar al usuario
-  const opts = document.getElementById('cOpts');
-  opts.innerHTML = ''; opts.style.display = 'flex';
-  [['📅 Agendar llamada','¿Cómo agendo?'],['💰 Precios','¿Qué precios manejas?'],['⚡ Otros servicios','Cuéntame más']].forEach(([lbl,val]) => {
-    const btn = document.createElement('button'); btn.className = 'co'; btn.textContent = lbl; btn.onclick = () => cs(val); opts.appendChild(btn);
-  });
+// Función para los botones de sugerencia rápidos
+function cs(text) {
+  document.getElementById('cIn').value = text;
+  cSend();
 }
 </script>
 </body>
