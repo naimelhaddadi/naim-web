@@ -551,14 +551,27 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       </div>
     </div>
   </div>
-  <section class="section" style="background: var(--ink-1); border-top: 1px solid var(--ink-2);">
-  <div class="fc-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
-    <h3 style="font-family:var(--f-display); font-size: 24px; margin-bottom: 12px;">¿No estás listo para una llamada?</h3>
-    <p style="color:var(--ink-4); margin-bottom: 20px;">Descarga mi <strong>Guía de Auditoría de Eficiencia</strong>: 5 procesos que puedes automatizar mañana mismo para recuperar 10h/semana.</p>
-    <form action="https://formspree.io/f/tu_id_de_formspree" method="POST" style="display: flex; gap: 10px;">
-      <input type="email" name="email" placeholder="Tu email profesional" required style="flex: 1; padding: 12px; border-radius: 8px; border: 1px solid var(--ink-2); background: var(--paper);">
-      <button type="submit" class="f-btn" style="padding: 12px 24px;">Enviar Guía</button>
-    </form>
+  <section id="lead-magnet" class="section" style="background: var(--stone); border-top: 1px solid var(--stone-3);">
+  <div class="w">
+    <div class="fc-card rv" style="max-width: 700px; margin: 0 auto; padding: 40px; text-align: center;">
+      <div class="hero-badge" style="margin-bottom: 12px;">Recurso Gratuito</div>
+      <h3 style="font-family:var(--f-display); font-size: clamp(24px, 3vw, 32px); font-weight: 700; margin-bottom: 16px; letter-spacing: -0.02em;">¿Tu operativa aguanta el crecimiento?</h3>
+      <p style="font-size: 15px; color: var(--ink-2); margin-bottom: 28px; line-height: 1.6;">
+        Descarga mi <strong>Checklist de Auditoría de Eficiencia (PDF)</strong>. 5 puntos críticos para detectar dónde estás perdiendo más de 10 horas semanales por falta de automatización.
+      </p>
+      
+      <form action="https://formspree.io/f/meeryawq" method="POST" style="display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="email" name="email" placeholder="tu@empresa.com" required 
+                 style="flex: 1; min-width: 250px; padding: 14px; border-radius: var(--r-md); border: 1px solid var(--stone-3); background: var(--white); font-family: var(--f-body); outline: none;">
+          <button type="submit" class="f-btn" style="flex: 0; white-space: nowrap; margin-top: 0; padding: 14px 28px;">
+            Enviar Checklist →
+          </button>
+        </div>
+        <input type="hidden" name="_subject" value="Nueva solicitud de Checklist - Naim Web">
+        <p style="font-size: 11px; color: var(--ink-4); font-family: var(--f-mono);">Al solicitarlo, te enviaré el PDF y consejos semanales de automatización. Sin spam.</p>
+      </form>
+    </div>
   </div>
 </section>
 </section>
