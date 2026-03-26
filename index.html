@@ -36,6 +36,20 @@
   --ink:#fafafa; --ink-2:#d4d4d4; --ink-3:#a3a3a3; --ink-4:#737373;
   --blue-bg:#1e3a8a25; --blue-bd:#1e3a8a80;
   --sh-sm:0 1px 3px rgba(0,0,0,.4); --sh-md:0 4px 12px rgba(0,0,0,.5); --sh-lg:0 8px 36px rgba(0,0,0,.6);
+  
+  /* Chat dark mode adjustments */
+  color{color: #1d4ed8;}
+  .chat-card{background:linear-gradient(135deg, var(--stone) 0%, #1a1a1a 100%);border-color:var(--stone-3)}
+  .chat-msgs{background:linear-gradient(180deg, rgba(255,255,255,.01) 0%, rgba(0,0,0,.03) 100%)}
+  .msg.b .bbl{background:linear-gradient(135deg, var(--stone-2) 0%, var(--stone) 100%);border-color:var(--stone-3);color:var(--ink)}
+  .chat-opts{background:linear-gradient(135deg, rgba(23,23,23,.95) 0%, rgba(33,33,33,.95) 100%);border-color:rgba(255,255,255,.06)}
+  .co{background:linear-gradient(135deg, rgba(23,23,23,.8) 0%, rgba(33,33,33,.8) 100%);border-color:rgba(255,255,255,.1);color:var(--ink-2)}
+  .co:hover{background:linear-gradient(135deg, var(--blue-bg) 0%, rgba(30,58,138,.2) 100%);border-color:var(--blue-bd)}
+  .chat-in-r{background:linear-gradient(135deg, rgba(23,23,23,.95) 0%, rgba(33,33,33,.95) 100%);border-color:rgba(255,255,255,.06)}
+  .ci{background:linear-gradient(135deg, rgba(23,23,23,.9) 0%, rgba(33,33,33,.9) 100%);border-color:rgba(255,255,255,.1);color:var(--ink)}
+  .ci:focus{background:linear-gradient(135deg, var(--stone-2) 0%, var(--stone) 100%);border-color:var(--blue-bd)}
+  .ty-b{background:linear-gradient(135deg, var(--stone-2) 0%, var(--stone) 100%);border-color:var(--stone-3)}
+  .chat-mdl{background:linear-gradient(135deg, var(--stone-2) 0%, var(--stone-3) 100%);border-color:rgba(255,255,255,.06)}
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -66,11 +80,61 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb
 
 /* HERO */
 #hero{padding:120px 0 80px;background:linear-gradient(160deg,var(--white) 55%,var(--stone) 100%);position:relative;overflow:hidden}
-#hero::after{content:'';position:absolute;top:-100px;right:-80px;width:460px;height:460px;background:radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none}
-.hero-grid{display:grid;grid-template-columns:1fr 460px;gap:64px;align-items:center}
+#hero::after{content:'';position:absolute;top:-100px;right:-80px;width:460px;height:460px;background:radial-gradient(circle,rgba(59,130,246,.07) 0%,transparent 65%);pointer-events:none;border-radius:50%}
+#hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none}
+#hero::before{
+  background:
+    radial-gradient(circle at 20% 30%, rgba(59,130,246,.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(139,92,246,.02) 0%, transparent 50%),
+    radial-gradient(circle at 60% 10%, rgba(16,185,129,.02) 0%, transparent 50%);
+  animation:float 20s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
+.hero-grid{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
 
-.hero-avatar { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--white); box-shadow: var(--sh-md); margin-bottom: 22px; background: var(--stone); display: block; }
+.hero-avatar { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--white); box-shadow: var(--sh-md); margin-bottom: 0; background: var(--stone); display: block; }
+
+.hero-portrait-container { position: relative; display: flex; justify-content: center; align-items: center; }
+
+.badge { position: absolute; background: var(--white); border: 1px solid var(--stone-3); border-radius: var(--r-md); padding: 4px 8px; font-size: 11px; font-family: var(--f-mono); box-shadow: var(--sh-sm); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; animation: badgeFloat 6s ease-in-out infinite; }
+
+.badge:hover { background: var(--blue-bg); border-color: var(--blue-bd); transform: scale(1.05) translateY(-2px); box-shadow: 0 8px 25px rgba(29,78,216,.15); }
+
+@keyframes badgeFloat {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes numberPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.02); }
+}
+
+@keyframes serviceGrow {
+  0%, 100% { transform: scale(1); box-shadow: 0 4px 6px rgba(0,0,0,.05); }
+  50% { transform: scale(1.01); box-shadow: 0 8px 15px rgba(0,0,0,.08); }
+}
+
+@keyframes chatActive {
+  0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+  50% { box-shadow: 0 8px 24px rgba(29,78,216,.12); }
+}
+
+@keyframes dataFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.b-1 { top: 10px; right: 10px; }
+
+.b-2 { bottom: 10px; left: 10px; }
+
+.b-n { font-weight: 500; color: var(--blue); }
+
+.b-l { font-size: 10px; color: var(--ink-3); margin-top: 2px; }
+
+.hero-right { display: flex; flex-direction: column; gap: 32px; align-items: center; }
 
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--blue-bg);border:1px solid var(--blue-bd);padding:5px 13px;border-radius:40px;font-size:12px;font-weight:500;color:var(--blue-2);font-family:var(--f-mono);letter-spacing:.03em;margin-bottom:22px}
 .hero-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);animation:pulse 2s ease infinite}
@@ -86,7 +150,9 @@ h1.hero-name{font-family:var(--f-display);font-size:clamp(38px,5vw,64px);font-we
 .btn-o{background:transparent;color:var(--ink-2);padding:13px 26px;border-radius:var(--r-md);font-size:15px;border:1px solid var(--stone-3);transition:all .18s}
 .btn-o:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
 .hero-stats{display:flex;gap:36px;margin-top:44px;padding-top:36px;border-top:1px solid var(--stone-3);flex-wrap:wrap}
-.stat-n{font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--blue);letter-spacing:-.02em;line-height:1}
+.stat-n{font-family:var(--f-display);font-size:30px;font-weight:700;color:var(--blue);letter-spacing:-.02em;line-height:1;animation:countUp 2s ease-out forwards;opacity:0}
+.stat-n[data-target]{animation:countUp 2s ease-out forwards}
+@keyframes countUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .stat-l{font-size:13px;color:var(--ink-3);margin-top:3px}
 
 /* Hero card */
@@ -104,12 +170,16 @@ h1.hero-name{font-family:var(--f-display);font-size:clamp(38px,5vw,64px);font-we
 .tag.b{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue-2)}
 
 /* TICKER */
-.ticker{border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3);padding:14px 0;overflow:hidden;background:var(--stone)}
-.ticker-i{display:flex;gap:0;animation:tick 32s linear infinite;width:max-content}
+.ticker{border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3);padding:14px 0;overflow:hidden;background:var(--stone);position:relative;animation:dataFlow 10s linear infinite}
+.ticker::before{content:'';position:absolute;top:0;left:0;bottom:0;width:100px;background:linear-gradient(90deg, var(--stone) 0%, transparent 100%);z-index:1;animation:scan 3s ease-in-out infinite}
+@keyframes scan{0%,100%{left:0}50%{left:calc(100% - 100px)}}
+.ticker-i{display:flex;gap:0;animation:tick 25s linear infinite;width:max-content}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tk{font-family:var(--f-mono);font-size:12px;color:var(--ink-4);white-space:nowrap;padding:0 26px;border-right:1px solid var(--stone-3);display:flex;align-items:center;gap:8px}
-.tk::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue-3);flex-shrink:0}
-.tk.hi{color:var(--ink-3)}
+.tk{font-family:var(--f-mono);font-size:12px;color:var(--ink-4);white-space:nowrap;padding:0 26px;border-right:1px solid var(--stone-3);display:flex;align-items:center;gap:8px;position:relative}
+.tk::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue-3);flex-shrink:0;animation:blink 1.5s ease infinite}
+@keyframes blink{0%,50%{opacity:1}51%,100%{opacity:0.3}}
+.tk.hi{color:var(--ink-3);font-weight:500}
+.tk.hi::before{background:#10b981}
 
 /* SECTION HEADER */
 .eyebrow{font-family:var(--f-mono);font-size:11px;font-weight:500;color:var(--blue);letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:12px}
@@ -118,14 +188,24 @@ h1.hero-name{font-family:var(--f-display);font-size:clamp(38px,5vw,64px);font-we
 .s-lead{font-size:16px;font-weight:300;color:var(--ink-2);max-width:500px;margin-top:12px;line-height:1.75}
 
 /* PAIN */
-#pain{background:var(--stone)}
-.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--stone-3);border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;margin-top:44px}
-@media(max-width:768px){.pain-grid{grid-template-columns:1fr}}
-.pi{background:var(--stone);padding:26px 22px;transition:background .2s}
-.pi:hover{background:var(--white)}
-.pi-icon{font-size:20px;margin-bottom:10px}
-.pi-t{font-size:14px;font-weight:600;margin-bottom:5px}
-.pi-d{font-size:13px;color:var(--ink-3);line-height:1.6}
+#pain{background:var(--white)}
+.pain-accordion{display:flex;flex-direction:column;gap:12px;margin-top:44px}
+.pain-item{border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;background:var(--stone);transition:all .5s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 2px 4px rgba(0,0,0,.02)}
+.pain-item.open{background:var(--white);border-color:var(--blue);box-shadow:0 8px 24px rgba(29,78,216,.15)}
+.pain-header{padding:18px 22px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .4s cubic-bezier(0.34, 1.56, 0.64, 1);user-select:none}
+.pain-header:hover{background:linear-gradient(135deg, var(--stone) 0%, #fafaf8 100%)}
+.pain-item.open .pain-header{background:linear-gradient(135deg, var(--blue-bg) 0%, #eff6ff 100%)}
+.pain-icon{font-size:20px;flex-shrink:0;transition:transform .6s cubic-bezier(0.34, 1.56, 0.64, 1)}
+.pain-item.open .pain-icon{transform:scale(1.15) rotate(10deg)}
+.pain-header-text{flex:1}
+.pain-t{font-size:14px;font-weight:700;color:var(--ink);transition:all .4s ease}
+.pain-item.open .pain-t{color:var(--blue);transform:translateX(2px)}
+.pain-toggle{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-weight:700;flex-shrink:0;transition:transform .6s cubic-bezier(0.34, 1.56, 0.64, 1)}
+.pain-item.open .pain-toggle{transform:rotate(180deg) scale(1.1)}
+.pain-content{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.34, 1.56, 0.64, 1),padding .5s ease,opacity .4s ease;padding:0 22px;opacity:0}
+.pain-item.open .pain-content{max-height:300px;padding:18px 22px;border-top:1px solid var(--blue-bd);opacity:1;animation:slideDown .5s cubic-bezier(0.34, 1.56, 0.64, 1)}
+@keyframes slideDown{from{transform:translateY(-10px);opacity:0}to{transform:translateY(0);opacity:1}}
+.pain-d{font-size:13px;color:var(--ink-2);line-height:1.65}
 
 /* ROI */
 #roi{background:var(--white)}
@@ -157,90 +237,116 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 #services{background:var(--stone)}
 .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
 @media(max-width:768px){.svc-grid{grid-template-columns:1fr}}
-.svc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:26px;transition:all .22s}
-.svc:hover{box-shadow:var(--sh-md);transform:translateY(-3px);border-color:var(--blue-bd)}
+.svc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:26px;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;overflow:hidden;animation:serviceGrow 8s ease-in-out infinite}
+.svc::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg, rgba(59,130,246,.05) 0%, transparent 50%);opacity:0;transition:opacity .3s ease;pointer-events:none}
+.svc:hover{box-shadow:0 25px 50px rgba(0,0,0,.15);transform:translateY(-6px) rotate(1deg);border-color:var(--blue-bd)}
+.svc:hover::before{opacity:1}
+.svc:hover .svc-icon{transform:scale(1.1) rotate(-5deg);background:linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 100%);color:#fff}
 .svc-num{font-family:var(--f-mono);font-size:11px;color:var(--ink-4);margin-bottom:16px}
-.svc-icon{width:42px;height:42px;border-radius:var(--r-md);background:var(--blue-bg);border:1px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px}
-.svc-t{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
+.svc-icon{width:42px;height:42px;border-radius:var(--r-md);background:var(--blue-bg);border:1px solid var(--blue-bd);display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;transition:all .3s ease}
+.svc-t{font-size:16px;font-weight:600;margin-bottom:8px;letter-spacing:-.01em;transition:color .3s ease}
+.svc:hover .svc-t{color:var(--blue)}
 .svc-d{font-size:14px;color:var(--ink-2);line-height:1.7;margin-bottom:14px}
 
 /* CASES */
 #cases{background:var(--white)}
 .cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
 @media(max-width:768px){.cases-grid{grid-template-columns:1fr}}
-.cc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;transition:all .22s}
-.cc:hover{box-shadow:var(--sh-md);transform:translateY(-3px)}
+.cc{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:24px;display:flex;flex-direction:column;transition:all .3s cubic-bezier(0.4, 0, 0.2, 1);transform:translateY(30px);opacity:0}
+.cc:hover{box-shadow:0 20px 40px rgba(0,0,0,.1);border-color:var(--blue)}
+.cc.animate-in{animation:slideUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards}
+@keyframes slideUp{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
 .cc-tag{font-size:11px;font-family:var(--f-mono);background:var(--blue-bg);border:1px solid var(--blue-bd);color:var(--blue-2);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:16px}
-.cc-n{font-family:var(--f-display);font-size:clamp(42px,5vw,58px);font-weight:700;color:var(--blue);line-height:1;letter-spacing:-.03em;margin-bottom:4px}
+.cc-n{font-family:var(--f-display);font-size:clamp(42px,5vw,58px);font-weight:700;color:var(--blue);line-height:1;letter-spacing:-.03em;margin-bottom:4px;transition:color .3s ease;position:relative}
+.cc-n::after{content:'';position:absolute;-top:2px;-right:2px;width:8px;height:8px;border-radius:50%;background:#10b981;opacity:0.7}
+.cc:hover .cc-n{color:#1d4ed8}
+.cc:hover .cc-n::after{animation:pulse 1.5s ease infinite}
 .cc-m{font-size:11px;font-family:var(--f-mono);color:var(--ink-4);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px}
 .cc-d{font-size:13px;color:var(--ink-2);line-height:1.65;flex:1}
 .cc-f{margin-top:12px;padding-top:10px;border-top:1px solid var(--stone-3);font-size:11px;font-family:var(--f-mono);color:var(--ink-4)}
 
 /* PROCESS */
 #process{background:var(--stone)}
-.proc-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;margin-top:44px}
-@media(max-width:768px){.proc-grid{grid-template-columns:1fr}}
-.proc{padding:30px 26px;background:var(--white);border-right:1px solid var(--stone-3);position:relative;transition:background .2s}
-.proc:last-child{border-right:none}
-.proc:hover{background:var(--stone)}
-.proc-n-bg{position:absolute;top:18px;right:20px;font-family:var(--f-display);font-size:58px;font-weight:700;color:var(--stone-2);line-height:1;letter-spacing:-.04em}
-.proc-badge{display:inline-flex;align-items:center;gap:5px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:20px;padding:3px 10px;font-family:var(--f-mono);font-size:11px;color:var(--blue-2);margin-bottom:12px}
-.proc-t{font-size:17px;font-weight:600;margin-bottom:7px;letter-spacing:-.01em}
-.proc-d{font-size:13px;color:var(--ink-2);line-height:1.65}
-.proc-items{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.proc-accordion{display:flex;flex-direction:column;gap:12px;margin-top:44px}
+.proc-item-acc{border:1px solid var(--stone-3);border-radius:var(--r-lg);overflow:hidden;background:var(--stone);transition:all .5s cubic-bezier(0.34, 1.56, 0.64, 1);box-shadow:0 2px 4px rgba(0,0,0,.02)}
+.proc-item-acc.open{background:var(--white);border-color:var(--blue);box-shadow:0 8px 24px rgba(29,78,216,.15)}
+.proc-header{padding:18px 22px;cursor:pointer;display:flex;align-items:center;gap:14px;transition:all .4s cubic-bezier(0.34, 1.56, 0.64, 1);user-select:none}
+.proc-header:hover{background:linear-gradient(135deg, var(--stone) 0%, #fafaf8 100%)}
+.proc-item-acc.open .proc-header{background:linear-gradient(135deg, var(--blue-bg) 0%, #eff6ff 100%)}
+.proc-num-badge{background:var(--blue);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;transition:all .6s cubic-bezier(0.34, 1.56, 0.64, 1)}
+.proc-item-acc.open .proc-num-badge{transform:scale(1.2) rotate(360deg);background:linear-gradient(135deg, var(--blue) 0%, var(--blue-2) 100%)}
+.proc-header-text{flex:1}
+.proc-title{font-size:16px;font-weight:700;color:var(--ink);transition:all .4s ease}
+.proc-item-acc.open .proc-title{color:var(--blue);transform:translateX(2px)}
+.proc-badge-acc{font-size:11px;font-family:var(--f-mono);color:var(--blue);background:var(--blue-bg);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:6px;transition:all .4s ease}
+.proc-item-acc.open .proc-badge-acc{background:var(--blue);color:#fff;transform:scale(1.05)}
+.proc-toggle{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-weight:700;flex-shrink:0;transition:transform .6s cubic-bezier(0.34, 1.56, 0.64, 1)}
+.proc-item-acc.open .proc-toggle{transform:rotate(180deg) scale(1.1)}
+.proc-content-item{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(0.34, 1.56, 0.64, 1),padding .5s ease,opacity .4s ease;padding:0 22px;opacity:0}
+.proc-item-acc.open .proc-content-item{max-height:400px;padding:18px 22px;border-top:1px solid var(--blue-bd);opacity:1;animation:slideDown .5s cubic-bezier(0.34, 1.56, 0.64, 1)}
+.proc-desc{font-size:14px;color:var(--ink-2);line-height:1.65;margin-bottom:12px}
+.proc-items{display:flex;flex-direction:column;gap:8px}
 .proc-item{font-size:12px;color:var(--ink-3);display:flex;gap:7px;align-items:flex-start}
 .proc-item::before{content:'→';color:var(--blue);flex-shrink:0;font-weight:500}
 
 /* AI PLAYGROUND */
-#playground{background:var(--white)}
+#playground{background:var(--white);position:relative;overflow:hidden}
 .pg-grid{display:grid;grid-template-columns:1fr 470px;gap:48px;align-items:start}
 @media(max-width:960px){.pg-grid{grid-template-columns:1fr}}
-.pg-info{position:static}
-.pg-badge-live{display:inline-flex;align-items:center;gap:7px;background:#10b98115;border:1px solid #10b98150;padding:5px 13px;border-radius:40px;font-family:var(--f-mono);font-size:12px;color:var(--green);margin-bottom:18px}
-.pg-badge-live::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s ease infinite}
-.pg-h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,42px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1}
-.pg-desc{font-size:15px;color:var(--ink-2);line-height:1.75;margin-bottom:22px}
-.code-box{background:#0a0a0a;border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.8}
-.kw{color:#7dd3fc}.str{color:#86efac}.fn{color:#fbbf24}.cm{color:#475569;font-style:italic}
-.pg-pills{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.pg-pill{background:var(--stone);border:1px solid var(--stone-3);border-radius:var(--r-md);padding:10px 13px;font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:6px}
-.pg-pill::before{content:'✓';color:var(--green);font-weight:700;font-size:12px}
+.pg-info{position:static;animation:fadeInUp 0.6s ease-out 0.1s both}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.pg-badge-live{display:inline-flex;align-items:center;gap:6px;background:var(--green);border:1px solid #10b98130;padding:5px 12px;border-radius:20px;font-family:var(--f-mono);font-size:11px;color:#fff;margin-bottom:16px;box-shadow:0 2px 8px rgba(16,185,129,.15)}
+.pg-badge-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 2s ease infinite}
+.pg-h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1;color:var(--ink)}
+.pg-desc{font-size:15px;color:var(--ink-2);line-height:1.7;margin-bottom:20px;max-width:560px}
+.code-box{background:#0f172a;border:1px solid var(--stone-3);border-radius:12px;padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.6;position:relative;overflow:hidden}
+.kw{color:#60a5fa}.str{color:#34d399}.fn{color:#fbbf24}.cm{color:#64748b;font-style:italic}
+.pg-pills{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pg-pill{background:var(--white);border:1px solid var(--stone-3);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px;transition:all .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.pg-pill:hover{background:var(--stone);border-color:var(--blue);color:var(--blue);transform:translateY(-1px);box-shadow:0 4px 12px rgba(29,78,216,.1)}
+.pg-pill:nth-child(1)::before{content:'⚡'}
+.pg-pill:nth-child(2)::before{content:'🌊'}
+.pg-pill:nth-child(3)::before{content:'🧠'}
+.pg-pill:nth-child(4)::before{content:'💾'}
 
-.chat-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg)}
-.chat-hd{background:#0a0a0a;padding:15px 18px;display:flex;align-items:center;gap:12px}
-.chat-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue-3),#60a5fa);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.chat-nm{font-weight:600;font-size:14px;color:#fff}
-.chat-st{font-size:11px;color:#86efac;display:flex;align-items:center;gap:5px;font-family:var(--f-mono)}
-.chat-st::before{content:'';width:6px;height:6px;border-radius:50%;background:#10b981}
-.chat-msgs{height:300px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:11px;scroll-behavior:smooth;background:var(--stone)}
-.chat-msgs::-webkit-scrollbar{width:3px}
+.chat-card{background:var(--white);border:1px solid var(--stone-3);border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,.08);animation:fadeInUp 0.6s ease-out 0.4s both, chatActive 5s ease-in-out infinite}
+.chat-hd{background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);padding:18px 20px;display:flex;align-items:center;gap:14px}
+.chat-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;border:2px solid rgba(255,255,255,.8);box-shadow:0 2px 4px rgba(0,0,0,.1)}
+.chat-nm{font-weight:700;font-size:16px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.2)}
+.chat-st{font-size:12px;color:rgba(255,255,255,.9);display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-weight:500}
+.chat-st::before{content:'';width:8px;height:8px;border-radius:50%;background:#4ade80;border:2px solid rgba(255,255,255,.3);animation:pulse 2s ease infinite}
+.chat-msgs{height:320px;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;background:#fafbfc;scrollbar-width:thin;scrollbar-color:var(--stone-3) transparent}
+.chat-msgs::-webkit-scrollbar{width:4px}
+.chat-msgs::-webkit-scrollbar-track{background:transparent}
 .chat-msgs::-webkit-scrollbar-thumb{background:var(--stone-3);border-radius:2px}
-.msg{display:flex;gap:8px;animation:mi .25s ease}
-@keyframes mi{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.msg{display:flex;gap:12px;animation:slideIn .3s ease-out;opacity:0;animation-fill-mode:forwards}
 .msg.u{flex-direction:row-reverse}
-.bbl{max-width:80%;padding:10px 13px;border-radius:13px;font-size:14px;line-height:1.55}
-.msg.b .bbl{background:var(--white);color:var(--ink);border:1px solid var(--stone-3);border-bottom-left-radius:4px;box-shadow:var(--sh-sm)}
-.msg.u .bbl{background:var(--blue);color:#fff;border-bottom-right-radius:4px}
-.m-av{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;align-self:flex-end}
-.m-av.bot{background:linear-gradient(135deg,var(--blue-3),#60a5fa)}
-.m-av.usr{background:var(--stone-3);color:var(--ink-3)}
-.ty-b{background:var(--white);border:1px solid var(--stone-3);border-radius:13px;border-bottom-left-radius:4px;padding:11px 15px;display:flex;gap:4px;align-items:center;box-shadow:var(--sh-sm)}
-.ty-b span{width:6px;height:6px;border-radius:50%;background:var(--ink-4);animation:bl 1.2s ease infinite}
+.msg:nth-child(1){animation-delay:.1s}
+.msg:nth-child(2){animation-delay:.2s}
+.msg:nth-child(3){animation-delay:.3s}
+@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.bbl{max-width:75%;padding:12px 16px;border-radius:16px;font-size:14px;line-height:1.5;position:relative}
+.msg.b .bbl{background:var(--white);color:var(--ink);border:1px solid var(--stone-3);border-bottom-left-radius:4px;box-shadow:0 2px 4px rgba(0,0,0,.05)}
+.msg.u .bbl{background:var(--blue);color:#fff;border-bottom-right-radius:4px;box-shadow:0 2px 8px rgba(29,78,216,.2)}
+.m-av{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;align-self:flex-end;border:1px solid rgba(255,255,255,.8);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.m-av.bot{background:linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);border-color:rgba(255,255,255,.6)}
+.m-av.usr{background:var(--stone-2);color:var(--ink-2);border-color:var(--stone-3)}
+.ty-b{background:var(--white);border:1px solid var(--stone-3);border-radius:16px;border-bottom-left-radius:4px;padding:12px 16px;display:flex;gap:4px;align-items:center}
+.ty-b span{width:4px;height:4px;border-radius:50%;background:var(--blue);animation:typing 1.4s ease infinite}
 .ty-b span:nth-child(2){animation-delay:.2s}
 .ty-b span:nth-child(3){animation-delay:.4s}
-@keyframes bl{0%,60%,100%{transform:none}30%{transform:translateY(-5px)}}
-.chat-opts{padding:9px 15px;background:var(--white);border-top:1px solid var(--stone-3);display:flex;flex-wrap:wrap;gap:6px}
-.co{font-size:12px;padding:5px 11px;border:1px solid var(--stone-3);border-radius:20px;color:var(--ink-2);background:transparent;transition:all .15s;cursor:pointer;font-family:var(--f-body)}
-.co:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg)}
-.chat-in-r{padding:13px 15px;background:var(--white);border-top:1px solid var(--stone-3);display:flex;gap:8px;align-items:center}
-.ci{flex:1;background:var(--stone);border:1px solid var(--stone-3);color:var(--ink);padding:9px 13px;border-radius:var(--r-md);font-size:14px;font-family:var(--f-body);outline:none;transition:border-color .15s}
-.ci:focus{border-color:var(--blue);background:var(--white)}
+@keyframes typing{0%,60%,100%{transform:scale(1);opacity:1}30%{transform:scale(1.2);opacity:.7}}
+.chat-opts{padding:14px 20px;background:#f8fafc;border-top:1px solid var(--stone-3);display:flex;flex-wrap:wrap;gap:6px}
+.co{font-size:12px;padding:6px 12px;border:1px solid var(--stone-3);border-radius:20px;color:var(--ink-2);background:var(--white);transition:all .15s ease;cursor:pointer;font-family:var(--f-body);font-weight:500}
+.co:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-bg);transform:translateY(-1px)}
+.chat-in-r{padding:16px 20px;background:#f8fafc;border-top:1px solid var(--stone-3);display:flex;gap:10px;align-items:center}
+.ci{flex:1;background:var(--white);border:1px solid var(--stone-3);color:var(--ink);padding:10px 14px;border-radius:20px;font-size:14px;font-family:var(--f-body);outline:none;transition:all .15s ease}
+.ci:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(29,78,216,.1)}
 .ci::placeholder{color:var(--ink-4)}
-.cs{background:var(--blue);color:#fff;width:37px;height:37px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all .15s;cursor:pointer;border:none}
-.cs:hover{background:var(--blue-2)}
-.cs:disabled{opacity:.35;cursor:default}
-.chat-mdl{padding:8px 15px;background:var(--stone);border-top:1px solid var(--stone-3);font-size:11px;font-family:var(--f-mono);color:var(--ink-4);display:flex;align-items:center;gap:5px}
-.chat-mdl::before{content:'⚡'}
+.cs{background:var(--blue);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;transition:all .15s ease;cursor:pointer;border:none;box-shadow:0 2px 6px rgba(29,78,216,.2)}
+.cs:hover{background:var(--blue-2);transform:scale(1.05);box-shadow:0 4px 12px rgba(29,78,216,.3)}
+.cs:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.chat-mdl{padding:10px 20px;background:var(--stone);border-top:1px solid var(--stone-3);font-size:10px;font-family:var(--f-mono);color:var(--ink-4);display:flex;align-items:center;gap:4px}
 
 /* CONTACT */
 #contact{background:var(--stone)}
@@ -292,13 +398,13 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 
 <nav>
   <div class="nav-i">
-    <a href="/" class="nav-logo">Naim<em>.</em></a>
+    <a href="/" class="nav-logo"><color>N</color>aim<em>.</em></a>
     <div class="nav-actions">
       <ul class="nav-links">
         <li><a href="#roi">ROI</a></li>
         <li><a href="#services">Servicios</a></li>
         <li><a href="#playground">AI Demo</a></li>
-        <li><a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank">Contacto</a></li>
+        <li><a href="#contact" target="_blank">Contacto</a></li>
       </ul>
       <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
       <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
@@ -307,44 +413,48 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 </nav>
 
 <section id="hero">
-  <div class="w">
+    <div class="w">
     <div class="hero-grid">
-      <div>
-        <img src="Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
-        
-        <div class="hero-badge">Disponible · Madrid &amp; Remoto · 2026</div>
+      <div class="hero-content rv-hidden">
         <h1 class="hero-name">Naim El Haddadi</h1>
         <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
-        <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong> y desarrollo a medida. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
-        <div class="hero-btns">
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="btn-p">Agendar diagnóstico gratis →</a>
-          <a href="#roi" class="btn-o">Calcular mi ROI</a>
+        <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong>. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap">
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn" style="padding:13px 26px">Agendar diagnóstico gratis →</a>
+          <a href="#roi" style="padding:13px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px">Calcular mi ROI</a>
         </div>
         <div class="hero-stats">
           <div><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
-          <div><div class="stat-n">72h</div><div class="stat-l">hasta primer piloto</div></div>
-          <div><div class="stat-n">3×</div><div class="stat-l">ROI promedio</div></div>
+          <div><div class="stat-n">72h</div><div class="stat-l">primer piloto</div></div>
           <div><div class="stat-n">€15k</div><div class="stat-l">ahorro/mes real</div></div>
         </div>
       </div>
-      <div class="hero-card rv" data-d="1">
-        <div class="hero-card-lbl">Metodología probada</div>
-        <div style="display:flex;flex-direction:column;gap:0">
-          <div class="p-step"><div class="p-num">01</div><div><div class="p-label">Descubrimiento</div><div class="p-desc">Auditoría de procesos y ROI real</div></div></div>
-          <div class="p-line"></div>
-          <div class="p-step"><div class="p-num">02</div><div><div class="p-label">Piloto en 72h</div><div class="p-desc">MVP funcional y medible</div></div></div>
-          <div class="p-line"></div>
-          <div class="p-step"><div class="p-num">03</div><div><div class="p-label">Implementación</div><div class="p-desc">Deploy, formación y soporte</div></div></div>
-          <div class="p-line"></div>
-          <div class="p-step"><div class="p-num">04</div><div><div class="p-label">Optimización</div><div class="p-desc">El sistema mejora cada semana</div></div></div>
+      <div class="hero-right rv-hidden">
+        <div class="hero-portrait-container">
+          <img src="Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
+          <div class="badge b-1"><div class="b-n">3×</div><div class="b-l">ROI promedio</div></div>
+          <div class="badge b-2"><div class="b-n">Disponible ahora</div><div class="b-l">Madrid & Remoto</div></div>
         </div>
-        <div class="stack-row">
-          <div class="stack-lbl">Stack técnico</div>
-          <div class="tags-row">
-            <span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag b">LangChain</span><span class="tag">Supabase</span><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Java</span>
+        <div class="hero-card rv" data-d="1">
+          <div class="hero-card-lbl">Metodología probada</div>
+          <div style="display:flex;flex-direction:column;gap:0">
+            <div class="p-step"><div class="p-num">01</div><div><div class="p-label">Descubrimiento</div><div class="p-desc">Auditoría de procesos y ROI real</div></div></div>
+            <div class="p-line"></div>
+            <div class="p-step"><div class="p-num">02</div><div><div class="p-label">Piloto en 72h</div><div class="p-desc">MVP funcional y medible</div></div></div>
+            <div class="p-line"></div>
+            <div class="p-step"><div class="p-num">03</div><div><div class="p-label">Implementación</div><div class="p-desc">Deploy, formación y soporte</div></div></div>
+            <div class="p-line"></div>
+            <div class="p-step"><div class="p-num">04</div><div><div class="p-label">Optimización</div><div class="p-desc">El sistema mejora cada semana</div></div></div>
+          </div>
+          <div class="stack-row">
+            <div class="stack-lbl">Stack técnico</div>
+            <div class="tags-row">
+              <span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag b">LangChain</span><span class="tag">Supabase</span><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Java</span>
+            </div>
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </section>
@@ -359,13 +469,55 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 <section id="pain" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">El Problema</div><h2 class="h2-d">¿Cuánto te cuesta operar a mano?</h2><p class="s-lead">Cada hora en tareas repetitivas es dinero que no se invierte en crecer.</p></div>
-    <div class="pain-grid rv" data-d="1">
-      <div class="pi"><div class="pi-icon">📋</div><div class="pi-t">Tareas manuales interminables</div><div class="pi-d">Tu equipo copia datos entre sistemas y responde las mismas preguntas cada día.</div></div>
-      <div class="pi"><div class="pi-icon">💀</div><div class="pi-t">CRM desactualizado</div><div class="pi-d">Los leads caen en el vacío. No sabes quién está listo para comprar.</div></div>
-      <div class="pi"><div class="pi-icon">⏳</div><div class="pi-t">Soporte lento y costoso</div><div class="pi-d">El 80% de preguntas son siempre las mismas. Tu equipo las responde una a una.</div></div>
-      <div class="pi"><div class="pi-icon">📉</div><div class="pi-t">Pipeline estancado</div><div class="pi-d">Nadie hace seguimiento en las primeras 2 horas. La oportunidad se pierde.</div></div>
-      <div class="pi"><div class="pi-icon">🔌</div><div class="pi-t">Herramientas desconectadas</div><div class="pi-d">Tu web, CRM y facturación no se hablan. Los datos viven en silos.</div></div>
-      <div class="pi"><div class="pi-icon">🔥</div><div class="pi-t">Siempre apagando incendios</div><div class="pi-d">Sin sistemas automáticos el día a día absorbe todo. No hay margen para escalar.</div></div>
+    <div class="pain-accordion rv" data-d="1">
+      <div class="pain-item open">
+        <div class="pain-header">
+          <div class="pain-icon">📋</div>
+          <div class="pain-header-text"><div class="pain-t">Tareas manuales interminables</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">Tu equipo copia datos entre sistemas y responde las mismas preguntas cada día. Sin automatización, cada tarea consume horas.</div></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-header">
+          <div class="pain-icon">💀</div>
+          <div class="pain-header-text"><div class="pain-t">CRM desactualizado</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">Los leads caen en el vacío. No sabes quién está listo para comprar. Sin integración pierdes la trazabilidad completa.</div></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-header">
+          <div class="pain-icon">⏳</div>
+          <div class="pain-header-text"><div class="pain-t">Soporte lento y costoso</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">El 80% de preguntas son siempre las mismas. Tu equipo las responde una a una consumiendo recursos valiosos.</div></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-header">
+          <div class="pain-icon">📉</div>
+          <div class="pain-header-text"><div class="pain-t">Pipeline estancado</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">Nadie hace seguimiento en las primeras 2 horas. Sin automatización de follow-ups, la oportunidad se pierde.</div></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-header">
+          <div class="pain-icon">🔌</div>
+          <div class="pain-header-text"><div class="pain-t">Herramientas desconectadas</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">Tu web, CRM y facturación no se hablan. Los datos viven en silos generando inconsistencias en todo el flujo.</div></div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-header">
+          <div class="pain-icon">🔥</div>
+          <div class="pain-header-text"><div class="pain-t">Siempre apagando incendios</div></div>
+          <div class="pain-toggle">▼</div>
+        </div>
+        <div class="pain-content"><div class="pain-d">Sin sistemas automáticos el día a día absorbe todo. No hay margen para escalar, innovar ni crecer realmente.</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -455,10 +607,61 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 <section id="process" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">Cómo Trabajo</div><h2 class="h2-d">Sin cajas negras,<br>sin sorpresas</h2></div>
-    <div class="proc-grid rv" data-d="1">
-      <div class="proc"><div class="proc-n-bg">01</div><div class="proc-badge">Semana 1</div><h3 class="proc-t">Descubrimiento</h3><p class="proc-d">Auditoría de procesos, cuellos de botella y estimación de ROI real.</p><div class="proc-items"><div class="proc-item">Entrevistas con el equipo</div><div class="proc-item">Mapeo de flujos</div><div class="proc-item">Propuesta técnica</div></div></div>
-      <div class="proc"><div class="proc-n-bg">02</div><div class="proc-badge">Semana 2–3</div><h3 class="proc-t">Piloto</h3><p class="proc-d">MVP funcional en 72h. Real, medible y ajustable desde el primer día.</p><div class="proc-items"><div class="proc-item">Prototipo en 72h</div><div class="proc-item">Iteración rápida</div><div class="proc-item">Métricas desde día 1</div></div></div>
-      <div class="proc" style="border-right:none"><div class="proc-n-bg">03</div><div class="proc-badge">Semana 4+</div><h3 class="proc-t">Implementación</h3><p class="proc-d">Deploy, formación del equipo y monitoreo continuo. El sistema mejora con el tiempo.</p><div class="proc-items"><div class="proc-item">Deploy en producción</div><div class="proc-item">Formación del equipo</div><div class="proc-item">Soporte continuo</div></div></div>
+    <div class="proc-accordion rv" data-d="1">
+      <div class="proc-item-acc open">
+        <div class="proc-header">
+          <div class="proc-num-badge">01</div>
+          <div class="proc-header-text">
+            <div class="proc-badge-acc">Semana 1</div>
+            <div class="proc-title">Descubrimiento</div>
+          </div>
+          <div class="proc-toggle">▼</div>
+        </div>
+        <div class="proc-content-item">
+          <div class="proc-desc">Auditoría de procesos, cuellos de botella y estimación de ROI real.</div>
+          <div class="proc-items">
+            <div class="proc-item">Entrevistas con el equipo</div>
+            <div class="proc-item">Mapeo de flujos</div>
+            <div class="proc-item">Propuesta técnica</div>
+          </div>
+        </div>
+      </div>
+      <div class="proc-item-acc">
+        <div class="proc-header">
+          <div class="proc-num-badge">02</div>
+          <div class="proc-header-text">
+            <div class="proc-badge-acc">Semana 2–3</div>
+            <div class="proc-title">Piloto</div>
+          </div>
+          <div class="proc-toggle">▼</div>
+        </div>
+        <div class="proc-content-item">
+          <div class="proc-desc">MVP funcional en 72h. Real, medible y ajustable desde el primer día.</div>
+          <div class="proc-items">
+            <div class="proc-item">Prototipo en 72h</div>
+            <div class="proc-item">Iteración rápida</div>
+            <div class="proc-item">Métricas desde día 1</div>
+          </div>
+        </div>
+      </div>
+      <div class="proc-item-acc">
+        <div class="proc-header">
+          <div class="proc-num-badge">03</div>
+          <div class="proc-header-text">
+            <div class="proc-badge-acc">Semana 4+</div>
+            <div class="proc-title">Implementación</div>
+          </div>
+          <div class="proc-toggle">▼</div>
+        </div>
+        <div class="proc-content-item">
+          <div class="proc-desc">Deploy, formación del equipo y monitoreo continuo. El sistema mejora con el tiempo.</div>
+          <div class="proc-items">
+            <div class="proc-item">Deploy en producción</div>
+            <div class="proc-item">Formación del equipo</div>
+            <div class="proc-item">Soporte continuo</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -468,11 +671,9 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 <section id="playground" class="section">
   <div class="w">
     <div class="rv" style="margin-bottom:40px">
-      <div class="pg-badge-live">AI Naim — Demo en vivo</div>
-      <h2 class="pg-h2">Habla con el agente.<br>Ve cómo funciona.</h2>
-      <p class="pg-desc" style="max-width:600px">Este chat demuestra cómo construyo sistemas de IA conversacional: streaming token a token, manejo de estados y prompt engineering — el mismo patrón que implemento en proyectos reales.</p>
-    </div>
-
+        <div class="pg-badge-live">🤖 AI Naim — Demo Interactiva</div>
+        <h2 class="pg-h2">Habla con el agente.<br>Ve cómo funciona.</h2>
+        <p class="pg-desc" style="max-width:600px">Esta demo muestra cómo construyo sistemas de IA conversacional: streaming token a token, manejo de estados y prompt engineering — el mismo patrón que implemento en proyectos reales.</p>
     <div class="pg-grid">
       <div class="pg-info rv">
         <div class="code-box">
@@ -489,34 +690,34 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
   <span class="kw">return</span> result.<span class="fn">toAIStreamResponse</span>()
 }</div>
         <div class="pg-pills">
-          <div class="pg-pill">Edge Runtime</div>
-          <div class="pg-pill">Streaming real</div>
-          <div class="pg-pill">Prompt engineering</div>
-          <div class="pg-pill">Historial de sesión</div>
+          <div class="pg-pill">⚡ Edge Runtime</div>
+          <div class="pg-pill">🌊 Streaming real</div>
+          <div class="pg-pill">🧠 Prompt engineering</div>
+          <div class="pg-pill">💾 Historial de sesión</div>
         </div>
-        <div style="margin-top:20px;padding:16px 18px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:var(--r-md)">
-          <p style="font-size:13px;color:var(--ink-2);line-height:1.7">💡 En producción, el <code style="background:var(--stone);padding:1px 5px;border-radius:4px;font-family:var(--f-mono);font-size:12px">SYSTEM_PROMPT</code> con el contexto de negocio se inyecta en el servidor — nunca expuesto al cliente. La clave de API vive solo en <code style="background:var(--stone);padding:1px 5px;border-radius:4px;font-family:var(--f-mono);font-size:12px">process.env</code>.</p>
+        <div style="margin-top:18px;padding:14px 16px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;border-left:3px solid var(--blue)">
+          <p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin:0">🔒 <strong>Seguridad primero:</strong> El <code style="background:var(--stone);padding:1px 4px;border-radius:3px;font-family:var(--f-mono);font-size:11px">SYSTEM_PROMPT</code> con contexto empresarial se inyecta únicamente en el servidor — nunca expuesto al cliente. Las claves API viven exclusivamente en <code style="background:var(--stone);padding:1px 4px;border-radius:3px;font-family:var(--f-mono);font-size:11px">process.env</code>.</p>
         </div>
       </div>
 
       <div class="rv" data-d="1">
         <div class="chat-card">
           <div class="chat-hd">
-            <div class="chat-av">🤖</div>
-            <div><div class="chat-nm">Asistente de Naim</div><div class="chat-st" id="cSt">Activo ahora</div></div>
+            <div class="chat-av"><img src="letra-n.png" alt="" width="30px"></div>
+            <div><div class="chat-nm">Asistente IA de Naim</div><div class="chat-st" id="cSt">En línea ahora ✨</div></div>
           </div>
           <div class="chat-msgs" id="cMsgs" role="log" aria-live="polite">
-            <div class="msg b"><div class="m-av bot">🤖</div><div class="bbl">Hola 👋 Soy el asistente de Naim El Haddadi. Puedo contarte sobre sus servicios de automatización con IA, su stack técnico o cómo podría ayudar a tu empresa. ¿Qué necesitas saber?</div></div>
+            <div class="msg b"><div class="m-av bot"><img src="letra-n.png" alt="" width="20px"></div><div class="bbl">¡Hola! 👋 Soy el asistente de Naim. Estoy aquí para ayudarte con preguntas sobre sus servicios de automatización con IA, procesos de trabajo, o cualquier duda que tengas sobre eficiencia operativa. ¿En qué puedo ayudarte hoy?</div></div>
           </div>
           <div class="chat-opts" id="cOpts">
-            <button class="co" onclick="cs('¿Qué servicios ofrece Naim?')">🔍 Servicios</button>
-            <button class="co" onclick="cs('¿Cuánto cuesta trabajar con él?')">💰 Precios</button>
-            <button class="co" onclick="cs('¿Qué stack técnico usa?')">⚡ Stack</button>
-            <button class="co" onclick="cs('¿Cómo es el proceso de trabajo?')">🗓️ Proceso</button>
+            <button class="co" onclick="cs('¿Qué servicios ofreces?')">💡 Servicios</button>
+            <button class="co" onclick="cs('¿Cuánto cuesta trabajar contigo?')">💰 Precios</button>
+            <button class="co" onclick="cs('¿Qué tecnologías usas?')">⚡ Tecnologías</button>
+            <button class="co" onclick="cs('Cuéntame sobre tu proceso')">🚀 Proceso</button>
           </div>
           <div class="chat-in-r">
-            <input class="ci" id="cIn" type="text" placeholder="Escribe tu pregunta..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();cSend()}">
-            <button class="cs" id="cBtn" onclick="cSend()" aria-label="Enviar">↑</button>
+            <input class="ci" id="cIn" type="text" placeholder="Escribe tu mensaje aquí..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();cSend()}">
+            <button class="cs" id="cBtn" onclick="cSend()" aria-label="Enviar">✈️</button>
       </div>
     </div>
   </div>
@@ -526,62 +727,56 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 
 <section id="contact" class="section">
   <div class="w">
-    <div class="ct-wrap">
+    <div class="ct-wrap" style="gap: 42px;">
       <div>
         <div class="eyebrow rv">Trabaja con Naim</div>
         <h2 class="h2-d rv" style="margin-bottom:12px">Hablemos de<br>tu negocio</h2>
         <p class="s-lead rv">Una conversación de 30 minutos puede revelarte cuántas horas y euros estás dejando sobre la mesa cada semana.</p>
         <div class="ct-hl rv"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Análisis de tus 3 mayores ineficiencias, estimación de ROI y propuesta de piloto con coste fijo y entregable claro.</div>
         <div class="c-links rv">
-          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></span>GitHub — naimelhaddadi</a>
-          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg></span>LinkedIn — Naim El Haddadi</a>
+          <a href="https://wa.me/34615846713" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico">💬</span>WhatsApp — +34 615 846 713</a>
+          <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico">✉</span>Email — naimprincipal@gmail.com</a>
         </div>
       </div>
-        <div class="fc-card rv" data-d="1">
-        <h3 style="font-family:var(--f-display);font-size: 22px;font-weight: 700;letter-spacing: -0.02em;margin-bottom: 4px">Agenda tu diagnóstico</h3>
-        <p style="font-size:13px;color:var(--ink-4);margin-bottom:22px;font-family:var(--f-mono)">Elige el día y la hora que mejor te vengan. Sin correos de ida y vuelta.</p>
-        <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="display:inline-block; text-align:center; text-decoration:none; padding:16px;">📅 Ver disponibilidad en el calendario →</a>
-        <p class="f-note" style="margin-top:16px;">🔒 El enlace de la videollamada se generará automáticamente en tu agenda.</p>
-      </div>
-          <h3 style="font-family:var(--f-display);font-size:20px;font-weight:700;margin-bottom:7px">Solicitud enviada</h3>
-          <p style="font-size:14px;color:var(--ink-2)">Naim te contactará en menos de 24h para confirmar el diagnóstico.</p>
+      <div>
+        <div class="fc-card rv" data-d="1" style="border: 2px solid var(--blue-2); background: var(--white); padding: 32px;">
+          <div class="hero-badge" style="margin-bottom: 14px; display: inline-flex;">Agenda tu auditoría</div>
+          <h3 style="font-family:var(--f-display);font-size: 24px;font-weight: 800;letter-spacing: -0.03em;margin-bottom: 10px;">Auditoría de Eficiencia Operativa</h3>
+          <p style="font-size:15px;color:var(--ink-3);margin-bottom:18px;">Reserva una sesión estructurada de 30 min para recibir:</p>
+          <ul style="margin-bottom:20px; padding-left: 20px; color: var(--ink-2); font-size: 14px; line-height: 1.6;">
+            <li>✔ Mapa rápido de procesos con cuellos de botella</li>
+            <li>✔ Estimación de ahorro potencial (tiempo + coste)</li>
+            <li>✔ Plan de acción con piloto de baja fricción</li>
+          </ul>
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="display:inline-block; width:100%; text-align:center; text-decoration:none; padding:16px;">📅 Agendar auditoría →</a>
+          <p class="f-note" style="margin-top:14px;">🔒 Enlace de videollamada directo a tu calendario. Cambia o cancela con un clic.</p>
         </div>
       </div>
     </div>
-  </div>
- <section id="lead-magnet" class="section" style="background: var(--bg); border-top: 1px solid var(--border); padding: 120px 0;">
-  <div class="w" style="max-width: 800px;">
-    <div class="fc-card" id="lm-container" style="padding: 60px 40px; text-align: center; background: var(--surface); border: 1px solid var(--border);">
-      
-      <div id="lm-form-area">
-        <div class="hero-badge" style="margin-bottom: 20px; display: inline-block;">Recurso Exclusivo</div>
-        <h2 style="font-family: var(--f-display); font-size: clamp(32px, 4vw, 42px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; color: #fff; letter-spacing: -0.03em;">
-          Auditoría de Eficiencia Operativa
-        </h2>
-        <p style="color: var(--text-muted); font-size: 18px; line-height: 1.6; margin-bottom: 35px; max-width: 600px; margin-left: auto; margin-right: auto;">
-          Detecta los 5 puntos donde tu operativa está quemando <strong>más de 60.000€ al año</strong> en tareas manuales e ineficiencias de comunicación.
-        </p>
 
-        <form id="checklist-form" style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; max-width: 550px; margin: 0 auto;">
-          <input type="email" id="lead-email" placeholder="Tu email profesional" required 
-                 style="flex: 1; min-width: 280px; padding: 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: #fff; font-family: var(--f-body); outline: none; font-size: 16px;">
-          <button type="submit" id="lead-btn" class="f-btn" style="margin: 0; padding: 18px 32px; font-weight: 700; font-size: 16px;">
-            Descargar PDF →
-          </button>
-        </form>
-        <p style="font-size: 12px; color: var(--ink-4); margin-top: 20px; font-family: var(--f-mono); opacity: 0.6;">PDF Directo · Sin Spam · Acceso Instantáneo</p>
+    <div class="ct-wrap" style="margin-top:40px;">
+      <div style="grid-column: 1 / -1;">
+        <div class="fc-card" id="lm-container" style="padding: 40px 30px; text-align: center; background: var(--white); border: 1px solid var(--stone-3);">
+          <div id="lm-form-area">
+            <div class="hero-badge" style="margin-bottom: 14px; display: inline-block;">Recurso Exclusivo</div>
+            <h2 style="font-family: var(--f-display); font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--ink); letter-spacing: -0.03em;">Auditoría de Eficiencia Operativa</h2>
+            <p style="color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-bottom: 26px; max-width: 640px; margin: 0 auto;">Detecta los 5 puntos donde tu operativa está quemando <strong>más de 60.000€ al año</strong> en tareas manuales e ineficiencias de comunicación.</p>
+            <form id="checklist-form" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-width: 560px; margin: 0 auto;">
+              <input type="email" id="lead-email" placeholder="Tu email profesional" required style="flex: 1; min-width: 280px; padding: 14px; border-radius: 8px; border: 1px solid var(--stone-3); background: var(--white); color: var(--ink); font-family: var(--f-body); outline: none; font-size: 15px;">
+              <button type="submit" id="lead-btn" class="f-btn" style="margin: 0; padding: 14px 30px; font-weight: 700; font-size: 15px;">Descargar PDF →</button>
+            </form>
+            <p style="font-size: 12px; color: var(--ink-4); margin-top: 14px; font-family: var(--f-mono); opacity: 0.8;">PDF Directo · Sin Spam · Acceso instantáneo</p>
+          </div>
+          <div id="lm-success" style="display: none; padding: 30px 0;">
+            <div style="font-size: 52px; margin-bottom: 16px;">📄</div>
+            <h3 style="font-family: var(--f-display); font-size: 30px; color: var(--ink); margin-bottom: 12px;">Documento Listo</h3>
+            <p style="color: var(--ink-2); margin-bottom: 24px; font-size: 16px;">Tu Auditoría de Eficiencia ya está disponible para descarga.</p>
+            <a id="download-link" href="#" class="f-btn" style="display: inline-block; padding: 15px 36px; text-decoration: none; font-size: 16px;">Abrir Auditoría (PDF)</a>
+          </div>
+        </div>
       </div>
-
-      <div id="lm-success" style="display: none; padding: 40px 0;">
-        <div style="font-size: 60px; margin-bottom: 20px;">📄</div>
-        <h3 style="font-family: var(--f-display); font-size: 32px; color: #fff; margin-bottom: 15px;">Documento Listo</h3>
-        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 18px;">Tu Auditoría de Eficiencia ya está disponible para descarga.</p>
-        <a id="download-link" href="#" class="f-btn" style="display: inline-block; padding: 20px 45px; text-decoration: none; font-size: 18px;">
-          Abrir Auditoría (PDF)
-        </a>
-      </div>
-
     </div>
+
   </div>
 </section>
 
@@ -636,6 +831,7 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       <div class="ft-links">
         <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
         <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="ftl"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg> LinkedIn</a>
+        <a href="https://wa.me/34615846713" target="_blank" rel="noopener noreferrer" class="ftl">💬 WhatsApp</a>
         <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="ftl">✉ Email</a>
       </div>
     </div>
@@ -697,7 +893,7 @@ function calcROI(){
     el('bM').textContent = '€' + Math.round(manual).toLocaleString('es-ES');
     el('bI').textContent = '–€' + Math.round(pilot).toLocaleString('es-ES');
     el('bN').textContent = '€' + Math.round(Math.max(net, 0)).toLocaleString('es-ES');
-    el('roiN').textContent = '€' + Math.round(Math.max(savings, 0)).toLocaleString('es-ES');
+    el('roiN').textContent = '€' + Math.round(Math.max(net, 0)).toLocaleString('es-ES');
   } catch (err) {
     console.error('Error calcROI', err);
   }
@@ -729,7 +925,7 @@ function addM(role,text){
   const c = document.getElementById('cMsgs');
   if(!c) return;
   const d = document.createElement('div'); d.className = 'msg ' + role;
-  const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.textContent = role === 'u' ? '👤' : '🤖';
+  const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.textContent = role === 'u' ? '👤' : '�';
   const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = rt(text);
   d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
   return b;
@@ -738,7 +934,7 @@ function addM(role,text){
 function showTy(){
   const c = document.getElementById('cMsgs');
   const d = document.createElement('div'); d.className = 'msg b'; d.id = 'tyEl';
-  d.innerHTML = '<div class="m-av bot">🤖</div><div class="ty-b"><span></span><span></span><span></span></div>';
+  d.innerHTML = '<div class="m-av bot">�</div><div class="ty-b"><span></span><span></span><span></span></div>';
   c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
 
@@ -747,7 +943,7 @@ function rmTy(){const e=document.getElementById('tyEl');if(e)e.remove();}
 async function stream(text){
   const c = document.getElementById('cMsgs');
   const d = document.createElement('div'); d.className = 'msg b';
-  const av = document.createElement('div'); av.className = 'm-av bot'; av.textContent = '🤖';
+  const av = document.createElement('div'); av.className = 'm-av bot'; av.textContent = '�';
   const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = '';
   d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
   let acc = '';
@@ -768,7 +964,7 @@ async function cSend() {
   busy = true;
   document.getElementById('cOpts').style.display = 'none';
   document.getElementById('cBtn').disabled = true;
-  document.getElementById('cSt').textContent = 'Escribiendo…';
+  document.getElementById('cSt').textContent = 'Escribiendo... ✨';
   input.value = '';
   
   addM('u', text);
@@ -796,7 +992,7 @@ async function cSend() {
   
   busy = false;
   document.getElementById('cBtn').disabled = false;
-  document.getElementById('cSt').textContent = 'Activo ahora';
+  document.getElementById('cSt').textContent = 'En línea ahora ✨';
 }
 
 // Función para los botones de sugerencia rápidos
@@ -804,6 +1000,102 @@ function cs(text) {
   document.getElementById('cIn').value = text;
   cSend();
 }
+
+// Animación de estadísticas del hero
+function animateStats() {
+  const stats = document.querySelectorAll('.stat-n');
+  stats.forEach((stat, index) => {
+    const target = parseInt(stat.textContent.replace(/[^\d]/g, ''));
+    if (target) {
+      let current = 0;
+      const increment = target / 60; // 60 frames para 1 segundo
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          stat.textContent = stat.textContent.replace(/\d+/, target);
+          clearInterval(timer);
+        } else {
+          stat.textContent = stat.textContent.replace(/\d+/, Math.floor(current));
+        }
+      }, 16);
+    }
+  });
+}
+
+// Animación de casos escalonada
+function animateCases() {
+  const cases = document.querySelectorAll('.cc');
+  cases.forEach((caseEl, index) => {
+    caseEl.style.animationDelay = `${index * 0.2}s`;
+    caseEl.classList.add('case-animate');
+  });
+}
+
+// Sistema de crecimiento dinámico
+function dynamicGrowth() {
+  const growthElements = document.querySelectorAll('.growth-dynamic');
+  growthElements.forEach(el => {
+    const baseValue = parseInt(el.dataset.base || el.textContent);
+    const growth = Math.sin(Date.now() / 10000) * 0.1; // Oscilación suave
+    const newValue = Math.round(baseValue * (1 + growth));
+    el.textContent = el.textContent.replace(/\d+/, newValue);
+  });
+}
+
+// Intersection Observer para animaciones al hacer scroll
+function initScrollAnimations() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Observar elementos que queremos animar
+  document.querySelectorAll('.cc, .svc, .pi').forEach(el => {
+    observer.observe(el);
+  });
+}
+
+// Inicializar todo cuando se carga la página
+document.addEventListener('DOMContentLoaded', () => {
+  // Animar estadísticas después de un pequeño delay
+  setTimeout(animateStats, 500);
+  
+  // Animar casos
+  animateCases();
+  
+  // Inicializar animaciones de scroll
+  initScrollAnimations();
+  
+  // Sistema de crecimiento dinámico cada 5 segundos
+  setInterval(dynamicGrowth, 5000);
+
+  // Acordeón de dolor
+  document.querySelectorAll('.pain-header').forEach(header => {
+    header.addEventListener('click', function() {
+      const item = this.closest('.pain-item');
+      item.classList.toggle('open');
+    });
+  });
+
+  // Acordeón de proceso
+  document.querySelectorAll('.proc-header').forEach(header => {
+    header.addEventListener('click', function() {
+      const item = this.closest('.proc-item-acc');
+      const isOpen = item.classList.contains('open');
+      
+      // Cerrar todos
+      document.querySelectorAll('.proc-item-acc').forEach(el => el.classList.remove('open'));
+      
+      // Abrir solo si no estaba abierto
+      if (!isOpen) {
+        item.classList.add('open');
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
