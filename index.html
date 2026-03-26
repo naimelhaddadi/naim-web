@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naim El Haddadi — Ingeniería de Eficiencia & IA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #020204;
+            --bg-light: #0a0a12;
+            --surface: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --p-gradient: linear-gradient(135deg, #a855f7 0%, #22d3ee 100%);
+            --accent-lila: #a855f7;
+            --accent-cian: #22d3ee;
+            --text-main: #ffffff;
+            --text-muted: #a1a1aa;
+            --f-display: 'Syne', sans-serif;
+            --f-body: 'Inter', sans-serif;
+            --r-lg: 16px;
+            --r-md: 12px;
+            --max-w: 1200px;
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { 
+            background: var(--bg-dark);
+            background: radial-gradient(circle at top right, #1a1a2e 0%, var(--bg-dark) 50%);
+            color: var(--text-main); 
+            font-family: var(--f-body); 
+            line-height: 1.6; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .w { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+        section { padding: 100px 0; }
+        
+        .fc-card {
+            background: var(--surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--r-lg);
+            padding: 40px;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .f-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 32px;
+            border-radius: var(--r-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            border: none;
+            color: #fff;
+            background: var(--p-gradient);
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.2);
+        }
+
+        h1, h2, h3 { font-family: var(--f-display); line-height: 1.1; font-weight: 800; }
+        .gradient-text { background: var(--p-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .eyebrow { color: var(--accent-cian); text-transform: uppercase; letter-spacing: 2px; font-size: 13px; font-weight: 600; margin-bottom: 16px; display: block; }
+
+        /* --- Nav --- */
+        nav { position: fixed; top: 0; width: 100%; z-index: 1000; background: rgba(2, 2, 4, 0.8); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); height: 80px; display: flex; align-items: center; }
+        .nav-i { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo { font-family: var(--f-display); font-size: 22px; color: #fff; text-decoration: none; font-weight: 800; }
+
+        /* --- Hero --- */
+        #hero { padding-top: 180px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .hero-img-wrapper img { width: 380px; height: 500px; object-fit: cover; border-radius: var(--r-lg); border: 1px solid var(--border-color); }
+        .hero-floating-badge { position: absolute; bottom: 20px; right: -20px; background: var(--bg-dark); border: 1px solid var(--accent-cian); padding: 12px 20px; border-radius: var(--r-md); }
+
+        /* --- ROI --- */
+        .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 60px; }
+        input[type=range] { width: 100%; accent-color: var(--accent-cian); margin-top: 10px; cursor: pointer; }
+        .roi-val { font-family: var(--f-display); font-size: 64px; font-weight: 800; display: block; margin: 20px 0; }
+
+        /* --- Chat Bot PREMIUM VISIBILITY --- */
+        .chat-container { position: fixed; bottom: 30px; right: 30px; z-index: 2000; display: flex; flex-direction: column; align-items: flex-end; }
+        
+        .chat-hint { 
+            background: white; color: black; padding: 8px 16px; border-radius: 20px; 
+            font-size: 13px; font-weight: 600; margin-bottom: 12px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            animation: bounce 2s infinite; cursor: pointer;
+        }
+
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+        .chat-btn { 
+            width: 65px; height: 65px; border-radius: 50%; 
+            background: var(--p-gradient); border: none; color: white; 
+            font-size: 28px; cursor: pointer; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4); 
+            display: flex; align-items: center; justify-content: center; position: relative;
+        }
+        
+        .online-dot { position: absolute; top: 2px; right: 2px; width: 14px; height: 14px; background: #00e5a0; border: 3px solid var(--bg-dark); border-radius: 50%; }
+
+        .chat-box { 
+            width: 380px; height: 550px; background: #0f0f1a; 
+            border: 1px solid var(--border-color); border-radius: var(--r-lg); 
+            display: none; flex-direction: column; backdrop-filter: blur(25px); 
+            overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.6); margin-bottom: 15px;
+        }
+
+        .chat-header { padding: 20px; background: rgba(255,255,255,0.03); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; }
+        .chat-msgs { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; font-size: 14px; }
+        .msg { padding: 12px 16px; border-radius: 14px; max-width: 85%; line-height: 1.5; }
+        .msg.bot { background: var(--surface); border: 1px solid var(--border-color); align-self: flex-start; }
+        .msg.user { background: var(--p-gradient); color: white; align-self: flex-end; font-weight: 500; }
+        
+        .chat-input { padding: 20px; border-top: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .chat-input input { flex: 1; background: transparent; border: none; color: white; outline: none; }
+
+        @media (max-width: 600px) { .chat-box { width: calc(100vw - 40px); right: 0; bottom: 80px; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="w nav-i">
+        <a href="#" class="logo">NAIM<span style="color:var(--accent-cian)">.</span></a>
+        <a href="#contact" class="f-btn" style="padding: 10px 20px; font-size: 13px;">Agendar Cita</a>
+    </div>
+</nav>
+
+<section id="hero" class="w">
+    <div class="hero-text">
+        <span class="eyebrow">Ingeniería de Eficiencia</span>
+        <h1>Soy <span class="gradient-text">Naim El Haddadi</span>. Automatizo tu crecimiento.</h1>
+        <p style="font-size: 20px; color: var(--text-muted); margin: 30px 0;">Libera a tu equipo de la carga operativa. Construyo agentes de IA que piensan y ejecutan por ti.</p>
+        <div style="display: flex; gap: 15px;">
+            <a href="#roi" class="f-btn">Calcular mi ahorro</a>
+        </div>
+    </div>
+    <div class="hero-img-wrapper" style="position:relative;">
+        <img src="Naim.jpeg" alt="Naim El Haddadi">
+        <div class="hero-floating-badge">
+            <span style="color: var(--accent-cian); font-weight: bold;">PILOTO EN 72H</span>
+        </div>
+    </div>
+</section>
+
+<section id="roi" class="w">
+    <div class="fc-card roi-grid">
+        <div>
+            <h2>Tu tiempo es dinero. Literalmente.</h2>
+            <div style="margin-top:30px">
+                <label>Tarifa: <b id="vR">10€/h</b></label>
+                <input type="range" id="sR" min="5" max="150" value="10" step="1" oninput="calcROI()">
+            </div>
+            <div style="margin-top:20px">
+                <label>Horas/día manuales: <b id="vH">4h</b></label>
+                <input type="range" id="sH" min="1" max="12" value="4" step="0.5" oninput="calcROI()">
+            </div>
+        </div>
+        <div style="text-align:center">
+            <span class="eyebrow">Ahorro Anual Potencial</span>
+            <span class="roi-val gradient-text" id="roiN">€0</span>
+            <a href="#contact" class="f-btn" style="width:100%">Recuperar este capital</a>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="w">
+    <div class="roi-grid">
+        <div class="fc-card">
+            <h3>Hablemos</h3>
+            <p style="color:var(--text-muted); margin:20px 0">Agenda una consultoría de 30 minutos sin compromiso.</p>
+            <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="width:100%">📅 Ver Calendario</a>
+        </div>
+        <div class="fc-card">
+            <h3>Redes</h3>
+            <div style="display:grid; gap:10px; margin-top:20px">
+                <a href="https://linkedin.com/in/naim-el-haddadi-173245304" class="f-btn" style="background:var(--surface); border:1px solid var(--border-color)">LinkedIn</a>
+                <a href="https://github.com/naimelhaddadi" class="f-btn" style="background:var(--surface); border:1px solid var(--border-color)">GitHub</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="chat-container">
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">
+            <div>
+                <span style="font-size:11px; color:var(--accent-cian); font-weight:700">AGENT BETA</span>
+                <div style="font-weight:700">Asistente de Naim</div>
+            </div>
+            <button onclick="toggleChat()" style="background:none; border:none; color:white; cursor:pointer">✕</button>
+        </div>
+        <div class="chat-msgs" id="chatMsgs">
+            <div class="msg bot">¡Hola! Soy el asistente de Naim. ¿Sabías que puedo automatizar procesos desde 9€/h? Cuéntame qué tarea te quita más tiempo hoy.</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Escribe aquí..." onkeydown="if(event.key==='Enter')sendMessage()">
+            <button onclick="sendMessage()" class="f-btn" style="padding:10px 20px">↑</button>
+        </div>
+    </div>
+    
+    <div class="chat-hint" id="chatHint" onclick="toggleChat()">Beta: ¿Calculamos tu ahorro?</div>
+    
+    <button class="chat-btn" onclick="toggleChat()">
+        <div class="online-dot"></div>
+        🤖
+    </button>
+</div>
+
+<script>
+    function calcROI(){
+        const h = parseFloat(document.getElementById('sH').value);
+        const r = parseFloat(document.getElementById('sR').value);
+        document.getElementById('vH').textContent = h + 'h';
+        document.getElementById('vR').textContent = r + '€/h';
+        const savings = h * r * 3 * 220 * 0.7; 
+        document.getElementById('roiN').textContent = '€' + Math.round(savings).toLocaleString('es-ES');
+    }
+    calcROI();
+
+    function toggleChat() {
+        const box = document.getElementById('chatBox');
+        const hint = document.getElementById('chatHint');
+        const isOpen = box.style.display === 'flex';
+        box.style.display = isOpen ? 'none' : 'flex';
+        hint.style.display = isOpen ? 'block' : 'none';
+    }
+
+    // AUTO-OPEN despues de 3 segundos para que lo vean sí o sí
+    setTimeout(() => {
+        if(document.getElementById('chatBox').style.display !== 'flex') {
+            toggleChat();
+        }
+    }, 3000);
+
+    async function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const container = document.getElementById('chatMsgs');
+        const text = input.value.trim();
+        if(!text) return;
+
+        const uDiv = document.createElement('div');
+        uDiv.className = 'msg user';
+        uDiv.textContent = text;
+        container.appendChild(uDiv);
+        input.value = '';
+        container.scrollTop = container.scrollHeight;
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: text }),
+            });
+            const data = await res.json();
+            const bDiv = document.createElement('div');
+            bDiv.className = 'msg bot';
+            bDiv.textContent = data.text;
+            container.appendChild(bDiv);
+        } catch(e) {
+            console.error(e);
+        }
+        container.scrollTop = container.scrollHeight;
+    }
+</script>
+
+</body>
+</html>
