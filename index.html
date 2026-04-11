@@ -14,7 +14,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="shortcut icon" href="letra-n.png" type="image/x-icon">
+<link rel="shortcut icon" href="/assets/letra-n.png" type="image/x-icon">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300&family=DM+Sans:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -438,7 +438,7 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
       </div>
       <div class="hero-right rv-hidden">
         <div class="hero-portrait-container">
-          <img src="Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
+          <img src="/assets/Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
           <div class="badge b-1"><div class="b-n">3×</div><div class="b-l">ROI promedio</div></div>
           <div class="badge b-2"><div class="b-n">Disponible ahora</div><div class="b-l">Madrid & Remoto</div></div>
         </div>
@@ -930,7 +930,7 @@ function addM(role,text){
   const c = document.getElementById('cMsgs');
   if(!c) return;
   const d = document.createElement('div'); d.className = 'msg ' + role;
-  const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.textContent = role === 'u' ? '👤' : '�';
+  const av = document.createElement('div'); av.className = 'm-av ' + (role === 'u' ? 'usr' : 'bot'); av.innerHTML = role === 'u' ? '👤' : '<img src="letra-n.png" alt="" width="20px">';
   const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = rt(text);
   d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
   return b;
@@ -939,7 +939,7 @@ function addM(role,text){
 function showTy(){
   const c = document.getElementById('cMsgs');
   const d = document.createElement('div'); d.className = 'msg b'; d.id = 'tyEl';
-  d.innerHTML = '<div class="m-av bot">�</div><div class="ty-b"><span></span><span></span><span></span></div>';
+  d.innerHTML = '<div class="m-av bot"><img src="letra-n.png" alt="" width="20px"></div><div class="ty-b"><span></span><span></span><span></span></div>';
   c.appendChild(d); c.scrollTop = c.scrollHeight;
 }
 
@@ -948,7 +948,7 @@ function rmTy(){const e=document.getElementById('tyEl');if(e)e.remove();}
 async function stream(text){
   const c = document.getElementById('cMsgs');
   const d = document.createElement('div'); d.className = 'msg b';
-  const av = document.createElement('div'); av.className = 'm-av bot'; av.textContent = '�';
+  const av = document.createElement('div'); av.className = 'm-av bot'; av.innerHTML = '<img src="letra-n.png" alt="" width="20px">';
   const b = document.createElement('div'); b.className = 'bbl'; b.innerHTML = '';
   d.appendChild(av); d.appendChild(b); c.appendChild(d); c.scrollTop = c.scrollHeight;
   let acc = '';
