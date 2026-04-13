@@ -492,9 +492,112 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
 
 /* Hero sub text link */
 .hero-badge{box-shadow:0 2px 10px rgba(29,78,216,.15)}
+
+/* =====================================================
+   SALES SYSTEM LAYER
+   ===================================================== */
+
+/* URGENCY BAR */
+.urgency-bar{background:linear-gradient(90deg,#1e3a8a 0%,#1d4ed8 50%,#2563eb 100%);color:#fff;padding:0 28px;height:38px;display:flex;align-items:center;justify-content:center;font-size:13px;position:relative;z-index:200;flex-shrink:0}
+.ub-inner{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.ub-dot{width:7px;height:7px;border-radius:50%;background:#4ade80;animation:pulse 1.5s ease infinite;flex-shrink:0;box-shadow:0 0 6px rgba(74,222,128,.6)}
+.ub-link{color:#fde68a;font-weight:700;border-bottom:1px solid rgba(253,230,138,.4);transition:opacity .15s;white-space:nowrap}
+.ub-link:hover{opacity:.8}
+.ub-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.15);font-size:12px;cursor:pointer;transition:background .15s;border:none;color:#fff;flex-shrink:0}
+.ub-close:hover{background:rgba(255,255,255,.3)}
+nav{top:38px}
+#hero{padding-top:calc(120px + 38px)}
+body.no-bar nav{top:0}
+body.no-bar #hero{padding-top:120px}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--white);border-bottom:1px solid var(--stone-3);padding:14px 0}
+.trust-items{display:flex;align-items:center;justify-content:center;gap:36px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2)}
+.trust-item strong{color:var(--ink);font-weight:700}
+.ti-icon{font-size:15px}
+.trust-sep{color:var(--stone-3);font-size:18px;font-weight:200}
+@media(max-width:640px){.trust-sep{display:none}.trust-items{gap:16px}}
+
+/* TRUST MICRO under hero CTA */
+.trust-micro{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:14px}
+.tm-item{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-3);font-family:var(--f-mono)}
+.tm-check{color:var(--green);font-weight:700;font-size:13px}
+
+/* HERO URGENCY PILL */
+.hero-urgency-pill{display:inline-flex;align-items:center;gap:7px;background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.18);padding:5px 14px;border-radius:20px;font-size:12px;font-family:var(--f-mono);color:#dc2626;font-weight:600;margin-bottom:18px}
+.hup-dot{width:6px;height:6px;border-radius:50%;background:#ef4444;animation:pulse 1.5s ease infinite;flex-shrink:0}
+
+/* TESTIMONIALS */
+#testimonials{background:var(--stone)}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+@media(max-width:768px){.testi-grid{grid-template-columns:1fr}}
+.testi-card{background:var(--white);border:1px solid var(--stone-3);border-radius:var(--r-lg);padding:26px;display:flex;flex-direction:column;gap:14px;position:relative;overflow:hidden;transition:all .3s ease}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),#8b5cf6)}
+.testi-card:hover{box-shadow:0 16px 40px rgba(29,78,216,.1);transform:translateY(-3px)}
+.testi-stars{color:#f59e0b;font-size:13px;letter-spacing:3px}
+.testi-quote{font-size:14px;color:var(--ink-2);line-height:1.75;font-style:italic;flex:1;position:relative;padding-left:14px}
+.testi-quote::before{content:'"';position:absolute;left:0;top:-2px;font-family:var(--f-display);font-size:36px;color:var(--blue-bd);line-height:1}
+.testi-author{display:flex;align-items:center;gap:10px;padding-top:14px;border-top:1px solid var(--stone-3)}
+.testi-av{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--blue) 0%,#8b5cf6 100%);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0;font-family:var(--f-mono)}
+.testi-info{display:flex;flex-direction:column;gap:1px}
+.testi-name{font-size:13px;font-weight:700;color:var(--ink)}
+.testi-role{font-size:11px;color:var(--ink-3);font-family:var(--f-mono)}
+.testi-result{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-mono);font-size:10px;font-weight:700;color:var(--green);background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.18);padding:2px 8px;border-radius:20px;margin-top:2px;align-self:flex-start}
+
+/* FAQ */
+#faq{background:var(--white)}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:44px;border:1px solid var(--stone-3);border-radius:var(--r-xl);overflow:hidden}
+@media(max-width:768px){.faq-grid{grid-template-columns:1fr}}
+.faq-item{padding:24px 28px;border-bottom:1px solid var(--stone-3);transition:background .2s ease;position:relative}
+.faq-item:nth-child(odd){border-right:1px solid var(--stone-3)}
+.faq-item:nth-last-child(-n+2){border-bottom:none}
+@media(max-width:768px){.faq-item:nth-child(odd){border-right:none}.faq-item:nth-last-child(2){border-bottom:1px solid var(--stone-3)}.faq-item:last-child{border-bottom:none}}
+.faq-item:hover{background:var(--stone)}
+.faq-q{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:8px;display:flex;align-items:flex-start;gap:9px}
+.faq-q-tag{font-family:var(--f-mono);font-size:9px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--blue),#7c3aed);padding:3px 6px;border-radius:4px;flex-shrink:0;margin-top:1px;letter-spacing:.04em}
+.faq-a{font-size:13px;color:var(--ink-2);line-height:1.7;padding-left:28px}
+.faq-a strong{color:var(--ink)}
+
+/* SCARCITY BOX */
+.scarcity-box{display:flex;align-items:flex-start;gap:10px;background:linear-gradient(135deg,rgba(5,150,105,.05) 0%,rgba(16,185,129,.03) 100%);border:1px solid rgba(5,150,105,.2);border-radius:var(--r-md);padding:12px 16px;margin-bottom:18px}
+.sc-dot{width:10px;height:10px;border-radius:50%;background:#10b981;flex-shrink:0;margin-top:2px;animation:pulse 2s ease infinite;box-shadow:0 0 8px rgba(16,185,129,.5)}
+.sc-text{font-size:13px;color:var(--ink-2);line-height:1.6}
+.sc-text strong{color:var(--ink)}
+.sc-meter{margin-top:8px;height:5px;background:var(--stone-3);border-radius:3px;overflow:hidden}
+.sc-fill{height:100%;width:66%;background:linear-gradient(90deg,#10b981,#34d399);border-radius:3px;animation:meterGrow 1.5s ease-out .5s both}
+@keyframes meterGrow{from{width:0}to{width:66%}}
+
+/* GUARANTEE BADGE */
+.guarantee-badge{display:flex;align-items:flex-start;gap:12px;background:linear-gradient(135deg,rgba(29,78,216,.04) 0%,rgba(124,58,237,.03) 100%);border:1px solid var(--blue-bd);border-radius:var(--r-md);padding:14px 16px;margin-top:16px}
+.gb-icon{font-size:22px;line-height:1;flex-shrink:0}
+.gb-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.gb-text{font-size:12px;color:var(--ink-3);line-height:1.6}
+
+/* CONTACT IMPROVED */
+.contact-trust-row{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:20px;padding-top:18px;border-top:1px solid var(--stone-3)}
+.ctr-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-3);font-family:var(--f-mono)}
+.ctr-item::before{content:'✓';color:var(--green);font-weight:800;font-size:13px}
+
+/* SOCIAL PROOF ROW in hero */
+.hero-social-proof{display:flex;align-items:center;gap:8px;margin-bottom:20px}
+.hsp-stars{color:#f59e0b;font-size:13px}
+.hsp-text{font-size:12px;color:var(--ink-3);font-family:var(--f-mono)}
+.hsp-sep{color:var(--stone-3)}
+.hsp-badge{font-size:12px;font-family:var(--f-mono);color:var(--blue-2);font-weight:600}
 </style>
 </head>
 <body>
+
+<div class="urgency-bar" id="urgencyBar">
+  <div class="ub-inner">
+    <div class="ub-dot"></div>
+    <span>Solo acepto <strong>3 proyectos nuevos al mes</strong> — Quedan <a href="#contact" class="ub-link">2 plazas disponibles en abril</a></span>
+    <span style="color:rgba(255,255,255,.5);display:none" id="ubSep">·</span>
+    <a href="#contact" class="ub-link" style="display:none" id="ubCta">Reservar plaza →</a>
+  </div>
+  <button class="ub-close" onclick="closeBar()" aria-label="Cerrar">✕</button>
+</div>
 
 <nav>
   <div class="nav-i">
@@ -503,8 +606,8 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
       <ul class="nav-links">
         <li><a href="#roi">ROI</a></li>
         <li><a href="#services">Servicios</a></li>
-        <li><a href="#playground">AI Demo</a></li>
-        <li><a href="#contact" target="_blank">Contacto</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#contact">Contacto</a></li>
       </ul>
       <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
       <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
@@ -516,12 +619,25 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
     <div class="w">
     <div class="hero-grid">
       <div class="hero-content rv-hidden">
+        <div class="hero-urgency-pill"><div class="hup-dot"></div>2 plazas disponibles · Abril 2026</div>
         <h1 class="hero-name">Naim El Haddadi</h1>
         <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
         <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong>. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
+        <div class="hero-social-proof">
+          <span class="hsp-stars">★★★★★</span>
+          <span class="hsp-text">100% de clientes repiten</span>
+          <span class="hsp-sep">·</span>
+          <span class="hsp-badge">12+ proyectos completados</span>
+        </div>
         <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn" style="padding:13px 26px">Agendar diagnóstico gratis →</a>
-          <a href="#roi" style="padding:13px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px">Calcular mi ROI</a>
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn" style="padding:13px 26px;font-size:15px">Diagnóstico gratuito — 30 min →</a>
+          <a href="#roi" style="padding:13px 20px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px; color:var(--ink-2); transition:all .18s" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--stone-3)';this.style.color='var(--ink-2)'">Ver mi ROI</a>
+        </div>
+        <div class="trust-micro">
+          <div class="tm-item"><span class="tm-check">✓</span>Sin permanencia</div>
+          <div class="tm-item"><span class="tm-check">✓</span>Piloto precio fijo</div>
+          <div class="tm-item"><span class="tm-check">✓</span>Primer resultado en 72h</div>
+          <div class="tm-item"><span class="tm-check">✓</span>Sin riesgo</div>
         </div>
         <div class="hero-stats">
           <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
@@ -563,6 +679,22 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
   <div class="ticker-i">
     <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
     <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
+  </div>
+</div>
+
+<div class="trust-strip">
+  <div class="w">
+    <div class="trust-items">
+      <div class="trust-item"><span class="ti-icon">🏆</span><span><strong>12+</strong> proyectos completados</span></div>
+      <div class="trust-sep">|</div>
+      <div class="trust-item"><span class="ti-icon">⭐</span><span><strong>100%</strong> clientes repiten</span></div>
+      <div class="trust-sep">|</div>
+      <div class="trust-item"><span class="ti-icon">⚡</span><span>Primer resultado en <strong>72h</strong></span></div>
+      <div class="trust-sep">|</div>
+      <div class="trust-item"><span class="ti-icon">🛡️</span><span>Piloto con <strong>coste fijo</strong></span></div>
+      <div class="trust-sep">|</div>
+      <div class="trust-item"><span class="ti-icon">📍</span><span><strong>Madrid</strong> &amp; Remoto</span></div>
+    </div>
   </div>
 </div>
 
@@ -704,6 +836,55 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
 
 <hr class="rule">
 
+<section id="testimonials" class="section">
+  <div class="w">
+    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+      <div><div class="eyebrow">Lo que dicen</div><h2 class="h2-d">Resultados en sus<br>propias palabras</h2></div>
+      <p style="font-size:13px;color:var(--ink-3);max-width:260px;line-height:1.7;font-family:var(--f-mono)">Identidades anonimizadas por acuerdo de confidencialidad.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card rv" data-d="1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">En 3 semanas teníamos un agente gestionando el 80% de consultas de soporte. El equipo ahora se dedica a lo que importa. No esperaba resultados tan rápidos.</div>
+        <div class="testi-author">
+          <div class="testi-av">MG</div>
+          <div class="testi-info">
+            <div class="testi-name">M. González</div>
+            <div class="testi-role">Director de Operaciones · SaaS B2B · Madrid</div>
+            <div class="testi-result">↑ 18h recuperadas/semana</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" data-d="2">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">Teníamos miedo de que la automatización fuera fría. El resultado fue lo contrario: la conversión subió un 340% porque los mensajes eran más personalizados que antes.</div>
+        <div class="testi-author">
+          <div class="testi-av">CR</div>
+          <div class="testi-info">
+            <div class="testi-name">C. Rodríguez</div>
+            <div class="testi-role">CEO · E-commerce · España</div>
+            <div class="testi-result">↑ +340% conversión de leads</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card rv" data-d="1">
+        <div class="testi-stars">★★★★★</div>
+        <div class="testi-quote">El piloto costó 3.200€. El primer mes recuperamos la inversión. Hoy es imposible imaginar al equipo sin estos sistemas. El ROI real supera el 10x.</div>
+        <div class="testi-author">
+          <div class="testi-av">AM</div>
+          <div class="testi-info">
+            <div class="testi-name">A. Martínez</div>
+            <div class="testi-role">Socio · Consultoría · Remoto</div>
+            <div class="testi-result">↑ ROI 10x en mes 1</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <section id="process" class="section">
   <div class="w">
     <div class="rv"><div class="eyebrow">Cómo Trabajo</div><h2 class="h2-d">Sin cajas negras,<br>sin sorpresas</h2></div>
@@ -786,6 +967,48 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
 
 <hr class="rule">
 
+<section id="faq" class="section">
+  <div class="w">
+    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto 0">
+      <div class="eyebrow" style="margin:0 auto 12px">Preguntas Frecuentes</div>
+      <h2 class="h2-d">Todo lo que necesitas saber<br>antes de llamar</h2>
+      <p class="s-lead" style="margin:10px auto 0">Las dudas más habituales resueltas con honestidad.</p>
+    </div>
+    <div class="faq-grid rv" data-d="1" style="margin-top:40px">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Cuánto cuesta trabajar contigo?</div>
+        <div class="faq-a">El diagnóstico inicial es <strong>100% gratuito y sin compromiso</strong>. El piloto parte de <strong>2.500€</strong> con entregable claro y coste cerrado desde el primer día. Sin sorpresas al final del mes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Funciona en mi sector?</div>
+        <div class="faq-a">Sí. He implementado sistemas en <strong>SaaS B2B, e-commerce, consultoría y servicios profesionales</strong>. Si tienes tareas manuales repetitivas y datos que fluyen entre herramientas, hay ROI.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Cuánto tiempo hasta ver resultados?</div>
+        <div class="faq-a">El primer prototipo funcional está listo en <strong>72 horas</strong>. El ROI es medible desde <strong>el mes 1</strong>. No trabajo con proyectos que tardan meses en dar señal de vida.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Y si no funciona o no me convence?</div>
+        <div class="faq-a">Si en el diagnóstico gratuito no identificamos <strong>al menos 3 ineficiencias concretas</strong> con ahorro estimado, no hay propuesta. Sin presión, sin coste. Mi reputación depende de resultados reales.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Necesito tener equipo técnico interno?</div>
+        <div class="faq-a"><strong>No.</strong> Me encargo de todo: diseño, desarrollo, deploy y formación. Tu equipo aprende a usar el sistema, no a mantenerlo. Yo me quedo disponible para soporte continuo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Y mis herramientas actuales?</div>
+        <div class="faq-a">Las integro. <strong>CRM, ERP, WhatsApp, email, calendarios, facturación.</strong> No te pido que cambies lo que ya funciona, sino que lo conectes para que fluya automáticamente.</div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:36px" class="rv">
+      <p style="font-size:14px;color:var(--ink-3);margin-bottom:16px">¿Tienes otra pregunta? El diagnóstico es gratuito.</p>
+      <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="btn-p" style="display:inline-block;padding:13px 28px;text-decoration:none">Reservar diagnóstico gratis →</a>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
 <section id="playground" class="section">
   <div class="w">
     <div class="rv" style="margin-bottom:40px">
@@ -849,24 +1072,43 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
       <div>
         <div class="eyebrow rv">Trabaja con Naim</div>
         <h2 class="h2-d rv" style="margin-bottom:12px">Hablemos de<br>tu negocio</h2>
-        <p class="s-lead rv">Una conversación de 30 minutos puede revelarte cuántas horas y euros estás dejando sobre la mesa cada semana.</p>
-        <div class="ct-hl rv"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Análisis de tus 3 mayores ineficiencias, estimación de ROI y propuesta de piloto con coste fijo y entregable claro.</div>
+        <p class="s-lead rv">30 minutos. Sin ventas agresivas. Solo te digo exactamente cuántas horas y euros estás dejando sobre la mesa cada semana.</p>
+        <div class="ct-hl rv" style="border-left:3px solid var(--green);background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.2)"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Identifico tus 3 mayores ineficiencias, calculo el ahorro potencial real y te entrego una propuesta de piloto con coste fijo. Sin rodeos.</div>
         <div class="c-links rv">
           <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico email"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>Email — naimprincipal@gmail.com</a>
         </div>
+        <div class="contact-trust-row rv">
+          <div class="ctr-item">Gratis y sin compromiso</div>
+          <div class="ctr-item">Respuesta en &lt;24h</div>
+          <div class="ctr-item">Sin permanencia</div>
+        </div>
       </div>
       <div>
+        <div class="scarcity-box rv">
+          <div class="sc-dot"></div>
+          <div class="sc-text">
+            <strong>Solo quedan 2 plazas disponibles en abril 2026</strong><br>
+            Proyectos activos este mes: 1 de 3
+            <div class="sc-meter"><div class="sc-fill"></div></div>
+          </div>
+        </div>
         <div class="fc-card rv" data-d="1" style="border: 2px solid var(--blue-2); background: var(--white); padding: 32px;">
-          <div class="hero-badge" style="margin-bottom: 14px; display: inline-flex;">Agenda tu auditoría</div>
+          <div class="hero-badge" style="margin-bottom: 14px; display: inline-flex;">Diagnóstico Gratuito · 30 min</div>
           <h3 style="font-family:var(--f-display);font-size: 24px;font-weight: 800;letter-spacing: -0.03em;margin-bottom: 10px;">Auditoría de Eficiencia Operativa</h3>
-          <p style="font-size:15px;color:var(--ink-3);margin-bottom:18px;">Reserva una sesión estructurada de 30 min para recibir:</p>
-          <ul style="margin-bottom:20px; padding-left: 20px; color: var(--ink-2); font-size: 14px; line-height: 1.6;">
-            <li>✔ Mapa rápido de procesos con cuellos de botella</li>
-            <li>✔ Estimación de ahorro potencial (tiempo + coste)</li>
-            <li>✔ Plan de acción con piloto de baja fricción</li>
+          <p style="font-size:14px;color:var(--ink-3);margin-bottom:16px;">Sales con un plan de acción claro o no te cobro nada:</p>
+          <ul style="margin-bottom:20px; padding-left:0; color: var(--ink-2); font-size: 14px; line-height: 1.8; list-style:none;">
+            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Mapa de tus 3 mayores cuellos de botella</li>
+            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Estimación de ahorro (tiempo + coste) verificada</li>
+            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Propuesta de piloto: precio fijo, entregable claro</li>
           </ul>
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="display:inline-block; width:100%; text-align:center; text-decoration:none; padding:16px;">📅 Agendar auditoría →</a>
-          <p class="f-note" style="margin-top:14px;">🔒 Enlace de videollamada directo a tu calendario. Cambia o cancela con un clic.</p>
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="display:block;width:100%;text-align:center;text-decoration:none;padding:16px;font-size:16px">Reservar mi plaza gratuita →</a>
+          <div class="guarantee-badge">
+            <div class="gb-icon">🛡️</div>
+            <div>
+              <div class="gb-title">Garantía de valor</div>
+              <div class="gb-text">Si no identificamos al menos 3 ineficiencias concretas en la sesión, no te propongo nada. Mi reputación depende de darte valor real.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -958,6 +1200,24 @@ footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px
 </footer>
 
 <script>
+/* 0b. URGENCY BAR */
+function closeBar() {
+  const bar = document.getElementById('urgencyBar');
+  if (!bar) return;
+  bar.style.transition = 'height .3s ease, opacity .3s ease';
+  bar.style.opacity = '0';
+  bar.style.height = '0';
+  bar.style.overflow = 'hidden';
+  document.body.classList.add('no-bar');
+  setTimeout(() => bar.remove(), 350);
+  sessionStorage.setItem('barClosed', '1');
+}
+// Check if bar was already closed
+if (sessionStorage.getItem('barClosed') === '1') {
+  const bar = document.getElementById('urgencyBar');
+  if (bar) { bar.remove(); document.body.classList.add('no-bar'); }
+}
+
 /* 0. TEMA OSCURO/CLARO */
 function toggleTheme() {
   const html = document.documentElement;
