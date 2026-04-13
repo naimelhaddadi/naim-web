@@ -90,7 +90,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:color-mix(in srgb
   animation:float 20s ease-in-out infinite;
 }
 @keyframes float{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
-.hero-grid{display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:start}
+.hero-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:56px;align-items:start}
 @media(max-width:960px){.hero-grid{grid-template-columns:1fr}}
 
 .hero-avatar { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; object-position: top; border: 3px solid var(--white); box-shadow: var(--sh-md); margin-bottom: 0; background: var(--stone); display: block; }
@@ -170,9 +170,9 @@ h1.hero-name{font-family:var(--f-display);font-size:clamp(38px,5vw,64px);font-we
 .tag.b{background:var(--blue-bg);border-color:var(--blue-bd);color:var(--blue-2)}
 
 /* TICKER */
-.ticker{border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3);padding:14px 0;overflow:hidden;background:var(--stone);position:relative;animation:dataFlow 10s linear infinite}
-.ticker::before{content:'';position:absolute;top:0;left:0;bottom:0;width:100px;background:linear-gradient(90deg, var(--stone) 0%, transparent 100%);z-index:1;animation:scan 3s ease-in-out infinite}
-@keyframes scan{0%,100%{left:0}50%{left:calc(100% - 100px)}}
+.ticker{border-top:1px solid var(--stone-3);border-bottom:1px solid var(--stone-3);padding:14px 0;overflow:hidden;background:linear-gradient(90deg,var(--stone) 0%,#f3f4f6 50%,var(--stone) 100%);position:relative}
+.ticker::before{content:'';position:absolute;top:0;left:0;bottom:0;width:80px;background:linear-gradient(90deg,var(--stone) 0%,transparent 100%);z-index:1;pointer-events:none}
+.ticker::after{content:'';position:absolute;top:0;right:0;bottom:0;width:80px;background:linear-gradient(270deg,var(--stone) 0%,transparent 100%);z-index:1;pointer-events:none}
 .ticker-i{display:flex;gap:0;animation:tick 25s linear infinite;width:max-content}
 @keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .tk{font-family:var(--f-mono);font-size:12px;color:var(--ink-4);white-space:nowrap;padding:0 26px;border-right:1px solid var(--stone-3);display:flex;align-items:center;gap:8px;position:relative}
@@ -299,7 +299,8 @@ input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.15)}
 .pg-badge-live::before{content:'';width:5px;height:5px;border-radius:50%;background:#fff;animation:pulse 2s ease infinite}
 .pg-h2{font-family:var(--f-display);font-size:clamp(28px,3.2vw,44px);font-weight:700;letter-spacing:-.025em;margin-bottom:12px;line-height:1.1;color:var(--ink)}
 .pg-desc{font-size:15px;color:var(--ink-2);line-height:1.7;margin-bottom:20px;max-width:560px}
-.code-box{background:#0f172a;border:1px solid var(--stone-3);border-radius:12px;padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.6;position:relative;overflow:hidden}
+.code-box{background:#0c1120;border:1px solid #1e2d4a;border-radius:12px;padding:20px;font-family:var(--f-mono);font-size:12px;color:#94a3b8;line-height:1.6;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.03)}
+.code-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(99,102,241,.4),transparent)}
 .kw{color:#60a5fa}.str{color:#34d399}.fn{color:#fbbf24}.cm{color:#64748b;font-style:italic}
 .pg-pills{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:6px}
 .pg-pill{background:var(--white);border:1px solid var(--stone-3);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--ink-2);display:flex;align-items:center;gap:6px;transition:all .2s ease;box-shadow:0 1px 3px rgba(0,0,0,.05)}
@@ -399,13 +400,105 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 .rv.in{opacity:1;transform:none}
 .rv.rv-hidden[data-d="1"]{transition-delay:.1s}
 .rv.rv-hidden[data-d="2"]{transition-delay:.2s}
+
+/* =====================================================
+   DESIGN ENHANCEMENT LAYER
+   ===================================================== */
+
+/* Avatar gradient ring */
+.hero-portrait-container::before{content:'';position:absolute;width:364px;height:364px;border-radius:50%;background:linear-gradient(135deg,#3b82f6 0%,#8b5cf6 40%,#ec4899 70%,#3b82f6 100%);background-size:300% 300%;animation:avatarRing 4s ease-in-out infinite;z-index:0}
+@keyframes avatarRing{0%,100%{background-position:0% 50%;opacity:.7}50%{background-position:100% 50%;opacity:1}}
+.hero-avatar{border:5px solid var(--white)!important;box-shadow:0 16px 48px rgba(29,78,216,.2),0 4px 12px rgba(0,0,0,.1)!important;position:relative;z-index:1}
+.badge{z-index:2}
+
+/* Gradient primary buttons */
+.btn-p{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 50%,#2563eb 100%);box-shadow:0 2px 14px rgba(29,78,216,.4)}
+.btn-p:hover{background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 60%,#1d4ed8 100%);box-shadow:0 6px 28px rgba(29,78,216,.55);transform:translateY(-2px)}
+.nav-btn{background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%);box-shadow:0 1px 8px rgba(29,78,216,.35)}
+.nav-btn:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 100%);box-shadow:0 4px 18px rgba(29,78,216,.45);transform:translateY(-1px)}
+.f-btn{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 50%,#2563eb 100%)!important;box-shadow:0 2px 14px rgba(29,78,216,.4)!important}
+.f-btn:hover{background:linear-gradient(135deg,#1e3a8a 0%,#1e40af 60%,#1d4ed8 100%)!important;box-shadow:0 6px 28px rgba(29,78,216,.55)!important;transform:translateY(-2px)!important}
+.roi-cta{background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%);box-shadow:0 2px 12px rgba(29,78,216,.45)}
+.roi-cta:hover{background:linear-gradient(135deg,#1e40af 0%,#1d4ed8 100%);box-shadow:0 6px 24px rgba(29,78,216,.55);transform:translateY(-2px)}
+
+/* Eyebrow pill */
+.eyebrow{background:linear-gradient(135deg,var(--blue-bg) 0%,rgba(59,130,246,.06) 100%);border:1px solid var(--blue-bd);padding:5px 14px;border-radius:20px;display:inline-flex;width:fit-content;letter-spacing:.08em;font-weight:600}
+.eyebrow::before{display:none}
+
+/* Gradient rule separator */
+hr.rule{background:linear-gradient(90deg,transparent 0%,var(--stone-3) 25%,var(--stone-3) 75%,transparent 100%)}
+
+/* Stats gradient text */
+.stat-n{background:linear-gradient(135deg,var(--blue) 0%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-size:34px}
+
+/* Hero card improvements */
+.hero-card{background:linear-gradient(160deg,var(--white) 0%,var(--stone) 100%);box-shadow:0 16px 56px rgba(18,17,15,.12),0 4px 16px rgba(18,17,15,.07)}
+
+/* Service card colored top accent */
+.svc{border-top:2px solid var(--stone-3)}
+.svc:nth-child(1){border-top:2px solid #3b82f6}
+.svc:nth-child(2){border-top:2px solid #8b5cf6}
+.svc:nth-child(3){border-top:2px solid #10b981}
+.svc-icon{background:linear-gradient(135deg,var(--blue-bg) 0%,rgba(59,130,246,.08) 100%);box-shadow:0 2px 8px rgba(29,78,216,.1)}
+.svc:hover{box-shadow:0 24px 56px rgba(0,0,0,.14),0 4px 16px rgba(0,0,0,.06);transform:translateY(-6px)}
+
+/* Case study numbers gradient */
+.cc-n{background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.cc:hover{box-shadow:0 20px 48px rgba(29,78,216,.1),0 4px 12px rgba(0,0,0,.06);border-color:var(--blue);transform:translateY(-4px)}
+
+/* ROI result enhancements */
+.roi-res{background:linear-gradient(135deg,#080d18 0%,#0d1628 40%,#1a2540 100%);box-shadow:0 24px 64px rgba(0,0,0,.35)}
+.roi-res-n{background:linear-gradient(135deg,#60a5fa 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Process badge gradient */
+.proc-num-badge{background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%);box-shadow:0 3px 12px rgba(29,78,216,.35)}
+.proc-item-acc.open .proc-num-badge{background:linear-gradient(135deg,#1e40af 0%,#7c3aed 100%);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+
+/* Section hero with gradient */
+#hero{background:linear-gradient(160deg,var(--white) 45%,#f0f5ff 75%,var(--stone) 100%)}
+#hero::after{background:radial-gradient(circle,rgba(59,130,246,.1) 0%,transparent 65%)}
+
+/* Services section */
+#services{background:linear-gradient(180deg,var(--stone) 0%,#f4f3f0 100%)}
+
+/* Cases section */
+#cases{background:linear-gradient(180deg,var(--stone) 0%,#f0f4f8 100%)}
+
+/* Chat header gradient */
+.chat-hd{background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 60%,#8b5cf6 100%)}
+
+/* Pain item improvements */
+.pain-item{box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.pain-item.open{box-shadow:0 8px 32px rgba(29,78,216,.12),0 2px 8px rgba(29,78,216,.06)}
+
+/* Playground live badge */
+.pg-badge-live{background:linear-gradient(135deg,#059669 0%,#10b981 100%);box-shadow:0 2px 10px rgba(16,185,129,.25)}
+
+/* Contact card highlighted */
+.fc-card{transition:box-shadow .3s ease}
+.fc-card:hover{box-shadow:0 20px 60px rgba(29,78,216,.1),0 4px 14px rgba(0,0,0,.06)}
+
+/* Footer enhancements */
+footer{background:linear-gradient(180deg,#0c0c0c 0%,#060606 100%);border-top:1px solid rgba(29,78,216,.15)}
+.ft-logo span{background:linear-gradient(135deg,#3b82f6 0%,#8b5cf6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ftl:hover{color:#fff;border-color:rgba(59,130,246,.4);background:rgba(59,130,246,.06)}
+
+/* Nav logo */
+.nav-logo-n{color:var(--blue)}
+
+/* Badge improved */
+.badge{background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.8);box-shadow:0 4px 16px rgba(0,0,0,.12)}
+.badge:hover{background:rgba(239,246,255,.95);border-color:var(--blue-bd);box-shadow:0 8px 24px rgba(29,78,216,.18)}
+
+/* Hero sub text link */
+.hero-badge{box-shadow:0 2px 10px rgba(29,78,216,.15)}
 </style>
 </head>
 <body>
 
 <nav>
   <div class="nav-i">
-    <a href="/" class="nav-logo"><color>N</color>aim<em>.</em></a>
+    <a href="/" class="nav-logo"><span class="nav-logo-n">N</span>aim<em>.</em></a>
     <div class="nav-actions">
       <ul class="nav-links">
         <li><a href="#roi">ROI</a></li>
@@ -431,9 +524,9 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
           <a href="#roi" style="padding:13px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px">Calcular mi ROI</a>
         </div>
         <div class="hero-stats">
-          <div><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
-          <div><div class="stat-n">72h</div><div class="stat-l">primer piloto</div></div>
-          <div><div class="stat-n">€15k</div><div class="stat-l">ahorro/mes real</div></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">72h</div><div class="stat-l">primer piloto</div></div>
+          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">€15k</div><div class="stat-l">ahorro/mes real</div></div>
         </div>
       </div>
       <div class="hero-right rv-hidden">
@@ -469,7 +562,7 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 <div class="ticker">
   <div class="ticker-i">
     <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
-    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class = " tk " > MySQL </ pan ><span class = " tk hi " > n8n </span ><span class = " tk " > Java </span ><span class = " tk hi " > App Router </span ><span class = " tk " > JavaScript </span >
+    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
   </div>
 </div>
 
@@ -566,7 +659,7 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
 
 <section id="services" class="section">
   <div class="w">
-    <div class="rv"><div class="eyebrow">La Solución</div><h2 class="h2-d">Sistemas que trabajan<br>mientras tú creces</h2></div>
+    <div class="rv"><div class="eyebrow">La Solución</div><h2 class="h2-d">Sistemas que trabajan<br>mientras tú creces</h2><p class="s-lead">Tres áreas clave para transformar tu operativa con IA y desarrollo de alto rendimiento.</p></div>
     <div class="svc-grid">
       <article class="svc rv" data-d="1">
         <div class="svc-num">01 / 03</div>
@@ -666,6 +759,24 @@ footer{background:#0a0a0a;color:#fff;padding:44px 0 32px}
             <div class="proc-item">Deploy en producción</div>
             <div class="proc-item">Formación del equipo</div>
             <div class="proc-item">Soporte continuo</div>
+          </div>
+        </div>
+      </div>
+      <div class="proc-item-acc">
+        <div class="proc-header">
+          <div class="proc-num-badge">04</div>
+          <div class="proc-header-text">
+            <div class="proc-badge-acc">Ongoing</div>
+            <div class="proc-title">Optimización</div>
+          </div>
+          <div class="proc-toggle">▼</div>
+        </div>
+        <div class="proc-content-item">
+          <div class="proc-desc">El sistema aprende y mejora cada semana. Ajustamos prompts, flujos y KPIs según los datos reales.</div>
+          <div class="proc-items">
+            <div class="proc-item">Monitoreo de KPIs</div>
+            <div class="proc-item">Ajuste de prompts y flujos</div>
+            <div class="proc-item">Expansión a nuevos procesos</div>
           </div>
         </div>
       </div>
