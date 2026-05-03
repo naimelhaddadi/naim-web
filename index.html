@@ -585,9 +585,209 @@ body.no-bar #hero{padding-top:120px}
 .hsp-text{font-size:12px;color:var(--ink-3);font-family:var(--f-mono)}
 .hsp-sep{color:var(--stone-3)}
 .hsp-badge{font-size:12px;font-family:var(--f-mono);color:var(--blue-2);font-weight:600}
-</style>
+
+/* =====================================================
+   WOW LAYER — Premium portfolio polish
+   ===================================================== */
+
+/* Scroll progress bar */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,#3b82f6,#8b5cf6,#ec4899);z-index:999;width:0;box-shadow:0 0 12px rgba(99,102,241,.6);transition:width .12s linear;pointer-events:none}
+
+/* Custom spotlight cursor (desktop only) */
+.cursor-spot{position:fixed;top:0;left:0;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.10) 0%,rgba(139,92,246,.05) 35%,transparent 70%);pointer-events:none;transform:translate(-50%,-50%);z-index:1;mix-blend-mode:plus-lighter;will-change:transform;filter:blur(20px);transition:opacity .4s ease;opacity:0}
+[data-theme="dark"] .cursor-spot{background:radial-gradient(circle,rgba(129,140,248,.18) 0%,rgba(168,85,247,.10) 35%,transparent 70%)}
+body:hover .cursor-spot{opacity:1}
+@media (max-width:900px), (hover:none){.cursor-spot{display:none}}
+
+/* Subtle film grain */
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");mix-blend-mode:overlay}
+[data-theme="dark"] .grain{opacity:.04}
+
+/* Hero aurora */
+#hero{isolation:isolate}
+.aurora{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.aurora b{position:absolute;width:60vw;height:60vw;border-radius:50%;filter:blur(90px);opacity:.4;animation:aur 22s ease-in-out infinite}
+.aurora b:nth-child(1){top:-22%;left:-12%;background:radial-gradient(circle,#3b82f6 0%,transparent 70%)}
+.aurora b:nth-child(2){top:18%;right:-22%;background:radial-gradient(circle,#a855f7 0%,transparent 70%);animation-delay:-7s;opacity:.32}
+.aurora b:nth-child(3){bottom:-30%;left:30%;width:50vw;height:50vw;background:radial-gradient(circle,#06b6d4 0%,transparent 70%);animation-delay:-13s;opacity:.22}
+[data-theme="dark"] .aurora b:nth-child(1){opacity:.32}
+[data-theme="dark"] .aurora b:nth-child(2){opacity:.28}
+[data-theme="dark"] .aurora b:nth-child(3){opacity:.22}
+@keyframes aur{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.12)}66%{transform:translate(-25px,25px) scale(.95)}}
+
+#hero .w{position:relative;z-index:2}
+
+/* Kinetic shimmer name */
+h1.hero-name{position:relative}
+h1.hero-name .word{display:inline-block;background:linear-gradient(120deg,var(--ink) 0%,var(--ink) 40%,#3b82f6 50%,var(--ink) 60%,var(--ink) 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shimmer 7s ease-in-out infinite}
+h1.hero-name .word:nth-child(2){animation-delay:.5s}
+[data-theme="dark"] h1.hero-name .word{background:linear-gradient(120deg,var(--ink) 0%,var(--ink) 40%,#a78bfa 50%,var(--ink) 60%,var(--ink) 100%);background-size:300% 100%;-webkit-background-clip:text;background-clip:text}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Magnetic + tilt utilities */
+.magnet{display:inline-block;will-change:transform;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.tilt{transform-style:preserve-3d;transition:transform .18s ease-out;will-change:transform}
+.tilt > *{transform:translateZ(20px)}
+
+/* Reveal upgrade — soft blur in */
+.rv.rv-hidden{opacity:0;transform:translateY(22px);filter:blur(8px);transition:opacity .9s ease,transform .9s ease,filter 1s ease}
+.rv.in{opacity:1;transform:none;filter:none}
+
+/* PROJECTS / BENTO */
+#projects{background:var(--white);position:relative;overflow:hidden}
+[data-theme="dark"] #projects{background:#0a0a0a}
+.bento-grid{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:170px;gap:14px;margin-top:48px}
+@media(max-width:1000px){.bento-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:auto}}
+@media(max-width:560px){.bento-grid{grid-template-columns:1fr}}
+
+.bento{position:relative;border:1px solid var(--stone-3);border-radius:22px;background:var(--white);padding:24px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;text-decoration:none;color:inherit;transition:transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s,border-color .3s;cursor:pointer;will-change:transform;min-height:200px}
+[data-theme="dark"] .bento{background:#111111;border-color:#1f1f1f}
+.bento::before{content:'';position:absolute;inset:0;background:radial-gradient(700px circle at var(--mx,50%) var(--my,50%),rgba(99,102,241,.10),transparent 40%);opacity:0;transition:opacity .35s;pointer-events:none}
+.bento:hover::before{opacity:1}
+.bento:hover{transform:translateY(-4px);border-color:var(--blue);box-shadow:0 24px 60px rgba(29,78,216,.14)}
+[data-theme="dark"] .bento:hover{border-color:#6366f1;box-shadow:0 28px 70px rgba(99,102,241,.30)}
+
+.bento-tag{font-family:var(--f-mono);font-size:11px;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-bd);padding:3px 10px;border-radius:20px;align-self:flex-start;letter-spacing:.04em;font-weight:600}
+.bento-title{font-family:var(--f-display);font-size:22px;font-weight:700;letter-spacing:-.02em;line-height:1.15;margin:14px 0 8px;color:var(--ink)}
+.bento-desc{font-size:13px;color:var(--ink-3);line-height:1.6;margin-bottom:10px}
+.bento-stack{display:flex;gap:6px;flex-wrap:wrap;font-family:var(--f-mono);font-size:11px;margin-top:auto}
+.bento-stack span{background:var(--stone);border:1px solid var(--stone-3);color:var(--ink-3);padding:3px 9px;border-radius:20px}
+[data-theme="dark"] .bento-stack span{background:#181818;border-color:#262626;color:var(--ink-2)}
+.bento-icon{font-size:28px;margin-bottom:6px;display:inline-block}
+.bento-arrow{position:absolute;top:22px;right:22px;width:36px;height:36px;border-radius:50%;background:var(--stone);border:1px solid var(--stone-3);display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .3s;color:var(--ink-2)}
+.bento:hover .bento-arrow{background:var(--blue);color:#fff;border-color:var(--blue);transform:rotate(-45deg)}
+
+/* Featured hero project */
+.bento-hero{grid-column:span 4;grid-row:span 2;background:linear-gradient(140deg,#0a0a14 0%,#11163a 50%,#1a1145 100%);color:#fff;border-color:transparent;justify-content:flex-end;padding:32px;min-height:auto}
+[data-theme="dark"] .bento-hero{background:linear-gradient(140deg,#06060f 0%,#0e1130 50%,#150e3a 100%)}
+.bento-hero .bento-title{color:#fff;font-size:32px;letter-spacing:-.025em}
+.bento-hero .bento-desc{color:rgba(255,255,255,.72);font-size:14px;max-width:90%}
+.bento-hero .bento-tag{background:rgba(167,139,250,.15);border-color:rgba(167,139,250,.3);color:#c4b5fd}
+.bento-hero .bento-stack span{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:rgba(255,255,255,.85)}
+.bento-hero .bento-arrow{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2);color:#fff}
+.bento-hero:hover .bento-arrow{background:#fff;color:#0a0a14;border-color:#fff}
+.bento-hero::after{content:'';position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.45) 0%,transparent 70%);top:-120px;right:-100px;filter:blur(30px);animation:pulseGlow 7s ease-in-out infinite;pointer-events:none}
+@keyframes pulseGlow{0%,100%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+
+/* Mock chat preview inside hero bento */
+.bento-mock{position:absolute;top:30px;right:30px;width:240px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);padding:14px;backdrop-filter:blur(10px);transform:rotate(-2deg);transition:transform .6s cubic-bezier(.2,.7,.2,1);z-index:1}
+.bento-hero:hover .bento-mock{transform:rotate(0deg) translateY(-6px) scale(1.02)}
+.mck-row{display:flex;gap:8px;margin-bottom:9px;align-items:center}
+.mck-row.user{flex-direction:row-reverse}
+.mck-av{width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#a855f7);flex-shrink:0}
+.mck-row.user .mck-av{background:rgba(255,255,255,.2)}
+.mck-bubble{height:8px;border-radius:6px;background:rgba(255,255,255,.18);flex:1;max-width:80%}
+.mck-bubble.s{max-width:55%}
+.mck-row.user .mck-bubble{background:linear-gradient(90deg,rgba(99,102,241,.7),rgba(168,85,247,.7))}
+@media(max-width:1100px){.bento-mock{display:none}}
+
+/* Bento variants */
+.bento-2{grid-column:span 2;grid-row:span 2;background:linear-gradient(155deg,#fff 0%,#eef2ff 100%)}
+[data-theme="dark"] .bento-2{background:linear-gradient(155deg,#0f0f0f 0%,#161a35 100%);border-color:#1f1f1f}
+.bento-3{grid-column:span 3;grid-row:span 1}
+.bento-4{grid-column:span 3;grid-row:span 1}
+.bento-5{grid-column:span 2;grid-row:span 1}
+.bento-6{grid-column:span 2;grid-row:span 1}
+.bento-7{grid-column:span 2;grid-row:span 1}
+@media(max-width:1000px){
+  .bento-hero{grid-column:span 2;grid-row:span 2}
+  .bento-2{grid-column:span 2;grid-row:span 1}
+  .bento-3,.bento-4,.bento-5,.bento-6,.bento-7{grid-column:span 1;grid-row:span 1}
+}
+@media(max-width:560px){
+  .bento-hero,.bento-2,.bento-3,.bento-4,.bento-5,.bento-6,.bento-7{grid-column:span 1;grid-row:auto}
+}
+
+/* Mini visual decorators inside bento variants */
+.bento-2::after{content:'';position:absolute;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(99,102,241,.25),transparent 70%);bottom:-60px;left:-50px;filter:blur(8px);pointer-events:none}
+.bento-mini-viz{position:absolute;top:20px;right:20px;display:flex;gap:4px;align-items:flex-end;height:50px}
+.bento-mini-viz i{width:7px;background:linear-gradient(to top,#3b82f6,#a855f7);border-radius:3px;opacity:.85;animation:bar 1.6s ease-in-out infinite}
+.bento-mini-viz i:nth-child(1){height:30%;animation-delay:0s}
+.bento-mini-viz i:nth-child(2){height:60%;animation-delay:.2s}
+.bento-mini-viz i:nth-child(3){height:90%;animation-delay:.4s}
+.bento-mini-viz i:nth-child(4){height:50%;animation-delay:.6s}
+.bento-mini-viz i:nth-child(5){height:75%;animation-delay:.8s}
+@keyframes bar{0%,100%{transform:scaleY(.7)}50%{transform:scaleY(1)}}
+
+/* SKILLS */
+#skills{background:var(--stone);position:relative;overflow:hidden}
+[data-theme="dark"] #skills{background:#0c0c0c}
+.skill-cats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:32px 0 0}
+.sc-tab{padding:9px 18px;border-radius:30px;border:1px solid var(--stone-3);background:transparent;color:var(--ink-2);font-size:13px;font-weight:500;cursor:pointer;transition:all .25s;font-family:var(--f-body)}
+.sc-tab:hover{color:var(--blue);border-color:var(--blue-bd)}
+.sc-tab.active{background:var(--ink);color:var(--white);border-color:var(--ink)}
+[data-theme="dark"] .sc-tab.active{background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;border-color:transparent}
+.skills-pool{margin-top:30px;min-height:200px;display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.skill-chip{display:inline-flex;align-items:center;gap:10px;padding:11px 16px;background:var(--white);border:1px solid var(--stone-3);border-radius:14px;font-size:14px;font-weight:500;transition:all .35s cubic-bezier(.2,.7,.2,1);cursor:default;position:relative;overflow:hidden;color:var(--ink)}
+[data-theme="dark"] .skill-chip{background:#141414;border-color:#262626}
+.skill-chip::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--blue-bg) 0%,transparent 60%);opacity:0;transition:opacity .3s}
+.skill-chip:hover::before{opacity:1}
+.skill-chip:hover{transform:translateY(-3px) scale(1.03);border-color:var(--blue);box-shadow:0 12px 28px rgba(29,78,216,.15)}
+[data-theme="dark"] .skill-chip:hover{border-color:#6366f1;box-shadow:0 12px 28px rgba(99,102,241,.25)}
+.skill-chip .si{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:11px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);color:#fff;flex-shrink:0;font-weight:700;font-family:var(--f-mono);position:relative;z-index:1;letter-spacing:-.02em}
+.skill-chip .sn{position:relative;z-index:1}
+.skill-chip[data-cat]:not(.show){display:none}
+
+/* Section padding refresh */
+.section{padding:110px 0}
+@media(max-width:768px){.section{padding:72px 0}}
+hr.rule{display:none}
+
+/* Section headers vertical accent */
+.h2-d{position:relative}
+
+/* Big stat utility */
+.bigstat{font-family:var(--f-display);font-size:clamp(60px,9vw,120px);font-weight:700;letter-spacing:-.04em;line-height:.95;background:linear-gradient(135deg,#1d4ed8 0%,#7c3aed 50%,#ec4899 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* Better stat-n: keep suffix safe */
+.stat-n{font-size:34px}
+
+/* Improve service & case cards on dark */
+[data-theme="dark"] .svc{background:#141414;border-color:#262626}
+[data-theme="dark"] .cc{background:#141414;border-color:#262626}
+[data-theme="dark"] .testi-card{background:#141414;border-color:#262626}
+[data-theme="dark"] .pain-item{background:#141414;border-color:#262626}
+[data-theme="dark"] .pain-item.open{background:#181a2c;border-color:#3b82f6}
+[data-theme="dark"] .proc-item-acc{background:#141414;border-color:#262626}
+[data-theme="dark"] .proc-item-acc.open{background:#181a2c;border-color:#3b82f6}
+[data-theme="dark"] .hero-card{background:linear-gradient(160deg,#141414 0%,#0e0e0e 100%);border-color:#262626}
+[data-theme="dark"] .roi-card{background:#141414;border-color:#262626}
+[data-theme="dark"] .fc-card{background:#141414;border-color:#262626}
+[data-theme="dark"] nav{background:color-mix(in srgb,#0a0a0a 85%,transparent);border-bottom-color:#1f1f1f}
+[data-theme="dark"] .trust-strip{background:#0a0a0a;border-bottom-color:#1f1f1f}
+[data-theme="dark"] .ticker{background:linear-gradient(90deg,#0a0a0a 0%,#0f0f0f 50%,#0a0a0a 100%);border-color:#1f1f1f}
+[data-theme="dark"] .tag{background:#181818;border-color:#262626;color:var(--ink-2)}
+[data-theme="dark"] .tag.b{background:rgba(99,102,241,.15);border-color:rgba(99,102,241,.3);color:#a5b4fc}
+[data-theme="dark"] .badge{background:rgba(20,20,20,.92);border-color:#262626;color:var(--ink)}
+[data-theme="dark"] .b-l{color:var(--ink-3)}
+[data-theme="dark"] .faq-item:hover{background:#141414}
+[data-theme="dark"] .faq-grid{border-color:#262626}
+[data-theme="dark"] .faq-item{border-color:#262626}
+[data-theme="dark"] .ct-hl{background:rgba(99,102,241,.08);border-color:rgba(99,102,241,.25)}
+[data-theme="dark"] .cl{background:#141414;border-color:#262626}
+[data-theme="dark"] .cl-ico{background:#181818;border-color:#262626}
+[data-theme="dark"] .scarcity-box{background:linear-gradient(135deg,rgba(16,185,129,.08) 0%,rgba(16,185,129,.04) 100%);border-color:rgba(16,185,129,.25)}
+[data-theme="dark"] .guarantee-badge{background:linear-gradient(135deg,rgba(99,102,241,.08) 0%,rgba(168,85,247,.05) 100%);border-color:rgba(99,102,241,.25)}
+[data-theme="dark"] .fc{background:#181818;border-color:#262626;color:var(--ink)}
+[data-theme="dark"] .fc:focus{background:#0a0a0a;border-color:#3b82f6}
+[data-theme="dark"] .stack-row,[data-theme="dark"] .roi-bkdn,[data-theme="dark"] .contact-trust-row{border-top-color:#262626}
+[data-theme="dark"] #hero{background:linear-gradient(160deg,#0a0a0a 45%,#0f0d1f 75%,#0c0c0c 100%)}
+[data-theme="dark"] #services{background:linear-gradient(180deg,#0c0c0c 0%,#0a0a0a 100%)}
+[data-theme="dark"] #cases{background:linear-gradient(180deg,#0a0a0a 0%,#0c0d14 100%)}
+[data-theme="dark"] #testimonials{background:#0c0c0c}
+[data-theme="dark"] #faq{background:#0a0a0a}
+[data-theme="dark"] #playground{background:#0a0a0a}
+[data-theme="dark"] #contact{background:#0c0c0c}
+[data-theme="dark"] #process{background:#0c0c0c}
+[data-theme="dark"] #pain{background:#0a0a0a}
+[data-theme="dark"] body{background:#0a0a0a}
+
 </head>
 <body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="cursor-spot" id="cursorSpot" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 
 <div class="urgency-bar" id="urgencyBar">
   <div class="ub-inner">
@@ -604,9 +804,10 @@ body.no-bar #hero{padding-top:120px}
     <a href="/" class="nav-logo"><span class="nav-logo-n">N</span>aim<em>.</em></a>
     <div class="nav-actions">
       <ul class="nav-links">
+        <li><a href="#projects">Proyectos</a></li>
+        <li><a href="#skills">Stack</a></li>
         <li><a href="#roi">ROI</a></li>
-        <li><a href="#services">Servicios</a></li>
-        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#playground">Demo IA</a></li>
         <li><a href="#contact">Contacto</a></li>
       </ul>
       <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
@@ -616,11 +817,12 @@ body.no-bar #hero{padding-top:120px}
 </nav>
 
 <section id="hero">
+    <div class="aurora" aria-hidden="true"><b></b><b></b><b></b></div>
     <div class="w">
     <div class="hero-grid">
       <div class="hero-content rv-hidden">
         <div class="hero-urgency-pill"><div class="hup-dot"></div>2 plazas disponibles · Abril 2026</div>
-        <h1 class="hero-name">Naim El Haddadi</h1>
+        <h1 class="hero-name"><span class="word">Naim</span> <span class="word">El&nbsp;Haddadi</span></h1>
         <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
         <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong>. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
         <div class="hero-social-proof">
@@ -630,7 +832,7 @@ body.no-bar #hero{padding-top:120px}
           <span class="hsp-badge">12+ proyectos completados</span>
         </div>
         <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn" style="padding:13px 26px;font-size:15px">Diagnóstico gratuito — 30 min →</a>
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn magnet" style="padding:13px 26px;font-size:15px">Diagnóstico gratuito — 30 min →</a>
           <a href="#roi" style="padding:13px 20px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px; color:var(--ink-2); transition:all .18s" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--stone-3)';this.style.color='var(--ink-2)'">Ver mi ROI</a>
         </div>
         <div class="trust-micro">
@@ -834,7 +1036,140 @@ body.no-bar #hero{padding-top:120px}
   </div>
 </section>
 
-<hr class="rule">
+<section id="projects" class="section">
+  <div class="w">
+    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+      <div>
+        <div class="eyebrow">Portfolio</div>
+        <h2 class="h2-d">Lo que construyo,<br>en producción</h2>
+      </div>
+      <p style="font-size:14px;color:var(--ink-2);max-width:340px;line-height:1.7">Sistemas reales que automatizan, escalan y entregan ROI medible. Desde agentes IA hasta integraciones full-stack.</p>
+    </div>
+    <div class="bento-grid rv" data-d="1">
+
+      <a class="bento bento-hero tilt" href="#playground">
+        <div class="bento-arrow">→</div>
+        <div class="bento-mock" aria-hidden="true">
+          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble"></div></div>
+          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble s"></div></div>
+          <div class="mck-row user"><div class="mck-av"></div><div class="mck-bubble s"></div></div>
+          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble"></div></div>
+        </div>
+        <span class="bento-tag">Proyecto destacado · Live</span>
+        <h3 class="bento-title">Agente Comercial IA</h3>
+        <p class="bento-desc">Asistente conversacional con OpenAI sobre Edge Runtime que cualifica leads en tiempo real. Esta misma web lo usa — pruébalo abajo.</p>
+        <div class="bento-stack"><span>OpenAI GPT-4o</span><span>Vercel Edge</span><span>Streaming</span><span>Prompt Engineering</span></div>
+      </a>
+
+      <a class="bento bento-2 tilt" href="#roi">
+        <div class="bento-arrow">→</div>
+        <span class="bento-icon">📊</span>
+        <span class="bento-tag">Interactivo</span>
+        <h3 class="bento-title">Calculadora de ROI</h3>
+        <p class="bento-desc">Lógica financiera en tiempo real con sliders. UX que convierte visitantes en leads cualificados.</p>
+        <div class="bento-stack"><span>Vanilla JS</span><span>UX</span></div>
+      </a>
+
+      <a class="bento bento-3 tilt" href="#services">
+        <div class="bento-arrow">→</div>
+        <div class="bento-mini-viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="bento-tag">Automatización</span>
+        <h3 class="bento-title">Pipelines n8n</h3>
+        <p class="bento-desc">Flujos CRM ↔ WhatsApp ↔ Stripe ↔ Email. Un evento dispara la cadena completa.</p>
+        <div class="bento-stack"><span>n8n</span><span>Webhooks</span><span>REST</span></div>
+      </a>
+
+      <a class="bento bento-4 tilt" href="#services">
+        <div class="bento-arrow">→</div>
+        <span class="bento-icon">⚡</span>
+        <span class="bento-tag">Full-stack</span>
+        <h3 class="bento-title">Dashboards Next.js 14</h3>
+        <p class="bento-desc">App Router, Server Components y Supabase realtime. 100/100 Lighthouse out of the box.</p>
+        <div class="bento-stack"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Tailwind</span></div>
+      </a>
+
+      <a class="bento bento-5 tilt" href="#contact">
+        <div class="bento-arrow">→</div>
+        <span class="bento-icon">📩</span>
+        <span class="bento-tag">Lead Magnet</span>
+        <h3 class="bento-title">Funnel de captación</h3>
+        <p class="bento-desc">Formulario + PDF + tracking automatizado.</p>
+        <div class="bento-stack"><span>Formspree</span><span>Drive API</span></div>
+      </a>
+
+      <a class="bento bento-6 tilt" href="#playground">
+        <div class="bento-arrow">→</div>
+        <span class="bento-icon">🤖</span>
+        <span class="bento-tag">RAG</span>
+        <h3 class="bento-title">Agentes con memoria</h3>
+        <p class="bento-desc">LangChain + vector DB para soporte contextual.</p>
+        <div class="bento-stack"><span>LangChain</span><span>pgvector</span></div>
+      </a>
+
+      <a class="bento bento-7 tilt" href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">
+        <div class="bento-arrow">↗</div>
+        <span class="bento-icon">🛠️</span>
+        <span class="bento-tag">Open Source</span>
+        <h3 class="bento-title">Más en GitHub</h3>
+        <p class="bento-desc">Repos, experimentos y prototipos.</p>
+        <div class="bento-stack"><span>Python</span><span>Java</span><span>JS</span></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section id="skills" class="section">
+  <div class="w">
+    <div class="rv" style="text-align:center;max-width:640px;margin:0 auto">
+      <div class="eyebrow" style="margin:0 auto 12px">Stack técnico</div>
+      <h2 class="h2-d">Tecnologías que domino<br>en el día a día</h2>
+      <p class="s-lead" style="margin:12px auto 0">Las herramientas que uso para diseñar, construir y desplegar sistemas que funcionan en producción.</p>
+    </div>
+    <div class="skill-cats rv" data-d="1">
+      <button class="sc-tab active" data-cat="all">Todo</button>
+      <button class="sc-tab" data-cat="ai">IA & Agentes</button>
+      <button class="sc-tab" data-cat="frontend">Frontend</button>
+      <button class="sc-tab" data-cat="backend">Backend</button>
+      <button class="sc-tab" data-cat="data">Datos</button>
+      <button class="sc-tab" data-cat="ops">DevOps</button>
+    </div>
+    <div class="skills-pool rv" data-d="2" id="skillsPool">
+      <span class="skill-chip show" data-cat="ai"><span class="si">AI</span><span class="sn">OpenAI API</span></span>
+      <span class="skill-chip show" data-cat="ai"><span class="si">LC</span><span class="sn">LangChain</span></span>
+      <span class="skill-chip show" data-cat="ai"><span class="si">GPT</span><span class="sn">Prompt Engineering</span></span>
+      <span class="skill-chip show" data-cat="ai"><span class="si">RAG</span><span class="sn">Vector DBs</span></span>
+      <span class="skill-chip show" data-cat="ai"><span class="si">N8</span><span class="sn">n8n</span></span>
+      <span class="skill-chip show" data-cat="ai"><span class="si">AG</span><span class="sn">AI Agents</span></span>
+
+      <span class="skill-chip show" data-cat="frontend"><span class="si">Nx</span><span class="sn">Next.js 14</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">TS</span><span class="sn">TypeScript</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">R</span><span class="sn">React</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">TW</span><span class="sn">Tailwind CSS</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">SC</span><span class="sn">shadcn/ui</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">JS</span><span class="sn">JavaScript</span></span>
+      <span class="skill-chip show" data-cat="frontend"><span class="si">{}</span><span class="sn">HTML5 & CSS3</span></span>
+
+      <span class="skill-chip show" data-cat="backend"><span class="si">Nd</span><span class="sn">Node.js</span></span>
+      <span class="skill-chip show" data-cat="backend"><span class="si">Py</span><span class="sn">Python</span></span>
+      <span class="skill-chip show" data-cat="backend"><span class="si">Jv</span><span class="sn">Java</span></span>
+      <span class="skill-chip show" data-cat="backend"><span class="si">Ed</span><span class="sn">Edge Functions</span></span>
+      <span class="skill-chip show" data-cat="backend"><span class="si">RT</span><span class="sn">REST APIs</span></span>
+      <span class="skill-chip show" data-cat="backend"><span class="si">WS</span><span class="sn">WebSockets</span></span>
+
+      <span class="skill-chip show" data-cat="data"><span class="si">Sb</span><span class="sn">Supabase</span></span>
+      <span class="skill-chip show" data-cat="data"><span class="si">PG</span><span class="sn">PostgreSQL</span></span>
+      <span class="skill-chip show" data-cat="data"><span class="si">My</span><span class="sn">MySQL</span></span>
+      <span class="skill-chip show" data-cat="data"><span class="si">RD</span><span class="sn">Redis</span></span>
+
+      <span class="skill-chip show" data-cat="ops"><span class="si">Vc</span><span class="sn">Vercel</span></span>
+      <span class="skill-chip show" data-cat="ops"><span class="si">Gh</span><span class="sn">GitHub Actions</span></span>
+      <span class="skill-chip show" data-cat="ops"><span class="si">Dk</span><span class="sn">Docker</span></span>
+      <span class="skill-chip show" data-cat="ops"><span class="si">Lx</span><span class="sn">Linux</span></span>
+      <span class="skill-chip show" data-cat="ops"><span class="si">CI</span><span class="sn">CI/CD</span></span>
+    </div>
+  </div>
+</section>
 
 <section id="testimonials" class="section">
   <div class="w">
@@ -1461,17 +1796,145 @@ document.addEventListener('DOMContentLoaded', () => {
     header.addEventListener('click', function() {
       const item = this.closest('.proc-item-acc');
       const isOpen = item.classList.contains('open');
-      
+
       // Cerrar todos
       document.querySelectorAll('.proc-item-acc').forEach(el => el.classList.remove('open'));
-      
+
       // Abrir solo si no estaba abierto
       if (!isOpen) {
         item.classList.add('open');
       }
     });
   });
+
+  /* ========== WOW INTERACTIONS ========== */
+
+  // Scroll progress bar
+  const sp = document.getElementById('scrollProgress');
+  if (sp) {
+    const onScroll = () => {
+      const h = document.documentElement;
+      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      sp.style.width = Math.min(100, Math.max(0, pct)) + '%';
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // Spotlight cursor (desktop)
+  const spot = document.getElementById('cursorSpot');
+  if (spot && window.matchMedia('(hover:hover)').matches) {
+    let tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+    let cx = tx, cy = ty;
+    document.addEventListener('mousemove', (e) => { tx = e.clientX; ty = e.clientY; }, { passive: true });
+    const tick = () => {
+      cx += (tx - cx) * 0.18;
+      cy += (ty - cy) * 0.18;
+      spot.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
+
+  // Bento spotlight: track per-card mouse position for ::before highlight
+  document.querySelectorAll('.bento').forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+  });
+
+  // 3D tilt on .tilt cards
+  if (window.matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.tilt').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        el.style.transform = `perspective(900px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 7).toFixed(2)}deg) translateY(-4px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  // Magnetic buttons
+  if (window.matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.magnet').forEach(el => {
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        el.style.transform = `translate(${x * 0.18}px, ${y * 0.25}px)`;
+      });
+      el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  // Skills category filter
+  const tabs = document.querySelectorAll('.sc-tab');
+  const chips = document.querySelectorAll('#skillsPool .skill-chip');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const cat = tab.dataset.cat;
+      chips.forEach(c => {
+        const match = cat === 'all' || c.dataset.cat === cat;
+        c.classList.toggle('show', match);
+      });
+    });
+  });
+
+  // Smooth scroll for in-page anchors (already handled by scroll-behavior, but add offset for sticky nav)
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    const id = a.getAttribute('href');
+    if (id.length < 2) return;
+    a.addEventListener('click', (e) => {
+      const t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      const offset = (document.querySelector('nav')?.offsetHeight || 60) + 12;
+      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - offset, behavior: 'smooth' });
+    });
+  });
+
+  // Active nav link highlighting
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const navMap = {};
+  navAnchors.forEach(a => { const id = a.getAttribute('href').slice(1); if (id) navMap[id] = a; });
+  const sectIds = Object.keys(navMap);
+  const navObs = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      const a = navMap[en.target.id];
+      if (a && en.isIntersecting) {
+        navAnchors.forEach(x => x.style.color = '');
+        a.style.color = 'var(--blue)';
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sectIds.forEach(id => { const s = document.getElementById(id); if (s) navObs.observe(s); });
 });
+
+// Override animateStats to keep suffixes (h+, h, k, etc.)
+window.animateStats = function() {
+  document.querySelectorAll('.stat-n').forEach(stat => {
+    const original = stat.textContent;
+    const m = original.match(/^([^\d]*)(\d+)(.*)$/);
+    if (!m) return;
+    const prefix = m[1], target = parseInt(m[2], 10), suffix = m[3];
+    let current = 0;
+    const dur = 1200, start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const v = Math.round(target * eased);
+      stat.textContent = prefix + v + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+};
 </script>
 </body>
 </html>
