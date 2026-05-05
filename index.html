@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="es" data-theme="light">
+<html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naim El Haddadi — Ingeniería de Eficiencia Operativa</title>
-<meta name="description" content="Automatizo procesos complejos con Agentes de IA y desarrollo a medida. Recupera 20 horas semanales y duplica tu pipeline de ventas.">
+<title>Naim El Haddadi — Automatización con IA · Madrid</title>
+<meta name="description" content="Automatizo procesos complejos con Agentes de IA y desarrollo a medida. Recupera 20 horas semanales y escala tu operativa.">
 <meta name="author" content="Naim El Haddadi">
 <link rel="canonical" href="https://naimelhaddadi.com/">
-<meta property="og:title" content="Naim El Haddadi — Ingeniería de Eficiencia Operativa">
+<meta property="og:title" content="Naim El Haddadi — Automatización con IA">
 <meta property="og:description" content="Automatizo procesos complejos con Agentes de IA y desarrollo a medida.">
 <meta property="og:url" content="https://naimelhaddadi.com/">
 <meta property="og:type" content="website">
-<meta property="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="shortcut icon" href="/assets/letra-n.png" type="image/x-icon">
@@ -22,186 +22,244 @@
 
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="cursor-spot" id="cursorSpot" aria-hidden="true"></div>
-<div class="grain" aria-hidden="true"></div>
 
+<!-- URGENCY BAR -->
 <div class="urgency-bar" id="urgencyBar">
   <div class="ub-inner">
     <div class="ub-dot"></div>
-    <span>Solo acepto <strong>3 proyectos nuevos al mes</strong> — Quedan <a href="#contact" class="ub-link">2 plazas disponibles en abril</a></span>
-    <span style="color:rgba(255,255,255,.5);display:none" id="ubSep">·</span>
-    <a href="#contact" class="ub-link" style="display:none" id="ubCta">Reservar plaza →</a>
+    <span>Solo acepto <strong>3 proyectos nuevos al mes</strong> — Quedan <a href="#contact" class="ub-link">2 plazas disponibles</a></span>
   </div>
   <button class="ub-close" onclick="closeBar()" aria-label="Cerrar">✕</button>
 </div>
 
-<nav>
+<!-- NAV -->
+<nav id="mainNav">
   <div class="nav-i">
-    <a href="/" class="nav-logo"><span class="nav-logo-n">N</span>aim<em>.</em></a>
+    <a href="/" class="nav-logo">Naim<span class="dot">.</span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#case">Casos</a></li>
+      <li><a href="#roi">ROI</a></li>
+      <li><a href="#projects">Portfolio</a></li>
+      <li><a href="#playground">Demo IA</a></li>
+    </ul>
     <div class="nav-actions">
-      <ul class="nav-links">
-        <li><a href="#projects">Proyectos</a></li>
-        <li><a href="#skills">Stack</a></li>
-        <li><a href="#roi">ROI</a></li>
-        <li><a href="#playground">Demo IA</a></li>
-        <li><a href="#contact">Contacto</a></li>
-      </ul>
-      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">🌓</button>
-      <a href="#contact" class="nav-btn">Diagnóstico gratis →</a>
+      <button class="nav-theme" onclick="toggleTheme()" aria-label="Toggle theme">◐</button>
+      <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" rel="noopener" class="nav-cta magnet">Diagnóstico gratis →</a>
     </div>
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
-    <div class="aurora" aria-hidden="true"><b></b><b></b><b></b></div>
-    <div class="w">
+  <div class="hero-bg" aria-hidden="true"><b></b><b></b><b></b></div>
+  <div class="w">
     <div class="hero-grid">
-      <div class="hero-content rv-hidden">
-        <div class="hero-urgency-pill"><div class="hup-dot"></div>2 plazas disponibles · Abril 2026</div>
-        <h1 class="hero-name"><span class="word">Naim</span> <span class="word">El&nbsp;Haddadi</span></h1>
-        <p class="hero-role">Ingeniería de Eficiencia Operativa</p>
-        <p class="hero-sub">Automatizo procesos complejos con <strong>Agentes de IA</strong>. Si tu equipo pierde tiempo en tareas manuales, <strong>estás perdiendo dinero.</strong></p>
-        <div class="hero-social-proof">
-          <span class="hsp-stars">★★★★★</span>
-          <span class="hsp-text">100% de clientes repiten</span>
-          <span class="hsp-sep">·</span>
-          <span class="hsp-badge">12+ proyectos completados</span>
+      <div class="hero-content">
+        <div class="hero-kicker">Disponible en Madrid &amp; Remoto</div>
+        <h1 class="hero-h1">Automatizo<br>lo que frena<br><em>tu negocio.</em></h1>
+        <p class="hero-sub">Agentes de IA que trabajan 24/7. Integraciones que eliminan trabajo manual. Desarrollo que escala. Todo medido en ROI real desde el día uno.</p>
+        <div class="hero-ctas">
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" rel="noopener" class="btn-primary magnet">Diagnóstico gratuito — 30 min →</a>
+          <a href="#projects" class="btn-ghost">Ver mi trabajo ↓</a>
         </div>
-        <div style="display:flex; gap:12px; flex-wrap:wrap">
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" class="nav-btn magnet" style="padding:13px 26px;font-size:15px">Diagnóstico gratuito — 30 min →</a>
-          <a href="#roi" style="padding:13px 20px; border:1px solid var(--stone-3); border-radius:var(--r-md); font-size:15px; color:var(--ink-2); transition:all .18s" onmouseover="this.style.borderColor='var(--blue)';this.style.color='var(--blue)'" onmouseout="this.style.borderColor='var(--stone-3)';this.style.color='var(--ink-2)'">Ver mi ROI</a>
-        </div>
-        <div class="trust-micro">
-          <div class="tm-item"><span class="tm-check">✓</span>Sin permanencia</div>
-          <div class="tm-item"><span class="tm-check">✓</span>Piloto precio fijo</div>
-          <div class="tm-item"><span class="tm-check">✓</span>Primer resultado en 72h</div>
-          <div class="tm-item"><span class="tm-check">✓</span>Sin riesgo</div>
-        </div>
-        <div class="hero-stats">
-          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">20h+</div><div class="stat-l">recuperadas / semana</div></div>
-          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">72h</div><div class="stat-l">primer piloto</div></div>
-          <div style="display:flex;flex-direction:column;gap:2px"><div class="stat-n">€15k</div><div class="stat-l">ahorro/mes real</div></div>
+        <div class="hero-proof">
+          <div class="hp-item"><div class="hp-n">20h+</div><div class="hp-l">recuperadas / semana</div></div>
+          <div class="hp-item"><div class="hp-n">72h</div><div class="hp-l">al primer piloto</div></div>
+          <div class="hp-item"><div class="hp-n">€15k</div><div class="hp-l">ahorro / mes real</div></div>
         </div>
       </div>
-      <div class="hero-right rv-hidden">
-        <div class="hero-portrait-container">
-          <img src="/assets/Naim.jpeg" alt="Naim El Haddadi" class="hero-avatar">
-          <div class="badge b-1"><div class="b-n">3×</div><div class="b-l">ROI promedio</div></div>
-          <div class="badge b-2"><div class="b-n">Disponible ahora</div><div class="b-l">Madrid & Remoto</div></div>
-        </div>
-        <div class="hero-card rv" data-d="1">
-          <div class="hero-card-lbl">Metodología probada</div>
-          <div style="display:flex;flex-direction:column;gap:0">
-            <div class="p-step"><div class="p-num">01</div><div><div class="p-label">Descubrimiento</div><div class="p-desc">Auditoría de procesos y ROI real</div></div></div>
-            <div class="p-line"></div>
-            <div class="p-step"><div class="p-num">02</div><div><div class="p-label">Piloto en 72h</div><div class="p-desc">MVP funcional y medible</div></div></div>
-            <div class="p-line"></div>
-            <div class="p-step"><div class="p-num">03</div><div><div class="p-label">Implementación</div><div class="p-desc">Deploy, formación y soporte</div></div></div>
-            <div class="p-line"></div>
-            <div class="p-step"><div class="p-num">04</div><div><div class="p-label">Optimización</div><div class="p-desc">El sistema mejora cada semana</div></div></div>
-          </div>
-          <div class="stack-row">
-            <div class="stack-lbl">Stack técnico</div>
-            <div class="tags-row">
-              <span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag b">LangChain</span><span class="tag">Supabase</span><span class="tag">n8n</span><span class="tag">OpenAI</span><span class="tag">JavaScript</span><span class="tag">Python</span><span class="tag">Java</span>
-            </div>
-          </div>
+      <div class="hero-photo-col">
+        <div class="hero-photo-glow"></div>
+        <img src="/assets/Naim.jpeg" alt="Naim El Haddadi" class="hero-photo">
+        <div class="hero-bd-stack">
+          <div class="hero-bd"><div class="hero-bd-n">3× ROI</div><div class="hero-bd-l">promedio de proyectos</div></div>
+          <div class="hero-bd"><div class="hero-bd-n">Disponible</div><div class="hero-bd-l">Madrid + Remoto</div></div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <span>SCROLL</span>
+    <div class="scroll-line"></div>
   </div>
 </section>
 
-<div class="ticker">
+<!-- TICKER -->
+<div class="ticker" aria-hidden="true">
   <div class="ticker-i">
-    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
-    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">Shadcn/UI</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">MySQL</span><span class="tk hi">n8n</span><span class="tk">Java</span><span class="tk hi">App Router</span><span class="tk">JavaScript</span>
+    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">n8n</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">PostgreSQL</span><span class="tk hi">Shadcn/UI</span><span class="tk">Java</span><span class="tk hi">RAG · Vector DB</span><span class="tk">REST API</span><span class="tk hi">WhatsApp API</span><span class="tk">Stripe</span>
+    <span class="tk hi">Next.js 14</span><span class="tk">TypeScript</span><span class="tk hi">LangChain</span><span class="tk">OpenAI API</span><span class="tk hi">Supabase</span><span class="tk">Tailwind CSS</span><span class="tk hi">n8n</span><span class="tk">Python</span><span class="tk hi">Vercel Edge</span><span class="tk">PostgreSQL</span><span class="tk hi">Shadcn/UI</span><span class="tk">Java</span><span class="tk hi">RAG · Vector DB</span><span class="tk">REST API</span><span class="tk hi">WhatsApp API</span><span class="tk">Stripe</span>
   </div>
 </div>
 
-<div class="trust-strip">
+<!-- STATEMENT -->
+<section id="statement">
   <div class="w">
-    <div class="trust-items">
-      <div class="trust-item"><span class="ti-icon">🏆</span><span><strong>12+</strong> proyectos completados</span></div>
-      <div class="trust-sep">|</div>
-      <div class="trust-item"><span class="ti-icon">⭐</span><span><strong>100%</strong> clientes repiten</span></div>
-      <div class="trust-sep">|</div>
-      <div class="trust-item"><span class="ti-icon">⚡</span><span>Primer resultado en <strong>72h</strong></span></div>
-      <div class="trust-sep">|</div>
-      <div class="trust-item"><span class="ti-icon">🛡️</span><span>Piloto con <strong>coste fijo</strong></span></div>
-      <div class="trust-sep">|</div>
-      <div class="trust-item"><span class="ti-icon">📍</span><span><strong>Madrid</strong> &amp; Remoto</span></div>
-    </div>
-  </div>
-</div>
-
-<section id="pain" class="section">
-  <div class="w">
-    <div class="rv"><div class="eyebrow">El Problema</div><h2 class="h2-d">¿Cuánto te cuesta operar a mano?</h2><p class="s-lead">Cada hora en tareas repetitivas es dinero que no se invierte en crecer.</p></div>
-    <div class="pain-accordion rv" data-d="1">
-      <div class="pain-item open">
-        <div class="pain-header">
-          <div class="pain-icon">📋</div>
-          <div class="pain-header-text"><div class="pain-t">Tareas manuales interminables</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">Tu equipo copia datos entre sistemas y responde las mismas preguntas cada día. Sin automatización, cada tarea consume horas.</div></div>
+    <p class="stmt-quote rv">
+      "Cada hora que tu equipo pierde en tareas repetitivas<br>
+      es dinero que <em>no está creciendo</em>.<br>
+      Eso se arregla."
+    </p>
+    <div class="stmt-cols">
+      <div class="rv" data-d="1">
+        <div class="stmt-n">12+</div>
+        <div class="stmt-l">Proyectos automatizados y en producción con clientes reales en España.</div>
       </div>
-      <div class="pain-item">
-        <div class="pain-header">
-          <div class="pain-icon">💀</div>
-          <div class="pain-header-text"><div class="pain-t">CRM desactualizado</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">Los leads caen en el vacío. No sabes quién está listo para comprar. Sin integración pierdes la trazabilidad completa.</div></div>
+      <div class="rv" data-d="2">
+        <div class="stmt-n">100%</div>
+        <div class="stmt-l">De clientes repiten o amplían el proyecto. Sin permanencia, sin letra pequeña.</div>
       </div>
-      <div class="pain-item">
-        <div class="pain-header">
-          <div class="pain-icon">⏳</div>
-          <div class="pain-header-text"><div class="pain-t">Soporte lento y costoso</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">El 80% de preguntas son siempre las mismas. Tu equipo las responde una a una consumiendo recursos valiosos.</div></div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-header">
-          <div class="pain-icon">📉</div>
-          <div class="pain-header-text"><div class="pain-t">Pipeline estancado</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">Nadie hace seguimiento en las primeras 2 horas. Sin automatización de follow-ups, la oportunidad se pierde.</div></div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-header">
-          <div class="pain-icon">🔌</div>
-          <div class="pain-header-text"><div class="pain-t">Herramientas desconectadas</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">Tu web, CRM y facturación no se hablan. Los datos viven en silos generando inconsistencias en todo el flujo.</div></div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-header">
-          <div class="pain-icon">🔥</div>
-          <div class="pain-header-text"><div class="pain-t">Siempre apagando incendios</div></div>
-          <div class="pain-toggle">▼</div>
-        </div>
-        <div class="pain-content"><div class="pain-d">Sin sistemas automáticos el día a día absorbe todo. No hay margen para escalar, innovar ni crecer realmente.</div></div>
+      <div class="rv" data-d="3">
+        <div class="stmt-n">72h</div>
+        <div class="stmt-l">Hasta tener el primer prototipo funcional y medible en tu stack real.</div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section id="roi" class="section">
+<!-- SERVICES -->
+<section id="services">
   <div class="w">
-    <div class="rv"><div class="eyebrow">Calculadora de ROI</div><h2 class="h2-d">Cuánto dinero estás<br>dejando sobre la mesa</h2><p class="s-lead">Desliza los sliders y ve el impacto económico real de automatizar tus operaciones.</p></div>
-    <div class="roi-wrap" style="margin-top:44px">
-      <div class="roi-card rv" data-d="1">
-        <div class="sg"><div class="sl-lbl"><span>Horas manuales al día</span><span class="sl-val" id="vH">4h</span></div><input type="range" id="sH" min="1" max="12" value="4" step="0.5" oninput="calcROI()"></div>
-        <div class="sg"><div class="sl-lbl"><span>Coste por hora (€)</span><span class="sl-val" id="vR">15€/h</span></div><input type="range" id="sR" min="6" max="100" value="15" step="1" oninput="calcROI()"></div>
-        <div class="sg"><div class="sl-lbl"><span>Personas en el equipo</span><span class="sl-val" id="vT">3</span></div><input type="range" id="sT" min="1" max="20" value="3" step="1" oninput="calcROI()"></div>
-        <div class="sg"><div class="sl-lbl"><span>% tareas automatizables</span><span class="sl-val" id="vA">70%</span></div><input type="range" id="sA" min="30" max="95" value="70" step="5" oninput="calcROI()"></div>
+    <div class="rv"><div class="sec-kicker">La solución</div></div>
+    <div class="svc-list">
+      <div class="svc-row rv" data-d="1">
+        <div class="svc-num">01 / 03</div>
+        <div class="svc-body">
+          <div class="svc-top">
+            <div class="svc-icon">🤖</div>
+            <h2 class="svc-h">Sistemas de IA Agéntica</h2>
+          </div>
+          <p class="svc-d">Agentes que no solo responden, sino que <strong style="color:var(--white)">ejecutan</strong>: cualifican leads, actualizan el CRM, agendan citas y responden soporte, autónomamente, 24/7. Sin intervención humana.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">LangChain</span><span class="svc-tag">OpenAI GPT-4o</span><span class="svc-tag">n8n</span><span class="svc-tag">Webhooks</span><span class="svc-tag">WhatsApp API</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-row rv" data-d="2">
+        <div class="svc-num">02 / 03</div>
+        <div class="svc-body">
+          <div class="svc-top">
+            <div class="svc-icon">⚡</div>
+            <h2 class="svc-h">Desarrollo Web de Alto Rendimiento</h2>
+          </div>
+          <p class="svc-d">Dashboards, herramientas internas y apps de cliente con Next.js 14 y TypeScript. <strong style="color:var(--white)">100/100 en Lighthouse</strong> y arquitectura pensada para escalar desde el primer commit.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">Next.js 14</span><span class="svc-tag">TypeScript</span><span class="svc-tag">Tailwind CSS</span><span class="svc-tag">Supabase</span><span class="svc-tag">Vercel Edge</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+      <div class="svc-row rv" data-d="1">
+        <div class="svc-num">03 / 03</div>
+        <div class="svc-body">
+          <div class="svc-top">
+            <div class="svc-icon">🔗</div>
+            <h2 class="svc-h">Integración de Ecosistemas</h2>
+          </div>
+          <p class="svc-d">CRM, ERP, WhatsApp, calendarios y facturación conectados. Un dato entra una vez y <strong style="color:var(--white)">fluye automáticamente</strong> por todo tu stack. Fin de los silos de datos.</p>
+          <div class="svc-tags">
+            <span class="svc-tag">REST API</span><span class="svc-tag">n8n</span><span class="svc-tag">Google APIs</span><span class="svc-tag">Stripe</span><span class="svc-tag">Zapier</span>
+          </div>
+        </div>
+        <div class="svc-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <div class="w">
+    <div class="rv"><div class="sec-kicker">Impacto real</div></div>
+    <div class="nums-grid rv" data-d="1">
+      <div class="num-cell">
+        <div class="num-big">20h+</div>
+        <div class="num-label">recuperadas por semana por empresa cliente</div>
+        <div class="num-sub">// promedio verificado</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-big">€15k</div>
+        <div class="num-label">ahorro mensual en el caso más documentado</div>
+        <div class="num-sub">// Madrid · 2026</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-big">3×</div>
+        <div class="num-label">ROI medio en el primer año de implementación</div>
+        <div class="num-sub">// sin contar escala</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED CASE: Jesús -->
+<section id="case">
+  <div class="w">
+    <div class="case-grid">
+      <div>
+        <div class="rv"><div class="sec-kicker purple">Caso real · Vídeo</div></div>
+        <h2 class="case-h rv">Clínica Dental.<br>Dos ciudades.<br>Un sistema.</h2>
+        <p class="case-p rv" data-d="1">Jesús dirige una clínica dental con sedes en Madrid y Valladolid. Implementamos automatización de comunicaciones, seguimiento de pacientes y gestión de agenda. El sistema sigue activo y mejorando semana a semana.</p>
+        <div class="case-tags rv" data-d="1">
+          <span class="case-tag">WhatsApp API</span>
+          <span class="case-tag">n8n</span>
+          <span class="case-tag">OpenAI</span>
+          <span class="case-tag">Agenda</span>
+          <span class="case-tag">Sector Salud</span>
+        </div>
+        <div class="rv" data-d="2">
+          <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" class="case-video-btn">
+            <span class="case-play">▶</span>
+            Jesús lo cuenta en vídeo
+          </a>
+        </div>
+      </div>
+      <div class="rv" data-d="2">
+        <div class="case-card">
+          <div class="case-logo">JD</div>
+          <div class="case-name">Jesús — Clínica Dental</div>
+          <div class="case-loc">Madrid + Valladolid · Activo 2026</div>
+          <div class="case-metrics">
+            <div class="cm-item"><span class="cm-k">Estado del proyecto</span><span class="cm-v">Activo ✓</span></div>
+            <div class="cm-item"><span class="cm-k">Sedes cubiertas</span><span class="cm-v">2 clínicas</span></div>
+            <div class="cm-item"><span class="cm-k">Tipo de cliente</span><span class="cm-v">Sector Salud</span></div>
+            <div class="cm-item"><span class="cm-k">Testimonio</span><span class="cm-v">En vídeo →</span></div>
+          </div>
+          <div class="case-live-row">
+            <div class="live-dot"></div>
+            Sistema funcionando en producción ahora mismo
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section id="roi">
+  <div class="w">
+    <div class="rv"><div class="sec-kicker light">Calculadora de ROI</div></div>
+    <h2 class="roi-h rv">¿Cuánto te cuesta<br>operar a mano?</h2>
+    <p class="roi-lead rv" data-d="1">Ajusta los sliders según tu empresa. El ahorro real aparece en tiempo real.</p>
+    <div class="roi-grid">
+      <div class="roi-controls rv" data-d="1">
+        <div class="sg">
+          <div class="sl-lbl"><span class="sl-k">Horas manuales al día</span><span class="sl-v" id="vH">4h</span></div>
+          <input type="range" id="sH" min="1" max="12" value="4" step="0.5">
+        </div>
+        <div class="sg">
+          <div class="sl-lbl"><span class="sl-k">Coste por hora (€)</span><span class="sl-v" id="vR">15€/h</span></div>
+          <input type="range" id="sR" min="6" max="100" value="15" step="1">
+        </div>
+        <div class="sg">
+          <div class="sl-lbl"><span class="sl-k">Personas en el equipo</span><span class="sl-v" id="vT">3</span></div>
+          <input type="range" id="sT" min="1" max="20" value="3" step="1">
+        </div>
+        <div class="sg">
+          <div class="sl-lbl"><span class="sl-k">% tareas automatizables</span><span class="sl-v" id="vA">70%</span></div>
+          <input type="range" id="sA" min="30" max="95" value="70" step="5">
+        </div>
         <div class="roi-bkdn">
           <div class="br"><span class="br-k">Coste manual anual</span><span class="br-v" id="bM">—</span></div>
           <div class="br"><span class="br-k">Inversión piloto (est.)</span><span class="br-v" id="bI">—</span></div>
@@ -209,172 +267,155 @@
         </div>
       </div>
       <div class="rv" data-d="2">
-        <div class="roi-res">
-          <div class="roi-res-lbl">Ahorro anual estimado</div>
-          <div class="roi-res-n" id="roiN">€0</div>
-          <div class="roi-res-sub">recuperados automatizando</div>
+        <div class="roi-result">
+          <div class="roi-result-lbl">Ahorro anual estimado</div>
+          <div class="roi-result-n" id="roiN">€0</div>
+          <div class="roi-result-sub">recuperados automatizando</div>
           <div class="roi-note">💡 <strong>Estimación conservadora.</strong> El ROI real incluye reducción de errores y capacidad de escala sin contratar más personal.</div>
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="roi-cta">Quiero recuperar este dinero →</a>
-        </div>
-        <div style="margin-top:16px;padding:14px 18px;background:var(--stone);border:1px solid var(--stone-3);border-radius:var(--r-lg)">
-          <div style="font-size:13px;color:var(--ink-2);line-height:1.65">📊 El diagnóstico incluye un <strong>análisis de ROI detallado</strong> para tu caso específico.</div>
+          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" rel="noopener" class="roi-cta-btn">Quiero este ahorro →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section id="services" class="section">
+<!-- PROJECTS BENTO -->
+<section id="projects">
   <div class="w">
-    <div class="rv"><div class="eyebrow">La Solución</div><h2 class="h2-d">Sistemas que trabajan<br>mientras tú creces</h2><p class="s-lead">Tres áreas clave para transformar tu operativa con IA y desarrollo de alto rendimiento.</p></div>
-    <div class="svc-grid">
-      <article class="svc rv" data-d="1">
-        <div class="svc-num">01 / 03</div>
-        <div class="svc-icon">🤖</div>
-        <h3 class="svc-t">Sistemas de IA Agéntica</h3>
-        <p class="svc-d">Agentes que <strong>ejecutan tareas</strong>, no solo responden. Cualifican leads, agendan citas y actualizan el CRM — autónomos, 24/7.</p>
-        <div class="tags-row"><span class="tag b">LangChain</span><span class="tag b">OpenAI</span><span class="tag">n8n</span><span class="tag">Webhooks</span></div>
-      </article>
-      <article class="svc rv" data-d="2">
-        <div class="svc-num">02 / 03</div>
-        <div class="svc-icon">⚡</div>
-        <h3 class="svc-t">Desarrollo Web de Alto Rendimiento</h3>
-        <p class="svc-d">Dashboards y herramientas con Next.js 14 y TypeScript. <strong>100/100 en Lighthouse.</strong> Diseño que convierte.</p>
-        <div class="tags-row"><span class="tag b">Next.js 14</span><span class="tag b">TypeScript</span><span class="tag">Tailwind</span><span class="tag">Supabase</span></div>
-      </article>
-      <article class="svc rv" data-d="1">
-        <div class="svc-num">03 / 03</div>
-        <div class="svc-icon">🔗</div>
-        <h3 class="svc-t">Integración de Ecosistemas</h3>
-        <p class="svc-d">CRM, ERP, WhatsApp y calendarios conectados. Un dato entra una vez y <strong>fluye automáticamente</strong> por todo tu stack.</p>
-        <div class="tags-row"><span class="tag b">REST API</span><span class="tag">Google APIs</span><span class="tag">Stripe</span><span class="tag">Zapier</span></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<hr class="rule">
-
-<section id="cases" class="section" style="background:var(--stone)">
-  <div class="w">
-    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:0">
-      <div><div class="eyebrow">Casos Reales</div><h2 class="h2-d">Resultados medibles,<br>no promesas</h2></div>
-      <p style="font-size:14px;color:var(--ink-2);max-width:320px;line-height:1.7">Algunos clientes comparten su experiencia en vídeo. Otros prefieren mantenerse anónimos por NDA.</p>
-    </div>
-    <div class="cases-grid">
-      <article class="cc cc-feat rv" data-d="1">
-        <span class="cc-tag">★ Cliente real · Vídeo</span>
-        <h3 class="cc-name">Jesús — Clínica Dental</h3>
-        <div class="cc-loc">Madrid + Valladolid · Activo 2026</div>
-        <p class="cc-d">Sistema de automatización para clínica dental con dos sedes. Implementación activa, en mejora continua mes a mes.</p>
-        <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" class="cc-video"><span class="cc-play">▶</span>Ver vídeo del caso</a>
-        <div class="cc-stack-feat"><span>WhatsApp</span><span>n8n</span><span>OpenAI</span><span>Calendario</span></div>
-      </article>
-      <article class="cc rv" data-d="2"><span class="cc-tag">E-commerce</span><div class="cc-n">+340%</div><div class="cc-m">conversión leads</div><p class="cc-d">Follow-up automático post-visita con secuencias personalizadas basadas en comportamiento de navegación.</p><div class="cc-f">// 2025</div></article>
-      <article class="cc rv" data-d="1"><span class="cc-tag">Consultoría</span><div class="cc-n">22h</div><div class="cc-m">recuperadas / semana</div><p class="cc-d">Dashboard integrado con Notion, Slack y facturación automática. El equipo eliminó todos los reportes manuales.</p><div class="cc-f">// Remoto · 2025</div></article>
-    </div>
-  </div>
-</section>
-
-<section id="projects" class="section">
-  <div class="w">
-    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
+    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px;margin-bottom:64px">
       <div>
-        <div class="eyebrow">Portfolio</div>
-        <h2 class="h2-d">Lo que construyo,<br>en producción</h2>
+        <div class="sec-kicker light">Portfolio</div>
+        <h2 class="proj-h">Lo que construyo,<br>en producción.</h2>
       </div>
-      <p style="font-size:14px;color:var(--ink-2);max-width:340px;line-height:1.7">Sistemas reales que automatizan, escalan y entregan ROI medible. Desde agentes IA hasta integraciones full-stack.</p>
+      <p class="proj-sub" style="margin-bottom:0;margin-top:0">Sistemas reales. Clientes reales. ROI documentado.</p>
     </div>
-    <div class="bento-grid rv" data-d="1">
-
-      <a class="bento bento-hero tilt" href="#playground">
-        <div class="bento-arrow">→</div>
-        <div class="bento-mock" aria-hidden="true">
-          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble"></div></div>
-          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble s"></div></div>
-          <div class="mck-row user"><div class="mck-av"></div><div class="mck-bubble s"></div></div>
-          <div class="mck-row"><div class="mck-av"></div><div class="mck-bubble"></div></div>
-        </div>
-        <span class="bento-tag">Proyecto destacado · Live</span>
-        <h3 class="bento-title">Agente Comercial IA</h3>
-        <p class="bento-desc">Asistente conversacional con OpenAI sobre Edge Runtime que cualifica leads en tiempo real. Esta misma web lo usa — pruébalo abajo.</p>
-        <div class="bento-stack"><span>OpenAI GPT-4o</span><span>Vercel Edge</span><span>Streaming</span><span>Prompt Engineering</span></div>
+    <div class="bento rv" data-d="1">
+      <a class="bc bc-feat tilt" href="#playground">
+        <div class="bc-arrow">→</div>
+        <span class="bc-tag">Destacado · Live</span>
+        <h3 class="bc-title">Agente Comercial IA</h3>
+        <p class="bc-desc">Asistente con OpenAI sobre Vercel Edge que cualifica leads en tiempo real. Esta web lo usa — pruébalo abajo.</p>
+        <div class="bc-stack"><span>OpenAI GPT-4o</span><span>Edge Runtime</span><span>Streaming</span></div>
       </a>
-
-      <a class="bento bento-2 tilt" href="#roi">
-        <div class="bento-arrow">→</div>
-        <span class="bento-icon">📊</span>
-        <span class="bento-tag">Interactivo</span>
-        <h3 class="bento-title">Calculadora de ROI</h3>
-        <p class="bento-desc">Lógica financiera en tiempo real con sliders. UX que convierte visitantes en leads cualificados.</p>
-        <div class="bento-stack"><span>Vanilla JS</span><span>UX</span></div>
+      <a class="bc bc-client tilt" href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener">
+        <div class="bc-arrow">▶</div>
+        <span class="bc-tag">Real · Vídeo</span>
+        <h3 class="bc-title">Jesús — Clínica Dental</h3>
+        <p class="bc-desc">Automatización para clínica con sedes en Madrid y Valladolid. Activo en producción.</p>
+        <div class="bc-stack"><span>WhatsApp</span><span>n8n</span><span>OpenAI</span></div>
       </a>
-
-      <a class="bento bento-3 tilt" href="#services">
-        <div class="bento-arrow">→</div>
-        <div class="bento-mini-viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="bento-tag">Automatización</span>
-        <h3 class="bento-title">Pipelines n8n</h3>
-        <p class="bento-desc">Flujos CRM ↔ WhatsApp ↔ Stripe ↔ Email. Un evento dispara la cadena completa.</p>
-        <div class="bento-stack"><span>n8n</span><span>Webhooks</span><span>REST</span></div>
+      <a class="bc bc-2 tilt" href="#roi">
+        <div class="bc-mini-viz" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <span class="bc-tag">Interactivo</span>
+        <h3 class="bc-title">Calculadora de ROI</h3>
+        <p class="bc-desc">Lógica financiera en tiempo real. UX que convierte visitantes en leads.</p>
+        <div class="bc-stack"><span>Vanilla JS</span><span>UX</span></div>
       </a>
-
-      <a class="bento bento-4 tilt" href="#services">
-        <div class="bento-arrow">→</div>
-        <span class="bento-icon">⚡</span>
-        <span class="bento-tag">Full-stack</span>
-        <h3 class="bento-title">Dashboards Next.js 14</h3>
-        <p class="bento-desc">App Router, Server Components y Supabase realtime. 100/100 Lighthouse out of the box.</p>
-        <div class="bento-stack"><span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>Tailwind</span></div>
+      <a class="bc bc-3 tilt" href="#services">
+        <span class="bc-icon">🔀</span>
+        <span class="bc-tag">Automatización</span>
+        <h3 class="bc-title">Pipelines n8n</h3>
+        <p class="bc-desc">CRM ↔ WhatsApp ↔ Stripe ↔ Email. Un evento dispara la cadena completa.</p>
+        <div class="bc-stack"><span>n8n</span><span>Webhooks</span><span>REST</span></div>
       </a>
-
-      <a class="bento bento-5 tilt" href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener">
-        <div class="bento-arrow">▶</div>
-        <span class="bento-icon">🦷</span>
-        <span class="bento-tag" style="background:linear-gradient(135deg,#6366f1,#a855f7);color:#fff;border-color:transparent">Cliente real · Vídeo</span>
-        <h3 class="bento-title">Clínica Dental — Jesús</h3>
-        <p class="bento-desc">Automatización para clínica con sedes en Madrid y Valladolid. Activo y en mejora.</p>
-        <div class="bento-stack"><span>WhatsApp</span><span>n8n</span><span>OpenAI</span></div>
+      <a class="bc bc-4 tilt" href="#services">
+        <span class="bc-icon">⚡</span>
+        <span class="bc-tag">Full-stack</span>
+        <h3 class="bc-title">Dashboards Next.js</h3>
+        <p class="bc-desc">App Router + Supabase realtime. 100/100 Lighthouse.</p>
+        <div class="bc-stack"><span>Next.js 14</span><span>TypeScript</span></div>
       </a>
-
-      <a class="bento bento-6 tilt" href="#playground">
-        <div class="bento-arrow">→</div>
-        <span class="bento-icon">🤖</span>
-        <span class="bento-tag">RAG</span>
-        <h3 class="bento-title">Agentes con memoria</h3>
-        <p class="bento-desc">LangChain + vector DB para soporte contextual.</p>
-        <div class="bento-stack"><span>LangChain</span><span>pgvector</span></div>
+      <a class="bc bc-5 tilt" href="#services">
+        <span class="bc-icon">🧠</span>
+        <span class="bc-tag">RAG</span>
+        <h3 class="bc-title">Agentes con memoria</h3>
+        <p class="bc-desc">LangChain + vector DB para soporte con contexto real.</p>
+        <div class="bc-stack"><span>LangChain</span><span>pgvector</span></div>
       </a>
-
-      <a class="bento bento-7 tilt" href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">
-        <div class="bento-arrow">↗</div>
-        <span class="bento-icon">🛠️</span>
-        <span class="bento-tag">Open Source</span>
-        <h3 class="bento-title">Más en GitHub</h3>
-        <p class="bento-desc">Repos, experimentos y prototipos.</p>
-        <div class="bento-stack"><span>Python</span><span>Java</span><span>JS</span></div>
+      <a class="bc bc-6 tilt" href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">
+        <span class="bc-icon">🛠</span>
+        <span class="bc-tag">Open source</span>
+        <h3 class="bc-title">Más en GitHub</h3>
+        <p class="bc-desc">Repos públicos, experimentos y prototipos.</p>
+        <div class="bc-stack"><span>Python</span><span>Java</span><span>JS</span></div>
       </a>
-
     </div>
   </div>
 </section>
 
-<section id="skills" class="section">
+<!-- CHAT DEMO -->
+<section id="playground">
   <div class="w">
-    <div class="rv" style="text-align:center;max-width:640px;margin:0 auto">
-      <div class="eyebrow" style="margin:0 auto 12px">Stack técnico</div>
-      <h2 class="h2-d">Tecnologías que domino<br>en el día a día</h2>
-      <p class="s-lead" style="margin:12px auto 0">Las herramientas que uso para diseñar, construir y desplegar sistemas que funcionan en producción.</p>
+    <div class="pg-grid">
+      <div>
+        <div class="rv"><div class="sec-kicker">Demo en vivo</div></div>
+        <h2 class="pg-h rv">Habla con el<br>agente. Ve cómo<br>funciona.</h2>
+        <p class="pg-sub rv" data-d="1">Esta demo muestra exactamente el patrón que implemento en proyectos reales: Edge Runtime, streaming token a token y prompt engineering a nivel comercial.</p>
+        <div class="code-box rv" data-d="1">
+<span class="cm">// api/chat.js — Vercel Edge Function</span>
+<span class="kw">export default async function</span> <span class="fn">handler</span>(req, res) {
+  <span class="kw">const</span> { message } = req.body
+  <span class="kw">const</span> response = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">'openai/v1/chat'</span>, {
+    body: <span class="fn">JSON.stringify</span>({
+      model: <span class="str">'gpt-4o-mini'</span>,
+      messages: [system, { role: <span class="str">'user'</span>, content: message }]
+    })
+  })
+  <span class="kw">const</span> data = <span class="kw">await</span> response.<span class="fn">json</span>()
+  res.<span class="fn">status</span>(<span class="str">200</span>).<span class="fn">json</span>({ text: data.choices[<span class="str">0</span>].message.content })
+}</div>
+        <div class="pg-chips rv" data-d="2">
+          <div class="pg-chip">⚡ Edge Runtime</div>
+          <div class="pg-chip">🌊 Streaming real</div>
+          <div class="pg-chip">🧠 Prompt engineering</div>
+          <div class="pg-chip">🔒 API keys seguras</div>
+        </div>
+      </div>
+      <div class="rv" data-d="2">
+        <div class="chat-card">
+          <div class="chat-hd">
+            <div class="chat-av"><img src="/assets/letra-n.png" alt="" width="24"></div>
+            <div>
+              <div class="chat-nm">Asistente IA de Naim</div>
+              <div class="chat-st" id="cSt">En línea ahora</div>
+            </div>
+          </div>
+          <div class="chat-msgs" id="cMsgs" role="log" aria-live="polite">
+            <div class="msg b">
+              <div class="m-av bot">🤖</div>
+              <div class="bbl">¡Hola! 👋 Soy el asistente de Naim. Cuéntame sobre tu empresa, ¿qué procesos os consumen más tiempo actualmente?</div>
+            </div>
+          </div>
+          <div class="chat-opts" id="cOpts">
+            <button class="co" onclick="cs('¿Qué servicios ofreces?')">💡 Servicios</button>
+            <button class="co" onclick="cs('¿Cuánto cuesta trabajar contigo?')">💰 Precios</button>
+            <button class="co" onclick="cs('¿Qué tecnologías usas?')">⚡ Stack</button>
+            <button class="co" onclick="cs('Cuéntame sobre el caso de Jesús')">🦷 Caso real</button>
+          </div>
+          <div class="chat-in-r">
+            <input class="ci" id="cIn" type="text" placeholder="Escribe aquí..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();cSend()}">
+            <button class="cs" id="cBtn" onclick="cSend()" aria-label="Enviar">↑</button>
+          </div>
+          <div class="chat-footer-bar">🔒 GPT-4o-mini · Vercel Edge · API key server-side</div>
+        </div>
+      </div>
     </div>
-    <div class="skill-cats rv" data-d="1">
-      <button class="sc-tab active" data-cat="all">Todo</button>
-      <button class="sc-tab" data-cat="ai">IA & Agentes</button>
-      <button class="sc-tab" data-cat="frontend">Frontend</button>
-      <button class="sc-tab" data-cat="backend">Backend</button>
-      <button class="sc-tab" data-cat="data">Datos</button>
-      <button class="sc-tab" data-cat="ops">DevOps</button>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="w">
+    <div class="rv"><div class="sec-kicker light">Stack técnico</div></div>
+    <h2 class="skills-h rv">Tecnologías que<br>domino en producción.</h2>
+    <p class="skills-sub rv" data-d="1">Herramientas probadas en proyectos reales, no en tutoriales.</p>
+    <div class="skill-tabs rv" data-d="1">
+      <button class="sk-tab active" data-cat="all">Todo</button>
+      <button class="sk-tab" data-cat="ai">IA & Agentes</button>
+      <button class="sk-tab" data-cat="frontend">Frontend</button>
+      <button class="sk-tab" data-cat="backend">Backend</button>
+      <button class="sk-tab" data-cat="data">Datos</button>
+      <button class="sk-tab" data-cat="ops">DevOps</button>
     </div>
     <div class="skills-pool rv" data-d="2" id="skillsPool">
       <span class="skill-chip show" data-cat="ai"><span class="si">AI</span><span class="sn">OpenAI API</span></span>
@@ -383,7 +424,6 @@
       <span class="skill-chip show" data-cat="ai"><span class="si">RAG</span><span class="sn">Vector DBs</span></span>
       <span class="skill-chip show" data-cat="ai"><span class="si">N8</span><span class="sn">n8n</span></span>
       <span class="skill-chip show" data-cat="ai"><span class="si">AG</span><span class="sn">AI Agents</span></span>
-
       <span class="skill-chip show" data-cat="frontend"><span class="si">Nx</span><span class="sn">Next.js 14</span></span>
       <span class="skill-chip show" data-cat="frontend"><span class="si">TS</span><span class="sn">TypeScript</span></span>
       <span class="skill-chip show" data-cat="frontend"><span class="si">R</span><span class="sn">React</span></span>
@@ -391,349 +431,187 @@
       <span class="skill-chip show" data-cat="frontend"><span class="si">SC</span><span class="sn">shadcn/ui</span></span>
       <span class="skill-chip show" data-cat="frontend"><span class="si">JS</span><span class="sn">JavaScript</span></span>
       <span class="skill-chip show" data-cat="frontend"><span class="si">{}</span><span class="sn">HTML5 & CSS3</span></span>
-
       <span class="skill-chip show" data-cat="backend"><span class="si">Nd</span><span class="sn">Node.js</span></span>
       <span class="skill-chip show" data-cat="backend"><span class="si">Py</span><span class="sn">Python</span></span>
       <span class="skill-chip show" data-cat="backend"><span class="si">Jv</span><span class="sn">Java</span></span>
       <span class="skill-chip show" data-cat="backend"><span class="si">Ed</span><span class="sn">Edge Functions</span></span>
       <span class="skill-chip show" data-cat="backend"><span class="si">RT</span><span class="sn">REST APIs</span></span>
-      <span class="skill-chip show" data-cat="backend"><span class="si">WS</span><span class="sn">WebSockets</span></span>
-
       <span class="skill-chip show" data-cat="data"><span class="si">Sb</span><span class="sn">Supabase</span></span>
       <span class="skill-chip show" data-cat="data"><span class="si">PG</span><span class="sn">PostgreSQL</span></span>
       <span class="skill-chip show" data-cat="data"><span class="si">My</span><span class="sn">MySQL</span></span>
       <span class="skill-chip show" data-cat="data"><span class="si">RD</span><span class="sn">Redis</span></span>
-
       <span class="skill-chip show" data-cat="ops"><span class="si">Vc</span><span class="sn">Vercel</span></span>
       <span class="skill-chip show" data-cat="ops"><span class="si">Gh</span><span class="sn">GitHub Actions</span></span>
       <span class="skill-chip show" data-cat="ops"><span class="si">Dk</span><span class="sn">Docker</span></span>
-      <span class="skill-chip show" data-cat="ops"><span class="si">Lx</span><span class="sn">Linux</span></span>
       <span class="skill-chip show" data-cat="ops"><span class="si">CI</span><span class="sn">CI/CD</span></span>
     </div>
   </div>
 </section>
 
-<section id="testimonials" class="section">
+<!-- TESTIMONIALS -->
+<section id="testimonials">
   <div class="w">
-    <div class="rv" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
-      <div><div class="eyebrow">Lo que dicen</div><h2 class="h2-d">Resultados en sus<br>propias palabras</h2></div>
-      <p style="font-size:13px;color:var(--ink-3);max-width:260px;line-height:1.7;font-family:var(--f-mono)">Identidades anonimizadas por acuerdo de confidencialidad.</p>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card rv" data-d="1" style="border:1px solid var(--blue-bd);box-shadow:0 12px 32px rgba(99,102,241,.10)">
-        <div style="display:flex;align-items:center;gap:8px"><div class="testi-stars">★★★★★</div><span style="font-family:var(--f-mono);font-size:10px;font-weight:700;color:#fff;background:linear-gradient(135deg,#6366f1,#a855f7);padding:3px 8px;border-radius:20px;letter-spacing:.05em">VÍDEO REAL</span></div>
-        <div class="testi-quote">Caso real, en activo. Jesús cuenta en vídeo cómo trabajamos en su clínica dental con sedes en Madrid y Valladolid.</div>
-        <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:9px;padding:9px 14px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:#fff;border-radius:30px;font-size:12px;font-weight:600;text-decoration:none;align-self:flex-start;box-shadow:0 6px 18px rgba(99,102,241,.3);transition:transform .2s">▶ Ver vídeo del cliente</a>
-        <div class="testi-author">
-          <div class="testi-av" style="background:linear-gradient(135deg,#06b6d4,#3b82f6)">JD</div>
-          <div class="testi-info">
-            <div class="testi-name">Jesús</div>
-            <div class="testi-role">Director · Clínica Dental · Madrid + Valladolid</div>
-            <div class="testi-result">★ Cliente verificado en vídeo</div>
-          </div>
+    <h2 class="testi-h rv">Lo que dicen<br>quienes ya automatizaron.</h2>
+    <div class="testi-row">
+      <div class="testi-item rv" data-d="1">
+        <div>
+          <div class="tav">JD</div>
+          <div class="tname">Jesús</div>
+          <div class="trole">Director · Clínica Dental<br>Madrid + Valladolid</div>
+          <div class="tverified">▶ Ver vídeo</div>
+        </div>
+        <div>
+          <div class="tstars">★★★★★</div>
+          <blockquote class="tquote">Caso real, en activo. Jesús cuenta en vídeo cómo trabajamos en su clínica dental con sedes en Madrid y Valladolid.</blockquote>
+          <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" class="tvid-btn">
+            <span class="tvid-play">▶</span> Ver el vídeo completo
+          </a>
         </div>
       </div>
-      <div class="testi-card rv" data-d="2">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">Teníamos miedo de que la automatización fuera fría. El resultado fue lo contrario: la conversión subió un 340% porque los mensajes eran más personalizados que antes.</div>
-        <div class="testi-author">
-          <div class="testi-av">CR</div>
-          <div class="testi-info">
-            <div class="testi-name">C. Rodríguez</div>
-            <div class="testi-role">CEO · E-commerce · España</div>
-            <div class="testi-result">↑ +340% conversión de leads</div>
-          </div>
+      <div class="testi-item rv" data-d="2">
+        <div>
+          <div class="tav">CR</div>
+          <div class="tname">C. Rodríguez</div>
+          <div class="trole">CEO · E-commerce · España</div>
+          <div class="tresult">+340% conversión leads</div>
+        </div>
+        <div>
+          <div class="tstars">★★★★★</div>
+          <blockquote class="tquote">"Teníamos miedo de que la automatización fuera fría. El resultado fue lo contrario: la conversión subió un 340% porque los mensajes eran más personalizados que antes."</blockquote>
         </div>
       </div>
-      <div class="testi-card rv" data-d="1">
-        <div class="testi-stars">★★★★★</div>
-        <div class="testi-quote">El piloto costó 3.200€. El primer mes recuperamos la inversión. Hoy es imposible imaginar al equipo sin estos sistemas. El ROI real supera el 10x.</div>
-        <div class="testi-author">
-          <div class="testi-av">AM</div>
-          <div class="testi-info">
-            <div class="testi-name">A. Martínez</div>
-            <div class="testi-role">Socio · Consultoría · Remoto</div>
-            <div class="testi-result">↑ ROI 10x en mes 1</div>
-          </div>
+      <div class="testi-item rv" data-d="1">
+        <div>
+          <div class="tav">AM</div>
+          <div class="tname">A. Martínez</div>
+          <div class="trole">Socio · Consultoría · Remoto</div>
+          <div class="tresult">ROI 10x en mes 1</div>
+        </div>
+        <div>
+          <div class="tstars">★★★★★</div>
+          <blockquote class="tquote">"El piloto costó 3.200€. El primer mes recuperamos la inversión. Hoy es imposible imaginar al equipo sin estos sistemas."</blockquote>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section id="process" class="section">
+<!-- FAQ -->
+<section id="faq">
   <div class="w">
-    <div class="rv"><div class="eyebrow">Cómo Trabajo</div><h2 class="h2-d">Sin cajas negras,<br>sin sorpresas</h2></div>
-    <div class="proc-accordion rv" data-d="1">
-      <div class="proc-item-acc open">
-        <div class="proc-header">
-          <div class="proc-num-badge">01</div>
-          <div class="proc-header-text">
-            <div class="proc-badge-acc">Semana 1</div>
-            <div class="proc-title">Descubrimiento</div>
-          </div>
-          <div class="proc-toggle">▼</div>
-        </div>
-        <div class="proc-content-item">
-          <div class="proc-desc">Auditoría de procesos, cuellos de botella y estimación de ROI real.</div>
-          <div class="proc-items">
-            <div class="proc-item">Entrevistas con el equipo</div>
-            <div class="proc-item">Mapeo de flujos</div>
-            <div class="proc-item">Propuesta técnica</div>
-          </div>
-        </div>
+    <h2 class="faq-h rv">Todo lo que necesitas<br>saber antes de llamar.</h2>
+    <div class="faq-list rv" data-d="1">
+      <div class="faq-item open">
+        <button class="faq-q">¿Cuánto cuesta trabajar contigo? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">El diagnóstico inicial es <strong>100% gratuito y sin compromiso</strong>. El piloto parte desde <strong>2.500€</strong> con entregable claro y precio cerrado desde el día uno. Sin sorpresas al final del mes.</div></div>
       </div>
-      <div class="proc-item-acc">
-        <div class="proc-header">
-          <div class="proc-num-badge">02</div>
-          <div class="proc-header-text">
-            <div class="proc-badge-acc">Semana 2–3</div>
-            <div class="proc-title">Piloto</div>
-          </div>
-          <div class="proc-toggle">▼</div>
-        </div>
-        <div class="proc-content-item">
-          <div class="proc-desc">MVP funcional en 72h. Real, medible y ajustable desde el primer día.</div>
-          <div class="proc-items">
-            <div class="proc-item">Prototipo en 72h</div>
-            <div class="proc-item">Iteración rápida</div>
-            <div class="proc-item">Métricas desde día 1</div>
-          </div>
-        </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Cuánto tiempo hasta ver resultados? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">El primer prototipo funcional está listo en <strong>72 horas</strong>. El ROI es medible desde <strong>el mes 1</strong>. No trabajo con proyectos que tardan meses en dar señal de vida.</div></div>
       </div>
-      <div class="proc-item-acc">
-        <div class="proc-header">
-          <div class="proc-num-badge">03</div>
-          <div class="proc-header-text">
-            <div class="proc-badge-acc">Semana 4+</div>
-            <div class="proc-title">Implementación</div>
-          </div>
-          <div class="proc-toggle">▼</div>
-        </div>
-        <div class="proc-content-item">
-          <div class="proc-desc">Deploy, formación del equipo y monitoreo continuo. El sistema mejora con el tiempo.</div>
-          <div class="proc-items">
-            <div class="proc-item">Deploy en producción</div>
-            <div class="proc-item">Formación del equipo</div>
-            <div class="proc-item">Soporte continuo</div>
-          </div>
-        </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Funciona en mi sector? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">He implementado en <strong>SaaS B2B, e-commerce, consultoría, servicios profesionales y salud</strong>. Si tienes tareas manuales repetitivas y datos que fluyen entre herramientas, hay ROI.</div></div>
       </div>
-      <div class="proc-item-acc">
-        <div class="proc-header">
-          <div class="proc-num-badge">04</div>
-          <div class="proc-header-text">
-            <div class="proc-badge-acc">Ongoing</div>
-            <div class="proc-title">Optimización</div>
-          </div>
-          <div class="proc-toggle">▼</div>
-        </div>
-        <div class="proc-content-item">
-          <div class="proc-desc">El sistema aprende y mejora cada semana. Ajustamos prompts, flujos y KPIs según los datos reales.</div>
-          <div class="proc-items">
-            <div class="proc-item">Monitoreo de KPIs</div>
-            <div class="proc-item">Ajuste de prompts y flujos</div>
-            <div class="proc-item">Expansión a nuevos procesos</div>
-          </div>
-        </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Necesito equipo técnico interno? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner"><strong>No.</strong> Me encargo de todo: diseño, desarrollo, deploy y formación. Tu equipo aprende a usar el sistema, no a mantenerlo.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Y si no funciona o no me convence? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Si en el diagnóstico gratuito no identificamos <strong>al menos 3 ineficiencias concretas</strong> con ahorro estimado, no hay propuesta. Sin presión, sin coste.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">¿Integras mis herramientas actuales? <span class="faq-q-icon">+</span></button>
+        <div class="faq-a"><div class="faq-a-inner">Sí. <strong>CRM, ERP, WhatsApp, email, calendarios, facturación.</strong> No te pido que cambies lo que ya funciona, sino que lo conectes para que fluya automáticamente.</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section id="faq" class="section">
+<!-- LEAD MAGNET -->
+<section id="lead-magnet">
   <div class="w">
-    <div class="rv" style="text-align:center;max-width:600px;margin:0 auto 0">
-      <div class="eyebrow" style="margin:0 auto 12px">Preguntas Frecuentes</div>
-      <h2 class="h2-d">Todo lo que necesitas saber<br>antes de llamar</h2>
-      <p class="s-lead" style="margin:10px auto 0">Las dudas más habituales resueltas con honestidad.</p>
+    <div class="lm-inner rv">
+      <span class="lm-tag">Recurso gratuito</span>
+      <h2 class="lm-h">Auditoría de Eficiencia Operativa</h2>
+      <p class="lm-p">Detecta los 5 puntos donde tu operativa pierde más de <strong>60.000€ al año</strong>.</p>
+      <form class="lm-form" id="checklist-form">
+        <input class="lm-input" type="email" id="lead-email" placeholder="Tu email profesional" required>
+        <button class="lm-btn" type="submit" id="lead-btn">Descargar PDF →</button>
+      </form>
+      <p class="lm-note">Sin spam · Acceso instantáneo · PDF directo</p>
     </div>
-    <div class="faq-grid rv" data-d="1" style="margin-top:40px">
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Cuánto cuesta trabajar contigo?</div>
-        <div class="faq-a">El diagnóstico inicial es <strong>100% gratuito y sin compromiso</strong>. El piloto parte de <strong>2.500€</strong> con entregable claro y coste cerrado desde el primer día. Sin sorpresas al final del mes.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Funciona en mi sector?</div>
-        <div class="faq-a">Sí. He implementado sistemas en <strong>SaaS B2B, e-commerce, consultoría y servicios profesionales</strong>. Si tienes tareas manuales repetitivas y datos que fluyen entre herramientas, hay ROI.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Cuánto tiempo hasta ver resultados?</div>
-        <div class="faq-a">El primer prototipo funcional está listo en <strong>72 horas</strong>. El ROI es medible desde <strong>el mes 1</strong>. No trabajo con proyectos que tardan meses en dar señal de vida.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Y si no funciona o no me convence?</div>
-        <div class="faq-a">Si en el diagnóstico gratuito no identificamos <strong>al menos 3 ineficiencias concretas</strong> con ahorro estimado, no hay propuesta. Sin presión, sin coste. Mi reputación depende de resultados reales.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Necesito tener equipo técnico interno?</div>
-        <div class="faq-a"><strong>No.</strong> Me encargo de todo: diseño, desarrollo, deploy y formación. Tu equipo aprende a usar el sistema, no a mantenerlo. Yo me quedo disponible para soporte continuo.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-tag">Q</span>¿Y mis herramientas actuales?</div>
-        <div class="faq-a">Las integro. <strong>CRM, ERP, WhatsApp, email, calendarios, facturación.</strong> No te pido que cambies lo que ya funciona, sino que lo conectes para que fluya automáticamente.</div>
-      </div>
-    </div>
-    <div style="text-align:center;margin-top:36px" class="rv">
-      <p style="font-size:14px;color:var(--ink-3);margin-bottom:16px">¿Tienes otra pregunta? El diagnóstico es gratuito.</p>
-      <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="btn-p" style="display:inline-block;padding:13px 28px;text-decoration:none">Reservar diagnóstico gratis →</a>
+    <div id="lm-form-area" style="display:none"></div>
+    <div id="lm-success" style="display:none;text-align:center;padding:40px 0">
+      <div style="font-size:48px;margin-bottom:16px">📄</div>
+      <h3 style="font-family:var(--f-display);font-size:28px;color:var(--ink);margin-bottom:12px">Documento listo</h3>
+      <p style="color:var(--ink-2);margin-bottom:24px">Tu Auditoría ya está disponible.</p>
+      <a id="download-link" href="#" style="display:inline-block;padding:14px 32px;background:var(--ink);color:var(--white);border-radius:14px;font-weight:600;text-decoration:none">Abrir Auditoría (PDF)</a>
     </div>
   </div>
 </section>
 
-<hr class="rule">
-
-<section id="playground" class="section">
+<!-- CONTACT CTA -->
+<section id="contact">
   <div class="w">
-    <div class="rv" style="margin-bottom:40px">
-        <div class="pg-badge-live">🤖 AI Naim — Demo Interactiva</div>
-        <h2 class="pg-h2">Habla con el agente.<br>Ve cómo funciona.</h2>
-        <p class="pg-desc" style="max-width:600px">Esta demo muestra cómo construyo sistemas de IA conversacional: streaming token a token, manejo de estados y prompt engineering — el mismo patrón que implemento en proyectos reales.</p>
-    <div class="pg-grid">
-      <div class="pg-info rv">
-        <div class="code-box">
-<span class="cm">// app/api/chat/route.ts — Edge Runtime</span>
-<span class="kw">export const</span> runtime = <span class="str">'edge'</span>
-
-<span class="kw">export async function</span> <span class="fn">POST</span>(req: Request) {
-  <span class="kw">const</span> { messages } = <span class="kw">await</span> req.json()
-  <span class="cm">// System prompt inyectado server-side</span>
-  <span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">streamText</span>({
-    model: <span class="fn">openai</span>(<span class="str">'gpt-4o-mini'</span>),
-    system: SYSTEM_PROMPT, messages,
-  })
-  <span class="kw">return</span> result.<span class="fn">toAIStreamResponse</span>()
-}</div>
-        <div class="pg-pills">
-          <div class="pg-pill">⚡ Edge Runtime</div>
-          <div class="pg-pill">🌊 Streaming real</div>
-          <div class="pg-pill">🧠 Prompt engineering</div>
-          <div class="pg-pill">💾 Historial de sesión</div>
-        </div>
-        <div style="margin-top:18px;padding:14px 16px;background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:8px;border-left:3px solid var(--blue)">
-          <p style="font-size:13px;color:var(--ink-2);line-height:1.6;margin:0">🔒 <strong>Seguridad primero:</strong> El <code style="background:var(--stone);padding:1px 4px;border-radius:3px;font-family:var(--f-mono);font-size:11px">SYSTEM_PROMPT</code> con contexto empresarial se inyecta únicamente en el servidor — nunca expuesto al cliente. Las claves API viven exclusivamente en <code style="background:var(--stone);padding:1px 4px;border-radius:3px;font-family:var(--f-mono);font-size:11px">process.env</code>.</p>
-        </div>
+    <div class="ct-inner rv">
+      <div class="ct-pill">2 plazas disponibles este mes</div>
+      <h2 class="ct-h">Hablemos de<br><em>tu negocio.</em></h2>
+      <p class="ct-sub">30 minutos. Sin ventas agresivas. Te digo exactamente cuántas horas y euros estás perdiendo cada semana y cómo recuperarlos.</p>
+      <div class="ct-ctas">
+        <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" rel="noopener" class="btn-primary magnet">Reservar diagnóstico gratis →</a>
+        <a href="mailto:naimprincipal@gmail.com" class="btn-ghost">Escribir un email</a>
       </div>
-
-      <div class="rv" data-d="1">
-        <div class="chat-card">
-          <div class="chat-hd">
-            <div class="chat-av"><img src="letra-n.png" alt="" width="30px"></div>
-            <div><div class="chat-nm">Asistente IA de Naim</div><div class="chat-st" id="cSt">En línea ahora ✨</div></div>
-          </div>
-          <div class="chat-msgs" id="cMsgs" role="log" aria-live="polite">
-            <div class="msg b"><div class="m-av bot"><img src="letra-n.png" alt="" width="20px"></div><div class="bbl">¡Hola! 👋 Soy el asistente de Naim. Estoy aquí para ayudarte con preguntas sobre sus servicios de automatización con IA, procesos de trabajo, o cualquier duda que tengas sobre eficiencia operativa. ¿En qué puedo ayudarte hoy?</div></div>
-          </div>
-          <div class="chat-opts" id="cOpts">
-            <button class="co" onclick="cs('¿Qué servicios ofreces?')">💡 Servicios</button>
-            <button class="co" onclick="cs('¿Cuánto cuesta trabajar contigo?')">💰 Precios</button>
-            <button class="co" onclick="cs('¿Qué tecnologías usas?')">⚡ Tecnologías</button>
-            <button class="co" onclick="cs('Cuéntame sobre tu proceso')">🚀 Proceso</button>
-          </div>
-          <div class="chat-in-r">
-            <input class="ci" id="cIn" type="text" placeholder="Escribe tu mensaje aquí..." onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();cSend()}">
-            <button class="cs" id="cBtn" onclick="cSend()" aria-label="Enviar">✈️</button>
+      <div class="ct-trust">
+        <div class="ct-trust-item">Gratis y sin compromiso</div>
+        <div class="ct-trust-item">Respuesta en menos de 24h</div>
+        <div class="ct-trust-item">Sin permanencia</div>
+        <div class="ct-trust-item">Primer resultado en 72h</div>
+      </div>
+      <div class="ct-links">
+        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="ct-link">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" class="ct-link">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:naimprincipal@gmail.com" class="ct-link">
+          <svg width="16" height="16" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          naimprincipal@gmail.com
+        </a>
       </div>
     </div>
   </div>
 </section>
-
-<hr class="rule">
-
-<section id="contact" class="section">
-  <div class="w">
-    <div class="ct-wrap" style="gap: 42px;">
-      <div>
-        <div class="eyebrow rv">Trabaja con Naim</div>
-        <h2 class="h2-d rv" style="margin-bottom:12px">Hablemos de<br>tu negocio</h2>
-        <p class="s-lead rv">30 minutos. Sin ventas agresivas. Solo te digo exactamente cuántas horas y euros estás dejando sobre la mesa cada semana.</p>
-        <div class="ct-hl rv" style="border-left:3px solid var(--green);background:rgba(5,150,105,.05);border-color:rgba(5,150,105,.2)"><strong>¿Qué incluye el diagnóstico gratuito?</strong><br>Identifico tus 3 mayores ineficiencias, calculo el ahorro potencial real y te entrego una propuesta de piloto con coste fijo. Sin rodeos.</div>
-        <div class="c-links rv">
-          <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="cl"><span class="cl-ico email"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span>Email — naimprincipal@gmail.com</a>
-        </div>
-        <div class="contact-trust-row rv">
-          <div class="ctr-item">Gratis y sin compromiso</div>
-          <div class="ctr-item">Respuesta en &lt;24h</div>
-          <div class="ctr-item">Sin permanencia</div>
-        </div>
-      </div>
-      <div>
-        <div class="scarcity-box rv">
-          <div class="sc-dot"></div>
-          <div class="sc-text">
-            <strong>Solo quedan 2 plazas disponibles en abril 2026</strong><br>
-            Proyectos activos este mes: 1 de 3
-            <div class="sc-meter"><div class="sc-fill"></div></div>
-          </div>
-        </div>
-        <div class="fc-card rv" data-d="1" style="border: 2px solid var(--blue-2); background: var(--white); padding: 32px;">
-          <div class="hero-badge" style="margin-bottom: 14px; display: inline-flex;">Diagnóstico Gratuito · 30 min</div>
-          <h3 style="font-family:var(--f-display);font-size: 24px;font-weight: 800;letter-spacing: -0.03em;margin-bottom: 10px;">Auditoría de Eficiencia Operativa</h3>
-          <p style="font-size:14px;color:var(--ink-3);margin-bottom:16px;">Sales con un plan de acción claro o no te cobro nada:</p>
-          <ul style="margin-bottom:20px; padding-left:0; color: var(--ink-2); font-size: 14px; line-height: 1.8; list-style:none;">
-            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Mapa de tus 3 mayores cuellos de botella</li>
-            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Estimación de ahorro (tiempo + coste) verificada</li>
-            <li style="display:flex;gap:8px;align-items:flex-start"><span style="color:var(--green);font-weight:700;font-size:16px;line-height:1.4">✓</span> Propuesta de piloto: precio fijo, entregable claro</li>
-          </ul>
-          <a href="https://cal.com/naim-9mrnet/diagnostico-de-eficiencia" target="_blank" class="f-btn" style="display:block;width:100%;text-align:center;text-decoration:none;padding:16px;font-size:16px">Reservar mi plaza gratuita →</a>
-          <div class="guarantee-badge">
-            <div class="gb-icon">🛡️</div>
-            <div>
-              <div class="gb-title">Garantía de valor</div>
-              <div class="gb-text">Si no identificamos al menos 3 ineficiencias concretas en la sesión, no te propongo nada. Mi reputación depende de darte valor real.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ct-wrap" style="margin-top:40px;">
-      <div style="grid-column: 1 / -1;">
-        <div class="fc-card" id="lm-container" style="padding: 40px 30px; text-align: center; background: var(--white); border: 1px solid var(--stone-3);">
-          <div id="lm-form-area">
-            <div class="hero-badge" style="margin-bottom: 14px; display: inline-block;">Recurso Exclusivo</div>
-            <h2 style="font-family: var(--f-display); font-size: clamp(28px, 3.5vw, 40px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--ink); letter-spacing: -0.03em;">Auditoría de Eficiencia Operativa</h2>
-            <p style="color: var(--ink-2); font-size: 17px; line-height: 1.6; margin-bottom: 26px; max-width: 640px; margin: 0 auto;">Detecta los 5 puntos donde tu operativa está quemando <strong>más de 60.000€ al año</strong> en tareas manuales e ineficiencias de comunicación.</p>
-            <form id="checklist-form" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; max-width: 560px; margin: 0 auto;">
-              <input type="email" id="lead-email" placeholder="Tu email profesional" required style="flex: 1; min-width: 280px; padding: 14px; border-radius: 8px; border: 1px solid var(--stone-3); background: var(--white); color: var(--ink); font-family: var(--f-body); outline: none; font-size: 15px;">
-              <button type="submit" id="lead-btn" class="f-btn" style="margin: 0; padding: 14px 30px; font-weight: 700; font-size: 15px;">Descargar PDF →</button>
-            </form>
-            <p style="font-size: 12px; color: var(--ink-4); margin-top: 14px; font-family: var(--f-mono); opacity: 0.8;">PDF Directo · Sin Spam · Acceso instantáneo</p>
-          </div>
-          <div id="lm-success" style="display: none; padding: 30px 0;">
-            <div style="font-size: 52px; margin-bottom: 16px;">📄</div>
-            <h3 style="font-family: var(--f-display); font-size: 30px; color: var(--ink); margin-bottom: 12px;">Documento Listo</h3>
-            <p style="color: var(--ink-2); margin-bottom: 24px; font-size: 16px;">Tu Auditoría de Eficiencia ya está disponible para descarga.</p>
-            <a id="download-link" href="#" class="f-btn" style="display: inline-block; padding: 15px 36px; text-decoration: none; font-size: 16px;">Abrir Auditoría (PDF)</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
 
 <footer>
   <div class="w">
     <div class="ft-top">
       <div>
-        <div class="ft-logo">Naim<span> El Haddadi</span></div>
-        <div class="ft-domain">naimelhaddadi.com</div>
-        <p class="ft-tagline">Ingeniería de Eficiencia Operativa · IA + Desarrollo Web · Madrid &amp; Remoto</p>
+        <div class="ft-logo">Naim<span class="dot">.</span></div>
+        <p class="ft-tag">Ingeniería de Eficiencia Operativa<br>IA + Desarrollo Web · Madrid &amp; Remoto</p>
       </div>
       <div class="ft-links">
-        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener noreferrer" class="ftl social-github"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg> GitHub</a>
-        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener noreferrer" class="ftl social-linkedin"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg> LinkedIn</a>
-        <a href="mailto:naimprincipal@gmail.com" target="_blank" rel="noopener noreferrer" class="ftl social-email"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="margin-right:8px; vertical-align:middle;"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>Email</a>
+        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="ftl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" class="ftl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+          LinkedIn
+        </a>
+        <a href="mailto:naimprincipal@gmail.com" class="ftl">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          Email
+        </a>
       </div>
     </div>
     <div class="ft-bottom">
-      <span class="ft-copy">© 2026 Naim El Haddadi · naimelhaddadi.com · Todos los derechos reservados.</span>
+      <span class="ft-copy">© 2026 Naim El Haddadi · naimelhaddadi.com</span>
+      <span class="ft-copy">Next.js · TypeScript · OpenAI · n8n · Vercel</span>
     </div>
   </div>
 </footer>
