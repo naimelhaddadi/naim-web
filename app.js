@@ -148,47 +148,136 @@ function cs(text) {
   if (input) { input.value = text; cSend(); }
 }
 
+/* ---- WORD SPLITTER for headlines ---- */
+function splitWords(el) {
+  const walk = (node) => {
+    if (node.nodeType === 3) {
+      const parts = node.nodeValue.split(/(\s+)/).filter(Boolean);
+      const frag = document.createDocumentFragment();
+      parts.forEach(p => {
+        if (/^\s+$/.test(p)) {
+          frag.appendChild(document.createTextNode(' '));
+        } else {
+          const outer = document.createElement('span');
+          outer.className = 'w-word';
+          const inner = document.createElement('span');
+          inner.className = 'w-word-i';
+          inner.textContent = p;
+          outer.appendChild(inner);
+          frag.appendChild(outer);
+        }
+      });
+      node.parentNode.replaceChild(frag, node);
+    } else if (node.nodeType === 1 && node.tagName !== 'BR') {
+      [...node.childNodes].forEach(walk);
+    }
+  };
+  [...el.childNodes].forEach(walk);
+}
+
 /* ---- INIT ---- */
 document.addEventListener('DOMContentLoaded', () => {
   const M = window.Motion;
   const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const HEADLINE_SELECTOR = 'h1.hero-h1, .sec-h, .case-h, .roi-h, .pg-h, .faq-h, .proj-h, .ct-h';
 
-  /* Motion One: entrance + scroll reveals */
+  /* Pre-split headlines so CSS can hide words before JS runs animations */
+  document.querySelectorAll(HEADLINE_SELECTOR).forEach(splitWords);
+
   if (M && !reduce) {
-    const { animate, inView } = M;
+    const { animate, inView, scroll, stagger } = M;
     const SPRING = { duration: 0.9, easing: [0.22, 1, 0.36, 1] };
 
+    /* Headline word stagger (Prezi-style) */
+    document.querySelectorAll(HEADLINE_SELECTOR).forEach(h => {
+      const inners = h.querySelectorAll('.w-word-i');
+      const inHero = h.closest('#hero');
+      const run = () => animate(inners, { transform: ['translateY(110%)', 'translateY(0)'] },
+        { delay: stagger(0.05), duration: 1, easing: [0.22, 1, 0.36, 1] });
+      if (inHero) setTimeout(run, 200);
+      else inView(h, run, { margin: '0px 0px -15% 0px' });
+    });
+
+    /* Card zoom-in entrance — Prezi feel (excludes .bc, bento handles those) */
+    const ZOOM_SELECTOR = '.svc-card, .case-card, .roi-controls, .roi-result, .chat-card, .pg-chip, .case-video-btn';
+
+    /* Generic [data-anim] for non-headline, non-card copy */
     document.querySelectorAll('[data-anim]').forEach(el => {
+      if (el.matches(HEADLINE_SELECTOR)) return;
+      if (el.matches(ZOOM_SELECTOR)) return;
       const kind = el.dataset.anim;
       const delay = parseFloat(el.dataset.delay || '0');
       const inHero = el.closest('#hero');
-      const from = kind === 'fade-in'
-        ? { opacity: 0 }
-        : { opacity: 0, transform: 'translateY(28px)' };
       const to = kind === 'fade-in'
         ? { opacity: 1 }
         : { opacity: 1, transform: 'translateY(0)' };
-      Object.assign(el.style, from);
-      if (inHero) {
-        animate(el, to, { ...SPRING, delay });
-      } else {
-        inView(el, () => { animate(el, to, { ...SPRING, delay }); }, { margin: '0px 0px -10% 0px' });
-      }
+      if (inHero) animate(el, to, { ...SPRING, delay });
+      else inView(el, () => animate(el, to, { ...SPRING, delay }), { margin: '0px 0px -10% 0px' });
     });
 
-    /* Stagger bento cards on entry */
+    document.querySelectorAll(ZOOM_SELECTOR).forEach(card => {
+      Object.assign(card.style, {
+        opacity: 0,
+        transform: 'translateY(40px) scale(.92) rotateX(8deg)',
+        transformOrigin: '50% 100%',
+      });
+      inView(card, () => {
+        animate(card, {
+          opacity: 1,
+          transform: 'translateY(0) scale(1) rotateX(0deg)',
+        }, { duration: 0.95, easing: [0.22, 1, 0.36, 1] });
+      }, { margin: '0px 0px -12% 0px' });
+    });
+
+    /* Bento stagger override */
     const bento = document.querySelector('.bento');
     if (bento) {
       const cards = bento.querySelectorAll('.bc');
-      cards.forEach(c => Object.assign(c.style, { opacity: 0, transform: 'translateY(24px) scale(.98)' }));
       inView(bento, () => {
         cards.forEach((c, i) => {
-          animate(c, { opacity: 1, transform: 'translateY(0) scale(1)' }, { ...SPRING, delay: i * 0.08 });
+          animate(c, {
+            opacity: 1,
+            transform: 'translateY(0) scale(1) rotateX(0deg)',
+          }, { duration: 0.9, delay: i * 0.07, easing: [0.22, 1, 0.36, 1] });
         });
       }, { margin: '0px 0px -15% 0px' });
     }
+
+    /* Hero parallax — scroll-linked */
+    const hero = document.getElementById('hero');
+    if (hero) {
+      scroll(animate('.hero-photo-col', { y: [0, -120], scale: [1, 0.92] }),
+        { target: hero, offset: ['start start', 'end start'] });
+      scroll(animate('.hero-content', { y: [0, 80], opacity: [1, 0.3] }),
+        { target: hero, offset: ['start start', 'end start'] });
+      scroll(animate('.hero-bg b', { y: [0, -200] }),
+        { target: hero, offset: ['start start', 'end start'] });
+    }
+
+    /* ROI big number scale-up scrub */
+    const roiSection = document.getElementById('roi');
+    const roiResult = document.querySelector('.roi-result-n');
+    if (roiSection && roiResult) {
+      scroll(animate(roiResult, { scale: [0.85, 1.05, 1] }),
+        { target: roiSection, offset: ['start end', 'center center', 'end start'] });
+    }
+
+    /* Contact CTA: scrubbed zoom-in for that big finale */
+    const contact = document.getElementById('contact');
+    const cth = document.querySelector('.ct-h');
+    if (contact && cth) {
+      scroll(animate(cth, { scale: [0.78, 1], opacity: [0.6, 1] }),
+        { target: contact, offset: ['start end', 'center center'] });
+    }
   } else {
-    document.querySelectorAll('[data-anim]').forEach(el => { el.style.opacity = 1; });
+    /* Reduced motion: just show everything */
+    document.querySelectorAll('[data-anim], .w-word-i').forEach(el => {
+      el.style.opacity = 1;
+      el.style.transform = 'none';
+    });
+    document.querySelectorAll('.svc-card, .case-card, .roi-controls, .roi-result, .chat-card, .bc, .pg-chip').forEach(el => {
+      el.style.opacity = 1;
+    });
   }
 
   /* Scroll progress */
@@ -236,11 +325,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* Pause hero blob animation when scrolled away */
   const heroBlobs = document.querySelectorAll('.hero-bg b');
-  const hero = document.getElementById('hero');
-  if (hero && heroBlobs.length) {
+  const heroEl = document.getElementById('hero');
+  if (heroEl && heroBlobs.length) {
     new IntersectionObserver(([e]) => {
       heroBlobs.forEach(b => { b.style.animationPlayState = e.isIntersecting ? 'running' : 'paused'; });
-    }).observe(hero);
+    }).observe(heroEl);
   }
 
   /* Smooth scroll with nav offset */

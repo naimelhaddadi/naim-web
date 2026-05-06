@@ -45,9 +45,19 @@ body:hover .cursor-spot{opacity:1}
 @media(hover:none),(max-width:900px){.cursor-spot{display:none}}
 .tilt{transform-style:preserve-3d;transition:transform .18s ease-out;will-change:transform}
 .magnet{will-change:transform;transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-[data-anim]{opacity:0}
-.bento .bc{opacity:0}
-@media(prefers-reduced-motion:reduce){[data-anim],.bento .bc{opacity:1}}
+[data-anim]:not(.hero-h1):not(.sec-h):not(.case-h):not(.roi-h):not(.pg-h):not(.faq-h):not(.proj-h):not(.ct-h){opacity:0;transform:translateY(28px)}
+[data-anim][data-anim="fade-in"]{transform:none}
+.bento .bc,.svc-card,.case-card,.roi-controls,.roi-result,.chat-card,.pg-chip,.case-video-btn{opacity:0}
+.svc-grid,.case-grid,.roi-grid,.pg-grid,.bento{perspective:1200px}
+
+/* Word-stagger headline reveal (Prezi-style) */
+.w-word{display:inline-block;overflow:hidden;line-height:1;padding-bottom:.12em;margin-bottom:-.12em;vertical-align:bottom}
+.w-word-i{display:inline-block;transform:translateY(110%);will-change:transform}
+
+@media(prefers-reduced-motion:reduce){
+  [data-anim],.bento .bc,.svc-card,.case-card,.roi-controls,.roi-result,.chat-card,.pg-chip,.case-video-btn{opacity:1;transform:none}
+  .w-word-i{transform:none}
+}
 
 /* NAV */
 nav{
@@ -343,7 +353,32 @@ footer{background:var(--black);padding:24px 0;border-top:1px solid var(--dark-bo
 
 /* RESPONSIVE TIGHTENING */
 @media(max-width:768px){
+  body{font-size:15px}
+  .w{padding:0 22px}
   #services,#case,#roi,#projects,#playground,#faq,#contact{padding:72px 0}
-  .hero-proof{gap:24px}
-  .hp-n{font-size:26px}
+  h1.hero-h1{font-size:clamp(40px,10vw,64px);margin-bottom:20px}
+  .hero-sub{font-size:16px;margin-bottom:24px}
+  .hero-proof{gap:24px;margin-top:32px;padding-top:24px}
+  .hp-n{font-size:24px}
+  .hp-l{font-size:11px}
+  .sec-h,.case-h,.roi-h,.pg-h,.faq-h,.proj-h{font-size:clamp(28px,7.5vw,42px);margin-bottom:36px}
+  .ct-h{font-size:clamp(36px,9.5vw,64px);margin-bottom:18px}
+  .ct-sub{font-size:16px;margin-bottom:28px}
+  .case-p,.pg-sub{font-size:15px}
+  .roi-controls,.roi-result{padding:24px}
+  .case-card{padding:24px}
+  .bento{gap:8px;grid-auto-rows:auto}
+  .bc{padding:20px;min-height:140px}
+  .bc-feat .bc-title{font-size:22px}
+  .bc-title{font-size:18px}
+  .btn-primary,.btn-ghost{padding:12px 22px;font-size:15px}
+}
+@media(max-width:480px){
+  body{font-size:14.5px}
+  .w{padding:0 18px}
+  #services,#case,#roi,#projects,#playground,#faq,#contact{padding:60px 0}
+  .hero-proof{gap:20px}
+  .hp-n{font-size:22px}
+  .case-metrics .cm-v{font-size:16px}
+  .roi-result-n{font-size:clamp(48px,14vw,68px)}
 }
