@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* Card zoom-in entrance — Prezi feel (excludes .bc, bento handles those) */
-    const ZOOM_SELECTOR = '.svc-card, .case-card, .roi-controls, .roi-result, .chat-card, .pg-chip, .case-video-btn';
+    const ZOOM_SELECTOR = '.svc-card, .case-card, .roi-controls, .roi-result, .chat-card, .pg-chip, .case-video-btn, .tc-block, .tc-st-card';
 
     /* Generic [data-anim] for non-headline, non-card copy */
     document.querySelectorAll('[data-anim]').forEach(el => {
@@ -240,6 +240,28 @@ document.addEventListener('DOMContentLoaded', () => {
             transform: 'translateY(0) scale(1) rotateX(0deg)',
           }, { duration: 0.9, delay: i * 0.07, easing: [0.22, 1, 0.36, 1] });
         });
+      }, { margin: '0px 0px -15% 0px' });
+    }
+
+    /* Terminal lines — typewriter-style reveal */
+    const term = document.querySelector('.tc-terminal');
+    if (term) {
+      const lines = term.querySelectorAll('.tc-line');
+      lines.forEach(l => { l.style.opacity = '0'; l.style.transform = 'translateX(-6px)'; });
+      inView(term, () => {
+        animate(lines, { opacity: [0, 1], transform: ['translateX(-6px)', 'translateX(0)'] },
+          { delay: stagger(0.07), duration: 0.32, easing: 'ease-out' });
+      }, { margin: '0px 0px -20% 0px' });
+    }
+
+    /* Arch flow nodes — sequential light-up */
+    const archFlow = document.querySelector('.tc-arch-flow');
+    if (archFlow) {
+      const items = [...archFlow.children];
+      items.forEach(i => Object.assign(i.style, { opacity: '0', transform: 'translateY(16px) scale(.92)' }));
+      inView(archFlow, () => {
+        animate(items, { opacity: [0, 1], transform: ['translateY(16px) scale(.92)', 'translateY(0) scale(1)'] },
+          { delay: stagger(0.08), duration: 0.55, easing: [0.22, 1, 0.36, 1] });
       }, { margin: '0px 0px -15% 0px' });
     }
 
