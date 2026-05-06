@@ -95,34 +95,91 @@
   </div>
 </section>
 
-<!-- CASE: Jesús -->
+<!-- CASE: Technical -->
 <section id="case">
   <div class="w">
-    <div class="case-grid">
-      <div>
-        <div data-anim="fade-up"><div class="sec-kicker purple">Caso real · Vídeo</div></div>
-        <h2 class="case-h" data-anim="fade-up" data-delay="0.1">Clínica dental.<br>Dos ciudades.<br>Un sistema.</h2>
-        <p class="case-p" data-anim="fade-up" data-delay="0.2">Jesús dirige una clínica con sedes en Madrid y Valladolid. Automatizamos comunicaciones, seguimiento y agenda. Activo en producción.</p>
-        <div data-anim="fade-up" data-delay="0.3">
-          <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" class="case-video-btn magnet">
-            <span class="case-play">▶</span>
-            Jesús lo cuenta en vídeo
-          </a>
-        </div>
+    <div class="tc-head">
+      <div data-anim="fade-up"><div class="sec-kicker purple">▸ caso_técnico · producción</div></div>
+      <h2 class="case-h" data-anim="fade-up" data-delay="0.1">Middleware de Automatización<br>y Desacoplamiento de<br><em>Infraestructura Cloud-Native.</em></h2>
+      <p class="tc-lead" data-anim="fade-up" data-delay="0.2">Sistema en producción real. Clínica dental con sedes en Madrid y Valladolid — operativa crítica desacoplada del hardware del cliente y orquestada como microservicios.</p>
+    </div>
+
+    <div class="tc-terminal">
+      <div class="tc-term-bar">
+        <span class="tc-dot r"></span><span class="tc-dot y"></span><span class="tc-dot g"></span>
+        <span class="tc-term-title">naim@vps-hostinger:~$ system_status</span>
       </div>
-      <div data-anim="fade-up" data-delay="0.2">
-        <div class="case-card">
-          <div class="case-logo">JD</div>
-          <div class="case-name">Jesús — Clínica Dental</div>
-          <div class="case-loc">Madrid + Valladolid · Activo 2026</div>
-          <div class="case-metrics">
-            <div class="cm-item"><span class="cm-k">Estado</span><span class="cm-v">Activo ✓</span></div>
-            <div class="cm-item"><span class="cm-k">Sedes</span><span class="cm-v">2 clínicas</span></div>
-            <div class="cm-item"><span class="cm-k">Sector</span><span class="cm-v">Salud</span></div>
-          </div>
-          <div class="case-live-row"><div class="live-dot"></div>Sistema funcionando ahora mismo</div>
-        </div>
+      <div class="tc-term-body">
+        <div class="tc-line"><span class="tc-prompt">$</span> docker ps --filter status=running</div>
+        <div class="tc-line tc-out">CONTAINER         IMAGE                  STATUS</div>
+        <div class="tc-line tc-out"><span class="tc-ok">middleware-core</span>   spring-boot:21         <span class="tc-ok">Up 47d ✓</span></div>
+        <div class="tc-line tc-out"><span class="tc-ok">orchestrator</span>      n8nio/n8n:latest       <span class="tc-ok">Up 47d ✓</span></div>
+        <div class="tc-line tc-out"><span class="tc-ok">db-leads</span>          mysql:8.0              <span class="tc-ok">Up 47d ✓</span></div>
+        <div class="tc-line"><span class="tc-prompt">$</span> health --all</div>
+        <div class="tc-line tc-out">→ eSIM gateway · <span class="tc-hl">CONNECTED</span></div>
+        <div class="tc-line tc-out">→ WhatsApp Cloud API · <span class="tc-hl">200 OK</span></div>
+        <div class="tc-line tc-out">→ MySQL persistence · <span class="tc-hl">SYNCED</span></div>
+        <div class="tc-line"><span class="tc-prompt">$</span><span class="tc-cursor"></span></div>
       </div>
+    </div>
+
+    <div class="tc-arch">
+      <div class="tc-arch-title">// pipeline de eventos</div>
+      <div class="tc-arch-flow">
+        <div class="tc-node"><div class="tc-node-i">📱</div><div class="tc-node-l">WhatsApp<br>Cloud API</div></div>
+        <div class="tc-arrow">→</div>
+        <div class="tc-node"><div class="tc-node-i">🔗</div><div class="tc-node-l">eSIM<br>Gateway</div></div>
+        <div class="tc-arrow">→</div>
+        <div class="tc-node tc-node-hi"><div class="tc-node-i">🖥</div><div class="tc-node-l">VPS Hostinger<br>+ Docker</div></div>
+        <div class="tc-arrow">→</div>
+        <div class="tc-node"><div class="tc-node-i">⚙</div><div class="tc-node-l">n8n<br>Orchestrator</div></div>
+        <div class="tc-arrow">→</div>
+        <div class="tc-node"><div class="tc-node-i">☕</div><div class="tc-node-l">Spring Boot<br>Java 21</div></div>
+        <div class="tc-arrow">→</div>
+        <div class="tc-node tc-node-db"><div class="tc-node-i">🗄</div><div class="tc-node-l">MySQL 8<br>persistence</div></div>
+      </div>
+    </div>
+
+    <div class="tc-blocks">
+      <article class="tc-block">
+        <div class="tc-block-num">01</div>
+        <h3 class="tc-block-h">Contexto técnico</h3>
+        <p class="tc-block-p">Eliminar el acoplamiento entre el hardware físico (móvil personal del cliente) y la operativa de negocio. Implementé una <strong>identidad digital virtualizada vía eSIM</strong>, redirigiendo el tráfico de comunicaciones hacia un VPS gestionado con Docker — desacoplando el dispositivo del flujo crítico.</p>
+      </article>
+      <article class="tc-block">
+        <div class="tc-block-num">02</div>
+        <h3 class="tc-block-h">Arquitectura del sistema</h3>
+        <p class="tc-block-p">Ecosistema de microservicios con <strong>n8n como orquestador de eventos</strong>, ingiriendo señales de la WhatsApp Cloud API. El procesamiento de dominio recae en un backend en <strong>Spring Boot (Java 21)</strong>, expuesto vía REST y desplegado en contenedores Docker sobre VPS Hostinger.</p>
+      </article>
+      <article class="tc-block">
+        <div class="tc-block-num">03</div>
+        <h3 class="tc-block-h">Persistencia y seguridad</h3>
+        <p class="tc-block-p"><strong>MySQL 8</strong> como capa de persistencia de leads, con validación transaccional de integridad y constraints de unicidad. Aislamiento estricto del tráfico corporativo respecto al personal — cumplimiento de privacidad <em>by design</em>.</p>
+      </article>
+      <article class="tc-block">
+        <div class="tc-block-num">04</div>
+        <h3 class="tc-block-h">Desafío superado</h3>
+        <p class="tc-block-p">Sustitución de flujos manuales por <strong>procesos asíncronos 24/7</strong>: recuperación automática de leads y sincronización de agenda sin intervención humana. Operativo en producción con uptime sostenido superior a <code>99.5%</code>.</p>
+      </article>
+    </div>
+
+    <div class="tc-stack">
+      <div class="tc-stack-title">// stack en producción</div>
+      <div class="tc-stack-grid">
+        <div class="tc-st-card"><div class="tc-st-tag">Backend</div><div class="tc-st-name">Spring Boot</div><div class="tc-st-meta">Java 21 · REST</div></div>
+        <div class="tc-st-card"><div class="tc-st-tag">Infra</div><div class="tc-st-name">Docker</div><div class="tc-st-meta">VPS Hostinger</div></div>
+        <div class="tc-st-card"><div class="tc-st-tag">Orquestación</div><div class="tc-st-name">n8n</div><div class="tc-st-meta">Event-driven</div></div>
+        <div class="tc-st-card"><div class="tc-st-tag">Datos</div><div class="tc-st-name">MySQL 8</div><div class="tc-st-meta">Persistencia · ACID</div></div>
+        <div class="tc-st-card"><div class="tc-st-tag">Comunicación</div><div class="tc-st-name">REST API</div><div class="tc-st-meta">WhatsApp Cloud</div></div>
+        <div class="tc-st-card"><div class="tc-st-tag">Identidad</div><div class="tc-st-name">eSIM</div><div class="tc-st-meta">SIM virtualizada</div></div>
+      </div>
+    </div>
+
+    <div class="tc-cta" data-anim="fade-up">
+      <a href="https://1drv.ms/v/c/83c063d5955440bd/IQDUKZMzSAe0RaO1nwTD2UpuAdQ9XDvvSWPN0l5P0cz1E84?e=2onRjW" target="_blank" rel="noopener" class="case-video-btn magnet">
+        <span class="case-play">▶</span>
+        El cliente lo cuenta en vídeo
+      </a>
     </div>
   </div>
 </section>
