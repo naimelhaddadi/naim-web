@@ -16,6 +16,9 @@ window.addEventListener('DOMContentLoaded', () => {
   /* ---- Dotted Surface (Three.js animated grid) ---- */
   /* Skipped on touch devices and prefers-reduced-motion to save battery/GPU */
   const dottedHost = document.getElementById('dottedSurface');
+  if (dottedHost && !isMobile && !reduce && typeof THREE === 'undefined') {
+    console.warn('[dotted-surface] Three.js no se cargó desde CDN — fondo desactivado.');
+  }
   if (dottedHost && !isMobile && !reduce && typeof THREE !== 'undefined') {
     const SEPARATION = 150;
     const AMOUNTX = 40;
