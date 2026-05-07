@@ -36,11 +36,10 @@
   };
 </script>
 
-<!-- GSAP + ScrollTrigger + Vanilla Tilt + Three.js -->
+<!-- GSAP + ScrollTrigger + Vanilla Tilt -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
 
 <link rel="stylesheet" href="/style.css">
 </head>
@@ -56,9 +55,6 @@
       </linearGradient>
     </defs>
   </svg>
-
-  <!-- Dotted surface (Three.js animated grid, behind everything) -->
-  <div id="dottedSurface" class="dotted-surface" aria-hidden="true"></div>
 
   <!-- Ambient background orbs -->
   <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
@@ -98,12 +94,12 @@
 
       <!-- Left: text -->
       <div class="hero-text relative z-10">
-        <div class="hero-kicker inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-mono text-blue-300 mb-6">
+        <div class="hero-kicker inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-mono text-blue-300 mb-3">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           Disponible · Madrid &amp; Remoto
         </div>
 
-        <h1 class="hero-title font-display font-extrabold tracking-tight leading-[0.95] text-5xl sm:text-6xl lg:text-7xl mb-6">
+        <h1 class="hero-title font-display font-extrabold tracking-tight leading-[0.95] text-5xl sm:text-6xl lg:text-7xl mb-4">
           <span class="gradient-text" data-words>Naim El Haddadi</span>
         </h1>
 
