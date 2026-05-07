@@ -13,6 +13,33 @@ window.addEventListener('DOMContentLoaded', () => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = matchMedia('(max-width: 768px)').matches;
 
+  /* ---- Spline 3D scene: lazy-load only on desktop, on intersection ---- */
+  const splineHost = document.getElementById('splineHost');
+  const splineFallback = document.getElementById('splineFallback');
+  if (splineHost) {
+    if (isMobile) {
+      // Mobile gets a graceful static message — Spline scenes are heavy
+      if (splineFallback) {
+        splineFallback.innerHTML =
+          '<div class="text-center px-4"><div class="text-4xl mb-3">🎛</div>' +
+          '<div class="text-xs font-mono text-slate-500">Escena 3D disponible<br>en escritorio</div></div>';
+      }
+    } else {
+      // Defer scene creation until host is near viewport (saves initial JS / network)
+      const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(e => {
+          if (!e.isIntersecting) return;
+          const v = document.createElement('spline-viewer');
+          v.setAttribute('url', 'https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode');
+          v.addEventListener('load', () => splineFallback && splineFallback.remove());
+          splineHost.appendChild(v);
+          obs.disconnect();
+        });
+      }, { rootMargin: '300px 0px' });
+      io.observe(splineHost);
+    }
+  }
+
   /* ---- Scroll progress bar ---- */
   const sp = document.getElementById('scrollProgress');
   if (sp) {
