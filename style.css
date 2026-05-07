@@ -17,15 +17,13 @@ body { background: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 .bg-paths path {
   fill: none;
   stroke: currentColor;
-  stroke-dasharray: 240 1000;
-  animation: pathFlow var(--dur, 25s) linear infinite;
+  animation: pathPulse var(--dur, 25s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
-  will-change: stroke-dashoffset, opacity;
+  will-change: opacity;
 }
-@keyframes pathFlow {
-  0%   { stroke-dashoffset: 0;     opacity: 0.3; }
-  50%  { stroke-dashoffset: -620;  opacity: 0.6; }
-  100% { stroke-dashoffset: -1240; opacity: 0.3; }
+@keyframes pathPulse {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 0.7; }
 }
 @media (prefers-reduced-motion: reduce) {
   .bg-paths path { animation: none; opacity: 0.4; }
