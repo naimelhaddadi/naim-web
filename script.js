@@ -13,32 +13,82 @@ window.addEventListener('DOMContentLoaded', () => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = matchMedia('(max-width: 768px)').matches;
 
-  /* ---- Background Paths SVG: generate 72 curves (36 each direction) ---- */
-  const bgPaths = document.getElementById('bgPaths');
-  if (bgPaths) {
-    const SVG_NS = 'http://www.w3.org/2000/svg';
-    const frag = document.createDocumentFragment();
-    [1, -1].forEach(position => {
-      for (let i = 0; i < 36; i++) {
-        const d =
-          `M-${380 - i * 5 * position} -${189 + i * 6}` +
-          `C-${380 - i * 5 * position} -${189 + i * 6} ` +
-          `-${312 - i * 5 * position} ${216 - i * 6} ` +
-          `${152 - i * 5 * position} ${343 - i * 6}` +
-          `C${616 - i * 5 * position} ${470 - i * 6} ` +
-          `${684 - i * 5 * position} ${875 - i * 6} ` +
-          `${684 - i * 5 * position} ${875 - i * 6}`;
-        const p = document.createElementNS(SVG_NS, 'path');
-        p.setAttribute('d', d);
-        p.setAttribute('stroke-width', String(0.5 + i * 0.03));
-        p.setAttribute('stroke-opacity', String(0.1 + i * 0.03));
-        // Per-path random duration + offset so they don't sync visually
-        p.style.setProperty('--dur', `${20 + Math.random() * 10}s`);
-        p.style.setProperty('--delay', `-${Math.random() * 25}s`);
-        frag.appendChild(p);
+  /* ---- Dotted Surface (Three.js animated grid) ---- */
+  /* Skipped on touch devices and prefers-reduced-motion to save battery/GPU */
+  const dottedHost = document.getElementById('dottedSurface');
+  if (dottedHost && !isMobile && !reduce && typeof THREE === 'undefined') {
+    console.warn('[dotted-surface] Three.js no se cargó desde CDN — fondo desactivado.');
+  }
+  if (dottedHost && !isMobile && !reduce && typeof THREE !== 'undefined') {
+    const SEPARATION = 150;
+    const AMOUNTX = 40;
+    const AMOUNTY = 60;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 10000);
+    camera.position.set(0, 355, 1220);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setSize(innerWidth, innerHeight);
+    renderer.setClearColor(0x000000, 0);
+    dottedHost.appendChild(renderer.domElement);
+
+    const positions = [];
+    const colors = [];
+    for (let ix = 0; ix < AMOUNTX; ix++) {
+      for (let iy = 0; iy < AMOUNTY; iy++) {
+        positions.push(
+          ix * SEPARATION - (AMOUNTX * SEPARATION) / 2,
+          0,
+          iy * SEPARATION - (AMOUNTY * SEPARATION) / 2
+        );
+        colors.push(0.78, 0.78, 0.82);
       }
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 8, vertexColors: true, transparent: true, opacity: 0.85, sizeAttenuation: true,
     });
-    bgPaths.appendChild(frag);
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    let count = 0;
+    let rafId;
+
+    const animate = () => {
+      rafId = requestAnimationFrame(animate);
+      const arr = geometry.attributes.position.array;
+      let i = 0;
+      for (let ix = 0; ix < AMOUNTX; ix++) {
+        for (let iy = 0; iy < AMOUNTY; iy++) {
+          arr[i * 3 + 1] =
+            Math.sin((ix + count) * 0.3) * 50 +
+            Math.sin((iy + count) * 0.5) * 50;
+          i++;
+        }
+      }
+      geometry.attributes.position.needsUpdate = true;
+      renderer.render(scene, camera);
+      count += 0.1;
+    };
+    animate();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = innerWidth / innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(innerWidth, innerHeight);
+    }, { passive: true });
+
+    // Pause animation when tab is hidden — saves battery
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) cancelAnimationFrame(rafId);
+      else rafId = requestAnimationFrame(animate);
+    });
   }
 
   /* ---- Scroll progress bar ---- */
