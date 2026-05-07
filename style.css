@@ -162,6 +162,16 @@ body { background: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 }
 @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.4); opacity: 0.7; } }
 
+/* Aceternity Spotlight sweep — animated entrance for the SVG inside the 3D card */
+.spotlight-svg { opacity: 0; animation: spotlight 2.4s ease 0.6s 1 forwards; }
+@keyframes spotlight {
+  0%   { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+/* Spline viewer fills the host and inherits dark background */
+spline-viewer { display: block; width: 100%; height: 100%; background: transparent; }
+
 /* Mobile: drop heaviest effects */
 @media (max-width: 768px) {
   .bg-orb { filter: blur(50px); opacity: 0.35; }

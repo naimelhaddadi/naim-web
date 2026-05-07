@@ -41,6 +41,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
 
+<!-- Spline Web Component (vanilla, no React needed) -->
+<script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+
 <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -157,6 +160,65 @@
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-cue">
       <span class="text-[10px] font-mono tracking-[0.2em] text-slate-500">SCROLL</span>
       <div class="w-px h-8 bg-gradient-to-b from-blue-400 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ============== INTERACTIVE 3D (Spline + Spotlight) ============== -->
+  <section id="interactive" class="relative z-10 px-6 py-20 lg:py-28">
+    <div class="max-w-6xl mx-auto">
+      <!-- Black card with spotlight + 3D scene -->
+      <div class="relative w-full h-[500px] rounded-2xl border border-white/10 bg-black/[0.96] overflow-hidden" data-fade>
+        <!-- Aceternity Spotlight SVG (animated sweep) -->
+        <svg
+          class="spotlight-svg pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%] -top-40 left-0 md:left-60 md:-top-20"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 3787 2842"
+          fill="none"
+          aria-hidden="true">
+          <g filter="url(#spotlight-filter)">
+            <ellipse
+              cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+              transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+              fill="white" fill-opacity="0.21"></ellipse>
+          </g>
+          <defs>
+            <filter id="spotlight-filter" x="0.860352" y="0.838989" width="3785.16" height="2840.26" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+              <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"></feBlend>
+              <feGaussianBlur stdDeviation="151" result="effect1_foregroundBlur_1065_8"></feGaussianBlur>
+            </filter>
+          </defs>
+        </svg>
+
+        <div class="flex flex-col md:flex-row h-full">
+          <!-- Left content -->
+          <div class="flex-1 p-8 md:p-10 relative z-10 flex flex-col justify-center">
+            <div class="text-[10px] font-mono text-blue-300 mb-4 tracking-[0.18em] uppercase">// experiencia interactiva</div>
+            <h2 class="font-display font-bold text-3xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-[1.05]">
+              Donde el código<br>cobra vida.
+            </h2>
+            <p class="mt-5 text-neutral-300 max-w-lg leading-relaxed text-sm md:text-base">
+              No solo construyo backends que escalan — diseño la capa visual que el usuario toca. Esta escena 3D corre en tu navegador, en tiempo real. Pruébala: arrástrala con el ratón.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Spline</span>
+              <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">WebGL</span>
+              <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300">Real-time 3D</span>
+            </div>
+          </div>
+
+          <!-- Right: 3D scene (skipped on small screens for perf) -->
+          <div class="flex-1 relative min-h-[260px]" id="splineHost">
+            <!-- spline-viewer is injected by JS only on capable devices -->
+            <div class="absolute inset-0 flex items-center justify-center" id="splineFallback">
+              <div class="text-center">
+                <div class="inline-block w-10 h-10 border-2 border-white/20 border-t-blue-400 rounded-full animate-spin mb-3"></div>
+                <div class="text-xs font-mono text-slate-500">cargando escena 3D…</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -751,10 +813,13 @@
         <span class="gradient-text">algo serio.</span>
       </h2>
       <p class="text-lg text-slate-400 mb-10 max-w-xl mx-auto leading-relaxed">
-        Software, infraestructura, automatización. Te enseño cómo desacoplar y escalar.
+        Disponible para oportunidades en Madrid o remoto. Contáctame por email o redes — respondo en menos de 24h.
       </p>
       <div class="flex flex-wrap gap-3 justify-center mb-12">
-        <a href="mailto:naimhaddadi15@gmail.com" class="btn-glow px-6 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-sm transition">Email: naimhaddadi15@gmail.com</a>
+        <a href="mailto:naimhaddadi15@gmail.com" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-400 text-white font-medium text-sm transition">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          naimhaddadi15@gmail.com
+        </a>
       </div>
       <div class="flex justify-center gap-3 flex-wrap">
         <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="btn-glow flex items-center gap-2 px-4 py-2 rounded-xl glass text-sm hover:text-white text-slate-400 transition">
