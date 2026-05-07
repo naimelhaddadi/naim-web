@@ -64,17 +64,18 @@ window.addEventListener('DOMContentLoaded', () => {
       rafId = requestAnimationFrame(animate);
       const arr = geometry.attributes.position.array;
       let i = 0;
+      // Lower frequencies (broader wavelengths) + smaller amplitude = ocean swell feel
       for (let ix = 0; ix < AMOUNTX; ix++) {
         for (let iy = 0; iy < AMOUNTY; iy++) {
           arr[i * 3 + 1] =
-            Math.sin((ix + count) * 0.3) * 50 +
-            Math.sin((iy + count) * 0.5) * 50;
+            Math.sin((ix + count) * 0.18) * 30 +
+            Math.sin((iy + count) * 0.22) * 30;
           i++;
         }
       }
       geometry.attributes.position.needsUpdate = true;
       renderer.render(scene, camera);
-      count += 0.1;
+      count += 0.025; // 4× slower than before — calmer waves
     };
     animate();
 
