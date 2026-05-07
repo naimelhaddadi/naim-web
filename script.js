@@ -13,6 +13,34 @@ window.addEventListener('DOMContentLoaded', () => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = matchMedia('(max-width: 768px)').matches;
 
+  /* ---- Background Paths SVG: generate 72 curves (36 each direction) ---- */
+  const bgPaths = document.getElementById('bgPaths');
+  if (bgPaths) {
+    const SVG_NS = 'http://www.w3.org/2000/svg';
+    const frag = document.createDocumentFragment();
+    [1, -1].forEach(position => {
+      for (let i = 0; i < 36; i++) {
+        const d =
+          `M-${380 - i * 5 * position} -${189 + i * 6}` +
+          `C-${380 - i * 5 * position} -${189 + i * 6} ` +
+          `-${312 - i * 5 * position} ${216 - i * 6} ` +
+          `${152 - i * 5 * position} ${343 - i * 6}` +
+          `C${616 - i * 5 * position} ${470 - i * 6} ` +
+          `${684 - i * 5 * position} ${875 - i * 6} ` +
+          `${684 - i * 5 * position} ${875 - i * 6}`;
+        const p = document.createElementNS(SVG_NS, 'path');
+        p.setAttribute('d', d);
+        p.setAttribute('stroke-width', String(0.5 + i * 0.03));
+        p.setAttribute('stroke-opacity', String(0.1 + i * 0.03));
+        // Per-path random duration + offset so they don't sync visually
+        p.style.setProperty('--dur', `${20 + Math.random() * 10}s`);
+        p.style.setProperty('--delay', `-${Math.random() * 25}s`);
+        frag.appendChild(p);
+      }
+    });
+    bgPaths.appendChild(frag);
+  }
+
   /* ---- Scroll progress bar ---- */
   const sp = document.getElementById('scrollProgress');
   if (sp) {

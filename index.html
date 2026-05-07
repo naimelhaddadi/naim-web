@@ -89,8 +89,14 @@
   </nav>
 
   <!-- ============== HERO ============== -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 z-10">
-    <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center">
+  <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 z-10 overflow-hidden">
+    <!-- Background animated SVG paths (dark style: white strokes on slate-950) -->
+    <svg id="bgPaths" class="bg-paths" viewBox="0 0 696 316" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
+      <title>Background Paths</title>
+      <!-- 72 paths injected by script.js (36 with position 1, 36 with position -1) -->
+    </svg>
+
+    <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
 
       <!-- Left: text -->
       <div class="hero-text relative z-10">
