@@ -14,22 +14,24 @@ window.addEventListener('DOMContentLoaded', () => {
   const isMobile = matchMedia('(max-width: 768px)').matches;
 
   /* ---- Dotted Surface (Three.js animated grid) ---- */
-  /* Skipped on touch devices and prefers-reduced-motion to save battery/GPU */
+  /* Enabled on all devices; mobile gets lighter config (60% fewer particles) */
   const dottedHost = document.getElementById('dottedSurface');
-  if (dottedHost && !isMobile && !reduce && typeof THREE === 'undefined') {
+  if (dottedHost && !reduce && typeof THREE === 'undefined') {
     console.warn('[dotted-surface] Three.js no se cargó desde CDN — fondo desactivado.');
   }
-  if (dottedHost && !isMobile && !reduce && typeof THREE !== 'undefined') {
-    const SEPARATION = 150;
-    const AMOUNTX = 40;
-    const AMOUNTY = 60;
+  if (dottedHost && !reduce && typeof THREE !== 'undefined') {
+    // Adjust density and pixel ratio for mobile to keep FPS + battery healthy
+    const SEPARATION = isMobile ? 130 : 150;
+    const AMOUNTX = isMobile ? 25 : 40;
+    const AMOUNTY = isMobile ? 40 : 60;
+    const PIXEL_RATIO_CAP = isMobile ? 1.5 : 2;
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, innerWidth / innerHeight, 1, 10000);
-    camera.position.set(0, 355, 1220);
+    camera.position.set(0, isMobile ? 300 : 355, isMobile ? 1100 : 1220);
 
     const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(devicePixelRatio, PIXEL_RATIO_CAP));
     renderer.setSize(innerWidth, innerHeight);
     renderer.setClearColor(0x000000, 0);
     dottedHost.appendChild(renderer.domElement);
