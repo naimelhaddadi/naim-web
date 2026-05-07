@@ -4,16 +4,17 @@
    ============================================ */
 
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
-body { background: #020617; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
+body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 ::selection { background: #60a5fa; color: #020617; }
 
-/* Dotted surface — Three.js animated background, deepest layer */
+/* Dotted surface — Three.js animated grid, deepest layer */
 .dotted-surface {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
-  opacity: 0.55;
-  mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, black 35%, transparent 75%);
+  opacity: 0.85;
+  /* Fade-in from top to bottom: dots concentrate in the lower half (sea horizon look) */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 28%, black 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%, black 100%);
 }
 .dotted-surface canvas { display: block; }
 
