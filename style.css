@@ -3,21 +3,21 @@ html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
 ::selection { background: #60a5fa; color: #020617; }
 
-/* Dotted surface — Three.js animated grid, deepest layer */
+/* Superficie punteada — cuadrícula animada de Three.js, capa más profunda */
 .dotted-surface {
   position: fixed; inset: 0; z-index: 0;
   pointer-events: none;
   opacity: 0.85;
-  /* Fade-in from top to bottom: dots concentrate in the lower half (sea horizon look) */
+  /* Desvanecimiento de arriba a abajo: los puntos se concentran en la mitad inferior (aspecto de horizonte marino) */
   mask-image: linear-gradient(to bottom, transparent 0%, black 28%, black 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 28%, black 100%);
 }
 .dotted-surface canvas { display: block; }
 
-/* Ambient orbs in the background */
+/* Orbes ambientales en el fondo */
 .bg-orb { position: absolute; border-radius: 50%; pointer-events: none; filter: blur(80px); opacity: .5; mix-blend-mode: screen; }
 
-/* Cursor-reactive ambient pool (fixed overlay that follows the mouse) */
+/* Piscina ambiental reactiva al cursor (superposición fija que sigue al ratón) */
 .cursor-pool {
   position: fixed; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(500px circle at var(--cx, 50%) var(--cy, 50%),
@@ -26,7 +26,7 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
   mix-blend-mode: screen;
 }
 
-/* Glassmorphism card — frosted with subtle inner highlight */
+/* Tarjeta glassmorphism — escarchada con resaltado interno sutil */
 .glass {
   background: rgba(255, 255, 255, 0.035);
   backdrop-filter: saturate(150%) blur(18px);
@@ -41,7 +41,7 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Cursor-tracked glow on .btn-glow */
+/* Brillo rastreado por cursor en .btn-glow */
 .btn-glow { position: relative; overflow: hidden; isolation: isolate; transition: transform .35s cubic-bezier(.22,1,.36,1); }
 .btn-glow::before {
   content: ''; position: absolute; inset: 0; z-index: -1;
@@ -81,14 +81,14 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 @keyframes orbit2 { from { transform: rotate(120deg) translateX(125px) rotate(-120deg); } to { transform: rotate(480deg) translateX(125px) rotate(-480deg); } }
 @keyframes orbit3 { from { transform: rotate(240deg) translateX(95px)  rotate(-240deg); } to { transform: rotate(600deg) translateX(95px)  rotate(-600deg); } }
 
-/* Floating animation for tech icons */
+/* Animación flotante para iconos tecnológicos */
 .float-icon { animation: float 5.5s ease-in-out infinite; will-change: transform; }
 .float-icon:nth-child(2n) { animation-duration: 6.8s; animation-delay: -2.1s; }
 .float-icon:nth-child(3n) { animation-duration: 4.9s; animation-delay: -3.4s; }
 .float-icon:nth-child(4n) { animation-duration: 7.4s; animation-delay: -1.6s; }
 @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
 
-/* "Gradient" text — now a subtle white-to-gray gradient (monochrome) */
+/* Texto "gradiente" — ahora un gradiente sutil de blanco a gris (monocromo) */
 .gradient-text {
   background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
   -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
@@ -106,17 +106,17 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 .scroll-cue { animation: scrollCue 2s ease-in-out infinite; }
 @keyframes scrollCue { 0%, 100% { transform: translateY(0); opacity: 0.4; } 50% { transform: translateY(8px); opacity: 1; } }
 
-/* Project expand transition (no layout-thrash height) */
+/* Transición de expansión de proyecto (sin altura de sacudida de diseño) */
 .proj-expand { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .55s cubic-bezier(.22,1,.36,1); }
 .proj-expand > * { overflow: hidden; }
 .project-card.expanded .proj-expand { grid-template-rows: 1fr; }
 .project-card.expanded .proj-toggle-icon { transform: rotate(45deg); }
 
-/* Word-split reveal */
+/* Revelación de división de palabras */
 .word { display: inline-block; overflow: hidden; line-height: 1; padding-bottom: 0.12em; margin-bottom: -0.12em; vertical-align: bottom; }
 .word > span { display: inline-block; transform: translateY(110%); }
 
-/* Certification badges — shining rim */
+/* Insignias de certificación — borde brillante */
 .cert-badge {
   position: relative; width: 110px; height: 110px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -141,14 +141,14 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 .cert-badge-aws   { --badge-color: #ff9900; --badge-color-2: #f59e0b; }
 .cert-badge-progress::before { animation-duration: 2.4s; }
 
-/* AWS progress ring (shows partial completion) */
+/* Anillo de progreso de AWS (muestra finalización parcial) */
 .cert-progress-ring { position: absolute; inset: -4px; pointer-events: none; }
 .cert-progress-ring circle { fill: none; stroke-width: 3; transform: rotate(-90deg); transform-origin: 50% 50%; }
 .cert-progress-ring .track { stroke: rgba(255,255,255,0.08); }
 .cert-progress-ring .progress { stroke: url(#awsGrad); stroke-linecap: round; stroke-dasharray: 70 100; animation: progressPulse 2.4s ease-in-out infinite; }
 @keyframes progressPulse { 0%, 100% { opacity: 0.85; } 50% { opacity: 1; filter: drop-shadow(0 0 6px #ff9900); } }
 
-/* Roadmap timeline */
+/* Línea de tiempo del roadmap */
 .roadmap { position: relative; }
 .roadmap-line {
   position: absolute; top: 50%; left: 0; right: 0; height: 2px;
@@ -169,7 +169,7 @@ body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; ov
 }
 @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.4); opacity: 0.7; } }
 
-/* Mobile: drop heaviest effects */
+/* Móvil: eliminar efectos más pesados */
 @media (max-width: 768px) {
   .bg-orb { filter: blur(50px); opacity: 0.35; }
   .core { width: 280px; height: 280px; }
