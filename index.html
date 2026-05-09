@@ -18,12 +18,12 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="shortcut icon" href="/assets/letra-n.png" type="image/x-icon">
 
-<!-- Fonts -->
+<!-- Fuentes -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-<!-- Tailwind CDN with custom config -->
+<!-- CDN de Tailwind con configuración personalizada -->
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
@@ -51,19 +51,19 @@
 
 <body class="relative bg-slate-950 text-slate-200">
 
-  <!-- Dotted surface (Three.js animated grid, behind everything) -->
+  <!-- Superficie punteada (cuadrícula animada de Three.js, detrás de todo) -->
   <div id="dottedSurface" class="dotted-surface" aria-hidden="true"></div>
 
-  <!-- Ambient background orbs (monochrome) -->
+  <!-- Orbes ambientales de fondo (monocromo) -->
   <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
     <div class="bg-orb" style="width:600px; height:600px; top:-200px; right:-150px; background: radial-gradient(circle, #ffffff, transparent 70%); opacity:0.06;"></div>
     <div class="bg-orb" style="width:500px; height:500px; bottom:-150px; left:-100px; background: radial-gradient(circle, #ffffff, transparent 70%); opacity:0.04;"></div>
   </div>
 
-  <!-- Cursor-reactive ambient pool -->
+  <!-- Piscina ambiental reactiva al cursor -->
   <div class="cursor-pool" id="cursorPool" aria-hidden="true"></div>
 
-  <!-- Scroll progress bar -->
+  <!-- Barra de progreso de desplazamiento -->
   <div id="scrollProgress" class="fixed top-0 left-0 h-[2px] bg-white z-[100] w-0 shadow-[0_0_12px_rgba(255,255,255,0.4)]"></div>
 
   <!-- ============== NAV ============== -->
@@ -88,7 +88,7 @@
   <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 z-10">
     <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center">
 
-      <!-- Left: text -->
+      <!-- Izquierda: texto -->
       <div class="hero-text relative z-10">
         <div class="hero-kicker inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-mono text-white/60 mb-3">
           <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -117,7 +117,7 @@
           </a>
         </div>
 
-        <!-- Quick proof -->
+        <!-- Prueba rápida -->
         <div class="hero-proof mt-12 pt-8 border-t border-white/5 grid grid-cols-3 gap-6 max-w-md">
           <div>
             <div class="font-display font-bold text-2xl text-white">Multi-Stack</div>
@@ -134,7 +134,7 @@
         </div>
       </div>
 
-      <!-- Right: tech core with photo as nucleus -->
+      <!-- Derecha: núcleo técnico con foto como núcleo -->
       <div class="hero-core flex items-center justify-center relative">
         <div class="core">
           <div class="core-ring r1"></div>
@@ -218,7 +218,7 @@
 
       <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
 
-        <!-- Languages -->
+        <!-- Lenguajes -->
         <div class="glass rounded-3xl p-7 md:col-span-2 lg:col-span-3 relative overflow-hidden group" data-fade>
           <div class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl group-hover:bg-white/10 transition-colors duration-700"></div>
           <div class="relative">
@@ -248,7 +248,7 @@
           </div>
         </div>
 
-        <!-- IA & Automation (featured) -->
+        <!-- IA y Automatización (destacado) -->
         <div class="glass rounded-3xl p-7 md:col-span-1 lg:col-span-3 relative overflow-hidden group" data-fade>
           <div class="absolute -bottom-10 -right-10 w-56 h-56 bg-white/5 rounded-full blur-3xl group-hover:bg-white/12 transition-colors duration-700"></div>
           <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
@@ -268,7 +268,7 @@
           </div>
         </div>
 
-        <!-- Cloud (in progress) -->
+        <!-- Nube (en progreso) -->
         <div class="glass rounded-3xl p-7 md:col-span-2 lg:col-span-3 relative overflow-hidden group" data-fade>
           <div class="absolute -top-10 -right-10 w-44 h-44 bg-orange-500/15 rounded-full blur-3xl group-hover:bg-orange-500/25 transition-colors duration-700"></div>
           <div class="relative">
@@ -288,7 +288,7 @@
           </div>
         </div>
 
-        <!-- Cybersecurity / Frontend -->
+        <!-- Ciberseguridad / Frontend -->
         <div class="glass rounded-3xl p-7 md:col-span-1 lg:col-span-3 relative overflow-hidden group" data-fade>
           <div class="absolute -bottom-10 -right-10 w-44 h-44 bg-emerald-500/15 rounded-full blur-3xl group-hover:bg-emerald-500/25 transition-colors duration-700"></div>
           <div class="relative">
@@ -322,7 +322,7 @@
 
       <div class="grid md:grid-cols-2 gap-6">
 
-        <!-- CISCO badge -->
+        <!-- Insignia CISCO -->
         <article class="glass-strong rounded-3xl p-8 flex gap-7 items-center" data-fade data-tilt>
           <div class="cert-badge cert-badge-cisco shrink-0">
             <div class="text-center">
@@ -342,7 +342,7 @@
           </div>
         </article>
 
-        <!-- AWS in progress -->
+        <!-- AWS en progreso -->
         <article class="glass-strong rounded-3xl p-8 flex gap-7 items-center" data-fade data-tilt>
           <div class="relative shrink-0">
             <div class="cert-badge cert-badge-aws cert-badge-progress">

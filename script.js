@@ -1,9 +1,9 @@
 /* ============================================
    NAIM EL HADDADI — script.js
-   Motion & interaction (GSAP + Vanilla Tilt)
+   Movimiento e interacción (GSAP + Vanilla Tilt)
    ============================================ */
 
-/* Project card expand toggle — global so onclick="" can reach it */
+/* Alternancia de expansión de tarjeta de proyecto — global para que onclick="" pueda alcanzarla */
 function toggleProject(card, ev) {
   if (ev && ev.target && ev.target.closest('a, button[aria-label]')) return;
   card.classList.toggle('expanded');
@@ -13,14 +13,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const isMobile = matchMedia('(max-width: 768px)').matches;
 
-  /* ---- Dotted Surface (Three.js animated grid) ---- */
-  /* Enabled on all devices; mobile gets lighter config (60% fewer particles) */
+  /* ---- Superficie Punteada (cuadrícula animada de Three.js) ---- */
+  /* Habilitado en todos los dispositivos; móvil obtiene configuración más ligera (60% menos partículas) */
   const dottedHost = document.getElementById('dottedSurface');
   if (dottedHost && !reduce && typeof THREE === 'undefined') {
     console.warn('[dotted-surface] Three.js no se cargó desde CDN — fondo desactivado.');
   }
   if (dottedHost && !reduce && typeof THREE !== 'undefined') {
-    // Adjust density and pixel ratio for mobile to keep FPS + battery healthy
+    // Ajustar densidad y relación de píxeles para móvil para mantener FPS + batería saludable
     const SEPARATION = isMobile ? 130 : 150;
     const AMOUNTX = isMobile ? 25 : 40;
     const AMOUNTY = isMobile ? 40 : 60;
@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', () => {
       rafId = requestAnimationFrame(animate);
       const arr = geometry.attributes.position.array;
       let i = 0;
-      // Lower frequencies (broader wavelengths) + smaller amplitude = ocean swell feel
+      // Frecuencias más bajas (longitudes de onda más amplias) + amplitud más pequeña = sensación de oleaje oceánico
       for (let ix = 0; ix < AMOUNTX; ix++) {
         for (let iy = 0; iy < AMOUNTY; iy++) {
           arr[i * 3 + 1] =
@@ -87,14 +87,14 @@ window.addEventListener('DOMContentLoaded', () => {
       renderer.setSize(innerWidth, innerHeight);
     }, { passive: true });
 
-    // Pause animation when tab is hidden — saves battery
+    // Pausar animación cuando la pestaña está oculta — ahorra batería
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) cancelAnimationFrame(rafId);
       else rafId = requestAnimationFrame(animate);
     });
   }
 
-  /* ---- Scroll progress bar ---- */
+  /* ---- Barra de progreso de desplazamiento ---- */
   const sp = document.getElementById('scrollProgress');
   if (sp) {
     window.addEventListener('scroll', () => {
@@ -103,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  /* ---- Cursor-reactive ambient pool (skip on touch) ---- */
+  /* ---- Piscina ambiental reactiva al cursor (omitir en toque) ---- */
   if (!isMobile) {
     const pool = document.getElementById('cursorPool');
     if (pool) {
@@ -119,7 +119,7 @@ window.addEventListener('DOMContentLoaded', () => {
       }, { passive: true });
     }
 
-    /* Buttons: localized cursor glow */
+    /* Botones: brillo de cursor localizado */
     document.querySelectorAll('.btn-glow').forEach(btn => {
       btn.addEventListener('mousemove', e => {
         const r = btn.getBoundingClientRect();
@@ -129,20 +129,20 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---- Word-split title reveal ---- */
+  /* ---- Revelación de título dividido por palabras ---- */
   document.querySelectorAll('[data-words]').forEach(el => {
     const text = el.textContent.trim();
     el.innerHTML = text.split(' ').map(w => `<span class="word"><span>${w}</span></span>`).join(' ');
   });
 
-  /* ---- Vanilla Tilt on cards (when library loaded, skip touch) ---- */
+  /* ---- Vanilla Tilt en tarjetas (cuando la biblioteca está cargada, omitir toque) ---- */
   if (typeof VanillaTilt !== 'undefined' && !isMobile) {
     VanillaTilt.init(document.querySelectorAll('[data-tilt]'), {
       max: 4, speed: 600, glare: false, perspective: 1200, scale: 1.01,
     });
   }
 
-  /* ---- GSAP setup with graceful fallback ---- */
+  /* ---- Configuración de GSAP con respaldo elegante ---- */
   if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
     document.querySelectorAll('[data-fade], .word > span').forEach(el => {
       el.style.opacity = 1;
@@ -157,7 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  /* ---- Hero entrance timeline ---- */
+  /* ---- Línea de tiempo de entrada del héroe ---- */
   const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
   tl.from('.hero-kicker', { y: 16, opacity: 0, duration: 0.7 }, 0)
     .from('.word > span',  { yPercent: 110, duration: 1, stagger: 0.05 }, 0.1)
@@ -166,12 +166,12 @@ window.addEventListener('DOMContentLoaded', () => {
     .from('.hero-proof',   { y: 24, opacity: 0, duration: 0.8 }, 0.85)
     .from('.hero-core',    { scale: 0.85, opacity: 0, duration: 1.2, ease: 'power2.out' }, 0.2);
 
-  /* ---- Hero parallax (different layers, different speeds) ---- */
+  /* ---- Paralaje del héroe (capas diferentes, velocidades diferentes) ---- */
   gsap.to('.hero-title', { yPercent: -25, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } });
   gsap.to('.hero-core',  { yPercent: -10, ease: 'none', scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: 1 } });
   gsap.to('.bg-orb',     { yPercent: -30, ease: 'none', scrollTrigger: { start: 'top top', end: 'bottom top', scrub: 1 } });
 
-  /* ---- Generic fade-up on every [data-fade] ---- */
+  /* ---- Desvanecimiento genérico hacia arriba en cada [data-fade] ---- */
   gsap.utils.toArray('[data-fade]').forEach(el => {
     gsap.from(el, {
       y: 50, opacity: 0, duration: 1, ease: 'power3.out',
@@ -179,7 +179,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---- Architecture flow nodes: sequential 3D reveal ---- */
+  /* ---- Nodos de flujo de arquitectura: revelación 3D secuencial ---- */
   const archNodes = document.querySelectorAll('.arch-node');
   if (archNodes.length) {
     gsap.from(archNodes, {
@@ -189,7 +189,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---- Float icons: subtle GSAP rotateY drift on top of CSS bob ---- */
+  /* ---- Iconos flotantes: deriva sutil de rotación Y de GSAP encima del balanceo CSS ---- */
   gsap.utils.toArray('.float-icon').forEach((el, i) => {
     gsap.to(el, {
       rotateY: i % 2 ? 6 : -6, duration: 4 + (i % 3),
@@ -197,7 +197,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  /* ---- Roadmap nodes: stagger reveal ---- */
+  /* ---- Nodos del roadmap: revelación escalonada ---- */
   const roadmapDots = document.querySelectorAll('.roadmap-node-dot');
   if (roadmapDots.length) {
     gsap.from(roadmapDots, {
@@ -206,7 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---- Cert badges: scale+rotate entrance ---- */
+  /* ---- Insignias de certificación: entrada de escala+rotación ---- */
   gsap.utils.toArray('.cert-badge').forEach(badge => {
     gsap.from(badge, {
       scale: 0.6, rotate: -90, opacity: 0, duration: 1.2, ease: 'back.out(1.7)',
