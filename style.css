@@ -1,7 +1,3 @@
-/* ============================================
-   NAIM EL HADDADI — style.css
-   Custom styles beyond Tailwind utilities
-   ============================================ */
 
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { background: #000000; color: #e2e8f0; font-family: 'Inter', sans-serif; overflow-x: hidden; }
