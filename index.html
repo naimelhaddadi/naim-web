@@ -1,770 +1,512 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Naim El Haddadi — Desarrollador Backend Junior | Madrid</title>
-<meta name="keywords" content="Naim El Haddadi, Desarrollador Backend Junior, SQL Server, Java, n8n, HTML, CSS, DAW, Madrid, FCT, Stanford Code in Place, CISCO">
-<meta name="description" content="Estudiante de DAW con 9,60 de media. SQL Server, Java y automatización con n8n. Carta de recomendación oficial. Buscando FCT noviembre 2026.">
-<meta name="author" content="Naim El Haddadi">
-<link rel="canonical" href="https://naimelhaddadi.com/">
-<meta property="og:title" content="Naim El Haddadi — Desarrollador Backend Junior | Madrid">
-<meta property="og:description" content="Estudiante de DAW con 9,60 de media. SQL Server, Java y automatización con n8n. Carta de recomendación oficial. Buscando FCT noviembre 2026.">
-<meta property="og:url" content="https://naimelhaddadi.com/">
-<meta property="og:type" content="website">
-<meta property="og:image" content="https://naimelhaddadi.com/assets/Naim.jpeg">
-<meta property="og:image:alt" content="Naim El Haddadi — Desarrollador Backend Junior · Madrid">
-<meta name="twitter:image" content="https://naimelhaddadi.com/assets/Naim.jpeg">
-<meta name="twitter:card" content="summary_large_image">
-<link rel="shortcut icon" href="/assets/letra-n.png" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naim El Haddadi — Desarrollador Backend Junior | Java · Spring Boot · SQL Server</title>
+  <meta name="description" content="Desarrollador backend junior en Madrid. Java, Spring Boot y SQL Server. Estudiante de DAW con 9,60 de media y trabajo en producción. Disponible para prácticas o primer puesto junior.">
+  <meta name="author" content="Naim El Haddadi">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="canonical" href="https://naimelhaddadi.com/">
 
-<!-- Fuentes -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <!-- para cuando se comparte el enlace (linkedin, whatsapp...) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://naimelhaddadi.com/">
+  <meta property="og:title" content="Naim El Haddadi — Desarrollador Backend Junior">
+  <meta property="og:description" content="Java · Spring Boot · SQL Server. Trabajo en producción, carta de recomendación y 9,60 de media en DAW. Madrid.">
+  <meta property="og:image" content="https://naimelhaddadi.com/assets/naim-retrato.jpg">
+  <meta name="twitter:card" content="summary_large_image">
 
-<!-- CDN de Tailwind con configuración personalizada -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: { slate: { 950: '#000000' } },
-        fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif'],
-          display: ['Sora', 'sans-serif'],
-          mono: ['"JetBrains Mono"', 'monospace'],
-        },
-      },
-    },
-  };
-</script>
+  <link rel="icon" href="/assets/letra-n.png" type="image/png">
 
-<!-- GSAP + ScrollTrigger + Vanilla Tilt + Three.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+  <!-- fuentes: anton para los titulos grandes y montserrat para el resto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="/style.css">
+  <!-- iconos: remix icon para la interfaz y devicon para los logos de tecnologias -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+  <link rel="stylesheet" href="/style.css">
 </head>
 
-<body class="relative bg-slate-950 text-slate-200">
+<body>
 
-  <!-- Dotted surface (Three.js animated grid, behind everything) -->
-  <div id="dottedSurface" class="dotted-surface" aria-hidden="true"></div>
+  <!-- ── navegacion ───────────────────────────────────────── -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#inicio" class="nav__logo">Naim<span>.</span></a>
 
-  <!-- Orbes ambientales de fondo (monocromo) -->
-  <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-    <div class="bg-orb" style="width:600px; height:600px; top:-200px; right:-150px; background: radial-gradient(circle, #ffffff, transparent 70%); opacity:0.06;"></div>
-    <div class="bg-orb" style="width:500px; height:500px; bottom:-150px; left:-100px; background: radial-gradient(circle, #ffffff, transparent 70%); opacity:0.04;"></div>
-  </div>
+      <nav class="nav__menu" id="menu">
+        <a href="#inicio" class="nav__link">Inicio</a>
+        <a href="#sobre-mi" class="nav__link">Sobre mí</a>
+        <a href="#experiencia" class="nav__link">Experiencia</a>
+        <a href="#proyectos" class="nav__link">Proyectos</a>
+        <a href="#stack" class="nav__link">Stack</a>
+        <a href="#contacto" class="nav__link">Contacto</a>
+      </nav>
 
-  <!-- Piscina ambiental reactiva al cursor -->
-  <div class="cursor-pool" id="cursorPool" aria-hidden="true"></div>
+      <a href="#contacto" class="btn btn--pill nav__cta">Hablemos <i class="ri-arrow-right-up-line"></i></a>
 
-  <!-- Barra de progreso de desplazamiento -->
-  <div id="scrollProgress" class="fixed top-0 left-0 h-[2px] bg-white z-[100] w-0 shadow-[0_0_12px_rgba(255,255,255,0.4)]"></div>
-
-  <!-- ============== NAV ============== -->
-  <nav class="fixed top-0 left-0 right-0 z-50 glass-strong">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a href="/" class="font-display font-bold text-lg tracking-tight">
-        Naim<span class="text-white/75">.</span>
-      </a>
-      <ul class="hidden md:flex items-center gap-7 text-sm text-slate-400">
-        <li><a href="#stack" class="hover:text-white transition">Stack</a></li>
-        <li><a href="#experience" class="hover:text-white transition">Experiencia</a></li>
-        <li><a href="#projects" class="hover:text-white transition">Proyectos</a></li>
-        <li><a href="#contact" class="hover:text-white transition">Contacto</a></li>
-      </ul>
-      <a href="#contact" class="btn-glow text-sm px-5 py-2 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 transition">
-        Hablemos →
-      </a>
+      <button class="nav__toggle" id="menu-btn" aria-label="Abrir menú" aria-expanded="false">
+        <i class="ri-menu-line"></i>
+      </button>
     </div>
-  </nav>
+  </header>
 
-  <!-- ============== HERO ============== -->
-  <section id="hero" class="relative min-h-screen flex items-center justify-center px-6 pt-24 pb-16 z-10">
-    <div class="max-w-6xl w-full mx-auto grid lg:grid-cols-2 gap-12 items-center">
+  <main>
 
-      <!-- Izquierda: texto -->
-      <div class="hero-text relative z-10">
-        <div class="hero-kicker inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-mono text-white/60 mb-3">
-          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-          Buscando FCT · Nov 2026 · Madrid &amp; Remoto
-        </div>
+    <!-- ── hero: foto de noche con el degradado a negro ─────── -->
+    <section class="hero" id="inicio">
+      <div class="hero__photo">
+        <img src="/assets/naim-noche.webp" alt="Naim El Haddadi trabajando con su portátil de noche en Madrid" width="1086" height="1448">
+      </div>
 
-        <h1 class="hero-title font-mono font-bold tracking-tight leading-[0.95] text-4xl sm:text-5xl lg:text-6xl mb-4 text-white">
-          <span data-words>Naim El Haddadi</span>
+      <i class="ri-sparkling-2-fill hero__star hero__star--1"></i>
+      <i class="ri-sparkling-2-fill hero__star hero__star--2"></i>
+
+      <div class="container hero__content">
+        <p class="eyebrow">Desarrollador backend junior · Madrid</p>
+
+        <h1 class="hero__title">
+          <span class="metal">Naim</span>
+          <span class="metal">El Haddadi</span>
         </h1>
 
-        <p class="hero-sub text-lg sm:text-xl text-slate-300 leading-relaxed mb-3 max-w-xl">
-          Desarrollador Backend Junior.
+        <p class="hero__role">Java · Spring Boot · SQL</p>
+
+        <p class="hero__text">
+          Diseño bases de datos y construyo APIs. Estudio DAW con un 9,60 de media
+          y ya tengo trabajo funcionando en producción.
         </p>
-        <p class="text-base sm:text-lg text-slate-400 leading-relaxed mb-8 max-w-xl">
-          Diseño bases de datos, automatizo procesos y entrego proyectos reales a clientes. <span class="text-white/85">SQL Server · Java · n8n · HTML/CSS.</span>
-        </p>
 
-        <div class="hero-ctas flex flex-wrap gap-3">
-          <a href="#projects" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-white/90 text-black font-medium text-sm transition">
-            Ver proyectos →
-          </a>
-          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/15 bg-white/5 hover:bg-white/10 text-sm transition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            Ver código en GitHub
-          </a>
+        <div class="hero__buttons">
+          <a href="#proyectos" class="btn btn--light">Ver proyectos <i class="ri-arrow-right-up-line"></i></a>
+          <a href="/assets/CV_Naim_El_Haddadi.pdf" class="btn btn--ghost" download>Descargar CV <i class="ri-download-2-line"></i></a>
         </div>
 
-        <!-- Quick proof — métricas reales del CV -->
-        <div class="hero-proof mt-12 pt-8 border-t border-white/5 grid grid-cols-3 gap-6 max-w-md">
-          <div>
-            <div class="font-display font-bold text-2xl text-white">9,60</div>
-            <div class="text-xs font-mono text-slate-500 mt-1">Media 1º DAW</div>
-          </div>
-          <div>
-            <div class="font-display font-bold text-2xl text-white">+10</div>
-            <div class="text-xs font-mono text-slate-500 mt-1">Entidades diseñadas · LH Management</div>
-          </div>
-          <div>
-            <div class="font-display font-bold text-2xl text-white">+50</div>
-            <div class="text-xs font-mono text-slate-500 mt-1">Citas automatizadas/mes · Clínica dental</div>
-          </div>
+        <div class="hero__social">
+          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-line"></i></a>
+          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
+          <a href="mailto:naimhaddadi15@gmail.com" aria-label="Email"><i class="ri-mail-line"></i></a>
         </div>
       </div>
 
-      <!-- Derecha: núcleo técnico con foto como núcleo -->
-      <div class="hero-core flex items-center justify-center relative">
-        <div class="core">
-          <div class="core-ring r1"></div>
-          <div class="core-ring r2"></div>
-          <div class="core-ring r3"></div>
-          <div class="core-particle p1"></div>
-          <div class="core-particle p2"></div>
-          <div class="core-particle p3"></div>
-          <div class="core-photo-wrap">
-            <img src="/assets/Naim.jpeg" alt="Naim El Haddadi" class="core-photo">
-          </div>
+      <a href="#contacto" class="hero__badge">
+        <span class="hero__badge-small">Disponible para</span>
+        <span class="hero__badge-big">Prácticas y junior</span>
+        <span class="hero__badge-small">Incorporación inmediata <i class="ri-arrow-right-up-line"></i></span>
+      </a>
+    </section>
+
+    <!-- ── estadisticas (los numeros se animan con el js) ────── -->
+    <section class="container">
+      <div class="stats reveal">
+        <div class="stat">
+          <i class="ri-graduation-cap-line"></i>
+          <p class="stat__number" data-count="9.60" data-decimals="2">9,60</p>
+          <p class="stat__label">Media en DAW</p>
+        </div>
+        <div class="stat">
+          <i class="ri-database-2-line"></i>
+          <p class="stat__number" data-count="10" data-prefix="+">+10</p>
+          <p class="stat__label">Entidades en SQL Server</p>
+        </div>
+        <div class="stat">
+          <i class="ri-github-line"></i>
+          <p class="stat__number" data-count="3">3</p>
+          <p class="stat__label">Proyectos destacados</p>
+        </div>
+        <div class="stat">
+          <i class="ri-translate-2"></i>
+          <p class="stat__number" data-count="4">4</p>
+          <p class="stat__label">Idiomas</p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-cue">
-      <span class="text-[10px] font-mono tracking-[0.2em] text-slate-500">SCROLL</span>
-      <div class="w-px h-8 bg-gradient-to-b from-white to-transparent"></div>
-    </div>
-  </section>
+    <!-- ── sobre mi ─────────────────────────────────────────── -->
+    <section class="section about" id="sobre-mi">
+      <div class="container about__grid">
+        <div class="about__text reveal">
+          <h2 class="title">Sobre mí</h2>
+          <a href="mailto:naimhaddadi15@gmail.com" class="about__email">naimhaddadi15@gmail.com</a>
 
-  <!-- ============== ABOUT ============== -->
-  <section id="profile" class="relative z-10 px-6 py-20 lg:py-28">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-12 max-w-3xl" data-fade>
-        <div class="text-xs font-mono text-white/75 mb-3 tracking-[0.15em] uppercase">// Sobre mí</div>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight leading-[1.05]">
-          No aprendo para aprobar.<br>
-          <span class="gradient-text">Aprendo para entregar.</span>
-        </h2>
-        <p class="text-slate-300 mt-6 leading-relaxed text-lg">
-          Estudio <strong class="text-white">1º de Grado Superior en Desarrollo de Aplicaciones Web</strong> con una media de <strong class="text-white">9,60</strong>. Completé una colaboración en <strong class="text-white">LH Sport &amp; Entertainment Management</strong> donde diseñé desde cero su arquitectura SQL Server &mdash; más de 10 entidades relacionales, stored procedures y triggers &mdash; y acabé con carta de recomendación oficial.
-        </p>
-        <p class="text-slate-300 mt-4 leading-relaxed">
-          Entiendo el negocio antes de tocar código. En la clínica dental no solo hice la web: diseñé la arquitectura n8n que gestiona más de <strong class="text-white">50 citas mensuales</strong> mediante flujos automatizados de WhatsApp integrados con LLM.
-        </p>
-        <p class="text-slate-400 mt-4 leading-relaxed">
-          Aprendo rápido, me comprometo con el resultado y entrego. Buscando FCT para noviembre de 2026.
-        </p>
-      </div>
+          <p>
+            Desarrollador Backend Junior especializado en Java y sistemas críticos.
+            Combino pensamiento técnico con comprensión del negocio: en LH Management
+            diseñé arquitecturas SQL desde cero para una agencia deportiva internacional.
+          </p>
 
-      <div class="grid md:grid-cols-3 gap-5">
-        <div class="glass rounded-3xl p-7 relative overflow-hidden group" data-fade>
-          <div class="absolute -top-12 -right-12 w-40 h-40 bg-white/8 rounded-full blur-3xl group-hover:bg-white/15 transition-colors duration-700"></div>
-          <div class="relative">
-            <div class="w-12 h-12 rounded-2xl bg-white/8 border border-white/20 flex items-center justify-center text-2xl mb-5">🗄</div>
-            <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-2">Base técnica probada</div>
-            <h3 class="font-display font-bold text-xl text-white mb-2">Experiencia real, con aval</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">SQL Server en una empresa real, con carta de recomendación oficial firmada. No demos personales: proyectos entregados a clientes.</p>
+          <blockquote class="about__quote">Entiendo que el código sirve a un propósito real.</blockquote>
+
+          <!-- mi stack principal en pequeño -->
+          <div class="about__stack">
+            <span class="about__stack-label">Stack</span>
+            <span class="chip"><i class="devicon-java-plain"></i>Java</span>
+            <span class="chip"><i class="devicon-spring-plain"></i>Spring Boot</span>
+            <span class="chip"><i class="ri-database-2-line"></i>SQL</span>
+            <span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span>
+            <span class="chip"><i class="devicon-python-plain"></i>Python</span>
           </div>
+
+          <p>Aprendo rápido, me comprometo y entrego.</p>
+
+          <ul class="about__info">
+            <li><span>Ubicación</span>Madrid, España</li>
+            <li><span>Disponibilidad</span>Inmediata</li>
+            <li><span>Busco</span>Prácticas o primer puesto junior</li>
+            <li><span>Extra</span>Carné de conducir B</li>
+          </ul>
         </div>
 
-        <div class="glass rounded-3xl p-7 relative overflow-hidden group" data-fade>
-          <div class="absolute -top-12 -right-12 w-40 h-40 bg-white/8 rounded-full blur-3xl group-hover:bg-white/15 transition-colors duration-700"></div>
-          <div class="relative">
-            <div class="w-12 h-12 rounded-2xl bg-white/8 border border-white/20 flex items-center justify-center text-2xl mb-5">🎯</div>
-            <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-2">Enfoque de negocio</div>
-            <h3 class="font-display font-bold text-xl text-white mb-2">Problema primero, código después</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">Antes de elegir tecnología pregunto qué problema hay que resolver y qué métrica se mueve si funciona.</p>
-          </div>
-        </div>
-
-        <div class="glass rounded-3xl p-7 relative overflow-hidden group" data-fade>
-          <div class="absolute -top-12 -right-12 w-40 h-40 bg-white/8 rounded-full blur-3xl group-hover:bg-white/15 transition-colors duration-700"></div>
-          <div class="relative">
-            <div class="w-12 h-12 rounded-2xl bg-white/8 border border-white/20 flex items-center justify-center text-2xl mb-5">📚</div>
-            <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-2">Aprendizaje continuo</div>
-            <h3 class="font-display font-bold text-xl text-white mb-2">9,60 en DAW · Stanford · CISCO</h3>
-            <p class="text-sm text-slate-400 leading-relaxed">9,60 en DAW. Stanford Code in Place 2026. CISCO Cybersecurity OT. Siempre aprendiendo, siempre entregando.</p>
-          </div>
+        <div class="about__photo reveal">
+          <img src="/assets/naim-retrato.jpg" alt="Retrato de Naim El Haddadi" width="952" height="1269" loading="lazy">
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============== TECH STACK ============== -->
-  <section id="stack" class="relative z-10 px-6 py-20 lg:py-28">
-    <div class="max-w-6xl mx-auto">
+    <!-- ── experiencia, formacion e idiomas ─────────────────── -->
+    <section class="section" id="experiencia">
+      <div class="container resume">
 
-      <div class="mb-12 max-w-2xl" data-fade>
-        <div class="text-xs font-mono text-white/75 mb-3 tracking-[0.15em] uppercase">// Stack técnico</div>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05]">
-          Las herramientas<br>
-          <span class="gradient-text">que ya he usado.</span>
-        </h2>
-      </div>
+        <div class="resume__main">
+          <h2 class="title reveal">Experiencia</h2>
 
-      <div class="grid gap-5">
-
-        <!-- Domino y he usado en proyectos reales -->
-        <div class="glass-strong rounded-3xl p-7 relative overflow-hidden" data-fade>
-          <div class="absolute -top-12 -right-12 w-56 h-56 bg-white/8 rounded-full blur-3xl"></div>
-          <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
-          <div class="relative">
-            <div class="flex items-center gap-3 mb-2">
-              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[10px] font-mono text-emerald-300">
-                <span class="w-1 h-1 rounded-full bg-emerald-400"></span>en proyectos reales
-              </span>
-            </div>
-            <h3 class="font-display font-bold text-xl text-white mb-5">Domino y he usado</h3>
-
-            <div class="grid md:grid-cols-2 gap-x-8 gap-y-4">
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ lenguajes</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Java (OOP)</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Python</span>
-                </div>
+          <div class="timeline">
+            <article class="job reveal">
+              <div class="job__date">2026<span>hoy</span></div>
+              <div class="job__body">
+                <h3>Desarrollador web y automatización</h3>
+                <p class="job__company">Freelance · 2 clientes · Madrid</p>
+                <ul>
+                  <li>Web corporativa completa para una clínica dental de nueva apertura, en HTML5 y CSS3.</li>
+                  <li>Automatización de procesos con n8n, webhooks y la API de WhatsApp Business: citas, confirmaciones y recordatorios sin trabajo manual.</li>
+                  <li>Todo funciona en producción sobre un VPS Linux que administro yo.</li>
+                </ul>
+                <div class="tags"><span>HTML5</span><span>CSS3</span><span>n8n</span><span>Webhooks</span><span>Linux</span></div>
               </div>
+            </article>
 
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ bases de datos</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">SQL Server</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">T-SQL</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Stored Procedures</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Triggers</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ web</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">HTML5</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">CSS3</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ automatización</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">n8n</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Workflows</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Webhooks</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Integraciones API</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ herramientas</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Git</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">GitHub</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">VS Code</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Eclipse</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">IntelliJ IDEA</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">SSMS</span>
-                </div>
-              </div>
-
-              <div>
-                <div class="text-[10px] font-mono text-white/55 tracking-[0.15em] uppercase mb-2">/ entorno</div>
-                <div class="flex flex-wrap gap-2">
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">Linux terminal</span>
-                  <span class="text-sm font-mono px-3 py-1.5 rounded-full bg-white/8 border border-white/20 text-white">CMD / Batch</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== CERTIFICATIONS ============== -->
-  <section id="certs" class="relative z-10 px-6 py-20 lg:py-28">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-12 max-w-2xl" data-fade>
-        <div class="text-xs font-mono text-white/75 mb-3 tracking-[0.15em] uppercase">// Certificaciones</div>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight leading-[1.05]">
-          Formación<br>
-          <span class="gradient-text">y reconocimientos.</span>
-        </h2>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Insignia CISCO -->
-        <article class="glass-strong rounded-3xl p-8 flex gap-7 items-center" data-fade data-tilt>
-          <div class="cert-badge cert-badge-cisco shrink-0">
-            <div class="text-center">
-              <div class="font-display font-extrabold text-white text-xl tracking-tight leading-none">CISCO</div>
-              <div class="font-mono text-[8px] text-white/55 tracking-[0.2em] mt-1">CERTIFIED</div>
-            </div>
-          </div>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[10px] font-mono text-emerald-300">
-                <span class="w-1 h-1 rounded-full bg-emerald-400"></span>completado
-              </span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-white mb-1">Specialist Jr. Cybersecurity OT &amp; Data Privacy</h3>
-            <p class="text-xs font-mono text-slate-500 mb-3">CISCO Networking Academy</p>
-            <p class="text-sm text-slate-400 leading-relaxed">Especialización en seguridad de tecnologías operativas y privacidad de datos. Aislamiento de redes, hardening de sistemas industriales, cumplimiento normativo.</p>
-          </div>
-        </article>
-
-        <!-- Stanford Code in Place -->
-        <article class="glass-strong rounded-3xl p-8 flex gap-7 items-center" data-fade data-tilt>
-          <div class="cert-badge shrink-0" style="--badge-color:#8c1515; --badge-color-2:#b1040e;">
-            <div class="text-center">
-              <div class="font-display font-extrabold text-white text-xl tracking-tight leading-none">CIP</div>
-              <div class="font-mono text-[8px] text-white/55 tracking-[0.2em] mt-1">STANFORD</div>
-            </div>
-          </div>
-          <div class="min-w-0">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[10px] font-mono text-emerald-300">
-                <span class="w-1 h-1 rounded-full bg-emerald-400"></span>completado · 2026
-              </span>
-            </div>
-            <h3 class="font-display font-bold text-lg text-white mb-1">Code in Place 2026</h3>
-            <p class="text-xs font-mono text-slate-500 mb-3">Stanford University · Python</p>
-            <p class="text-sm text-slate-400 leading-relaxed">Programa oficial de Stanford basado en el curso CS106A. Fundamentos de programación en Python: estructuras de control, funciones, recursividad y resolución de problemas. <strong class="text-white">Proyecto final entregado y publicado en GitHub.</strong></p>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== EXPERIENCE & EDUCATION ============== -->
-  <section id="experience" class="relative z-10 px-6 py-20 lg:py-28">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-12 max-w-2xl" data-fade>
-        <div class="text-xs font-mono text-white/75 mb-3 tracking-[0.15em] uppercase">// Trayectoria</div>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight leading-[1.05]">
-          Experiencia <span class="gradient-text">&amp; Educación.</span>
-        </h2>
-      </div>
-
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12">
-
-        <!-- Experiencia -->
-        <div data-fade>
-          <div class="text-[10px] font-mono text-white/55 mb-5 tracking-[0.18em] uppercase">/ experiencia profesional</div>
-          <div class="space-y-5">
-
-            <article class="glass rounded-2xl p-6">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <h3 class="font-display font-bold text-lg text-white">Desarrollador de Bases de Datos</h3>
-                  <p class="text-xs font-mono text-white/55 mt-0.5">LH Sport &amp; Entertainment Management · Madrid</p>
-                </div>
-                <span class="text-[10px] font-mono text-white/55 whitespace-nowrap pt-1">Feb — Abr 2026</span>
-              </div>
-              <ul class="text-sm text-slate-300 leading-relaxed mt-3 space-y-2 list-disc pl-5 marker:text-white/40">
-                <li>Diseñé e implementé desde cero un esquema relacional de más de <strong class="text-white">10 entidades</strong> (jugadores, contratos, traspasos, agentes) para una agencia deportiva internacional.</li>
-                <li>Desarrollé <strong class="text-white">stored procedures</strong> y <strong class="text-white">triggers</strong> que automatizaron la integridad referencial y eliminaron consultas manuales repetitivas en la operativa diaria.</li>
-                <li>Construí la <strong class="text-white">interfaz web de captura de datos</strong> que conectó el flujo operativo con la base de datos en tiempo real.</li>
-              </ul>
-              <div class="mt-4 flex flex-wrap items-center gap-2">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[11px] font-mono text-emerald-300">
-                  <span class="w-1 h-1 rounded-full bg-emerald-400"></span>
-                  Resultado: carta de recomendación oficial
-                </span>
-                <a href="/assets/recomendacion-lh.pdf" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 text-[11px] font-mono text-white/85 transition">
-                  Ver carta (PDF) →
+            <article class="job reveal">
+              <div class="job__date">Feb<span>abr 26</span></div>
+              <div class="job__body">
+                <h3>Desarrollador de bases de datos</h3>
+                <p class="job__company">LH Sport &amp; Entertainment Management · Madrid</p>
+                <ul>
+                  <li>Diseñé desde cero el esquema relacional en SQL Server: más de 10 entidades (jugadores, contratos, traspasos, agentes) que la agencia usa a diario.</li>
+                  <li>Pasé la lógica de negocio a T-SQL con procedimientos almacenados y triggers. Así se mantiene la integridad de los datos y desapareció trabajo manual que se repetía cada semana.</li>
+                  <li>Hice la interfaz web de captura de datos que conecta la operativa con la base de datos en tiempo real.</li>
+                </ul>
+                <a href="/assets/recomendacion-lh.pdf" class="link" target="_blank" rel="noopener">
+                  <i class="ri-file-text-line"></i> Carta de recomendación de la dirección
                 </a>
-              </div>
-              <div class="mt-3 flex flex-wrap gap-1.5">
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">SQL Server</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">T-SQL</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Stored Procedures</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Triggers</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">HTML · CSS</span>
+                <div class="tags"><span>SQL Server</span><span>T-SQL</span><span>Procedimientos</span><span>Triggers</span></div>
               </div>
             </article>
-
-            <article class="glass rounded-2xl p-6">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <h3 class="font-display font-bold text-lg text-white">Desarrollador Web &amp; Automatización · Freelance</h3>
-                  <p class="text-xs font-mono text-white/55 mt-0.5">Clínica dental · Madrid</p>
-                </div>
-                <span class="text-[10px] font-mono text-white/55 whitespace-nowrap pt-1">2026</span>
-              </div>
-              <ul class="text-sm text-slate-300 leading-relaxed mt-3 space-y-2 list-disc pl-5 marker:text-white/40">
-                <li>Diseñé y desarrollé el <strong class="text-white">sitio web corporativo completo</strong> para una clínica de nueva apertura: estructura, contenido y maquetación en HTML5 y CSS3.</li>
-                <li>Diseñé la <strong class="text-white">arquitectura y lógica en n8n</strong> para la gestión automatizada de citas, confirmaciones y recordatorios vía WhatsApp integrados con LLM.</li>
-                <li>Planteamiento de solución híbrida: despliegue inmediato de la plataforma web corporativa y diseño del roadmap de automatización según las necesidades operativas del cliente.</li>
-              </ul>
-              <div class="mt-3 flex flex-wrap gap-1.5">
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">HTML5</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">CSS3</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">n8n</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">Webhooks</span>
-                <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-slate-300">LLM</span>
-              </div>
-            </article>
-
           </div>
         </div>
 
-        <!-- Educación -->
-        <div data-fade>
-          <div class="text-[10px] font-mono text-white/55 mb-5 tracking-[0.18em] uppercase">/ educación &amp; formación</div>
-          <div class="space-y-5">
-
-            <article class="glass rounded-2xl p-6 border-emerald-400/20">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <h3 class="font-display font-bold text-lg text-white">Grado Superior · Desarrollo de Aplicaciones Web</h3>
-                  <p class="text-xs font-mono text-white/55 mt-0.5">Formación oficial reglada</p>
-                </div>
-                <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-[10px] font-mono text-emerald-300 whitespace-nowrap">
-                  <span class="w-1 h-1 rounded-full bg-emerald-400 animate-pulse"></span>
-                  09/2025 — en curso
-                </span>
-              </div>
-              <div class="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/8 border border-white/20">
-                <span class="text-[10px] font-mono text-white/60 tracking-wider uppercase">Media</span>
-                <span class="font-display font-bold text-white text-lg leading-none">9,60</span>
-              </div>
-            </article>
-
-            <article class="glass rounded-2xl p-6">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <h3 class="font-display font-bold text-lg text-white">Code in Place 2026</h3>
-                  <p class="text-xs font-mono text-white/55 mt-0.5">Stanford University · Python</p>
-                </div>
-                <span class="text-[10px] font-mono text-white/55 whitespace-nowrap pt-1">Completado · 2026</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed mt-3">
-                Programa oficial de Stanford basado en su curso CS106A. Fundamentos de programación en Python. Proyecto final publicado en GitHub.
-              </p>
-            </article>
-
-            <article class="glass rounded-2xl p-6">
-              <div class="flex items-start justify-between gap-3 mb-2">
-                <div>
-                  <h3 class="font-display font-bold text-lg text-white">Specialist Jr. Cybersecurity OT &amp; Data Privacy</h3>
-                  <p class="text-xs font-mono text-white/55 mt-0.5">CISCO Networking Academy</p>
-                </div>
-                <span class="text-[10px] font-mono text-white/55 whitespace-nowrap pt-1">Completado</span>
-              </div>
-              <p class="text-sm text-slate-400 leading-relaxed mt-3">
-                Especialización junior en seguridad de tecnologías operativas y privacidad de datos.
-              </p>
-            </article>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== PROJECTS ============== -->
-  <section id="projects" class="relative z-10 px-6 py-20 lg:py-28">
-    <div class="max-w-6xl mx-auto">
-
-      <div class="mb-12 max-w-2xl" data-fade>
-        <div class="text-xs font-mono text-white/70 mb-3 tracking-[0.15em] uppercase">// Proyectos</div>
-        <h2 class="font-display font-bold text-4xl sm:text-5xl lg:text-6xl tracking-tight leading-[1.05]">
-          Trabajo entregado,<br>
-          <span class="gradient-text">código revisable.</span>
-        </h2>
-      </div>
-
-      <!-- Project 1: LH Football Agency -->
-      <article class="glass-strong rounded-3xl p-8 md:p-10 mb-6" data-fade data-tilt data-tilt-max="3" data-tilt-glare="false">
-        <header class="flex flex-wrap items-start justify-between gap-4 mb-6">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/85 to-white/35 flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-white/10">01</div>
+        <aside class="resume__side">
+          <h2 class="title reveal">Formación</h2>
+          <ul class="studies reveal">
+            <li>
+              <i class="ri-graduation-cap-line"></i>
               <div>
-                <div class="text-[10px] font-mono text-emerald-300 tracking-[0.15em] uppercase mb-0.5">Colaboración real · Carta de recomendación</div>
-                <h3 class="font-display font-bold text-2xl text-white">Base de datos · LH Football Agency</h3>
-                <p class="text-xs font-mono text-slate-500 mt-1">Agencia deportiva internacional · 2026</p>
+                <h3>Grado Superior en DAW</h3>
+                <p>Desarrollo de Aplicaciones Web · 09/2025 – en curso</p>
+                <span class="studies__grade">Media 9,60</span>
               </div>
-            </div>
-          </div>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/20 text-xs font-mono text-white/70">
-            SQL Server
-          </span>
-        </header>
-
-        <p class="text-slate-300 leading-relaxed">
-          Arquitectura relacional en SQL Server para gestión de jugadores, contratos y traspasos de una agencia deportiva internacional. Stored procedures, triggers y vistas para reporting interno. Proyecto de colaboración real.
-        </p>
-
-        <!-- Recommendation quote -->
-        <figure class="mt-6 relative rounded-2xl p-6 overflow-hidden border border-emerald-400/25 bg-gradient-to-br from-emerald-500/8 via-white/5 to-transparent">
-          <div class="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-emerald-500/15 blur-3xl pointer-events-none"></div>
-          <div class="relative flex items-start gap-4">
-            <div class="text-5xl font-display font-extrabold text-emerald-400/30 leading-none select-none">"</div>
-            <div class="min-w-0">
-              <blockquote class="text-base text-slate-200 leading-relaxed italic">
-                Es una persona de buen talante y muy diligente en el trabajo.
-              </blockquote>
-              <figcaption class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs">
-                <span class="font-display font-semibold text-white">Iván López Hierro</span>
-                <span class="font-mono text-slate-500">— Administrador · LH Sport &amp; Entertainment Management</span>
-              </figcaption>
-              <div class="mt-3 flex flex-wrap items-center gap-3">
-                <a href="/assets/recomendacion-lh.pdf" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 hover:bg-emerald-500/20 text-[11px] font-mono text-emerald-200 transition">
-                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                  Ver carta oficial (PDF)
-                </a>
-              </div>
-            </div>
-          </div>
-        </figure>
-
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">SQL Server</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">T-SQL</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Stored Procedures</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Triggers</span>
-          </div>
-          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 text-sm transition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            Ver código en GitHub
-          </a>
-        </div>
-      </article>
-
-      <!-- Project 2: Clínica dental — web + automatización -->
-      <article class="glass-strong rounded-3xl p-8 md:p-10 mb-6" data-fade data-tilt data-tilt-max="3" data-tilt-glare="false">
-        <header class="flex flex-wrap items-start justify-between gap-4 mb-6">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/85 to-white/35 flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-white/10">02</div>
+            </li>
+            <li>
+              <i class="ri-award-line"></i>
               <div>
-                <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-0.5">Cliente real · Solución híbrida</div>
-                <h3 class="font-display font-bold text-2xl text-white">Web &amp; Automatización · Clínica dental (Madrid)</h3>
-                <p class="text-xs font-mono text-slate-500 mt-1">Freelance · 2026</p>
+                <h3>Code in Place 2026</h3>
+                <p>Stanford University · Python · mayo 2026</p>
               </div>
-            </div>
-          </div>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/20 text-xs font-mono text-white/70">
-            HTML · CSS · n8n
-          </span>
-        </header>
-
-        <p class="text-slate-300 leading-relaxed">
-          Sitio web corporativo completo más diseño de arquitectura n8n para automatización de más de <strong class="text-white">50 citas mensuales</strong> vía WhatsApp. Solución híbrida entregada a cliente real.
-        </p>
-
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">HTML5</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">CSS3</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">n8n</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Webhooks</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">LLM</span>
-          </div>
-          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/15 hover:bg-white/10 text-sm transition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            Ver código en GitHub
-          </a>
-        </div>
-      </article>
-
-      <!-- Project 3: java-bank-management (GitHub) -->
-      <article class="glass-strong rounded-3xl p-8 md:p-10 mb-6" data-fade data-tilt data-tilt-max="3" data-tilt-glare="false">
-        <header class="flex flex-wrap items-start justify-between gap-4 mb-6">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/85 to-white/35 flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-white/10">03</div>
+            </li>
+            <li>
+              <i class="ri-shield-check-line"></i>
               <div>
-                <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-0.5">Open source · GitHub</div>
-                <h3 class="font-display font-bold text-2xl text-white font-mono">java-bank-management</h3>
-                <p class="text-xs font-mono text-slate-500 mt-1">Java · OOP · JUnit 5</p>
+                <h3>Specialist Jr. Cybersecurity OT</h3>
+                <p>CISCO Networking Academy</p>
               </div>
+            </li>
+          </ul>
+
+          <h2 class="title reveal">Idiomas</h2>
+          <!-- el ancho de cada barra sale de --level -->
+          <ul class="languages reveal">
+            <li style="--level: 100%"><p>Español <span>Nativo</span></p><div class="bar"></div></li>
+            <li style="--level: 80%"><p>Inglés <span>B2–C1 · Cambridge</span></p><div class="bar"></div></li>
+            <li style="--level: 55%"><p>Árabe <span>B1</span></p><div class="bar"></div></li>
+            <li style="--level: 55%"><p>Darija <span>B1</span></p><div class="bar"></div></li>
+          </ul>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ── proyectos ────────────────────────────────────────── -->
+    <section class="section" id="proyectos">
+      <div class="container">
+        <div class="section__head reveal">
+          <h2 class="title">Proyectos destacados</h2>
+          <a href="https://github.com/naimelhaddadi" class="link" target="_blank" rel="noopener">Ver mi GitHub <i class="ri-arrow-right-up-line"></i></a>
+        </div>
+
+        <div class="projects">
+          <article class="project reveal">
+            <div class="project__cover">
+              <i class="ri-gamepad-line project__icon"></i>
+              <span class="project__chip">9 endpoints · CRUD completo</span>
+            </div>
+            <div class="project__info">
+              <p class="project__stack">Java · Spring Boot</p>
+              <h3><a href="https://github.com/naimelhaddadi/GameStore_SpringBoot" target="_blank" rel="noopener">GameStore</a></h3>
+              <p>API REST de un catálogo de videojuegos con arquitectura en capas, validación y tests con JUnit 5 y Mockito.</p>
+            </div>
+            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__cover">
+              <i class="ri-graduation-cap-line project__icon"></i>
+              <span class="project__chip">8 endpoints · estadísticas</span>
+            </div>
+            <div class="project__info">
+              <p class="project__stack">Java · Spring Data JPA</p>
+              <h3><a href="https://github.com/naimelhaddadi/Spring-Boot-Academy-Project" target="_blank" rel="noopener">Academia API</a></h3>
+              <p>API REST para gestionar alumnos: filtro por curso, ranking por nota y estadísticas de la clase.</p>
+            </div>
+            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+          </article>
+
+          <article class="project reveal">
+            <div class="project__cover">
+              <!-- linea de grafica dibujada a mano con svg -->
+              <svg class="project__chart" viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true">
+                <polyline points="0,62 18,55 36,60 54,40 72,46 90,28 108,36 126,18 144,30 162,14 180,22 200,6" />
+              </svg>
+              <span class="project__chip">12 meses · 3 activos</span>
+            </div>
+            <div class="project__info">
+              <p class="project__stack">Python · Stanford</p>
+              <h3><a href="https://github.com/naimelhaddadi/financial-market-simulator" target="_blank" rel="noopener">Market Simulator</a></h3>
+              <p>Juego de bolsa por turnos: 12 meses, 10.000 $ y noticias que mueven los precios. Proyecto final de Code in Place 2026.</p>
+            </div>
+            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── stack: lo que puedo aportar + habilidades por grupos ── -->
+    <section class="section" id="stack">
+      <div class="container">
+
+        <div class="skills__box reveal">
+          <h2 class="title">Qué puedo aportar</h2>
+          <div class="capabilities">
+            <div class="capability">
+              <i class="ri-code-s-slash-line"></i>
+              <h3>APIs REST</h3>
+              <p>Spring Boot por capas, con validación y control de errores.</p>
+            </div>
+            <div class="capability">
+              <i class="ri-database-2-line"></i>
+              <h3>Bases de datos</h3>
+              <p>Modelos relacionales en SQL Server y PostgreSQL, procedimientos y triggers.</p>
+            </div>
+            <div class="capability">
+              <i class="ri-test-tube-line"></i>
+              <h3>Testing</h3>
+              <p>Tests unitarios con JUnit 5 y Mockito.</p>
+            </div>
+            <div class="capability">
+              <i class="ri-flow-chart"></i>
+              <h3>Automatización</h3>
+              <p>Procesos de negocio con n8n, webhooks y APIs externas.</p>
+            </div>
+            <div class="capability">
+              <i class="ri-layout-line"></i>
+              <h3>Webs</h3>
+              <p>HTML, CSS y JavaScript para webs corporativas.</p>
+            </div>
+            <div class="capability">
+              <i class="ri-server-line"></i>
+              <h3>Servidores</h3>
+              <p>Linux, VPS y Docker para dejarlo todo en producción.</p>
             </div>
           </div>
-          <a href="https://github.com/naimelhaddadi/java-bank-management" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/20 text-xs font-mono text-white/80 hover:bg-white/10 transition">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            público
-          </a>
-        </header>
-
-        <p class="text-slate-300 leading-relaxed">
-          Sistema bancario en Java con OOP, interfaces, clases abstractas, herencia y polimorfismo. Incluye tests con JUnit 5.
-        </p>
-
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">Java 17+</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Maven</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">JUnit 5</span>
-          </div>
-          <a href="https://github.com/naimelhaddadi/java-bank-management" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black hover:bg-white/90 text-sm font-medium transition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            Ver código en GitHub
-          </a>
         </div>
-      </article>
 
-      <!-- Project 4: financial-market-simulator (Python · Stanford Code in Place final) -->
-      <article class="glass-strong rounded-3xl p-8 md:p-10" data-fade data-tilt data-tilt-max="3" data-tilt-glare="false">
-        <header class="flex flex-wrap items-start justify-between gap-4 mb-6">
-          <div>
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-white/85 to-white/35 flex items-center justify-center font-display font-bold text-white text-lg shadow-lg shadow-white/10">04</div>
-              <div>
-                <div class="text-[10px] font-mono text-white/60 tracking-[0.15em] uppercase mb-0.5">Stanford Code in Place 2026 · Proyecto final</div>
-                <h3 class="font-display font-bold text-2xl text-white font-mono">financial-market-simulator</h3>
-                <p class="text-xs font-mono text-slate-500 mt-1">Python · Turn-based strategy</p>
-              </div>
+        <h2 class="title reveal skills__title">Habilidades técnicas</h2>
+
+        <!-- los mismos grupos que en el cv -->
+        <div class="skill-groups">
+          <div class="skill-group reveal">
+            <h3><i class="ri-brackets-line"></i>Lenguajes</h3>
+            <div class="chips">
+              <span class="chip"><i class="devicon-java-plain"></i>Java</span>
+              <span class="chip"><i class="devicon-python-plain"></i>Python</span>
+              <span class="chip">SQL / T-SQL</span>
+              <span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span>
+              <span class="chip"><i class="devicon-php-plain"></i>PHP</span>
+              <span class="chip"><i class="devicon-html5-plain"></i>HTML5</span>
+              <span class="chip"><i class="devicon-css3-plain"></i>CSS3</span>
             </div>
           </div>
-          <a href="https://github.com/naimelhaddadi/financial-market-simulator" target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/20 text-xs font-mono text-white/80 hover:bg-white/10 transition">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            público
-          </a>
-        </header>
 
-        <p class="text-slate-300 leading-relaxed">
-          Juego de estrategia financiera por turnos. El usuario asume el rol de inversor y gestiona un capital inicial de <strong class="text-white">10.000&nbsp;$</strong> a lo largo de <strong class="text-white">12 turnos</strong> (meses), tomando decisiones de inversión y reaccionando a la evolución del mercado.
-        </p>
-
-        <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
-          <div class="flex flex-wrap gap-2">
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/8 border border-white/20 text-white">Python</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Stanford CS106A</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">OOP</span>
-            <span class="text-[11px] font-mono px-3 py-1 rounded-full bg-white/5 border border-white/15 text-slate-300">Lógica de simulación</span>
+          <div class="skill-group reveal">
+            <h3><i class="ri-stack-line"></i>Backend</h3>
+            <div class="chips">
+              <span class="chip"><i class="devicon-spring-plain"></i>Spring Boot</span>
+              <span class="chip">Spring Web MVC</span>
+              <span class="chip">Spring Data JPA</span>
+              <span class="chip">Bean Validation</span>
+              <span class="chip">APIs REST</span>
+              <span class="chip"><i class="devicon-hibernate-plain"></i>JPA / Hibernate</span>
+            </div>
           </div>
-          <a href="https://github.com/naimelhaddadi/financial-market-simulator" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black hover:bg-white/90 text-sm font-medium transition">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-            Ver código en GitHub
-          </a>
-        </div>
-      </article>
 
-    </div>
-  </section>
-
-  <!-- ============== LANGUAGES ============== -->
-  <section id="languages" class="relative z-10 px-6 py-20">
-    <div class="max-w-6xl mx-auto">
-      <div class="mb-10 max-w-2xl" data-fade>
-        <div class="text-xs font-mono text-white/75 mb-3 tracking-[0.15em] uppercase">// Global mindset</div>
-        <h2 class="font-display font-bold text-3xl sm:text-4xl tracking-tight leading-[1.05]">Idiomas que hablo cada día.</h2>
-      </div>
-
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="glass rounded-2xl p-5" data-fade>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🇬🇧</span>
-            <span class="font-display font-bold text-white">English</span>
+          <div class="skill-group reveal">
+            <h3><i class="ri-database-2-line"></i>Bases de datos</h3>
+            <div class="chips">
+              <span class="chip"><i class="devicon-microsoftsqlserver-plain"></i>SQL Server</span>
+              <span class="chip"><i class="devicon-postgresql-plain"></i>PostgreSQL</span>
+              <span class="chip">H2</span>
+              <span class="chip">Modelado relacional</span>
+              <span class="chip">Stored procedures</span>
+              <span class="chip">Triggers</span>
+            </div>
           </div>
-          <div class="h-1 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full w-[88%] bg-gradient-to-r from-white to-white/40"></div></div>
-          <div class="text-[11px] font-mono text-slate-500">B2 — C1 · Cambridge</div>
-        </div>
-        <div class="glass rounded-2xl p-5" data-fade>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🇪🇸</span>
-            <span class="font-display font-bold text-white">Español</span>
+
+          <div class="skill-group reveal">
+            <h3><i class="ri-test-tube-line"></i>Testing</h3>
+            <div class="chips">
+              <span class="chip"><i class="devicon-junit-plain"></i>JUnit 5</span>
+              <span class="chip">Mockito</span>
+            </div>
           </div>
-          <div class="h-1 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full w-full bg-gradient-to-r from-white to-white/40"></div></div>
-          <div class="text-[11px] font-mono text-slate-500">Nativo</div>
-        </div>
-        <div class="glass rounded-2xl p-5" data-fade>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🇸🇦</span>
-            <span class="font-display font-bold text-white">Árabe</span>
+
+          <div class="skill-group reveal">
+            <h3><i class="ri-flow-chart"></i>Automatización</h3>
+            <div class="chips">
+              <span class="chip">n8n</span>
+              <span class="chip">Webhooks</span>
+              <span class="chip">WhatsApp Business API</span>
+              <span class="chip">Integración de LLMs</span>
+            </div>
           </div>
-          <div class="h-1 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full w-[70%] bg-gradient-to-r from-white to-white/40"></div></div>
-          <div class="text-[11px] font-mono text-slate-500">B1</div>
-        </div>
-        <div class="glass rounded-2xl p-5" data-fade>
-          <div class="flex items-center gap-3 mb-3">
-            <span class="text-2xl">🇲🇦</span>
-            <span class="font-display font-bold text-white">Darija</span>
+
+          <div class="skill-group reveal">
+            <h3><i class="ri-terminal-box-line"></i>Entorno</h3>
+            <div class="chips">
+              <span class="chip"><i class="devicon-git-plain"></i>Git</span>
+              <span class="chip"><i class="devicon-github-original"></i>GitHub</span>
+              <span class="chip"><i class="devicon-maven-plain"></i>Maven</span>
+              <span class="chip"><i class="devicon-docker-plain"></i>Docker</span>
+              <span class="chip"><i class="devicon-postman-plain"></i>Postman</span>
+              <span class="chip"><i class="devicon-intellij-plain"></i>IntelliJ IDEA</span>
+              <span class="chip"><i class="devicon-eclipse-plain"></i>Eclipse</span>
+              <span class="chip">SSMS</span>
+              <span class="chip"><i class="devicon-linux-plain"></i>Linux</span>
+              <span class="chip">VPS</span>
+            </div>
           </div>
-          <div class="h-1 rounded-full bg-white/5 overflow-hidden mb-2"><div class="h-full w-[70%] bg-gradient-to-r from-amber-400 to-orange-400"></div></div>
-          <div class="text-[11px] font-mono text-slate-500">B1</div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── como trabajo (5 pasos) ───────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <h2 class="title reveal">Cómo trabajo</h2>
+        <ol class="process reveal">
+          <li class="step">
+            <span class="step__number">01</span>
+            <i class="ri-search-eye-line"></i>
+            <h3>Entender</h3>
+            <p>Hablo con quien lo va a usar y aclaro qué hay que resolver.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">02</span>
+            <i class="ri-node-tree"></i>
+            <h3>Modelar</h3>
+            <p>Diseño las tablas y sus relaciones antes de tocar la API.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">03</span>
+            <i class="ri-hammer-line"></i>
+            <h3>Construir</h3>
+            <p>Desarrollo por capas: controller, service y repository.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">04</span>
+            <i class="ri-checkbox-circle-line"></i>
+            <h3>Probar</h3>
+            <p>Tests con JUnit y Mockito, y los endpoints con Postman.</p>
+          </li>
+          <li class="step">
+            <span class="step__number">05</span>
+            <i class="ri-rocket-2-line"></i>
+            <h3>Desplegar</h3>
+            <p>Lo subo a producción y me encargo de mantenerlo.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ── contacto ─────────────────────────────────────────── -->
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="contact reveal">
+          <h2 class="contact__title metal">¿Hablamos?</h2>
+
+          <div class="contact__middle">
+            <p>
+              Busco prácticas o mi primer puesto como desarrollador backend.
+              Puedo empezar ya en Madrid y suelo responder en menos de 24 horas.
+            </p>
+            <a href="mailto:naimhaddadi15@gmail.com" class="btn btn--light">Escríbeme <i class="ri-arrow-right-up-line"></i></a>
+          </div>
+
+          <ul class="contact__list">
+            <li>
+              <i class="ri-mail-line"></i>
+              <button class="contact__copy" id="copy-email" data-email="naimhaddadi15@gmail.com">
+                naimhaddadi15@gmail.com <i class="ri-file-copy-line"></i>
+              </button>
+            </li>
+            <li><i class="ri-linkedin-box-line"></i><a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><i class="ri-github-line"></i><a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">github.com/naimelhaddadi</a></li>
+            <li><i class="ri-download-2-line"></i><a href="/assets/CV_Naim_El_Haddadi.pdf" download>Descargar CV (PDF)</a></li>
+            <li><i class="ri-map-pin-line"></i>Madrid, España</li>
+          </ul>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============== CONTACT ============== -->
-  <section id="contact" class="relative z-10 px-6 py-24 lg:py-32">
-    <div class="max-w-3xl mx-auto text-center" data-fade>
-      <div class="text-xs font-mono text-white/75 mb-4 tracking-[0.15em] uppercase">// Contacto</div>
-      <h2 class="font-display font-extrabold text-5xl sm:text-6xl lg:text-7xl tracking-tight leading-[0.95] mb-6">
-        ¿Buscas un junior<br>
-        <span class="gradient-text">que ya entrega?</span>
-      </h2>
-      <p class="text-lg text-slate-400 mb-10 max-w-xl mx-auto leading-relaxed">
-        Escríbeme &mdash; respondo en menos de 24h. Disponible para FCT a partir de noviembre 2026 en Madrid o remoto.
-      </p>
+  </main>
 
-      <!-- Email principal -->
-      <div class="flex flex-wrap gap-3 justify-center mb-6">
-        <a href="mailto:naimhaddadi15@gmail.com" class="btn-glow inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white hover:bg-white/90 text-black font-medium text-sm transition">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18a2 2 0 002 2h16a2 2 0 002-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          naimhaddadi15@gmail.com
-        </a>
+  <!-- ── footer ───────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© <span id="year">2026</span> Naim El Haddadi</p>
+      <div class="footer__social">
+        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-line"></i></a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
+        <a href="mailto:naimhaddadi15@gmail.com" aria-label="Email"><i class="ri-mail-line"></i></a>
       </div>
-
-      <!-- GitHub prominente -->
-      <div class="flex justify-center mb-10">
-        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" class="btn-glow inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-white/5 border border-white/20 hover:bg-white/10 text-sm font-medium text-white transition">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.929.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-          github.com/naimelhaddadi
-        </a>
-      </div>
-
-      <!-- Carta de recomendación -->
-      <p class="text-xs font-mono text-slate-500 mb-10">
-        Carta de recomendación de LH Management disponible
-        <a href="/assets/recomendacion-lh.pdf" target="_blank" rel="noopener" class="text-white/85 underline decoration-white/30 underline-offset-4 hover:text-white hover:decoration-white transition">bajo petición</a>.
-      </p>
-
-      <!-- LinkedIn secundario -->
-      <div class="flex justify-center gap-3 flex-wrap">
-        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" class="btn-glow flex items-center gap-2 px-4 py-2 rounded-xl glass text-sm hover:text-white text-slate-400 transition">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
-          LinkedIn
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============== FOOTER ============== -->
-  <footer class="relative z-10 px-6 py-10 border-t border-white/5">
-    <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-3 text-xs font-mono text-slate-500">
-      <span>Naim<span class="text-white/75">.</span> · naimelhaddadi.com</span>
-      <span>© 2026 · Madrid &amp; Remoto</span>
     </div>
   </footer>
 
-  <script src="/script.js" defer></script>
+  <!-- aviso pequeño que sale al copiar el email -->
+  <div class="toast" id="toast">Email copiado</div>
+
+  <script src="/script.js"></script>
 </body>
 </html>
