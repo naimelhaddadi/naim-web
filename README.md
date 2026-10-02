@@ -1,50 +1,35 @@
 # Naim El Haddadi — Portfolio
 
-Portfolio personal desplegado en **[naimelhaddadi.com](https://naimelhaddadi.com)**.
-Web minimalista en blanco y negro, estética developer, con foco en proyectos reales en producción.
+Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 
-## Stack
+## Tecnologías
 
-- **Frontend:** HTML5 + Tailwind (CDN) + CSS3 + JavaScript vanilla
-- **Animación:** GSAP 3.12 + ScrollTrigger, Three.js r128, Vanilla Tilt
-- **Backend:** Node.js sobre Vercel Edge Functions (`/api/chat.js`)
-- **Deploy:** Vercel con CI/CD automático desde `main`
-
-## Secciones
-
-- **Hero** — presentación con foto orbital y tagline técnico
-- **Stack** — tecnologías dominadas (Java, Python, SQL Server, n8n, Docker, AWS…)
-- **Experiencia & Educación** — trayectoria profesional y formación
-- **Proyectos** — infraestructura autónoma desplegada en producción
-- **Roadmap** — próximos hitos técnicos
-- **Contacto** — email directo
-
-## Detalles de diseño
-
-- Paleta monocroma: negro puro `#000000` + blanco con variantes de opacidad
-- Fondo animado: cuadrícula de puntos en Three.js con animación de oleaje suave
-- Tipografía mono para títulos (estética developer)
-- Mobile-first: configuración Three.js más ligera en móvil para FPS y batería estables
-- Respeta `prefers-reduced-motion`
+- HTML, CSS y JavaScript, sin frameworks.
+- Fuentes de Google Fonts: Anton para los títulos grandes y Montserrat para el resto.
+- Iconos de [Remix Icon](https://remixicon.com) y [Devicon](https://devicon.dev), cargados por CDN.
+- Se despliega en Vercel cada vez que subo cambios a `main`.
 
 ## Estructura
 
 ```
-├── index.html          # Estructura y contenido
-├── style.css           # Estilos custom (más allá de Tailwind)
-├── script.js           # GSAP, Three.js, interacciones
-├── api/
-│   └── chat.js         # Endpoint serverless
-└── assets/             # Imágenes, PDFs (CV, recomendaciones)
+├── index.html     # el contenido, una sección detrás de otra
+├── style.css      # los estilos, en el mismo orden que las secciones del html
+├── script.js      # menú, animaciones al hacer scroll, contadores y copiar el email
+├── api/chat.js    # función serverless antigua (la web ya no la usa)
+└── assets/        # fotos, CV y carta de recomendación
 ```
 
-## Desarrollo local
+## Cómo está organizado el código
 
-Al ser HTML estático, basta con abrir `index.html` o servir la carpeta:
+- Arriba del `style.css` están las variables: colores, fuentes y medidas. Si quiero cambiar el azul, solo toco `--accent`.
+- Cada sección tiene su bloque marcado con `/* ── nombre ── */` y el responsive va al final del archivo.
+- En `script.js` hay una función para cada cosa: `toggleMenu`, `onScroll`, `countUp` y `showToast`.
+- Las animaciones al bajar funcionan con la clase `.reveal`. El JS le pone `.visible` cuando el elemento entra en pantalla y el CSS hace la animación.
+
+## Probarla en local
+
+Es una web estática, así que basta con servir la carpeta:
 
 ```bash
 npx serve .
 ```
-
----
-*Naim El Haddadi · 2026*
