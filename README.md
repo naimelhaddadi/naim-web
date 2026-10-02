@@ -6,7 +6,7 @@ Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 
 - HTML, CSS y JavaScript, sin frameworks.
 - Fuentes de Google Fonts: Anton para los títulos grandes y Montserrat para el resto.
-- Iconos de [Remix Icon](https://remixicon.com) y [Devicon](https://devicon.dev), cargados por CDN.
+- Iconos en `assets/icons.svg`: solo los que uso, sacados de [Remix Icon](https://remixicon.com) (Apache 2.0) y [Devicon](https://devicon.dev) (MIT). Antes cargaba las librerías enteras por CDN y eran más de 1,5 MB.
 - Se despliega en Vercel cada vez que subo cambios a `main`.
 
 ## Estructura
@@ -25,6 +25,13 @@ Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 - Cada sección tiene su bloque marcado con `/* ── nombre ── */` y el responsive va al final del archivo.
 - En `script.js` hay una función para cada cosa: `toggleMenu`, `onScroll`, `countUp` y `showToast`.
 - Las animaciones al bajar funcionan con la clase `.reveal`. El JS le pone `.visible` cuando el elemento entra en pantalla y el CSS hace la animación.
+- Para usar un icono: `<svg class="icon"><use href="/assets/icons.svg#github"/></svg>`. Mide 1em, así que se le cambia el tamaño con `font-size`.
+
+## Rendimiento
+
+- Nada de `backdrop-filter` ni animaciones infinitas sobre textos grandes: hacían que el scroll fuera a tirones.
+- La foto de "Sobre mí" ya viene en blanco y negro y fundida con el fondo, así no hace falta filtro en el CSS.
+- La foto de portada se pide con `fetchpriority="high"` porque es lo primero que se ve.
 
 ## Probarla en local
 

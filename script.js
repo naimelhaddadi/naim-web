@@ -11,10 +11,10 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 
 // ── menu movil ────────────────────────────────────────────
+// el icono de abrir/cerrar lo cambia el css con la clase .open
 function toggleMenu(open) {
   nav.classList.toggle('open', open);
   menuBtn.setAttribute('aria-expanded', open);
-  menuBtn.innerHTML = open ? '<i class="ri-close-line"></i>' : '<i class="ri-menu-line"></i>';
 }
 
 menuBtn.addEventListener('click', () => {
@@ -28,6 +28,8 @@ menuLinks.forEach(link => {
 
 
 // ── scroll: fondo de la barra y parallax de la foto ───────
+let scrollPending = false;
+
 function onScroll() {
   // cuando bajamos un poco le ponemos fondo a la barra
   nav.classList.toggle('scrolled', window.scrollY > 40);
@@ -36,9 +38,18 @@ function onScroll() {
   if (!reduceMotion && window.scrollY < window.innerHeight) {
     heroPhoto.style.transform = `translateY(${window.scrollY * 0.25}px)`;
   }
+
+  scrollPending = false;
 }
 
-window.addEventListener('scroll', onScroll);
+// el evento scroll salta muchas veces por segundo,
+// asi que solo actualizamos una vez por frame con requestAnimationFrame
+window.addEventListener('scroll', () => {
+  if (scrollPending) return;
+  scrollPending = true;
+  requestAnimationFrame(onScroll);
+}, { passive: true });
+
 onScroll();
 
 

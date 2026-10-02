@@ -24,10 +24,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <!-- iconos: remix icon para la interfaz y devicon para los logos de tecnologias -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
-
   <link rel="stylesheet" href="/style.css">
 </head>
 
@@ -47,10 +43,11 @@
         <a href="#contacto" class="nav__link">Contacto</a>
       </nav>
 
-      <a href="#contacto" class="btn btn--pill nav__cta">Hablemos <i class="ri-arrow-right-up-line"></i></a>
+      <a href="#contacto" class="btn btn--pill nav__cta">Hablemos <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></a>
 
       <button class="nav__toggle" id="menu-btn" aria-label="Abrir menú" aria-expanded="false">
-        <i class="ri-menu-line"></i>
+        <svg class="icon icon--menu" aria-hidden="true"><use href="/assets/icons.svg#menu"/></svg>
+        <svg class="icon icon--close" aria-hidden="true"><use href="/assets/icons.svg#close"/></svg>
       </button>
     </div>
   </header>
@@ -60,11 +57,8 @@
     <!-- ── hero: foto de noche con el degradado a negro ─────── -->
     <section class="hero" id="inicio">
       <div class="hero__photo">
-        <img src="/assets/naim-noche.webp" alt="Naim El Haddadi trabajando con su portátil de noche en Madrid" width="1086" height="1448">
+        <img src="/assets/naim-noche.webp" alt="Naim El Haddadi trabajando con su portátil de noche en Madrid" width="1086" height="1448" fetchpriority="high">
       </div>
-
-      <i class="ri-sparkling-2-fill hero__star hero__star--1"></i>
-      <i class="ri-sparkling-2-fill hero__star hero__star--2"></i>
 
       <div class="container hero__content">
         <p class="eyebrow">Desarrollador backend junior · Madrid</p>
@@ -82,21 +76,21 @@
         </p>
 
         <div class="hero__buttons">
-          <a href="#proyectos" class="btn btn--light">Ver proyectos <i class="ri-arrow-right-up-line"></i></a>
-          <a href="/assets/CV_Naim_El_Haddadi.pdf" class="btn btn--ghost" download>Descargar CV <i class="ri-download-2-line"></i></a>
+          <a href="#proyectos" class="btn btn--slide"><span>Ver proyectos <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span></a>
+          <a href="/assets/CV_Naim_El_Haddadi.pdf" class="btn btn--download" download>Descargar CV <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#download"/></svg></a>
         </div>
 
         <div class="hero__social">
-          <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-line"></i></a>
-          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
-          <a href="mailto:naimhaddadi15@gmail.com" aria-label="Email"><i class="ri-mail-line"></i></a>
+          <a href="https://github.com/naimelhaddadi" class="social-link" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"/></svg><span class="social-link__tip">GitHub</span></a>
+          <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" class="social-link" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#linkedin"/></svg><span class="social-link__tip">LinkedIn</span></a>
+          <a href="mailto:naimhaddadi15@gmail.com" class="social-link"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg><span class="social-link__tip">Email</span></a>
         </div>
       </div>
 
       <a href="#contacto" class="hero__badge">
         <span class="hero__badge-small">Disponible para</span>
         <span class="hero__badge-big">Prácticas y junior</span>
-        <span class="hero__badge-small">Incorporación inmediata <i class="ri-arrow-right-up-line"></i></span>
+        <span class="hero__badge-small">Incorporación inmediata <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
       </a>
     </section>
 
@@ -104,22 +98,22 @@
     <section class="container">
       <div class="stats reveal">
         <div class="stat">
-          <i class="ri-graduation-cap-line"></i>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#graduation"/></svg>
           <p class="stat__number" data-count="9.60" data-decimals="2">9,60</p>
           <p class="stat__label">Media en DAW</p>
         </div>
         <div class="stat">
-          <i class="ri-database-2-line"></i>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>
           <p class="stat__number" data-count="10" data-prefix="+">+10</p>
           <p class="stat__label">Entidades en SQL Server</p>
         </div>
         <div class="stat">
-          <i class="ri-github-line"></i>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"/></svg>
           <p class="stat__number" data-count="3">3</p>
           <p class="stat__label">Proyectos destacados</p>
         </div>
         <div class="stat">
-          <i class="ri-translate-2"></i>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#translate"/></svg>
           <p class="stat__number" data-count="4">4</p>
           <p class="stat__label">Idiomas</p>
         </div>
@@ -144,11 +138,11 @@
           <!-- mi stack principal en pequeño -->
           <div class="about__stack">
             <span class="about__stack-label">Stack</span>
-            <span class="chip"><i class="devicon-java-plain"></i>Java</span>
-            <span class="chip"><i class="devicon-spring-plain"></i>Spring Boot</span>
-            <span class="chip"><i class="ri-database-2-line"></i>SQL</span>
-            <span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span>
-            <span class="chip"><i class="devicon-python-plain"></i>Python</span>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-java"/></svg>Java</span>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-spring"/></svg>Spring Boot</span>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>SQL</span>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-javascript"/></svg>JavaScript</span>
+            <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-python"/></svg>Python</span>
           </div>
 
           <p>Aprendo rápido, me comprometo y entrego.</p>
@@ -162,7 +156,8 @@
         </div>
 
         <div class="about__photo reveal">
-          <img src="/assets/naim-retrato.jpg" alt="Retrato de Naim El Haddadi" width="952" height="1269" loading="lazy">
+          <!-- el blanco y negro y el difuminado ya vienen en la imagen, asi no hace falta filtro en el css -->
+          <img src="/assets/naim-retrato-bn.webp" alt="Retrato de Naim El Haddadi" width="952" height="1190" loading="lazy" decoding="async">
         </div>
       </div>
     </section>
@@ -200,7 +195,7 @@
                   <li>Hice la interfaz web de captura de datos que conecta la operativa con la base de datos en tiempo real.</li>
                 </ul>
                 <a href="/assets/recomendacion-lh.pdf" class="link" target="_blank" rel="noopener">
-                  <i class="ri-file-text-line"></i> Carta de recomendación de la dirección
+                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#file"/></svg> Carta de recomendación de la dirección
                 </a>
                 <div class="tags"><span>SQL Server</span><span>T-SQL</span><span>Procedimientos</span><span>Triggers</span></div>
               </div>
@@ -212,7 +207,7 @@
           <h2 class="title reveal">Formación</h2>
           <ul class="studies reveal">
             <li>
-              <i class="ri-graduation-cap-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#graduation"/></svg>
               <div>
                 <h3>Grado Superior en DAW</h3>
                 <p>Desarrollo de Aplicaciones Web · 09/2025 – en curso</p>
@@ -220,14 +215,14 @@
               </div>
             </li>
             <li>
-              <i class="ri-award-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#award"/></svg>
               <div>
                 <h3>Code in Place 2026</h3>
                 <p>Stanford University · Python · mayo 2026</p>
               </div>
             </li>
             <li>
-              <i class="ri-shield-check-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
               <div>
                 <h3>Specialist Jr. Cybersecurity OT</h3>
                 <p>CISCO Networking Academy</p>
@@ -253,13 +248,13 @@
       <div class="container">
         <div class="section__head reveal">
           <h2 class="title">Proyectos destacados</h2>
-          <a href="https://github.com/naimelhaddadi" class="link" target="_blank" rel="noopener">Ver mi GitHub <i class="ri-arrow-right-up-line"></i></a>
+          <a href="https://github.com/naimelhaddadi" class="link" target="_blank" rel="noopener">Ver mi GitHub <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></a>
         </div>
 
         <div class="projects">
           <article class="project reveal">
             <div class="project__cover">
-              <i class="ri-gamepad-line project__icon"></i>
+              <svg class="icon project__icon" aria-hidden="true"><use href="/assets/icons.svg#gamepad"/></svg>
               <span class="project__chip">9 endpoints · CRUD completo</span>
             </div>
             <div class="project__info">
@@ -267,12 +262,12 @@
               <h3><a href="https://github.com/naimelhaddadi/GameStore_SpringBoot" target="_blank" rel="noopener">GameStore</a></h3>
               <p>API REST de un catálogo de videojuegos con arquitectura en capas, validación y tests con JUnit 5 y Mockito.</p>
             </div>
-            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+            <span class="project__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
           </article>
 
           <article class="project reveal">
             <div class="project__cover">
-              <i class="ri-graduation-cap-line project__icon"></i>
+              <svg class="icon project__icon" aria-hidden="true"><use href="/assets/icons.svg#graduation"/></svg>
               <span class="project__chip">8 endpoints · estadísticas</span>
             </div>
             <div class="project__info">
@@ -280,7 +275,7 @@
               <h3><a href="https://github.com/naimelhaddadi/Spring-Boot-Academy-Project" target="_blank" rel="noopener">Academia API</a></h3>
               <p>API REST para gestionar alumnos: filtro por curso, ranking por nota y estadísticas de la clase.</p>
             </div>
-            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+            <span class="project__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
           </article>
 
           <article class="project reveal">
@@ -296,7 +291,7 @@
               <h3><a href="https://github.com/naimelhaddadi/financial-market-simulator" target="_blank" rel="noopener">Market Simulator</a></h3>
               <p>Juego de bolsa por turnos: 12 meses, 10.000 $ y noticias que mueven los precios. Proyecto final de Code in Place 2026.</p>
             </div>
-            <span class="project__arrow" aria-hidden="true"><i class="ri-arrow-right-up-line"></i></span>
+            <span class="project__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
           </article>
         </div>
       </div>
@@ -310,32 +305,32 @@
           <h2 class="title">Qué puedo aportar</h2>
           <div class="capabilities">
             <div class="capability">
-              <i class="ri-code-s-slash-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#code"/></svg>
               <h3>APIs REST</h3>
               <p>Spring Boot por capas, con validación y control de errores.</p>
             </div>
             <div class="capability">
-              <i class="ri-database-2-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>
               <h3>Bases de datos</h3>
               <p>Modelos relacionales en SQL Server y PostgreSQL, procedimientos y triggers.</p>
             </div>
             <div class="capability">
-              <i class="ri-test-tube-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#test"/></svg>
               <h3>Testing</h3>
               <p>Tests unitarios con JUnit 5 y Mockito.</p>
             </div>
             <div class="capability">
-              <i class="ri-flow-chart"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#flow"/></svg>
               <h3>Automatización</h3>
               <p>Procesos de negocio con n8n, webhooks y APIs externas.</p>
             </div>
             <div class="capability">
-              <i class="ri-layout-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#layout"/></svg>
               <h3>Webs</h3>
               <p>HTML, CSS y JavaScript para webs corporativas.</p>
             </div>
             <div class="capability">
-              <i class="ri-server-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#server"/></svg>
               <h3>Servidores</h3>
               <p>Linux, VPS y Docker para dejarlo todo en producción.</p>
             </div>
@@ -347,35 +342,35 @@
         <!-- los mismos grupos que en el cv -->
         <div class="skill-groups">
           <div class="skill-group reveal">
-            <h3><i class="ri-brackets-line"></i>Lenguajes</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#brackets"/></svg>Lenguajes</h3>
             <div class="chips">
-              <span class="chip"><i class="devicon-java-plain"></i>Java</span>
-              <span class="chip"><i class="devicon-python-plain"></i>Python</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-java"/></svg>Java</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-python"/></svg>Python</span>
               <span class="chip">SQL / T-SQL</span>
-              <span class="chip"><i class="devicon-javascript-plain"></i>JavaScript</span>
-              <span class="chip"><i class="devicon-php-plain"></i>PHP</span>
-              <span class="chip"><i class="devicon-html5-plain"></i>HTML5</span>
-              <span class="chip"><i class="devicon-css3-plain"></i>CSS3</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-javascript"/></svg>JavaScript</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-php"/></svg>PHP</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-html"/></svg>HTML5</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-css"/></svg>CSS3</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <h3><i class="ri-stack-line"></i>Backend</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#stack"/></svg>Backend</h3>
             <div class="chips">
-              <span class="chip"><i class="devicon-spring-plain"></i>Spring Boot</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-spring"/></svg>Spring Boot</span>
               <span class="chip">Spring Web MVC</span>
               <span class="chip">Spring Data JPA</span>
               <span class="chip">Bean Validation</span>
               <span class="chip">APIs REST</span>
-              <span class="chip"><i class="devicon-hibernate-plain"></i>JPA / Hibernate</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-hibernate"/></svg>JPA / Hibernate</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <h3><i class="ri-database-2-line"></i>Bases de datos</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>Bases de datos</h3>
             <div class="chips">
-              <span class="chip"><i class="devicon-microsoftsqlserver-plain"></i>SQL Server</span>
-              <span class="chip"><i class="devicon-postgresql-plain"></i>PostgreSQL</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-sqlserver"/></svg>SQL Server</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-postgresql"/></svg>PostgreSQL</span>
               <span class="chip">H2</span>
               <span class="chip">Modelado relacional</span>
               <span class="chip">Stored procedures</span>
@@ -384,15 +379,15 @@
           </div>
 
           <div class="skill-group reveal">
-            <h3><i class="ri-test-tube-line"></i>Testing</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#test"/></svg>Testing</h3>
             <div class="chips">
-              <span class="chip"><i class="devicon-junit-plain"></i>JUnit 5</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-junit"/></svg>JUnit 5</span>
               <span class="chip">Mockito</span>
             </div>
           </div>
 
           <div class="skill-group reveal">
-            <h3><i class="ri-flow-chart"></i>Automatización</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#flow"/></svg>Automatización</h3>
             <div class="chips">
               <span class="chip">n8n</span>
               <span class="chip">Webhooks</span>
@@ -402,17 +397,17 @@
           </div>
 
           <div class="skill-group reveal">
-            <h3><i class="ri-terminal-box-line"></i>Entorno</h3>
+            <h3><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#terminal"/></svg>Entorno</h3>
             <div class="chips">
-              <span class="chip"><i class="devicon-git-plain"></i>Git</span>
-              <span class="chip"><i class="devicon-github-original"></i>GitHub</span>
-              <span class="chip"><i class="devicon-maven-plain"></i>Maven</span>
-              <span class="chip"><i class="devicon-docker-plain"></i>Docker</span>
-              <span class="chip"><i class="devicon-postman-plain"></i>Postman</span>
-              <span class="chip"><i class="devicon-intellij-plain"></i>IntelliJ IDEA</span>
-              <span class="chip"><i class="devicon-eclipse-plain"></i>Eclipse</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-git"/></svg>Git</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-github"/></svg>GitHub</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-maven"/></svg>Maven</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-docker"/></svg>Docker</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-postman"/></svg>Postman</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-intellij"/></svg>IntelliJ IDEA</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-eclipse"/></svg>Eclipse</span>
               <span class="chip">SSMS</span>
-              <span class="chip"><i class="devicon-linux-plain"></i>Linux</span>
+              <span class="chip"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-linux"/></svg>Linux</span>
               <span class="chip">VPS</span>
             </div>
           </div>
@@ -428,31 +423,31 @@
         <ol class="process reveal">
           <li class="step">
             <span class="step__number">01</span>
-            <i class="ri-search-eye-line"></i>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#search"/></svg>
             <h3>Entender</h3>
             <p>Hablo con quien lo va a usar y aclaro qué hay que resolver.</p>
           </li>
           <li class="step">
             <span class="step__number">02</span>
-            <i class="ri-node-tree"></i>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#tree"/></svg>
             <h3>Modelar</h3>
             <p>Diseño las tablas y sus relaciones antes de tocar la API.</p>
           </li>
           <li class="step">
             <span class="step__number">03</span>
-            <i class="ri-hammer-line"></i>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#hammer"/></svg>
             <h3>Construir</h3>
             <p>Desarrollo por capas: controller, service y repository.</p>
           </li>
           <li class="step">
             <span class="step__number">04</span>
-            <i class="ri-checkbox-circle-line"></i>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#check"/></svg>
             <h3>Probar</h3>
             <p>Tests con JUnit y Mockito, y los endpoints con Postman.</p>
           </li>
           <li class="step">
             <span class="step__number">05</span>
-            <i class="ri-rocket-2-line"></i>
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#rocket"/></svg>
             <h3>Desplegar</h3>
             <p>Lo subo a producción y me encargo de mantenerlo.</p>
           </li>
@@ -471,20 +466,20 @@
               Busco prácticas o mi primer puesto como desarrollador backend.
               Puedo empezar ya en Madrid y suelo responder en menos de 24 horas.
             </p>
-            <a href="mailto:naimhaddadi15@gmail.com" class="btn btn--light">Escríbeme <i class="ri-arrow-right-up-line"></i></a>
+            <a href="mailto:naimhaddadi15@gmail.com" class="btn btn--slide"><span>Escríbeme <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span></a>
           </div>
 
           <ul class="contact__list">
             <li>
-              <i class="ri-mail-line"></i>
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg>
               <button class="contact__copy" id="copy-email" data-email="naimhaddadi15@gmail.com">
-                naimhaddadi15@gmail.com <i class="ri-file-copy-line"></i>
+                naimhaddadi15@gmail.com <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#copy"/></svg>
               </button>
             </li>
-            <li><i class="ri-linkedin-box-line"></i><a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener">LinkedIn</a></li>
-            <li><i class="ri-github-line"></i><a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">github.com/naimelhaddadi</a></li>
-            <li><i class="ri-download-2-line"></i><a href="/assets/CV_Naim_El_Haddadi.pdf" download>Descargar CV (PDF)</a></li>
-            <li><i class="ri-map-pin-line"></i>Madrid, España</li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#linkedin"/></svg><a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"/></svg><a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener">github.com/naimelhaddadi</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#download"/></svg><a href="/assets/CV_Naim_El_Haddadi.pdf" download>Descargar CV (PDF)</a></li>
+            <li><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#pin"/></svg>Madrid, España</li>
           </ul>
         </div>
       </div>
@@ -497,9 +492,9 @@
     <div class="container footer__inner">
       <p>© <span id="year">2026</span> Naim El Haddadi</p>
       <div class="footer__social">
-        <a href="https://github.com/naimelhaddadi" target="_blank" rel="noopener" aria-label="GitHub"><i class="ri-github-line"></i></a>
-        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="ri-linkedin-box-line"></i></a>
-        <a href="mailto:naimhaddadi15@gmail.com" aria-label="Email"><i class="ri-mail-line"></i></a>
+        <a href="https://github.com/naimelhaddadi" class="social-link" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"/></svg><span class="social-link__tip">GitHub</span></a>
+        <a href="https://www.linkedin.com/in/naim-el-haddadi-173245304" class="social-link" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#linkedin"/></svg><span class="social-link__tip">LinkedIn</span></a>
+        <a href="mailto:naimhaddadi15@gmail.com" class="social-link"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#mail"/></svg><span class="social-link__tip">Email</span></a>
       </div>
     </div>
   </footer>
