@@ -4,6 +4,7 @@ const menuBtn = document.getElementById('menu-btn');
 const menuLinks = document.querySelectorAll('.nav__link');
 const heroPhoto = document.querySelector('.hero__photo');
 const copyBtn = document.getElementById('copy-email');
+const writeBtn = document.getElementById('write-btn');
 const toast = document.getElementById('toast');
 
 // si el usuario tiene las animaciones desactivadas no movemos nada
@@ -121,21 +122,31 @@ document.querySelectorAll('.reveal').forEach(element => {
 
 
 // ── copiar el email ───────────────────────────────────────
+const email = copyBtn.dataset.email;
+
 function showToast(text) {
   toast.textContent = text;
   toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+function copyEmail() {
+  return navigator.clipboard.writeText(email)
+    .then(() => showToast('Email copiado: ' + email));
 }
 
 copyBtn.addEventListener('click', () => {
-  const email = copyBtn.dataset.email;
+  // si el navegador no deja copiar, abrimos el correo directamente
+  copyEmail().catch(() => {
+    window.location.href = 'mailto:' + email;
+  });
+});
 
-  navigator.clipboard.writeText(email)
-    .then(() => showToast('Email copiado'))
-    // si el navegador no deja copiar, abrimos el correo directamente
-    .catch(() => {
-      window.location.href = 'mailto:' + email;
-    });
+// "escribeme" abre el correo (mailto), pero si el ordenador no tiene
+// una app de correo configurada no pasa nada, asi que tambien copiamos el email.
+// si el navegador no deja copiar (pasa en algunos navegadores de apps), al menos lo enseñamos
+writeBtn.addEventListener('click', () => {
+  copyEmail().catch(() => showToast('Mi email: ' + email));
 });
 
 
