@@ -183,12 +183,15 @@ button {
   transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
 
-.btn--slide:hover::before {
-  transform: translate3d(100%, 0, 0);
-}
+/* solo con raton: en el movil el boton se quedaba azul despues de tocarlo */
+@media (hover: hover) {
+  .btn--slide:hover::before {
+    transform: translate3d(100%, 0, 0);
+  }
 
-.btn--slide:hover span {
-  color: #ffffff;
+  .btn--slide:hover span {
+    color: #ffffff;
+  }
 }
 
 .btn--slide:active {
