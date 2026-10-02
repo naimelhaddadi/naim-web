@@ -119,7 +119,17 @@ button {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: shine 7s ease-in-out infinite alternate;
+  animation: shine 2.5s ease 0.6s both; /* solo una vez al cargar, si se repite sin parar da tirones */
+}
+
+/* iconos svg: miden lo mismo que el texto (1em) y cogen su color */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
 }
 
 .btn {
@@ -135,26 +145,75 @@ button {
   transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s, border-color 0.3s;
 }
 
-.btn i {
+.btn .icon {
   font-size: 16px;
 }
 
-.btn--light {
-  background: linear-gradient(180deg, #ffffff, #d4d7dc);
+/* boton principal: una capa plateada inclinada tapa el degradado azul
+   y al pasar el raton se va hacia la derecha (idea de uiverse.io, de adamgiebl) */
+.btn--slide {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  border-radius: 8px;
+  background: linear-gradient(to right, var(--accent), #1b4f86);
   color: var(--bg);
 }
 
-.btn--light:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 30px rgba(255, 255, 255, 0.12);
+/* el texto va en un span para quedar por encima de la capa */
+.btn--slide span {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 24px;
+  transition: color 0.4s;
 }
 
-.btn--ghost {
-  border: 1px solid var(--line-strong);
+.btn--slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10%;
+  width: 120%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff, #d4d7dc);
+  transform: skew(30deg);
+  transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
 }
 
-.btn--ghost:hover {
-  border-color: var(--text);
+.btn--slide:hover::before {
+  transform: translate3d(100%, 0, 0);
+}
+
+.btn--slide:hover span {
+  color: #ffffff;
+}
+
+.btn--slide:active {
+  transform: scale(0.95);
+}
+
+/* boton de descargar: se levanta y deja una sombra blanca debajo (idea de uiverse.io, de cybrejon) */
+.btn--download {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  transition: 0.2s;
+}
+
+.btn--download:hover {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.39));
+  border-color: rgba(255, 255, 255, 0.62);
+  box-shadow: 0 6px rgba(255, 255, 255, 0.62);
+  transform: translateY(-6px);
+}
+
+.btn--download:active {
+  box-shadow: none;
+  transform: translateY(2px);
 }
 
 .btn--pill {
@@ -167,6 +226,46 @@ button {
 .btn--pill:hover {
   background: var(--text);
   color: var(--bg);
+}
+
+/* iconos de redes: el icono crece y sale una etiqueta encima (idea de uiverse.io, de EcheverriaJesus) */
+.social-link {
+  position: relative;
+  display: inline-flex;
+}
+
+.social-link .icon {
+  transition: transform 0.2s, color 0.2s;
+}
+
+.social-link:hover .icon {
+  color: var(--accent);
+  transform: scale(1.25);
+}
+
+.social-link__tip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  z-index: 20;
+  padding: 6px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #111111;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  transform: translateX(-50%) scale(0);
+  transform-origin: bottom center;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* tambien sale con el teclado (tab), no solo con el raton */
+.social-link:hover .social-link__tip,
+.social-link:focus-visible .social-link__tip {
+  transform: translateX(-50%) scale(1);
 }
 
 .link {
@@ -214,9 +313,9 @@ button {
 }
 
 /* la clase scrolled la pone el js cuando bajamos un poco */
+/* sin desenfoque (backdrop-filter): en una barra fija da tirones al hacer scroll */
 .nav.scrolled {
-  background: rgba(10, 11, 13, 0.82);
-  backdrop-filter: blur(12px);
+  background: rgba(10, 11, 13, 0.95);
   border-color: var(--line);
 }
 
@@ -265,6 +364,16 @@ button {
   font-size: 24px;
 }
 
+/* se ve el icono de abrir o el de cerrar segun si el menu esta abierto */
+.nav__toggle .icon--close,
+.nav.open .nav__toggle .icon--menu {
+  display: none;
+}
+
+.nav.open .nav__toggle .icon--close {
+  display: inline-block;
+}
+
 
 /* ── hero ───────────────────────────────────────────────── */
 .hero {
@@ -277,7 +386,9 @@ button {
 }
 
 /* la foto ocupa la parte derecha */
+/* will-change la pone en su propia capa y el parallax no tiene que repintarla */
 .hero__photo {
+  will-change: transform;
   position: absolute;
   top: 0;
   right: 0;
@@ -353,10 +464,6 @@ button {
   color: var(--text-soft);
 }
 
-.hero__social a:hover {
-  color: var(--text);
-}
-
 /* entrada del hero: cada bloque sube un poco mas tarde que el anterior */
 .hero__content > * {
   animation: fadeUp 0.9s ease both;
@@ -401,27 +508,6 @@ button {
   color: var(--text);
 }
 
-/* estrellitas que parpadean */
-.hero__star {
-  position: absolute;
-  z-index: 1;
-  color: var(--text);
-  animation: twinkle 3s ease-in-out infinite;
-}
-
-.hero__star--1 {
-  top: 26%;
-  right: 12%;
-  font-size: 20px;
-}
-
-.hero__star--2 {
-  top: 20%;
-  right: 46%;
-  font-size: 12px;
-  animation-delay: 1.5s;
-}
-
 
 /* ── estadisticas ───────────────────────────────────────── */
 /* la caja sube un poco y se monta encima del hero */
@@ -432,8 +518,7 @@ button {
   grid-template-columns: repeat(4, 1fr);
   margin-top: -90px;
   padding: 34px 0;
-  background: rgba(18, 20, 24, 0.75);
-  backdrop-filter: blur(14px);
+  background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
@@ -447,7 +532,7 @@ button {
   border-right: none;
 }
 
-.stat i {
+.stat .icon {
   font-size: 22px;
   color: var(--text-soft);
 }
@@ -532,20 +617,9 @@ button {
   color: var(--text-dim);
 }
 
-/* foto en blanco y negro que se funde con el fondo por todos los lados */
+/* la imagen ya viene en blanco y negro y fundida con el fondo (assets/naim-retrato-bn.webp) */
 .about__photo img {
   width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 35%;
-  filter: grayscale(1) contrast(1.2) brightness(0.62);
-  -webkit-mask-image: radial-gradient(closest-side at 50% 45%, #000 30%, transparent 100%);
-  mask-image: radial-gradient(closest-side at 50% 45%, #000 30%, transparent 100%);
-  transition: filter 0.8s;
-}
-
-.about__photo:hover img {
-  filter: grayscale(0.2) contrast(1.05) brightness(0.8);
 }
 
 
@@ -650,15 +724,14 @@ button {
   padding-top: 0;
 }
 
-.studies i {
-  display: grid;
-  place-items: center;
+/* el padding hace que el dibujo quede de 20px dentro del cuadrado de 44px */
+.studies .icon {
   flex: none;
   width: 44px;
   height: 44px;
+  padding: 12px;
   border-radius: 10px;
   background: rgba(74, 168, 255, 0.08);
-  font-size: 20px;
   color: var(--accent);
 }
 
@@ -795,11 +868,7 @@ button {
 
 .project__icon {
   font-size: 86px;
-  background: var(--metal);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  filter: drop-shadow(0 10px 30px rgba(74, 168, 255, 0.25));
+  color: #d7dade;
   transition: transform 0.6s;
 }
 
@@ -834,8 +903,7 @@ button {
   padding: 6px 12px;
   border: 1px solid var(--line-strong);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
+  background: rgba(10, 11, 13, 0.6);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -917,14 +985,13 @@ button {
   column-gap: 14px;
 }
 
-.capability i {
+.capability .icon {
   grid-row: span 2;
   font-size: 26px;
-  line-height: 1;
   transition: color 0.3s;
 }
 
-.capability:hover i {
+.capability:hover .icon {
   color: var(--accent);
 }
 
@@ -974,7 +1041,7 @@ button {
   text-transform: uppercase;
 }
 
-.skill-group h3 i {
+.skill-group h3 .icon {
   font-size: 18px;
   color: var(--accent);
 }
@@ -999,7 +1066,7 @@ button {
   transition: border-color 0.3s;
 }
 
-.chip i {
+.chip .icon {
   font-size: 16px;
   color: var(--text-soft);
   transition: color 0.3s;
@@ -1009,7 +1076,7 @@ button {
   border-color: var(--line-strong);
 }
 
-.chip:hover i {
+.chip:hover .icon {
   color: var(--accent);
 }
 
@@ -1078,7 +1145,7 @@ button {
   -webkit-text-stroke-color: var(--accent);
 }
 
-.step i {
+.step .icon {
   display: block;
   margin-bottom: 14px;
   font-size: 26px;
@@ -1162,7 +1229,7 @@ button {
   border-bottom: none;
 }
 
-.contact__list i {
+.contact__list .icon {
   font-size: 18px;
   color: var(--text);
 }
@@ -1180,7 +1247,7 @@ button {
   font-size: 14px;
 }
 
-.contact__copy i {
+.contact__copy .icon {
   font-size: 15px;
   color: var(--text-soft);
 }
@@ -1206,10 +1273,6 @@ button {
   display: flex;
   gap: 16px;
   font-size: 18px;
-}
-
-.footer__social a:hover {
-  color: var(--text);
 }
 
 
@@ -1267,17 +1330,6 @@ button {
 @keyframes shine {
   from { background-position: 0% 0; }
   to { background-position: 100% 0; }
-}
-
-@keyframes twinkle {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(0.7);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* si el usuario tiene las animaciones desactivadas en su sistema, las quitamos */
@@ -1386,8 +1438,7 @@ button {
     margin-top: -70px;
   }
 
-  .hero__badge,
-  .hero__star--2 {
+  .hero__badge {
     display: none;
   }
 
