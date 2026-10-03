@@ -30,7 +30,7 @@ Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 ## Rendimiento
 
 - Nada de `backdrop-filter` ni animaciones infinitas sobre textos grandes: hacían que el scroll fuera a tirones.
-- La foto de "Sobre mí" ya viene en blanco y negro y fundida con el fondo, así no hace falta filtro en el CSS.
+- Las fotos ya vienen preparadas: la de portada recortada (sin fondo) y la de "Sobre mí" en blanco y negro, con sombra y fundida con el fondo. Así no hace falta ningún filtro en el CSS.
 - La foto de portada se pide con `fetchpriority="high"` porque es lo primero que se ve.
 
 ## Probarla en local

@@ -407,16 +407,27 @@ button {
   animation: zoomOut 1.8s ease backwards;
 }
 
-/* el difuminado a negro: por la izquierda, por abajo y un poco por arriba */
-/* el de la izquierda es corto para que no tape el portatil */
+/* la foto ya viene recortada (sin fondo), asi que solo la fundimos por abajo */
 .hero__photo::after {
   content: '';
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(90deg, var(--bg) 0%, rgba(10, 11, 13, 0.45) 12%, transparent 30%),
-    linear-gradient(0deg, var(--bg) 0%, transparent 22%),
-    linear-gradient(180deg, rgba(10, 11, 13, 0.6) 0%, transparent 22%);
+  background: linear-gradient(0deg, var(--bg) 0%, transparent 22%);
+}
+
+/* aro fino con un brillo suave detras de la cabeza */
+.hero__photo::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 26%;
+  left: 58%;
+  width: 520px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(74, 168, 255, 0.12) 0%, transparent 62%);
+  transform: translate(-50%, -50%);
 }
 
 .hero__content {
@@ -558,11 +569,14 @@ button {
 
 
 /* ── sobre mi ───────────────────────────────────────────── */
-.about__grid {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 60px;
-  align-items: center;
+.about__inner {
+  position: relative;
+}
+
+.about__text {
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
 }
 
 .about__email {
@@ -620,9 +634,23 @@ button {
   color: var(--text-dim);
 }
 
-/* la imagen ya viene en blanco y negro y fundida con el fondo (assets/naim-retrato-bn.webp) */
+/* la foto va pegada a la derecha y ocupa todo el alto de la seccion.
+   el blanco y negro, la sombra y el difuminado ya vienen en assets/naim-sobre-mi.webp */
+.about__photo {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  bottom: -60px;
+  width: 55%;
+}
+
 .about__photo img {
-  width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
 }
 
 
@@ -1432,9 +1460,11 @@ button {
   }
 
   .hero__photo::after {
-    background:
-      linear-gradient(0deg, var(--bg) 0%, transparent 32%),
-      linear-gradient(180deg, rgba(10, 11, 13, 0.6) 0%, transparent 22%);
+    background: linear-gradient(0deg, var(--bg) 0%, transparent 32%);
+  }
+
+  .hero__photo::before {
+    display: none;
   }
 
   .hero__content {
@@ -1454,13 +1484,24 @@ button {
     border-right: none;
   }
 
-  .about__grid,
   .resume {
     grid-template-columns: 1fr;
   }
 
+  /* en movil la foto de "sobre mi" va debajo del texto, centrada */
   .about__photo {
-    max-width: 440px;
+    position: relative;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    height: 440px;
+    margin-top: 32px;
+  }
+
+  .about__photo img {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
   }
 
   .projects {
