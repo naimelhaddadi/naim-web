@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Naim El Haddadi — Desarrollador Backend Junior | Java · Spring Boot · SQL Server</title>
-  <meta name="description" content="Desarrollador backend junior en Madrid. Java, Spring Boot y SQL Server. Estudiante de DAW con 9,60 de media y trabajo en producción. Disponible para prácticas o primer puesto junior.">
+  <meta name="description" content="Desarrollador backend junior en Madrid. Java, Spring Boot y SQL Server. APIs REST, bases de datos y automatizaciones funcionando en producción. Disponible para prácticas o primer puesto junior.">
   <meta name="author" content="Naim El Haddadi">
   <meta name="theme-color" content="#0a0b0d">
   <link rel="canonical" href="https://naimelhaddadi.com/">
@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://naimelhaddadi.com/">
   <meta property="og:title" content="Naim El Haddadi — Desarrollador Backend Junior">
-  <meta property="og:description" content="Java · Spring Boot · SQL Server. Trabajo en producción, carta de recomendación y 9,60 de media en DAW. Madrid.">
+  <meta property="og:description" content="Java · Spring Boot · SQL Server. Proyectos, trabajo en producción y carta de recomendación. Madrid.">
   <meta property="og:image" content="https://naimelhaddadi.com/assets/naim-retrato.jpg">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -37,8 +37,8 @@
       <nav class="nav__menu" id="menu">
         <a href="#inicio" class="nav__link">Inicio</a>
         <a href="#sobre-mi" class="nav__link">Sobre mí</a>
-        <a href="#experiencia" class="nav__link">Experiencia</a>
         <a href="#proyectos" class="nav__link">Proyectos</a>
+        <a href="#experiencia" class="nav__link">Experiencia</a>
         <a href="#stack" class="nav__link">Stack</a>
         <a href="#contacto" class="nav__link">Contacto</a>
       </nav>
@@ -93,30 +93,18 @@
       </a>
     </section>
 
-    <!-- ── estadisticas (los numeros se animan con el js) ────── -->
+    <!-- ── franja con lo que uso a diario ───────────────────── -->
     <section class="container">
-      <div class="stats reveal">
-        <div class="stat">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#graduation"/></svg>
-          <p class="stat__number" data-count="9.60" data-decimals="2">9,60</p>
-          <p class="stat__label">Media en DAW</p>
-        </div>
-        <div class="stat">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#database"/></svg>
-          <p class="stat__number" data-count="10" data-prefix="+">+10</p>
-          <p class="stat__label">Entidades en SQL Server</p>
-        </div>
-        <div class="stat">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#github"/></svg>
-          <p class="stat__number" data-count="3">3</p>
-          <p class="stat__label">Proyectos destacados</p>
-        </div>
-        <div class="stat">
-          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#translate"/></svg>
-          <p class="stat__number" data-count="4">4</p>
-          <p class="stat__label">Idiomas</p>
-        </div>
-      </div>
+      <ul class="tech-strip reveal" aria-label="Tecnologías que uso">
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-java"/></svg>Java</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-spring"/></svg>Spring Boot</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-sqlserver"/></svg>SQL Server</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-postgresql"/></svg>PostgreSQL</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-python"/></svg>Python</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-javascript"/></svg>JavaScript</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#flow"/></svg>n8n</li>
+        <li class="tech"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#logo-linux"/></svg>Linux</li>
+      </ul>
     </section>
 
     <!-- ── sobre mi ─────────────────────────────────────────── -->
@@ -127,7 +115,7 @@
           <a href="mailto:naimhaddadi15@gmail.com" class="about__email">naimhaddadi15@gmail.com</a>
 
           <p>
-           Desarrollador Backend centrado en Java (Spring Boot), Python y arquitectura de datos, cursando el último año de DAW tras un primer curso con media de 9,60. Experiencia práctica diseñando esquemas en SQL Server/PostgreSQL, APIs REST y pipelines de automatización con n8n. Perfil autodidacta con alta disciplina de ejecución, rápida adaptación a nuevos entornos tecnológicos y enfoque constante en rendimiento, rigor técnico y entrega limpia.
+           Desarrollador Backend centrado en Java (Spring Boot), Python y arquitectura de datos. Experiencia práctica diseñando esquemas en SQL Server/PostgreSQL, APIs REST y pipelines de automatización con n8n. Perfil autodidacta con alta disciplina de ejecución, rápida adaptación a nuevos entornos tecnológicos y enfoque constante en rendimiento, rigor técnico y entrega limpia.
           </p>
 
           <blockquote class="about__quote">Entiendo que el código sirve a un propósito real.</blockquote>
@@ -156,87 +144,6 @@
         <div class="about__photo reveal">
           <img src="/assets/naim-sobre-mi.webp" alt="Retrato de Naim El Haddadi" width="952" height="1269" loading="lazy" decoding="async">
         </div>
-      </div>
-    </section>
-
-    <!-- ── experiencia, formacion e idiomas ─────────────────── -->
-    <section class="section" id="experiencia">
-      <div class="container resume">
-
-        <div class="resume__main">
-          <h2 class="title reveal">Experiencia</h2>
-
-          <div class="timeline">
-            <article class="job reveal">
-              <div class="job__date">2026<span>hoy</span></div>
-              <div class="job__body">
-                <h3>Desarrollador web y automatización</h3>
-                <p class="job__company">Freelance · 2 clientes · Madrid</p>
-                <ul>
-                  <li>Web corporativa completa para una clínica dental de nueva apertura, en HTML5 y CSS3.</li>
-                  <li>Automatización de procesos con n8n, webhooks y la API de WhatsApp Business: citas, confirmaciones y recordatorios sin trabajo manual.</li>
-                  <li>Todo funciona en producción sobre un VPS Linux que administro yo.</li>
-                </ul>
-                <div class="tags"><span>HTML5</span><span>CSS3</span><span>n8n</span><span>Webhooks</span><span>Linux</span></div>
-              </div>
-            </article>
-
-            <article class="job reveal">
-              <div class="job__date">Feb<span>abr 26</span></div>
-              <div class="job__body">
-                <h3>Desarrollador de bases de datos</h3>
-                <p class="job__company">LH Sport &amp; Entertainment Management · Madrid</p>
-                <ul>
-                  <li>Diseñé desde cero el esquema relacional en SQL Server: más de 10 entidades (jugadores, contratos, traspasos, agentes) que la agencia usa a diario.</li>
-                  <li>Pasé la lógica de negocio a T-SQL con procedimientos almacenados y triggers. Así se mantiene la integridad de los datos y desapareció trabajo manual que se repetía cada semana.</li>
-                  <li>Hice la interfaz web de captura de datos que conecta la operativa con la base de datos en tiempo real.</li>
-                </ul>
-                <a href="/assets/recomendacion-lh.pdf" class="link" target="_blank" rel="noopener">
-                  <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#file"/></svg> Carta de recomendación de la dirección
-                </a>
-                <div class="tags"><span>SQL Server</span><span>T-SQL</span><span>Procedimientos</span><span>Triggers</span></div>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <aside class="resume__side">
-          <h2 class="title reveal">Formación</h2>
-          <ul class="studies reveal">
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#graduation"/></svg>
-              <div>
-                <h3>Grado Superior en DAW</h3>
-                <p>Desarrollo de Aplicaciones Web · 09/2025 – en curso</p>
-                <span class="studies__grade">Media 9,60</span>
-              </div>
-            </li>
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#award"/></svg>
-              <div>
-                <h3>Code in Place 2026</h3>
-                <p>Stanford University · Python · mayo 2026</p>
-              </div>
-            </li>
-            <li>
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#shield"/></svg>
-              <div>
-                <h3>Specialist Jr. Cybersecurity OT</h3>
-                <p>CISCO Networking Academy</p>
-              </div>
-            </li>
-          </ul>
-
-          <h2 class="title reveal">Idiomas</h2>
-          <!-- el ancho de cada barra sale de --level -->
-          <ul class="languages reveal">
-            <li style="--level: 100%"><p>Español <span>Nativo</span></p><div class="bar"></div></li>
-            <li style="--level: 80%"><p>Inglés <span>B2–C1 · Cambridge</span></p><div class="bar"></div></li>
-            <li style="--level: 55%"><p>Árabe <span>B1</span></p><div class="bar"></div></li>
-            <li style="--level: 55%"><p>Darija <span>B1</span></p><div class="bar"></div></li>
-          </ul>
-        </aside>
-
       </div>
     </section>
 
@@ -291,6 +198,53 @@
             <span class="project__arrow" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#arrow"/></svg></span>
           </article>
         </div>
+      </div>
+    </section>
+
+    <!-- ── experiencia ──────────────────────────────────────── -->
+    <section class="section" id="experiencia">
+      <div class="container resume">
+        <h2 class="title reveal">Experiencia</h2>
+
+        <div class="timeline">
+          <article class="job reveal">
+            <div class="job__date">2026<span>hoy</span></div>
+            <div class="job__body">
+              <h3>Desarrollador web y automatización</h3>
+              <p class="job__company">Freelance · 2 clientes · Madrid</p>
+              <ul>
+                <li>Web corporativa completa para una clínica dental de nueva apertura, en HTML5 y CSS3.</li>
+                <li>Automatización de procesos con n8n, webhooks y la API de WhatsApp Business: citas, confirmaciones y recordatorios sin trabajo manual.</li>
+                <li>Todo funciona en producción sobre un VPS Linux que administro yo.</li>
+              </ul>
+              <div class="tags"><span>HTML5</span><span>CSS3</span><span>n8n</span><span>Webhooks</span><span>Linux</span></div>
+            </div>
+          </article>
+
+          <article class="job reveal">
+            <div class="job__date">Feb<span>abr 26</span></div>
+            <div class="job__body">
+              <h3>Desarrollador de bases de datos</h3>
+              <p class="job__company">LH Sport &amp; Entertainment Management · Madrid</p>
+              <ul>
+                <li>Diseñé desde cero el esquema relacional en SQL Server: más de 10 entidades (jugadores, contratos, traspasos, agentes) que la agencia usa a diario.</li>
+                <li>Pasé la lógica de negocio a T-SQL con procedimientos almacenados y triggers. Así se mantiene la integridad de los datos y desapareció trabajo manual que se repetía cada semana.</li>
+                <li>Hice la interfaz web de captura de datos que conecta la operativa con la base de datos en tiempo real.</li>
+              </ul>
+              <a href="/assets/recomendacion-lh.pdf" class="link" target="_blank" rel="noopener">
+                <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#file"/></svg> Carta de recomendación de la dirección
+              </a>
+              <div class="tags"><span>SQL Server</span><span>T-SQL</span><span>Procedimientos</span><span>Triggers</span></div>
+            </div>
+          </article>
+        </div>
+
+        <!-- la formacion, los certificados y los idiomas estan en el cv -->
+        <a href="/assets/CV_Naim_El_Haddadi.pdf" class="resume__cv reveal" download>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#file"/></svg>
+          <span>Formación, certificados e idiomas en mi CV</span>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#download"/></svg>
+        </a>
       </div>
     </section>
 
