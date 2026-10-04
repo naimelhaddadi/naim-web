@@ -71,37 +71,6 @@ document.querySelectorAll('main section[id]').forEach(section => {
 });
 
 
-// ── contadores de las estadisticas ────────────────────────
-// el numero sube desde 0 hasta lo que pone en data-count
-function countUp(element) {
-  const target = parseFloat(element.dataset.count);
-  const decimals = parseInt(element.dataset.decimals || 0);
-  const prefix = element.dataset.prefix || '';
-
-  // en español los decimales van con coma
-  const format = value => prefix + value.toFixed(decimals).replace('.', ',');
-
-  if (reduceMotion) {
-    element.textContent = format(target);
-    return;
-  }
-
-  const duration = 1500;
-  const start = performance.now();
-
-  function frame(now) {
-    const progress = Math.min((now - start) / duration, 1);
-    const eased = 1 - Math.pow(1 - progress, 3); // que frene al final
-
-    element.textContent = format(target * eased);
-
-    if (progress < 1) requestAnimationFrame(frame);
-  }
-
-  requestAnimationFrame(frame);
-}
-
-
 // ── aparecer al hacer scroll ──────────────────────────────
 // cuando un .reveal entra en pantalla le ponemos .visible y el css hace la animacion
 const revealObserver = new IntersectionObserver(entries => {
@@ -109,7 +78,6 @@ const revealObserver = new IntersectionObserver(entries => {
     if (!entry.isIntersecting) return;
 
     entry.target.classList.add('visible');
-    entry.target.querySelectorAll('[data-count]').forEach(countUp);
 
     // solo lo animamos una vez
     revealObserver.unobserve(entry.target);

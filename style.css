@@ -524,48 +524,42 @@ button {
 }
 
 
-/* ── estadisticas ───────────────────────────────────────── */
+/* ── franja de tecnologias ──────────────────────────────── */
 /* la caja sube un poco y se monta encima del hero */
-.stats {
+.tech-strip {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   margin-top: -90px;
-  padding: 34px 0;
+  padding: 28px 10px;
   background: var(--bg-card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
 }
 
-.stat {
-  text-align: center;
-  border-right: 1px solid var(--line);
-}
-
-.stat:last-child {
-  border-right: none;
-}
-
-.stat .icon {
-  font-size: 22px;
-  color: var(--text-soft);
-}
-
-.stat__number {
-  margin-top: 6px;
-  font-size: 40px;
+.tech {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
   font-weight: 600;
-  line-height: 1.2;
-}
-
-.stat__label {
-  margin-top: 6px;
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--text-dim);
+  transition: color 0.3s;
+}
+
+.tech .icon {
+  font-size: 30px;
+  color: var(--text-soft);
+  transition: color 0.3s;
+}
+
+.tech:hover,
+.tech:hover .icon {
+  color: var(--text);
 }
 
 
@@ -655,11 +649,10 @@ button {
 }
 
 
-/* ── experiencia, formacion e idiomas ───────────────────── */
-.resume {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: 70px;
+/* ── experiencia ────────────────────────────────────────── */
+/* la experiencia ocupa todo el ancho, pero el texto no pasa de 820px para que se lea bien */
+.job__body {
+  max-width: 820px;
 }
 
 /* linea vertical que une los circulos de las fechas */
@@ -741,112 +734,28 @@ button {
   border-radius: 50%;
 }
 
-.resume__side .title:not(:first-child) {
-  margin-top: 56px;
+/* enlace al cv: alineado con el texto de los trabajos (64px del circulo + 26px de hueco) */
+.resume__cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-left: 90px;
+  padding: 16px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.3s;
 }
 
-.studies li {
-  display: flex;
-  gap: 16px;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.studies li:first-child {
-  padding-top: 0;
-}
-
-/* el padding hace que el dibujo quede de 20px dentro del cuadrado de 44px */
-.studies .icon {
-  flex: none;
-  width: 44px;
-  height: 44px;
-  padding: 12px;
-  border-radius: 10px;
-  background: rgba(74, 168, 255, 0.08);
+.resume__cv .icon {
+  font-size: 18px;
   color: var(--accent);
 }
 
-.studies h3 {
-  font-size: 15px;
-  font-weight: 700;
-}
-
-.studies p {
-  font-size: 13px;
-  color: var(--text-soft);
-}
-
-.studies__grade {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 4px 10px;
-  border-radius: 4px;
-  background: linear-gradient(180deg, #ffffff, #cfd3d8);
-  color: var(--bg);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-/* barras de idiomas: se llenan hasta --level cuando aparecen en pantalla */
-.languages li {
-  margin-bottom: 22px;
-}
-
-.languages p {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.languages p span {
-  font-size: 13px;
-  font-weight: 400;
-  color: var(--text-soft);
-}
-
-.bar {
-  position: relative;
-  height: 2px;
-  background: var(--line-strong);
-}
-
-.bar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: var(--accent);
-  transition: width 1.4s ease;
-}
-
-/* el circulito del final */
-.bar::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 12px;
-  height: 12px;
-  border: 2px solid var(--text);
-  border-radius: 50%;
-  background: var(--bg);
-  transform: translate(-50%, -50%);
-  transition: left 1.4s ease;
-}
-
-.languages.visible .bar::before {
-  width: var(--level);
-}
-
-.languages.visible .bar::after {
-  left: var(--level);
+.resume__cv:hover {
+  border-color: var(--line-strong);
 }
 
 
@@ -1476,17 +1385,13 @@ button {
     display: none;
   }
 
-  .stats {
-    grid-template-columns: 1fr 1fr;
-    row-gap: 28px;
+  .tech-strip {
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 26px;
   }
 
-  .stat:nth-child(2) {
-    border-right: none;
-  }
-
-  .resume {
-    grid-template-columns: 1fr;
+  .resume__cv {
+    margin-left: 0;
   }
 
   /* en movil la foto de "sobre mi" va debajo del texto, centrada */
@@ -1561,8 +1466,13 @@ button {
     letter-spacing: 0.3em;
   }
 
-  .stat__number {
-    font-size: 32px;
+  .tech {
+    font-size: 9px;
+    letter-spacing: 0.08em;
+  }
+
+  .tech .icon {
+    font-size: 24px;
   }
 
   .about__info,

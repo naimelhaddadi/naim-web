@@ -14,7 +14,7 @@ Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 ```
 ├── index.html     # el contenido, una sección detrás de otra
 ├── style.css      # los estilos, en el mismo orden que las secciones del html
-├── script.js      # menú, animaciones al hacer scroll, contadores y copiar el email
+├── script.js      # menú, animaciones al hacer scroll y copiar el email
 ├── api/chat.js    # función serverless antigua (la web ya no la usa)
 └── assets/        # fotos, CV y carta de recomendación
 ```
@@ -23,7 +23,7 @@ Mi web personal: **[naimelhaddadi.com](https://naimelhaddadi.com)**
 
 - Arriba del `style.css` están las variables: colores, fuentes y medidas. Si quiero cambiar el azul, solo toco `--accent`.
 - Cada sección tiene su bloque marcado con `/* ── nombre ── */` y el responsive va al final del archivo.
-- En `script.js` hay una función para cada cosa: `toggleMenu`, `onScroll`, `countUp` y `showToast`.
+- En `script.js` hay una función para cada cosa: `toggleMenu`, `onScroll` y `showToast`.
 - Las animaciones al bajar funcionan con la clase `.reveal`. El JS le pone `.visible` cuando el elemento entra en pantalla y el CSS hace la animación.
 - Para usar un icono: `<svg class="icon"><use href="/assets/icons.svg#github"/></svg>`. Mide 1em, así que se le cambia el tamaño con `font-size`.
 
