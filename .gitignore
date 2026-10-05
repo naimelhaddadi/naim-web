@@ -1,3 +1,10 @@
 .vscode/
 node_modules/
-.env
+.env*
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.vercel
+AGENTS.md
+CLAUDE.md

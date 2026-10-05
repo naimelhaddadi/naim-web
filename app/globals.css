@@ -1,0 +1,169 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+/*
+  Design tokens
+  ─────────────
+  Night palette taken from the hero photograph: near-black ink, warm
+  sodium street light (accent: the human side) and cool office-window
+  blue (signal: data moving through a system). Everything else is
+  greyscale and hairlines.
+*/
+@theme {
+  --color-ink: #07080a;
+  --color-ink-2: #0c0e11;
+  --color-ink-3: #13161b;
+  --color-fg: #ecebe7;
+  --color-muted: #9aa0a8;
+  --color-dim: #5e646d;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-line-strong: rgb(255 255 255 / 0.16);
+  --color-sodium: #f2a15a;
+  --color-signal: #8db4ff;
+  --color-live: #7fd6a4;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-display: var(--font-archivo), var(--font-geist), sans-serif;
+  --font-serif: var(--font-instrument), Georgia, serif;
+}
+
+:root {
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --section-y: clamp(6rem, 14vw, 12rem);
+  --nav-h: 4.5rem;
+}
+
+@layer base {
+  html {
+    background: var(--color-ink);
+    color: var(--color-fg);
+    color-scheme: dark;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    min-height: 100svh;
+    background: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  /* Film grain: one static SVG noise tile over the whole page. */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.07;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: var(--color-sodium);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-sodium);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  [id] {
+    scroll-margin-top: var(--nav-h);
+  }
+}
+
+@utility container-x {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+/* Small technical labels: section indices, metadata, captions. */
+@utility label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.4;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 560;
+  font-variation-settings: "wdth" 104;
+  letter-spacing: -0.035em;
+  line-height: 0.9;
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(255 255 255 / 0.2);
+}
+
+@utility hairline-grid {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility sr-only-focusable {
+  &:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(2.6); opacity: 0; }
+}
+
+@keyframes scroll-cue {
+  0% { transform: translateY(-100%); }
+  60%, 100% { transform: translateY(100%); }
+}
+
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulse-ring 2.2s var(--ease-out-expo) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
