@@ -1,14 +1,28 @@
 "use client";
 
-import { apiProjects, dental, lhSport } from "@/lib/content";
-import { DentalDiagram } from "@/components/diagrams/DentalDiagram";
-import { LhDiagram } from "@/components/diagrams/LhDiagram";
+import { useCallback, useRef, useState } from "react";
+import { projects, type Project } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { CaseStudy } from "./CaseStudy";
-import { ApiProjects } from "./ApiProject";
+import { CaseOverlay } from "@/components/work/CaseOverlay";
+import { ProjectCard } from "@/components/work/ProjectCard";
+import { DentalVisual, GameStoreVisual, LhVisual } from "@/components/work/Visuals";
 
+const visuals = { "lh-sport": LhVisual, dental: DentalVisual, gamestore: GameStoreVisual };
+
+/* Two systems built for real people on top, the backend project underneath. */
 export function Work() {
+  const [open, setOpen] = useState<Project | null>(null);
+  const trigger = useRef<HTMLElement | null>(null);
+  const close = useCallback(() => setOpen(null), []);
+  const [lh, dental, gamestore] = projects;
+
+  // remember which button opened the case, to give it the focus back on close
+  const openCase = useCallback((project: Project, button: HTMLElement) => {
+    trigger.current = button;
+    setOpen(project);
+  }, []);
+
   return (
     <section id="work" aria-labelledby="work-title" className="section-y">
       <div className="container-x">
@@ -16,38 +30,24 @@ export function Work() {
           index="02"
           label="Selected work"
           id="work-title"
-          lines={["Things I've built."]}
-          aside={
-            <p className="max-w-sm">
-              Two systems built for real operations — one for a sports agency, one running with real patients. Two APIs
-              that show where my backend work is heading.
-            </p>
-          }
+          lines={["Selected work."]}
+          aside={<p className="max-w-xs text-lg">Things I&apos;ve built to solve real problems.</p>}
         />
 
-        <div className="mt-20 space-y-28 md:mt-28 md:space-y-40">
-          <CaseStudy study={lhSport} Diagram={LhDiagram} />
-          <CaseStudy study={dental} Diagram={DentalDiagram} />
-
-          <div className="border-t border-line pt-10 md:pt-14">
-            <Reveal className="mb-10 grid gap-6 md:mb-14 md:grid-cols-12 md:items-end">
-              <div className="md:col-span-7">
-                <p className="label mb-6 flex items-center gap-3">
-                  <span className="text-sodium">03 — 04</span>
-                  <span className="h-px w-8 bg-line-strong" aria-hidden />
-                  Backend direction
-                </p>
-                <h3 className="display text-[clamp(2.25rem,5vw,5rem)]">Java &amp; Spring Boot, layer by layer.</h3>
-              </div>
-              <p className="text-muted md:col-span-4 md:col-start-9">
-                Pick an endpoint and follow the request through each layer. These are the real routes from each
-                repository.
-              </p>
-            </Reveal>
-            <ApiProjects projects={apiProjects} />
-          </div>
+        <div className="mt-14 grid gap-6 md:mt-20 lg:grid-cols-12">
+          <Reveal className="lg:col-span-7">
+            <ProjectCard project={lh} Visual={visuals[lh.id]} onOpen={(button) => openCase(lh, button)} />
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-5">
+            <ProjectCard project={dental} Visual={visuals[dental.id]} onOpen={(button) => openCase(dental, button)} />
+          </Reveal>
+          <Reveal className="lg:col-span-12">
+            <ProjectCard project={gamestore} Visual={visuals[gamestore.id]} onOpen={(button) => openCase(gamestore, button)} wide />
+          </Reveal>
         </div>
       </div>
+
+      <CaseOverlay project={open} onClose={close} returnFocus={trigger} />
     </section>
   );
 }

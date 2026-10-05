@@ -1,27 +1,23 @@
 import { About } from "@/components/sections/About";
-import { Approach } from "@/components/sections/Approach";
 import { Contact } from "@/components/sections/Contact";
 import { Hero } from "@/components/sections/Hero";
-import { Philosophy } from "@/components/sections/Philosophy";
-import { Record } from "@/components/sections/Record";
 import { Stack } from "@/components/sections/Stack";
+import { Thinking } from "@/components/sections/Thinking";
 import { Work } from "@/components/sections/Work";
 
 /*
-  The page reads as one argument:
-  who (hero) → how he thinks (philosophy, loop) → proof (work) →
-  method (approach) → tools (stack) → the person (about, record) → next problem (contact).
+  Short on purpose: who I am → what I build → how I think → contact.
+  The hero does the "wow", the work is interactive, the rest stays calm.
+  Education, languages and the rest of the details live in the CV.
 */
 export default function Home() {
   return (
     <>
       <Hero />
-      <Philosophy />
-      <Work />
-      <Approach />
-      <Stack />
       <About />
-      <Record />
+      <Work />
+      <Thinking />
+      <Stack />
       <Contact />
     </>
   );

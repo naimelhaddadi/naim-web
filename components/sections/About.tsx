@@ -1,101 +1,65 @@
-"use client";
-
-import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import portrait from "@/assets/photos/naim-portrait.webp";
+import { site } from "@/lib/site";
+import { ArrowUpRight } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
 import { Reveal } from "@/components/ui/Reveal";
 
-const now = [
-  { k: "Now", v: "Deepening my Java fundamentals" },
-  { k: "Next", v: "Spring Boot and JPA, properly" },
-  { k: "For fun", v: "Python" },
-];
+const direction = ["Java", "JPA", "Spring Boot"];
 
+/* Who he is, in three sentences. Everything else is in the CV. */
 export function About() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-
   return (
-    <section id="about" aria-labelledby="about-title" className="section-y relative">
-      <div className="container-x grid gap-14 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-5">
-          <p className="label mb-10 flex items-center gap-3">
-            <span className="text-sodium">(05)</span>
-            <span className="h-px w-8 bg-line-strong" aria-hidden />
-            About
-          </p>
-          <Reveal>
-            <figure ref={ref} className="relative mx-auto max-w-md overflow-hidden lg:mx-0">
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <div aria-hidden className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_20%,rgba(242,161,90,0.12),transparent_60%)]" />
-                <motion.div className="absolute inset-[-10%_0]" style={reduce ? undefined : { y }}>
-                  <Image
-                    src={portrait}
-                    alt="Portrait of Naim El Haddadi"
-                    fill
-                    sizes="(min-width: 1024px) 34vw, (min-width: 640px) 28rem, 100vw"
-                    className="object-cover object-[50%_35%]"
-                  />
-                </motion.div>
-              </div>
-              <figcaption className="label mt-4 flex justify-between">
-                <span>Naim El Haddadi</span>
-                <span>Madrid · 2026</span>
-              </figcaption>
-            </figure>
-          </Reveal>
-        </div>
+    <section id="about" aria-labelledby="about-title" className="section-y">
+      <div className="container-x grid gap-10 lg:grid-cols-12">
+        <p className="label flex items-center gap-3 self-start lg:col-span-3 lg:pt-4">
+          <span className="text-sodium">(01)</span>
+          <span aria-hidden className="h-px w-8 bg-line-strong" />
+          About
+        </p>
 
-        <div className="lg:col-span-7 lg:pt-20">
-          <h2 id="about-title" className="display text-[clamp(2.4rem,5.2vw,5.25rem)] leading-[0.95]">
-            <MaskLines
-              lines={[
-                "Two years ago,",
-                "I started programming.",
-                <span key="s" className="text-muted">
-                  I haven&apos;t really stopped since.
-                </span>,
-              ]}
-            />
+        <div className="lg:col-span-9">
+          <h2 id="about-title" className="display max-w-[20ch] text-[clamp(2.2rem,4.8vw,5rem)] leading-[0.98]">
+            <MaskLines lines={["Computers have always been something I liked to experiment with."]} />
           </h2>
 
-          <div className="mt-12 grid gap-6 text-lg text-muted md:grid-cols-2 md:gap-10">
-            <Reveal>
-              <p>
-                What started as curiosity became something I genuinely enjoy: understanding how things work, solving
-                problems and building things from scratch.
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <p>
-                I&apos;m going deeper into Java and Spring Boot — strengthening the fundamentals and learning how to
-                build better backend systems. What I want now is a real team to learn from, contribute to from day one,
-                and turn this into my career.
-              </p>
-            </Reveal>
-          </div>
-
-          <Reveal>
-            <blockquote className="mt-16 border-l border-sodium pl-6 md:pl-8">
-              <p className="font-serif text-[clamp(1.75rem,3vw,2.75rem)] italic leading-[1.15]">
-                “I like thinking — and in the end, solving the problem is the best feeling.”
-              </p>
-            </blockquote>
+          <Reveal delay={0.1}>
+            <p className="mt-8 max-w-[34ch] text-[clamp(1.25rem,2vw,1.75rem)] leading-snug text-muted">
+              About two years ago, I started programming seriously — and I haven&apos;t really stopped since.
+            </p>
           </Reveal>
 
-          <Reveal>
-            <dl className="mt-16 grid border-t border-line sm:grid-cols-3">
-              {now.map((n) => (
-                <div key={n.k} className="border-b border-line py-5 sm:border-b-0 sm:pr-6">
-                  <dt className="label mb-2">{n.k}</dt>
-                  <dd>{n.v}</dd>
-                </div>
-              ))}
-            </dl>
+          <Reveal delay={0.15} className="mt-14 grid gap-10 border-t border-line pt-8 md:grid-cols-2">
+            <p className="max-w-[40ch] text-lg">
+              I enjoy understanding problems, figuring out how they work and building the solution.
+            </p>
+            <div className="flex flex-col gap-6 md:items-end">
+              <div>
+                <p className="label mb-3">Where I&apos;m heading</p>
+                <p className="flex flex-wrap items-center gap-2 font-mono text-sm">
+                  {direction.map((step, i) => (
+                    <span key={step} className="flex items-center gap-2">
+                      <span className={`rounded-full border px-3 py-1 ${i === direction.length - 1 ? "border-sodium/60 text-sodium" : "border-line-strong"}`}>
+                        {step}
+                      </span>
+                      <span aria-hidden className="text-dim">
+                        →
+                      </span>
+                    </span>
+                  ))}
+                  <span className="text-muted">backend</span>
+                </p>
+                <p className="mt-3 text-sm text-muted">And Python, because I enjoy it.</p>
+              </div>
+              <a
+                href={site.cv}
+                target="_blank"
+                rel="noopener"
+                data-cursor="Open"
+                className="group inline-flex items-center gap-2 border-b border-sodium/50 pb-1 text-sm font-medium transition-colors hover:border-sodium hover:text-sodium"
+              >
+                View CV
+                <ArrowUpRight className="transition-transform duration-500 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+              </a>
+            </div>
           </Reveal>
         </div>
       </div>
