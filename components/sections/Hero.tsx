@@ -3,6 +3,7 @@
 import Image from "next/image";
 import {
   motion,
+  useMotionTemplate,
   useMotionValue,
   useReducedMotion,
   useScroll,
@@ -45,9 +46,19 @@ export function Hero() {
   const reduce = useReducedMotion() ?? false;
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  // on the way out: the photo sinks and shrinks, the copy rises, blurs and fades,
+  // and each line of the motto slides its own way
   const figureY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
+  const figureScale = useTransform(scrollYProgress, [0, 1], [1, 0.86]);
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const blurPx = useTransform(scrollYProgress, [0, 0.6], [0, 8]);
+  const blur = useMotionTemplate`blur(${blurPx}px)`;
+  const mottoX = [
+    useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "6%"]),
+    useTransform(scrollYProgress, [0, 1], ["0%", "-3%"]),
+  ];
 
   // pointer parallax: the photo (foreground) moves and turns the most, the
   // screen behind it less, the orbits (OrbitField) less still
@@ -81,7 +92,7 @@ export function Hero() {
       <motion.div
         ref={figureRef}
         className="absolute left-1/2 top-[calc(var(--nav-h)-0.5rem)] z-10 aspect-[1086/1102] w-[min(112vw,580px)] -translate-x-[48%] lg:bottom-[-3svh] lg:left-auto lg:right-[2vw] lg:top-auto lg:w-[min(50vw,86svh)] lg:translate-x-0"
-        style={reduce ? undefined : { y: figureY }}
+        style={reduce ? undefined : { y: figureY, scale: figureScale }}
       >
         <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: panelX, y: panelY, rotateY: panelTurn, transformPerspective: 1600 }}>
           {/* light behind the head */}
@@ -131,7 +142,7 @@ export function Hero() {
       {/* Copy */}
       <motion.div
         className="container-x relative z-30 flex min-h-[100svh] flex-col pb-8 pt-[calc(var(--nav-h)+min(112vw,580px)*0.78)] lg:pb-10 lg:pt-[calc(var(--nav-h)+8svh)]"
-        style={reduce ? undefined : { y: contentY, opacity: fade }}
+        style={reduce ? undefined : { y: contentY, opacity: fade, filter: blur }}
       >
         <div className="lg:max-w-[50%]">
           <h1 id="hero-name" className="display text-[clamp(2.6rem,5.4vw,6.25rem)]">
@@ -151,7 +162,12 @@ export function Hero() {
           <p className="display text-[clamp(3.25rem,7.6vw,9rem)] leading-[0.86]">
             <span className="sr-only">I think. I build. I solve.</span>
             {motto.map((word, i) => (
-              <span key={word} aria-hidden className="block" style={{ marginLeft: `${i * 0.6}em` }}>
+              <motion.span
+                key={word}
+                aria-hidden
+                className="block"
+                style={{ marginLeft: `${i * 0.6}em`, ...(reduce ? {} : { x: mottoX[i] }) }}
+              >
                 <MaskLines
                   trigger="mount"
                   delay={1.7 + i * 0.13}
@@ -162,7 +178,7 @@ export function Hero() {
                     </>,
                   ]}
                 />
-              </span>
+              </motion.span>
             ))}
           </p>
         </div>

@@ -34,14 +34,15 @@ export type Project = {
 
 const GITHUB = "https://github.com/naimelhaddadi";
 
-export const featured: Project[] = [
+/* Real-world work: an internship and a freelance client. Shown in the pinned horizontal section. */
+export const realWorld: Project[] = [
   {
     id: "lh-sport",
     index: "01",
     title: "LH Sport & Entertainment Management",
-    headline: "From scattered information to a structured system.",
-    summary: "A relational database in SQL Server and a web interface to feed it, built for a sports agency.",
-    kind: "Internship · Database design",
+    headline: "From scattered information to a structured operational system.",
+    summary: "The relational SQL Server database the agency works on, and the web interface that feeds it.",
+    kind: "Internship · Feb – Apr 2026",
     meta: [
       { label: "Context", value: "Internship · Feb – Apr 2026" },
       { label: "Role", value: "Database design · Web interface" },
@@ -54,25 +55,25 @@ export const featured: Project[] = [
       },
       {
         label: "The approach",
-        body: "Model the domain before building any screen: more than 10 entities — players, contracts, transfers, agents — and how each one relates to the rest.",
+        body: "Model the domain before building any screen: more than 10 entities — players, clubs, leagues, contracts, transfers, agents — and how each one relates to the rest.",
         step: 1,
       },
       {
         label: "The system",
-        body: "A relational SQL Server database with the business logic in T-SQL stored procedures and triggers, and a web data-entry interface connected to it. I left the position with an official recommendation letter.",
+        body: "Built from scratch in SQL Server: business logic in T-SQL stored procedures and triggers, referential integrity enforced by the database, and a web data-entry interface on top. The agency uses it, and I left with an official recommendation letter.",
         step: 3,
       },
     ],
-    stack: ["SQL Server", "T-SQL", "Relational modelling", "Stored procedures", "Triggers", "Web interface"],
+    stack: ["SQL Server", "T-SQL", "Relational model", "Stored procedures", "Triggers", "Referential integrity"],
     links: [{ href: "/assets/recomendacion-lh.pdf", label: "Recommendation letter" }],
   },
   {
     id: "dental",
     index: "02",
     title: "Dental Clinic Automation",
-    headline: "Replacing repetitive follow-ups with automation.",
-    summary: "The website of a new private clinic, then the system that handles its appointment messages on WhatsApp.",
-    kind: "Freelance · Web & automation",
+    headline: "From manual follow-ups to automated patient communication.",
+    summary: "The website of a private dental clinic, then the system that handles its appointment messages on WhatsApp.",
+    kind: "Freelance · 2026 – present",
     status: { label: "In production · real patients", live: true },
     meta: [
       { label: "Context", value: "Freelance · 2026 – present" },
@@ -81,7 +82,7 @@ export const featured: Project[] = [
     sections: [
       {
         label: "The problem",
-        body: "A newly opened private clinic: first it needed a website, then a way out of messaging every patient by hand to confirm and remind appointments.",
+        body: "A private dental clinic: first it needed a website, then a way out of messaging every patient by hand to confirm and remind appointments.",
         step: 1,
       },
       {
@@ -98,15 +99,19 @@ export const featured: Project[] = [
     stack: ["n8n", "WhatsApp Business API", "Webhooks", "LLM integration", "Linux VPS", "HTML5", "CSS3"],
     links: [],
   },
+];
+
+/* Personal and academic projects: built to learn, not for a client. */
+export const personal: Project[] = [
   {
     id: "gamestore",
     index: "03",
     title: "GameStore",
     headline: "A structured Java backend, layer by layer.",
     summary: "A REST API for a video game catalogue with a clean Controller → Service → Repository split.",
-    kind: "Personal project · REST API",
+    kind: "Personal project",
     meta: [
-      { label: "Type", value: "REST API" },
+      { label: "Type", value: "Java · Spring Boot REST API" },
       { label: "Architecture", value: "Controller · Service · Repository · DTO" },
     ],
     sections: [
@@ -144,49 +149,15 @@ export const featured: Project[] = [
       { method: "DELETE", path: "/games/{title}" },
     ],
   },
-];
-
-export const more: Project[] = [
-  {
-    id: "market",
-    index: "04",
-    title: "Financial Market Simulator",
-    headline: "Prices that react to events, one turn at a time.",
-    summary: "A turn-based market simulator in Python. Final project for Code in Place 2026, Stanford University.",
-    kind: "Stanford · Code in Place 2026",
-    meta: [
-      { label: "Context", value: "Code in Place 2026 · Stanford" },
-      { label: "Language", value: "Python" },
-    ],
-    sections: [
-      {
-        label: "The project",
-        body: "A turn-based financial market simulator: each turn, events alter the prices.",
-        step: 0,
-      },
-      {
-        label: "What it shows",
-        body: "Program logic and state that changes turn after turn, with every input validated before it's used.",
-        step: 0,
-      },
-      {
-        label: "Why it matters",
-        body: "My final project for Code in Place 2026 at Stanford — an independent project taken from idea to finished program.",
-        step: 0,
-      },
-    ],
-    stack: ["Python", "Turn-based logic", "State changes", "Input validation"],
-    links: [{ href: `${GITHUB}/financial-market-simulator`, label: "Source on GitHub" }],
-  },
   {
     id: "academia",
-    index: "05",
+    index: "04",
     title: "Academia Programming API",
     headline: "Student management as a REST API.",
     summary: "A Java and Spring Boot API with course filtering, ranking by grade and aggregated statistics.",
-    kind: "Personal project · REST API",
+    kind: "Personal project",
     meta: [
-      { label: "Type", value: "REST API" },
+      { label: "Type", value: "Java · Spring Boot REST API" },
       { label: "Domain", value: "Student management" },
     ],
     sections: [
@@ -223,6 +194,37 @@ export const more: Project[] = [
       { method: "PUT", path: "/students/{email}/grade" },
       { method: "DELETE", path: "/students/{email}" },
     ],
+  },
+  {
+    id: "market",
+    index: "05",
+    title: "Financial Market Simulator",
+    headline: "Prices that react to events, one turn at a time.",
+    summary: "A turn-based market simulator in Python. Final project for Code in Place 2026, Stanford University.",
+    kind: "Stanford · Personal project",
+    meta: [
+      { label: "Context", value: "Code in Place 2026 · Stanford" },
+      { label: "Language", value: "Python" },
+    ],
+    sections: [
+      {
+        label: "The project",
+        body: "A turn-based financial market simulator: each turn, events alter the prices.",
+        step: 0,
+      },
+      {
+        label: "What it shows",
+        body: "Program logic and state that changes turn after turn, with every input validated before it's used.",
+        step: 0,
+      },
+      {
+        label: "Why it matters",
+        body: "My final project for Code in Place 2026 at Stanford — an independent project taken from idea to finished program.",
+        step: 0,
+      },
+    ],
+    stack: ["Python", "Turn-based logic", "State changes", "Input validation"],
+    links: [{ href: `${GITHUB}/financial-market-simulator`, label: "Source on GitHub" }],
   },
 ];
 
@@ -299,40 +301,41 @@ export const stack: StackGroup[] = [
 
 /*
   How the pieces connect. Hovering a technology lights up the first flow
-  it belongs to and draws the path between its steps.
+  it appears in (so the order below matters) and draws the path between
+  its steps.
 */
 export type Flow = { id: string; label: string; steps: string[]; note: string };
 
 export const flows: Flow[] = [
   {
-    id: "backend",
-    label: "Backend path",
-    steps: ["Java", "Spring Boot", "JPA / Hibernate", "SQL Server"],
-    note: "From a Java class to a row in a relational database.",
-  },
-  {
-    id: "api",
-    label: "API layer",
-    steps: ["Web MVC", "REST APIs", "Bean Validation", "Data JPA", "H2"],
-    note: "How GameStore and Academia API handle a request, from the endpoint to the data.",
-  },
-  {
-    id: "quality",
-    label: "Testing",
-    steps: ["Postman", "JUnit 5", "Mockito"],
-    note: "Endpoints called by hand, service logic covered by unit tests with mocked dependencies.",
+    id: "java",
+    label: "Java backend",
+    steps: ["Java", "Spring Boot", "Data JPA", "JPA / Hibernate", "JUnit 5"],
+    note: "The core of GameStore and Academia API: Spring Boot on top of Java, JPA for the data, JUnit for the logic.",
   },
   {
     id: "data",
-    label: "Data layer",
-    steps: ["SQL / T-SQL", "Relational modelling", "Stored procedures", "Triggers", "SSMS"],
-    note: "The LH Sport database: the model and its business rules, inside SQL Server.",
+    label: "SQL Server",
+    steps: ["SQL Server", "SQL / T-SQL", "Stored procedures", "Triggers", "Relational modelling", "SSMS"],
+    note: "The LH Sport database: the model and its business rules, living inside SQL Server.",
   },
   {
     id: "automation",
     label: "Automation",
     steps: ["n8n", "Webhooks", "WhatsApp Business API", "LLM integrations", "VPS"],
     note: "The dental clinic system, running in production on a server I administer.",
+  },
+  {
+    id: "api",
+    label: "REST APIs",
+    steps: ["Web MVC", "REST APIs", "Bean Validation", "H2"],
+    note: "How the Spring Boot APIs take a request: an endpoint, validated input, an in-memory database for development.",
+  },
+  {
+    id: "testing",
+    label: "Testing",
+    steps: ["Mockito", "Postman"],
+    note: "Mocked dependencies in unit tests, and endpoints exercised by hand.",
   },
   {
     id: "delivery",

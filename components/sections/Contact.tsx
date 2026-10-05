@@ -22,7 +22,7 @@ export function Contact() {
       />
       <div className="container-x relative">
         <p className="label mb-10 flex items-center gap-3">
-          <span className="text-sodium">(04)</span>
+          <span className="text-sodium">(05)</span>
           <span aria-hidden className="h-px w-8 bg-line-strong" />
           Contact
         </p>

@@ -7,14 +7,13 @@ import { Packet } from "@/components/diagrams/primitives";
 import { ease } from "@/lib/motion";
 
 /*
-  The small diagrams on the project cards. Each one tells its project's
-  story in one move when the card becomes active (hover, focus, or simply
-  being on screen on touch devices):
-    LH Sport   scattered pieces snap into a connected model
-    Market     a price line that reacts to an event, turn by turn
-    Academia   students → filtered by course → ranked → statistics
-    Dental     appointment → n8n → WhatsApp → patient, and the reply back
+  The small diagrams on the personal project tiles. Each one tells its
+  project's story in one move when the tile becomes active (hover, focus,
+  or simply being on screen on touch devices):
     GameStore  a request goes down the layers and comes back as 200 OK
+    Academia   students → filtered by course → ranked → statistics
+    Market     a price line that reacts to an event, turn by turn
+  (LH Sport and the dental clinic use the bigger diagrams in components/diagrams.)
 */
 
 export type VisualProps = { active: boolean };
@@ -54,93 +53,6 @@ function Edge({ d, active, delay = 0, color = C.line, dashed }: { d: string; act
       animate={{ pathLength: active ? 1 : 0, opacity: active ? 1 : 0 }}
       transition={{ duration: 0.8, ease: ease.inOut, delay: active ? delay : 0 }}
     />
-  );
-}
-
-/* ── LH Sport: from scattered information to a structured system ── */
-
-const lhNodes = [
-  { id: "player", label: "Player", x: 168, y: 132, w: 74, scatter: [-34, 44, -9] },
-  { id: "transfer", label: "Transfer", x: 292, y: 78, w: 80, scatter: [46, -22, 11] },
-  { id: "more", label: "+ more", x: 336, y: 178, w: 70, scatter: [30, 38, -14] },
-  { id: "contract", label: "Contract", x: 236, y: 206, w: 80, scatter: [-56, 18, 8] },
-  { id: "agent", label: "Agent", x: 70, y: 74, w: 64, scatter: [18, 66, 12] },
-] as const;
-
-export function LhVisual({ active }: VisualProps) {
-  return (
-    <svg viewBox="0 0 400 260" className="h-full w-full" aria-hidden>
-      {/* the relations only exist once the model is structured */}
-      <Edge d="M205 132 H261 V92" active={active} delay={0.25} />
-      <Edge d="M292 92 V150 H301" active={active} delay={0.35} />
-      <Edge d="M168 146 V206 H196" active={active} delay={0.45} />
-      <Edge d="M276 206 H292 V92" active={active} delay={0.55} color={C.faint} />
-      <Edge d="M131 132 H70 V88" active={active} delay={0.4} />
-
-      {lhNodes.map((n, i) => (
-        <motion.g
-          key={n.id}
-          initial={false}
-          animate={
-            active
-              ? { x: 0, y: 0, rotate: 0, opacity: 1 }
-              : { x: n.scatter[0], y: n.scatter[1], rotate: n.scatter[2], opacity: 0.55 }
-          }
-          transition={{ duration: 0.9, ease: ease.out, delay: active ? i * 0.04 : 0 }}
-        >
-          <Pill x={n.x} y={n.y} w={n.w} label={n.label} tone={active && n.id === "player" ? "accent" : active ? "signal" : "default"} />
-        </motion.g>
-      ))}
-
-      <Packet show={active} points={[[205, 132], [261, 132], [261, 92], [292, 92], [292, 150], [301, 150]]} duration={2.6} delay={0.9} />
-      <Packet show={active} color={C.signal} points={[[168, 146], [168, 206], [196, 206]]} duration={1.6} delay={1.6} />
-
-      <text x={16} y={244} fontSize={9} letterSpacing={1.4} fill={C.dim} className="font-mono uppercase">
-        {active ? "sql server · 10+ entities" : "scattered · duplicated · unlinked"}
-      </text>
-    </svg>
-  );
-}
-
-/* ── Dental: appointment → n8n → WhatsApp → patient ── */
-
-export function DentalVisual({ active }: VisualProps) {
-  const row = 104;
-  return (
-    <svg viewBox="0 0 400 260" className="h-full w-full" aria-hidden>
-      <g opacity={active ? 1 : 0.6} style={{ transition: "opacity .6s" }}>
-        <Pill x={58} y={row} w={92} label="Appointment" />
-        <Pill x={160} y={row} w={58} label="n8n" tone={active ? "accent" : "default"} />
-        <Pill x={256} y={row} w={84} label="WhatsApp" />
-        <Pill x={350} y={row} w={68} label="Patient" tone={active ? "signal" : "default"} />
-      </g>
-      <path d={`M104 ${row} H131 M189 ${row} H214 M298 ${row} H316`} stroke={C.faint} />
-      <Edge d={`M104 ${row} H131`} active={active} delay={0.1} color={C.line} />
-      <Edge d={`M189 ${row} H214`} active={active} delay={0.25} color={C.line} />
-      <Edge d={`M298 ${row} H316`} active={active} delay={0.4} color={C.line} />
-      {/* the reply comes back to the workflow */}
-      <Edge d={`M350 ${row + 14} V176 H160 V${row + 14}`} active={active} delay={0.55} color={C.signal} dashed />
-
-      <Packet show={active} points={[[104, row], [214, row], [298, row], [316, row]]} duration={2.2} delay={0.6} />
-      <Packet show={active} color={C.signal} points={[[350, row + 14], [350, 176], [160, 176], [160, row + 14]]} duration={1.8} delay={1.9} />
-
-      <motion.g initial={false} animate={{ opacity: active ? 1 : 0, y: active ? 0 : 6 }} transition={{ duration: 0.5, delay: active ? 0.9 : 0 }}>
-        <rect x={214} y={38} width={128} height={24} rx={12} fill="#13161b" stroke={C.faint} />
-        <text x={278} y={51} textAnchor="middle" dominantBaseline="middle" fontSize={10} fill={C.sodium} className="font-sans">
-          Reminder: tomorrow 10:00
-        </text>
-      </motion.g>
-      <motion.g initial={false} animate={{ opacity: active ? 1 : 0, y: active ? 0 : 6 }} transition={{ duration: 0.5, delay: active ? 2.2 : 0 }}>
-        <rect x={204} y={190} width={92} height={24} rx={12} fill="#13161b" stroke={C.faint} />
-        <text x={250} y={203} textAnchor="middle" dominantBaseline="middle" fontSize={10} fill={C.live} className="font-sans">
-          Confirmed ✓
-        </text>
-      </motion.g>
-
-      <text x={16} y={244} fontSize={9} letterSpacing={1.4} fill={C.dim} className="font-mono uppercase">
-        {active ? "automated · in production" : "by hand · one message at a time"}
-      </text>
-    </svg>
   );
 }
 
@@ -289,9 +201,7 @@ export function AcademiaVisual({ active }: VisualProps) {
   );
 }
 
-export const visuals: Record<ProjectId, ComponentType<VisualProps>> = {
-  "lh-sport": LhVisual,
-  dental: DentalVisual,
+export const visuals: Partial<Record<ProjectId, ComponentType<VisualProps>>> = {
   gamestore: GameStoreVisual,
   market: MarketVisual,
   academia: AcademiaVisual,

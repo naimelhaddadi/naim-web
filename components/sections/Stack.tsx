@@ -57,7 +57,7 @@ export function Stack() {
     <section id="stack" aria-labelledby="stack-title" className="section-y">
       <div className="container-x">
         <SectionHeading
-          index="03"
+          index="04"
           label="Stack"
           id="stack-title"
           lines={["The system", "I build with."]}
