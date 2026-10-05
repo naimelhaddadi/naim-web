@@ -10,7 +10,7 @@ export const site = {
   source: "https://github.com/naimelhaddadi/naim-web",
   title: "Naim El Haddadi — Backend Developer",
   description:
-    "Backend developer in Madrid building with Java, Spring Boot and SQL. A database for a scouting team, a WhatsApp automation running with real patients and a layered Spring Boot API.",
+    "Backend developer in Madrid working with Java, Spring Boot and SQL. A SQL Server database for a sports agency, a WhatsApp automation running with real patients, Spring Boot APIs and a Python market simulator.",
 } as const;
 
 export const nav = [

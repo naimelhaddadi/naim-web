@@ -11,6 +11,7 @@ import { ArrowUpRight } from "@/components/ui/Icons";
 import { ease } from "@/lib/motion";
 import { smooth } from "@/lib/scroll";
 import { RequestTracer } from "./RequestTracer";
+import { visuals } from "./Visuals";
 
 const noop = () => () => {};
 
@@ -60,7 +61,9 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
   const [current, setCurrent] = useState(0);
   const [manual, setManual] = useState(false);
   const [inspect, setInspect] = useState<Inspect>(null);
-  const hasSteps = project.id !== "gamestore";
+  // only the two case studies have a diagram that changes state step by step
+  const hasSteps = project.id === "lh-sport" || project.id === "dental";
+  const Visual = visuals[project.id];
   const step = project.sections[current].step;
 
   useEffect(() => closeRef.current?.focus(), []);
@@ -209,6 +212,12 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
               <div className="min-w-0 lg:col-span-7">
                 {project.endpoints && project.layers ? (
                   <RequestTracer endpoints={project.endpoints} layers={project.layers} label={project.title} />
+                ) : !hasSteps ? (
+                  <figure className="hairline-grid overflow-hidden rounded-md border border-line bg-ink p-4 sm:p-8">
+                    <div className="aspect-[400/220]">
+                      <Visual active />
+                    </div>
+                  </figure>
                 ) : (
                   <figure className="hairline-grid overflow-hidden rounded-md border border-line bg-ink">
                     <div className="overflow-x-auto px-3 py-4 [scrollbar-width:thin] sm:px-6 sm:py-6">

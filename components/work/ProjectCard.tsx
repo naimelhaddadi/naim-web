@@ -12,7 +12,9 @@ type Props = {
   project: Project;
   Visual: ComponentType<VisualProps>;
   onOpen: (trigger: HTMLElement) => void;
+  /** wide: diagram beside the text. compact: the smaller "more on GitHub" cards. */
   wide?: boolean;
+  compact?: boolean;
 };
 
 /*
@@ -20,7 +22,7 @@ type Props = {
   the diagram drifts with it and plays its story. Touch screens have no
   hover, so there the diagram plays when the card is on screen.
 */
-export function ProjectCard({ project, Visual, onOpen, wide }: Props) {
+export function ProjectCard({ project, Visual, onOpen, wide, compact }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [hover, setHover] = useState(false);
   const touch = useMedia("(hover: none)");
@@ -67,11 +69,11 @@ export function ProjectCard({ project, Visual, onOpen, wide }: Props) {
       {/* Diagram */}
       <div
         className={`hairline-grid relative min-h-0 overflow-hidden border-line bg-ink-2 ${
-          wide ? "h-[clamp(14rem,40vw,20rem)] border-b lg:order-2 lg:col-span-7 lg:h-auto lg:min-h-[20rem] lg:border-b-0 lg:border-l" : "h-[clamp(15rem,24vw,20rem)] border-b"
+          wide ? "h-[clamp(14rem,40vw,20rem)] border-b lg:order-2 lg:col-span-7 lg:h-auto lg:min-h-[20rem] lg:border-b-0 lg:border-l" : compact ? "h-56 border-b" : "h-[clamp(15rem,24vw,20rem)] border-b"
         }`}
       >
         <motion.div
-          className="absolute inset-0 p-4 sm:p-6"
+          className={`absolute inset-0 ${compact ? "p-3 sm:p-4" : "p-4 sm:p-6"}`}
           style={reduce ? undefined : { x: driftX, y: driftY }}
           animate={{ scale: active ? 1.03 : 1 }}
           transition={{ duration: 0.9, ease: ease.out }}
@@ -88,18 +90,23 @@ export function ProjectCard({ project, Visual, onOpen, wide }: Props) {
       </div>
 
       {/* Text */}
-      <div className={`flex min-w-0 flex-col gap-5 p-6 md:p-8 ${wide ? "lg:order-1 lg:col-span-5" : ""}`}>
+      <div className={`flex min-w-0 flex-col gap-5 ${compact ? "p-6" : "p-6 md:p-8"} ${wide ? "lg:order-1 lg:col-span-5" : ""}`}>
         <p className="label">{project.kind}</p>
         <div>
-          <h3 id={`${project.id}-title`} className="display text-[clamp(1.9rem,2.9vw,3rem)] leading-[0.95]">
+          <h3
+            id={`${project.id}-title`}
+            className={`display leading-[0.95] ${compact ? "text-[clamp(1.6rem,2.2vw,2.2rem)]" : "text-[clamp(1.9rem,2.9vw,3rem)]"}`}
+          >
             {project.title}
           </h3>
-          <p className="mt-3 font-serif text-[clamp(1.3rem,1.8vw,1.65rem)] italic leading-tight text-fg/85">{project.headline}</p>
+          {!compact && (
+            <p className="mt-3 font-serif text-[clamp(1.3rem,1.8vw,1.65rem)] italic leading-tight text-fg/85">{project.headline}</p>
+          )}
         </div>
         <p className="max-w-[48ch] text-muted">{project.summary}</p>
 
         <ul className="flex flex-wrap gap-2" aria-label="Technologies">
-          {project.stack.slice(0, wide ? 6 : 4).map((t, i) => (
+          {project.stack.slice(0, wide ? 6 : compact ? 3 : 4).map((t, i) => (
             <motion.li
               key={t}
               initial={false}

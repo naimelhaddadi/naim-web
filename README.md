@@ -24,13 +24,13 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 │   └── icon.svg, robots.ts, sitemap.ts
 ├── components/
 │   ├── hero/OrbitField.tsx   # las órbitas del hero, en dos canvas (detrás y delante de la foto)
-│   ├── sections/             # Hero, About, Work, Thinking, Stack, Contact
+│   ├── sections/             # Hero, About, Work, Stack, Contact
 │   ├── work/                 # tarjetas de proyecto, sus diagramas, el panel "View case" y el trazador de peticiones
 │   ├── diagrams/             # diagramas SVG detallados de LH Sport y de la clínica dental
 │   ├── layout/               # Nav, Footer, cursor, scroll suave
 │   └── ui/                   # piezas reutilizables: botón magnético, textos con máscara...
 ├── lib/
-│   ├── content.ts            # TODO el contenido (proyectos, stack). Se edita aquí.
+│   ├── content.ts            # TODO el contenido: proyectos, stack y cómo se conectan las tecnologías
 │   ├── site.ts               # enlaces y datos de contacto
 │   ├── scroll.ts             # la instancia de Lenis, para pararla cuando se abre un caso
 │   └── motion.ts             # curvas y duraciones de animación
@@ -43,7 +43,14 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 - La foto es un recorte de la foto de noche (sin fondo). Detrás hay una "pantalla" de la que sobresalen la cabeza y los hombros.
 - Las órbitas se dibujan en dos `<canvas>` que comparten la misma simulación: la mitad lejana de cada órbita va en el canvas de detrás de la foto y la mitad cercana en el de delante. Por eso los puntos pasan por detrás y por delante de mí.
 - Entrada: los puntos aparecen dispersos, se juntan en sus órbitas, sale la foto, se dibujan las órbitas y luego el nombre y el lema. No bloquea nada: se puede hacer scroll desde el principio.
+- Solo hay siete etiquetas y todas son tecnologías que uso (Java, Spring Boot, JPA, SQL, Python, Docker, n8n). El resto del stack está en su sección.
+- Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
 - Se apartan un poco del ratón y la animación se para cuando el hero no está en pantalla.
+
+## El stack
+
+- Están todas las tecnologías del CV, agrupadas igual: lenguajes, backend, bases de datos, testing, automatización y herramientas.
+- Cada tecnología pertenece a un "flujo" (`flows` en `lib/content.ts`), por ejemplo Java → Spring Boot → JPA / Hibernate → SQL Server. Al pasar el ratón por una, se ilumina su flujo y se dibuja una línea SVG entre sus pasos, midiendo la posición de cada etiqueta con `getBoundingClientRect`.
 
 ## Sistema visual
 
