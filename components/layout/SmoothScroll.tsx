@@ -2,6 +2,7 @@
 
 import Lenis from "lenis";
 import { useEffect } from "react";
+import { smooth } from "@/lib/scroll";
 
 /* Inertial scrolling on desktop. Skipped entirely for reduced motion. */
 export function SmoothScroll() {
@@ -14,8 +15,12 @@ export function SmoothScroll() {
       lerp: 0.11,
       stopInertiaOnNavigate: true,
     });
+    smooth.lenis = lenis;
 
-    return () => lenis.destroy();
+    return () => {
+      smooth.lenis = null;
+      lenis.destroy();
+    };
   }, []);
 
   return null;

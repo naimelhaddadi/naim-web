@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } fr
 import { useEffect, useState } from "react";
 import { nav, site } from "@/lib/site";
 import { ease } from "@/lib/motion";
-import { Button } from "@/components/ui/Button";
+import { ArrowUpRight } from "@/components/ui/Icons";
 
 export function Nav() {
   const { scrollY, scrollYProgress } = useScroll();
@@ -61,13 +61,14 @@ export function Nav() {
           </nav>
 
           <div className="flex items-center gap-7">
-            <p className="hidden items-center gap-2.5 text-xs text-muted lg:flex">
-              <span className="live-dot relative size-1.5 rounded-full bg-live text-live" aria-hidden />
-              Open to junior roles
-            </p>
-            <span className="hidden md:inline-block">
-              <Button href="#contact">Let&apos;s talk</Button>
-            </span>
+            <a
+              href={site.cv}
+              target="_blank"
+              rel="noopener"
+              className="hidden items-center gap-1.5 rounded-full border border-line-strong px-4 py-2 text-sm transition-colors hover:border-fg/60 md:inline-flex"
+            >
+              CV <ArrowUpRight className="text-muted" />
+            </a>
             <button
               type="button"
               className="label relative z-10 -mr-2 p-2 text-fg md:hidden"
@@ -102,7 +103,7 @@ export function Nav() {
           >
             <nav aria-label="Mobile">
               <ul className="space-y-1">
-                {[...nav, { href: "#contact", label: "Contact" }].map((item, i) => (
+                {nav.map((item, i) => (
                   <li key={item.href} className="overflow-hidden">
                     <motion.a
                       href={item.href}
@@ -120,10 +121,9 @@ export function Nav() {
             </nav>
             <div className="flex items-center justify-between text-sm text-muted">
               <a href={`mailto:${site.email}`}>{site.email}</a>
-              <span className="flex items-center gap-2">
-                <span className="live-dot relative size-1.5 rounded-full bg-live text-live" aria-hidden />
-                Available
-              </span>
+              <a href={site.cv} target="_blank" rel="noopener" className="flex items-center gap-1.5 text-fg">
+                CV <ArrowUpRight />
+              </a>
             </div>
           </motion.div>
         )}
