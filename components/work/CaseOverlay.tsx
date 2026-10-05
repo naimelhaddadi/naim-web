@@ -1,12 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { useEffect, useRef, useState, useSyncExternalStore, type RefObject } from "react";
+import { useEffect, useRef, useSyncExternalStore, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import type { Project } from "@/lib/content";
-import type { Inspect } from "@/components/diagrams/primitives";
-import { DentalDiagram } from "@/components/diagrams/DentalDiagram";
-import { LhDiagram } from "@/components/diagrams/LhDiagram";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { ease } from "@/lib/motion";
 import { smooth } from "@/lib/scroll";
@@ -18,7 +15,7 @@ const noop = () => () => {};
 type Props = { project: Project | null; onClose: () => void; returnFocus: RefObject<HTMLElement | null> };
 
 /*
-  "View case": the full story of one project over the page. While it's
+  The details of a personal project over the page. While it's
   open the rest of the page is inert (no focus, no clicks, no scroll), and
   closing it puts the focus back on the button that opened it.
 */
@@ -58,31 +55,9 @@ export function CaseOverlay({ project, onClose, returnFocus }: Props) {
 
 function Panel({ project, onClose }: { project: Project; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
-  const [current, setCurrent] = useState(0);
-  const [manual, setManual] = useState(false);
-  const [inspect, setInspect] = useState<Inspect>(null);
-  // only the two case studies have a diagram that changes state step by step
-  const hasSteps = project.id === "lh-sport" || project.id === "dental";
   const Visual = visuals[project.id];
-  const step = project.sections[current].step;
 
   useEffect(() => closeRef.current?.focus(), []);
-
-  // play the story through once the panel has opened, until the reader takes over
-  useEffect(() => {
-    if (!hasSteps || manual) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      const id = window.setTimeout(() => setCurrent(project.sections.length - 1), 0);
-      return () => window.clearTimeout(id);
-    }
-    const id = window.setInterval(() => setCurrent((c) => (c + 1) % project.sections.length), 3600);
-    return () => window.clearInterval(id);
-  }, [hasSteps, manual, project.sections.length]);
-
-  function pick(i: number) {
-    setManual(true);
-    setCurrent(i);
-  }
 
   return (
     <motion.div
@@ -154,28 +129,12 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
               {/* Story */}
               <div className="min-w-0 lg:col-span-5">
                 <ol className="space-y-2">
-                  {project.sections.map((s, i) => {
-                    const on = hasSteps && i === current;
-                    return (
-                      <li key={s.label}>
-                        <button
-                          type="button"
-                          disabled={!hasSteps}
-                          aria-pressed={hasSteps ? on : undefined}
-                          onClick={() => pick(i)}
-                          onMouseEnter={() => hasSteps && pick(i)}
-                          className={`block w-full border-l py-3 pl-5 text-left transition-colors duration-500 disabled:cursor-auto ${
-                            on ? "border-sodium" : "border-line hover:border-line-strong"
-                          }`}
-                        >
-                          <span className={`label block ${on ? "text-sodium" : ""}`}>{s.label}</span>
-                          <span className={`mt-2 block leading-relaxed transition-colors duration-500 ${on || !hasSteps ? "text-fg" : "text-muted"}`}>
-                            {s.body}
-                          </span>
-                        </button>
-                      </li>
-                    );
-                  })}
+                  {project.sections.map((s) => (
+                    <li key={s.label} className="border-l border-line py-3 pl-5">
+                      <p className="label">{s.label}</p>
+                      <p className="mt-2 leading-relaxed">{s.body}</p>
+                    </li>
+                  ))}
                 </ol>
 
                 <div className="mt-10 border-l border-line pl-5">
@@ -212,48 +171,14 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
               <div className="min-w-0 lg:col-span-7">
                 {project.endpoints && project.layers ? (
                   <RequestTracer endpoints={project.endpoints} layers={project.layers} label={project.title} />
-                ) : !hasSteps ? (
-                  <figure className="hairline-grid overflow-hidden rounded-md border border-line bg-ink p-4 sm:p-8">
-                    <div className="aspect-[400/220]">
-                      <Visual active />
-                    </div>
-                  </figure>
                 ) : (
-                  <figure className="hairline-grid overflow-hidden rounded-md border border-line bg-ink">
-                    <div className="overflow-x-auto px-3 py-4 [scrollbar-width:thin] sm:px-6 sm:py-6">
-                      <div className="min-w-[520px] sm:min-w-0">
-                        {project.id === "lh-sport" ? (
-                          <LhDiagram step={step} onInspect={setInspect} />
-                        ) : (
-                          <DentalDiagram step={step} onInspect={setInspect} />
-                        )}
+                  Visual && (
+                    <figure className="hairline-grid overflow-hidden rounded-md border border-line bg-ink p-4 sm:p-8">
+                      <div className="aspect-[400/220]">
+                        <Visual active />
                       </div>
-                    </div>
-                    <figcaption className="flex min-h-[4.25rem] items-start gap-4 border-t border-line px-4 py-3.5" aria-live="polite">
-                      <span className="label mt-0.5 shrink-0 text-sodium">{inspect ? "Node" : `0${current + 1}`}</span>
-                      <AnimatePresence mode="wait" initial={false}>
-                        <motion.span
-                          key={inspect ? inspect.name : `s${current}`}
-                          initial={{ opacity: 0, y: 6 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -6 }}
-                          transition={{ duration: 0.3, ease: ease.out }}
-                          className="text-sm leading-relaxed text-muted"
-                        >
-                          <span className="text-fg">{inspect ? inspect.name : project.sections[current].label}</span>
-                          {" — "}
-                          {inspect ? (
-                            inspect.detail
-                          ) : (
-                            <>
-                              <span className="pointer-coarse:hidden">hover a node to inspect it.</span>
-                              <span className="hidden pointer-coarse:inline">tap a node to inspect it.</span>
-                            </>
-                          )}
-                        </motion.span>
-                      </AnimatePresence>
-                    </figcaption>
-                  </figure>
+                    </figure>
+                  )
                 )}
               </div>
             </div>

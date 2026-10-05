@@ -24,11 +24,11 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 │   └── icon.svg, robots.ts, sitemap.ts
 ├── components/
 │   ├── hero/OrbitField.tsx   # las órbitas del hero, en dos canvas (detrás y delante de la foto)
-│   ├── sections/             # Hero, About, Work, Stack, Contact
-│   ├── work/                 # tarjetas de proyecto, sus diagramas, el panel "View case" y el trazador de peticiones
-│   ├── diagrams/             # diagramas SVG detallados de LH Sport y de la clínica dental
+│   ├── sections/             # Hero, About, RealWorld, Projects, Stack, Contact
+│   ├── work/                 # tarjetas de proyectos personales, sus diagramas, el panel de detalles y el trazador de peticiones
+│   ├── diagrams/             # diagramas SVG de LH Sport y de la clínica dental (los de la sección horizontal)
 │   ├── layout/               # Nav, Footer, cursor, scroll suave
-│   └── ui/                   # piezas reutilizables: botón magnético, textos con máscara...
+│   └── ui/                   # piezas reutilizables: botón magnético, textos con máscara, texto que se enciende con el scroll...
 ├── lib/
 │   ├── content.ts            # TODO el contenido: proyectos, stack y cómo se conectan las tecnologías
 │   ├── site.ts               # enlaces y datos de contacto
@@ -46,6 +46,13 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 - Solo hay siete etiquetas y todas son tecnologías que uso (Java, Spring Boot, JPA, SQL, Python, Docker, n8n). El resto del stack está en su sección.
 - Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
 - Se apartan un poco del ratón y la animación se para cuando el hero no está en pantalla.
+
+## Trabajo real: el scroll horizontal
+
+- LH Sport y la clínica dental son trabajo real (unas prácticas y un cliente freelance), así que van separados de los proyectos personales.
+- La sección mide 420vh y dentro hay un contenedor `sticky` del alto de la pantalla. Con `useScroll` de Motion saco el progreso del scroll dentro de la sección (0 → 1) y lo convierto en un `translateX` del carril: intro → LH → clínica.
+- El carril se queda quieto un rato en cada proyecto, y ese tramo de scroll es el que construye su diagrama paso a paso (problema → modelo → sistema → en marcha).
+- En móvil, en pantallas bajas o con "reducir movimiento" no se fija: es una lista vertical normal y cada diagrama se reproduce una vez al aparecer.
 
 ## El stack
 
