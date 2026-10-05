@@ -12,7 +12,10 @@ import {
 import { useRef } from "react";
 import cutout from "@/assets/photos/naim-cutout.webp";
 import { OrbitField } from "@/components/hero/OrbitField";
+import { Button } from "@/components/ui/Button";
+import { Github } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
+import { site } from "@/lib/site";
 import { ease } from "@/lib/motion";
 
 const motto = ["think", "build", "solve"];
@@ -46,13 +49,16 @@ export function Hero() {
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
   const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
-  // pointer parallax: the photo moves a little, the screen behind it less
+  // pointer parallax: the photo (foreground) moves and turns the most, the
+  // screen behind it less, the orbits (OrbitField) less still
   const mx = useSpring(useMotionValue(0), { stiffness: 50, damping: 18 });
   const my = useSpring(useMotionValue(0), { stiffness: 50, damping: 18 });
-  const photoX = useTransform(mx, [-0.5, 0.5], [14, -14]);
-  const photoY = useTransform(my, [-0.5, 0.5], [8, -8]);
-  const panelX = useTransform(mx, [-0.5, 0.5], [6, -6]);
-  const panelY = useTransform(my, [-0.5, 0.5], [3, -3]);
+  const photoX = useTransform(mx, [-0.5, 0.5], [18, -18]);
+  const photoY = useTransform(my, [-0.5, 0.5], [10, -10]);
+  const photoTurn = useTransform(mx, [-0.5, 0.5], [-3, 3]);
+  const panelX = useTransform(mx, [-0.5, 0.5], [7, -7]);
+  const panelY = useTransform(my, [-0.5, 0.5], [4, -4]);
+  const panelTurn = useTransform(mx, [-0.5, 0.5], [-1.5, 1.5]);
 
   function onPointerMove(e: React.PointerEvent<HTMLElement>) {
     if (reduce || e.pointerType !== "mouse") return;
@@ -77,7 +83,7 @@ export function Hero() {
         className="absolute left-1/2 top-[calc(var(--nav-h)-0.5rem)] z-10 aspect-[1086/1102] w-[min(112vw,580px)] -translate-x-[48%] lg:bottom-[-3svh] lg:left-auto lg:right-[2vw] lg:top-auto lg:w-[min(50vw,86svh)] lg:translate-x-0"
         style={reduce ? undefined : { y: figureY }}
       >
-        <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: panelX, y: panelY }}>
+        <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: panelX, y: panelY, rotateY: panelTurn, transformPerspective: 1600 }}>
           {/* light behind the head */}
           <motion.div
             className="absolute inset-[-20%] bg-[radial-gradient(circle_at_52%_34%,rgba(141,180,255,0.17),transparent_42%),radial-gradient(circle_at_30%_70%,rgba(242,161,90,0.08),transparent_40%)]"
@@ -99,7 +105,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div className="absolute inset-0" style={reduce ? undefined : { x: photoX, y: photoY }}>
+        <motion.div className="absolute inset-0" style={reduce ? undefined : { x: photoX, y: photoY, rotateY: photoTurn, transformPerspective: 1600 }}>
           <motion.div
             className="absolute inset-0"
             initial={{ opacity: 0, y: 46, scale: 0.97, filter: "blur(14px)" }}
@@ -138,8 +144,6 @@ export function Hero() {
             transition={{ duration: 1, ease: ease.out, delay: 1.55 }}
           >
             <span className="text-fg">Backend Developer</span>
-            <span aria-hidden className="h-px w-6 bg-line-strong" />
-            <span>Madrid</span>
           </motion.p>
         </div>
 
@@ -164,13 +168,18 @@ export function Hero() {
         </div>
 
         <motion.div
-          className="grid gap-4 border-t border-line pt-6 text-sm sm:grid-cols-2 sm:items-end lg:max-w-[50%]"
+          className="flex flex-wrap items-center justify-between gap-x-6 gap-y-5 border-t border-line pt-6 lg:max-w-[50%]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.2, ease: ease.out, delay: 2.2 }}
         >
-          <p className="max-w-[30ch] text-muted">Building software, solving problems and constantly learning.</p>
-          <p className="label sm:text-right">Java · Spring Boot · SQL · Python</p>
+          <p className="label">Java · Spring Boot · SQL · Python</p>
+          <div className="flex items-center gap-3">
+            <Button href="#work">View work</Button>
+            <Button href={site.github} target="_blank" rel="noopener" variant="ghost" icon={<Github />}>
+              GitHub
+            </Button>
+          </div>
         </motion.div>
       </motion.div>
     </section>
