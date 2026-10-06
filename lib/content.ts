@@ -348,9 +348,9 @@ export const process = [
 /* ── Stack ─────────────────────────────────────────────────────────────── */
 
 /*
-  One stack, not a catalogue: the four technologies I build with, in the
-  order a request goes through them, each with what I actually do with it
-  and the work on this site that shows it. The rest of the CV stays in the CV.
+  Where I go deep: the four technologies I build with, in the order a
+  request goes through them, each with what I actually do with it and the
+  work on this site that shows it.
 */
 export type Layer = {
   name: string;
@@ -400,5 +400,15 @@ export const layers: Layer[] = [
   },
 ];
 
-/* Tools I've worked with around the stack: mentioned, not featured. */
-export const alsoUsed = ["Git & GitHub", "Docker", "Linux", "n8n", "Python", "Postman"];
+/*
+  Depth isn't a fence: the other languages I've worked with get their own
+  place, so it's clear Java is where I go deepest, not the only place I work.
+*/
+export const beyond = {
+  languages: ["Python", "JavaScript", "PHP"],
+  note: "Java is where I go deepest, not the only place I work. The habits carry over to any language: understand the problem, model the data, keep the logic clean.",
+  proof: { label: "Financial Market Simulator", href: `${GITHUB}/financial-market-simulator`, context: "in Python" },
+};
+
+/* Tools around the stack: mentioned, not featured. */
+export const tools = ["Git & GitHub", "Docker", "Linux", "n8n", "Postman"];

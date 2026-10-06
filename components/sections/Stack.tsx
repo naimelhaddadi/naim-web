@@ -2,18 +2,20 @@
 
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
-import { alsoUsed, layers, type Layer } from "@/lib/content";
+import { Fragment, useRef } from "react";
+import { beyond, layers, tools, type Layer } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { useCalm } from "@/lib/useCalm";
 
 /*
-  Depth over breadth: four technologies, not a wall of badges. They are
+  Depth first: four technologies, not a wall of badges. They are
   listed in the order a request goes through them (the API, the logic, the
   mapping, the data), on one thread. While scrolling, a point travels down
   that thread and each layer lights up as the request reaches it. Every
   layer says what I do with it and links to the work that shows it.
+  Below, the other languages I've worked with, so depth doesn't read as
+  "Java only".
 */
 export function Stack() {
   const ref = useRef<HTMLOListElement>(null);
@@ -29,10 +31,10 @@ export function Stack() {
           index="05"
           label="Stack"
           id="stack-title"
-          lines={["One stack,", "end to end."]}
+          lines={["Where I", "go deep."]}
           aside={
             <p className="max-w-xs">
-              I&apos;d rather know one stack properly than many by name. These four are mine: the path a request takes, from the endpoint down to the table.
+              Java, Spring and SQL: the path a request takes, from the endpoint down to the table. It&apos;s where I&apos;ve gone furthest, and it isn&apos;t a fence.
             </p>
           }
         />
@@ -59,9 +61,36 @@ export function Stack() {
           </ol>
         </div>
 
-        <Reveal className="mt-14 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-line pt-6 pl-8 text-sm">
-          <span className="label">Also worked with</span>
-          <span className="text-muted">{alsoUsed.join(" · ")}</span>
+        <Reveal className="mt-14 grid gap-8 border-t border-line pt-10 pl-8 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-5">
+            <p className="label mb-3">Beyond Java</p>
+            <p className="display text-[clamp(1.9rem,3vw,2.75rem)]">
+              {beyond.languages.map((l, i) => (
+                <Fragment key={l}>
+                  {i > 0 && <span className="text-dim"> · </span>}
+                  <span className="whitespace-nowrap">{l}</span>
+                </Fragment>
+              ))}
+            </p>
+          </div>
+          <div className="lg:col-span-4">
+            <p className="max-w-md text-[1.05rem] leading-relaxed text-muted">{beyond.note}</p>
+            <p className="mt-4 text-sm text-muted">
+              <Link
+                href={beyond.proof.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:text-sodium hover:decoration-sodium"
+              >
+                {beyond.proof.label}
+              </Link>{" "}
+              {beyond.proof.context}
+            </p>
+          </div>
+          <div className="text-sm lg:col-span-3 lg:text-right">
+            <p className="label mb-1.5">Tools</p>
+            <p className="text-muted">{tools.join(" · ")}</p>
+          </div>
         </Reveal>
       </div>
     </section>

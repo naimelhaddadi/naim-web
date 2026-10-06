@@ -67,9 +67,9 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## El stack
 
-- Mejor saber mucho de un stack que poco de muchos: la sección solo enseña cuatro tecnologías (Spring Boot, Java, JPA / Hibernate y SQL), en el orden en que una petición pasa por ellas: la API, la lógica, el mapeo y los datos.
+- Perfil en T: profundidad en un stack y apertura a otros. La sección se titula "Where I go deep" y enseña cuatro tecnologías (Spring Boot, Java, JPA / Hibernate y SQL) en el orden en que una petición pasa por ellas: la API, la lógica, el mapeo y los datos.
 - Un hilo las une y, al hacer scroll, un punto baja por él (como la petición `POST /games` de GameStore) y cada capa se enciende al llegar. Cada una dice qué hago con ella y enlaza al trabajo que lo demuestra.
-- El resto de herramientas va en una sola línea discreta ("Also worked with"). Lo demás está en el CV.
+- Debajo, "Beyond Java": Python, JavaScript y PHP, para que se vea que Java es donde más he profundizado, no lo único con lo que trabajo. Las herramientas (Git, Docker, Linux, n8n, Postman) van aparte, en pequeño.
 
 ## Sistema visual
 
@@ -82,7 +82,7 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## Cambiar contenido
 
-Casi todo está en `lib/content.ts`. Las capas del stack son `layers` y la línea secundaria es `alsoUsed`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
+Casi todo está en `lib/content.ts`. Las capas del stack son `layers`, los otros lenguajes `beyond` y las herramientas `tools`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
 
 ## Probarla en local
 
