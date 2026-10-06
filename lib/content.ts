@@ -347,135 +347,58 @@ export const process = [
 
 /* ── Stack ─────────────────────────────────────────────────────────────── */
 
-/* Every technology from the CV, grouped the same way. */
-export type StackGroup = { id: string; title: string; items: string[] };
+/*
+  One stack, not a catalogue: the four technologies I build with, in the
+  order a request goes through them, each with what I actually do with it
+  and the work on this site that shows it. The rest of the CV stays in the CV.
+*/
+export type Layer = {
+  name: string;
+  role: string;
+  /** One request (GameStore's POST /games) followed down through the layers. */
+  trace: string;
+  body: string;
+  tools: string[];
+  proof: { label: string; href: string }[];
+};
 
-export const stack: StackGroup[] = [
-  { id: "languages", title: "Languages", items: ["Java", "Python", "SQL / T-SQL", "HTML5", "CSS3", "JavaScript", "PHP"] },
-  { id: "backend", title: "Backend", items: ["Spring Boot", "Spring Web MVC", "Spring Data JPA", "Bean Validation", "REST APIs", "JPA / Hibernate"] },
-  { id: "databases", title: "Databases", items: ["SQL Server", "Relational modelling", "Stored procedures", "Triggers", "H2"] },
-  { id: "testing", title: "Testing", items: ["JUnit 5", "Mockito"] },
-  { id: "automation", title: "Automation", items: ["n8n", "WhatsApp Business API", "Webhooks", "LLM integration"] },
+const GAMESTORE = { label: "GameStore", href: `${GITHUB}/GameStore_SpringBoot` };
+const ACADEMIA = { label: "Academia API", href: `${GITHUB}/Spring-Boot-Academy-Project` };
+
+export const layers: Layer[] = [
   {
-    id: "environment",
-    title: "Environment",
-    items: ["Git", "GitHub", "Maven", "IntelliJ IDEA", "Eclipse", "Docker", "Postman", "SSMS", "Linux", "VPS"],
+    name: "Spring Boot",
+    role: "The API",
+    trace: "POST /games",
+    body: "REST APIs split into controller, service and repository. Bean Validation checks what comes in; DTOs decide what goes out.",
+    tools: ["Spring Web MVC", "Bean Validation", "REST", "Maven"],
+    proof: [GAMESTORE, ACADEMIA],
+  },
+  {
+    name: "Java",
+    role: "The logic",
+    trace: "GameService",
+    body: "The rules live in plain Java services, kept apart from HTTP and from the database, so they can be tested on their own.",
+    tools: ["JUnit 5", "Mockito"],
+    proof: [GAMESTORE, ACADEMIA],
+  },
+  {
+    name: "JPA / Hibernate",
+    role: "The mapping",
+    trace: "repository.save(game)",
+    body: "Entities mapped to tables and Spring Data JPA repositories, so the service works with objects instead of SQL strings.",
+    tools: ["Spring Data JPA", "Hibernate", "H2"],
+    proof: [GAMESTORE, ACADEMIA],
+  },
+  {
+    name: "SQL",
+    role: "The data",
+    trace: "INSERT INTO game …",
+    body: "Relational models designed from the problem up: tables, keys and relationships in SQL Server, with stored procedures and triggers for the rules that belong in the database.",
+    tools: ["SQL Server", "T-SQL", "Stored procedures", "Triggers", "SSMS"],
+    proof: [{ label: "LH Management", href: "/work/lh-management" }],
   },
 ];
 
-/*
-  The same stack as an ecosystem: a core, a ring of what the core works
-  with every day, and an outer ring of everything around it. Each ring is
-  listed in order around the circle, so related technologies sit near
-  each other.
-*/
-export const core = ["Java", "Spring Boot", "JPA / Hibernate", "SQL / T-SQL"];
-
-export const innerRing = [
-  "Spring Web MVC",
-  "Spring Data JPA",
-  "Bean Validation",
-  "REST APIs",
-  "JUnit 5",
-  "Mockito",
-  "SQL Server",
-  "H2",
-  "n8n",
-  "Docker",
-  "Git",
-  "Python",
-];
-
-export const outerRing = [
-  "IntelliJ IDEA",
-  "Eclipse",
-  "Maven",
-  "Postman",
-  "Relational modelling",
-  "Stored procedures",
-  "Triggers",
-  "SSMS",
-  "Webhooks",
-  "WhatsApp Business API",
-  "LLM integration",
-  "VPS",
-  "Linux",
-  "GitHub",
-  "HTML5",
-  "CSS3",
-  "JavaScript",
-  "PHP",
-];
-
-/* What works with what (undirected). */
-export const relations: [string, string][] = [
-  ["Java", "Spring Boot"],
-  ["Java", "JPA / Hibernate"],
-  ["Java", "JUnit 5"],
-  ["Java", "Maven"],
-  ["Java", "IntelliJ IDEA"],
-  ["Java", "Eclipse"],
-  ["Spring Boot", "Spring Web MVC"],
-  ["Spring Boot", "Spring Data JPA"],
-  ["Spring Boot", "Bean Validation"],
-  ["Spring Boot", "REST APIs"],
-  ["Spring Boot", "Maven"],
-  ["JPA / Hibernate", "Spring Data JPA"],
-  ["JPA / Hibernate", "H2"],
-  ["JPA / Hibernate", "SQL / T-SQL"],
-  ["SQL / T-SQL", "SQL Server"],
-  ["SQL / T-SQL", "Stored procedures"],
-  ["SQL / T-SQL", "Triggers"],
-  ["SQL Server", "Relational modelling"],
-  ["SQL Server", "Stored procedures"],
-  ["SQL Server", "Triggers"],
-  ["SQL Server", "SSMS"],
-  ["REST APIs", "Postman"],
-  ["REST APIs", "Spring Web MVC"],
-  ["REST APIs", "Bean Validation"],
-  ["JUnit 5", "Mockito"],
-  ["n8n", "Webhooks"],
-  ["n8n", "WhatsApp Business API"],
-  ["n8n", "LLM integration"],
-  ["n8n", "VPS"],
-  ["Webhooks", "WhatsApp Business API"],
-  ["VPS", "Linux"],
-  ["Linux", "Docker"],
-  ["Git", "GitHub"],
-  ["HTML5", "CSS3"],
-  ["HTML5", "JavaScript"],
-  ["JavaScript", "PHP"],
-];
-
-/* Where a technology shows up in the work on this site (only where it's true). */
-export const usedIn: Record<string, string> = {
-  Java: "GameStore · Academia API",
-  "Spring Boot": "GameStore · Academia API",
-  "Spring Web MVC": "GameStore · Academia API",
-  "Spring Data JPA": "GameStore · Academia API",
-  "Bean Validation": "GameStore · Academia API",
-  "REST APIs": "GameStore · Academia API",
-  "JPA / Hibernate": "GameStore · Academia API",
-  H2: "GameStore · Academia API",
-  Maven: "GameStore · Academia API",
-  "JUnit 5": "GameStore",
-  Mockito: "GameStore",
-  "SQL / T-SQL": "LH Management",
-  "SQL Server": "LH Management",
-  "Relational modelling": "LH Management",
-  "Stored procedures": "LH Management",
-  Triggers: "LH Management",
-  n8n: "Dental clinic",
-  "WhatsApp Business API": "Dental clinic",
-  Webhooks: "Dental clinic",
-  "LLM integration": "Dental clinic",
-  VPS: "Dental clinic · Linux VPS I administer",
-  Linux: "Dental clinic · Linux VPS I administer",
-  HTML5: "Dental clinic website",
-  CSS3: "Dental clinic website",
-  Python: "Financial Market Simulator · Stanford Code in Place 2026",
-};
-
-export function relatedTo(name: string) {
-  return relations.flatMap(([a, b]) => (a === name ? [b] : b === name ? [a] : []));
-}
+/* Tools I've worked with around the stack: mentioned, not featured. */
+export const alsoUsed = ["Git & GitHub", "Docker", "Linux", "n8n", "Python", "Postman"];
