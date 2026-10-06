@@ -3,9 +3,7 @@
 import Image from "next/image";
 import {
   motion,
-  useMotionTemplate,
   useMotionValue,
-  useReducedMotion,
   useScroll,
   useSpring,
   useTransform,
@@ -18,6 +16,7 @@ import { Github } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
 import { site } from "@/lib/site";
 import { ease } from "@/lib/motion";
+import { useCalm } from "@/lib/useCalm";
 
 const motto = ["think", "build", "solve"];
 
@@ -43,17 +42,24 @@ export function Hero() {
   const ref = useRef<HTMLElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
   const coreRef = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion() ?? false;
+  const reduce = useCalm();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  // on the way out: the photo sinks and shrinks, the copy rises, blurs and fades,
-  // and each line of the motto slides its own way
-  const figureY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
-  const figureScale = useTransform(scrollYProgress, [0, 1], [1, 0.86]);
-  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
-  const fade = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
-  const blurPx = useTransform(scrollYProgress, [0, 0.6], [0, 8]);
-  const blur = useMotionTemplate`blur(${blurPx}px)`;
+  /*
+    On the way out (one continuous move, no pause):
+      Naim drifts up and back (smaller, dimmer) — he stays the core
+      the orbit system opens up and its nodes leave the frame (OrbitField)
+      the type shrinks towards the bottom-left and lifts away
+      each line of the motto slides its own way
+      the page darkens from the bottom into the next section
+  */
+  const figureY = useTransform(scrollYProgress, [0, 1], ["0%", "-9%"]);
+  const figureScale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const figureFade = useTransform(scrollYProgress, [0.2, 0.95], [1, 0.15]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-16%"]);
+  const contentScale = useTransform(scrollYProgress, [0, 1], [1, 0.88]);
+  const fade = useTransform(scrollYProgress, [0.1, 0.75], [1, 0]);
+  const dusk = useTransform(scrollYProgress, [0, 0.65], [0, 1]);
   const mottoX = [
     useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]),
     useTransform(scrollYProgress, [0, 1], ["0%", "6%"]),
@@ -86,13 +92,13 @@ export function Hero() {
       onPointerMove={onPointerMove}
       className="relative isolate min-h-[100svh] overflow-hidden"
     >
-      <OrbitField anchor={coreRef} scale={figureRef} backClassName="z-0" frontClassName="z-20" />
+      <OrbitField anchor={coreRef} scale={figureRef} backClassName="z-0" frontClassName="z-20" exit={reduce ? undefined : scrollYProgress} />
 
       {/* Naim, coming out of the screen */}
       <motion.div
         ref={figureRef}
         className="absolute left-1/2 top-[calc(var(--nav-h)-0.5rem)] z-10 aspect-[1086/1102] w-[min(112vw,580px)] -translate-x-[48%] lg:bottom-[-3svh] lg:left-auto lg:right-[2vw] lg:top-auto lg:w-[min(50vw,86svh)] lg:translate-x-0"
-        style={reduce ? undefined : { y: figureY, scale: figureScale }}
+        style={reduce ? undefined : { y: figureY, scale: figureScale, opacity: figureFade }}
       >
         <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: panelX, y: panelY, rotateY: panelTurn, transformPerspective: 1600 }}>
           {/* light behind the head */}
@@ -142,7 +148,7 @@ export function Hero() {
       {/* Copy */}
       <motion.div
         className="container-x relative z-30 flex min-h-[100svh] flex-col pb-8 pt-[calc(var(--nav-h)+min(112vw,580px)*0.78)] lg:pb-10 lg:pt-[calc(var(--nav-h)+8svh)]"
-        style={reduce ? undefined : { y: contentY, opacity: fade, filter: blur }}
+        style={reduce ? undefined : { y: contentY, scale: contentScale, opacity: fade, transformOrigin: "0% 100%" }}
       >
         <div className="lg:max-w-[50%]">
           <h1 id="hero-name" className="display text-[clamp(2.6rem,5.4vw,6.25rem)]">
@@ -198,6 +204,13 @@ export function Hero() {
           </div>
         </motion.div>
       </motion.div>
+
+      {/* the hero hands over to the page: it darkens from the bottom as it leaves */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-40 h-[60%] bg-gradient-to-t from-ink via-ink/70 to-transparent"
+        style={{ opacity: reduce ? 0 : dusk }}
+      />
     </section>
   );
 }
