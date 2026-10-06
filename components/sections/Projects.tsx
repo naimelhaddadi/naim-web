@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 import { useCallback, useRef, useState } from "react";
 import { personal, type Project } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -10,11 +10,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CaseOverlay } from "@/components/work/CaseOverlay";
 import { ProjectCard } from "@/components/work/ProjectCard";
 import { visuals } from "@/components/work/Visuals";
+import { useCalm } from "@/lib/useCalm";
 
 /*
-  Personal and academic projects: smaller than the real-world work, on
-  purpose. On wide screens the three columns travel at different speeds
-  while the section scrolls past.
+  Personal and academic projects — clearly apart from the real-world work,
+  and lighter on purpose. On wide screens the three columns drift at
+  slightly different speeds while the section scrolls past.
 */
 export function Projects() {
   const [open, setOpen] = useState<Project | null>(null);
@@ -28,12 +29,12 @@ export function Projects() {
 
   const ref = useRef<HTMLDivElement>(null);
   const wide = useMedia("(min-width: 1024px)");
-  const reduce = useReducedMotion();
+  const reduce = useCalm();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const columns = [
-    useTransform(scrollYProgress, [0, 1], [40, -40]),
-    useTransform(scrollYProgress, [0, 1], [110, -60]),
-    useTransform(scrollYProgress, [0, 1], [180, -80]),
+    useTransform(scrollYProgress, [0, 1], [24, -24]),
+    useTransform(scrollYProgress, [0, 1], [56, -36]),
+    useTransform(scrollYProgress, [0, 1], [88, -48]),
   ];
 
   return (
@@ -46,7 +47,9 @@ export function Projects() {
           lines={["Personal projects."]}
           aside={
             <div className="space-y-4">
-              <p className="max-w-xs text-lg">Experiments, APIs and projects built while learning.</p>
+              <p className="max-w-sm text-lg">
+                Projects built while learning, experimenting and going deeper into software development.
+              </p>
               <a
                 href={site.github}
                 target="_blank"
