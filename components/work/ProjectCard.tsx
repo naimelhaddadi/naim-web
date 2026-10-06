@@ -1,12 +1,13 @@
 "use client";
 
-import { AnimatePresence, motion, useInView, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
+import { AnimatePresence, motion, useInView, useMotionValue, useSpring, useTransform } from "motion/react";
 import { useRef, useState, type ComponentType } from "react";
 import type { Project } from "@/lib/content";
 import { ease } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
 import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
 import type { VisualProps } from "./Visuals";
+import { useCalm } from "@/lib/useCalm";
 
 type Props = {
   project: Project;
@@ -23,7 +24,7 @@ export function ProjectCard({ project, Visual, onOpen }: Props) {
   const ref = useRef<HTMLElement>(null);
   const [hover, setHover] = useState(false);
   const touch = useMedia("(hover: none)");
-  const reduce = useReducedMotion();
+  const reduce = useCalm();
   const inView = useInView(ref, { amount: 0.55 });
   const active = hover || (touch && inView);
 
@@ -64,7 +65,7 @@ export function ProjectCard({ project, Visual, onOpen }: Props) {
       }`}
     >
       {/* Diagram */}
-      <div className="hairline-grid relative h-52 overflow-hidden border-b border-line bg-ink-2">
+      <div className="hairline-grid relative h-60 overflow-hidden border-b border-line bg-ink-2">
         <motion.div
           className="absolute inset-0 p-3 sm:p-4"
           style={reduce ? undefined : { x: driftX, y: driftY }}

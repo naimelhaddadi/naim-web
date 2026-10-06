@@ -1,5 +1,6 @@
 "use client";
 
+import type { MotionValue } from "motion/react";
 import { useEffect, useRef, type RefObject } from "react";
 
 /*
@@ -141,9 +142,11 @@ type Props = {
   scale: RefObject<HTMLElement | null>;
   backClassName?: string;
   frontClassName?: string;
+  /** 0 → 1 as the hero scrolls away: the orbits open up and the nodes fly out. */
+  exit?: MotionValue<number>;
 };
 
-export function OrbitField({ anchor, scale, backClassName, frontClassName }: Props) {
+export function OrbitField({ anchor, scale, backClassName, frontClassName, exit }: Props) {
   const backRef = useRef<HTMLCanvasElement>(null);
   const frontRef = useRef<HTMLCanvasElement>(null);
 
@@ -202,6 +205,10 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const t = still ? 10 : (now - t0) / 1000;
+      // leaving the hero: each ring opens up by a different amount, so the system separates
+      const ex = still ? 0 : (exit?.get() ?? 0);
+      const open = (ring: number) => 1 + ex * (0.5 + ring * 0.55);
+      const stay = Math.max(0, 1 - ex * 1.1);
 
       // where the nucleus is right now (the photo has its own parallax)
       const box = back!.getBoundingClientRect();
@@ -226,18 +233,18 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
       const dustIn = phase(t, 0, 1.2);
       for (const d of dust) {
         if (!still) d.y = (d.y + d.drift * dt + 1) % 1;
-        bctx!.fillStyle = `rgba(${FG},${d.alpha * dustIn})`;
+        bctx!.fillStyle = `rgba(${FG},${d.alpha * dustIn * (1 - ex * 0.5)})`;
         bctx!.beginPath();
-        bctx!.arc(d.x * width + shiftX(DUST_SHIFT), d.y * height + shiftY(DUST_SHIFT), d.r, 0, TAU);
+        bctx!.arc(d.x * width + shiftX(DUST_SHIFT), d.y * height + shiftY(DUST_SHIFT) - ex * height * 0.18, d.r, 0, TAU);
         bctx!.fill();
       }
 
       // orbit lines: the far half of each arc behind the photo, the near half in front
       const ringsIn = phase(t, 0.9, 1.2);
-      for (const ring of RINGS) {
+      for (const [ri, ring] of RINGS.entries()) {
         const x = cx + ring.off[0] * base + shiftX(ring.shift);
         const y = cy + ring.off[1] * base + shiftY(ring.shift);
-        const rx = ring.r * base;
+        const rx = ring.r * base * open(ri);
         const ry = rx * ring.tilt;
         for (const [from, to] of ring.arcs) {
           const start = from * TAU;
@@ -252,7 +259,7 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
             ctx.beginPath();
             ctx.ellipse(x, y, rx, ry, ring.rot, a0, a1);
             ctx.setLineDash(ring.dash ? [2, 6] : []);
-            ctx.strokeStyle = `rgba(${FG},${alpha})`;
+            ctx.strokeStyle = `rgba(${FG},${alpha * stay})`;
             ctx.lineWidth = 1;
             ctx.stroke();
           }
@@ -266,7 +273,8 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
         const ring = RINGS[p.ring];
         if (!still) p.a += ring.speed * p.mul * dt;
         const shift = ring.shift + (p.label ? LABEL_SHIFT : 0);
-        const rx = ring.r * base;
+        // labelled nodes and some dots fly further out than their ring
+        const rx = ring.r * base * open(p.ring) * (1 + ex * (p.label ? 0.35 : (p.mul - 0.75)));
         const lx = Math.cos(p.a) * rx;
         const ly = Math.sin(p.a) * rx * ring.tilt;
         const cos = Math.cos(ring.rot);
@@ -288,11 +296,11 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
         p.x = p.sx * width + (ox - p.sx * width) * k;
         p.y = p.sy * height + (oy - p.sy * height) * k;
         p.depth = Math.sin(p.a);
-        p.alpha = clamp01((t - p.delay * 0.6) / 0.6);
+        p.alpha = clamp01((t - p.delay * 0.6) / 0.6) * Math.max(0, 1 - ex * 0.9);
       }
 
       // connections between nearby nodes, and a few spokes back to the nucleus
-      const linksIn = phase(t, 1.2, 1);
+      const linksIn = phase(t, 1.2, 1) * stay;
       const maxD = Math.max(90, base * 0.2);
       if (linksIn > 0) {
         for (let i = 0; i < particles.length; i++) {
@@ -345,7 +353,7 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
       }
 
       // labelled nodes: a ring, a dot and the name
-      const labelsIn = phase(t, 1.5, 0.9);
+      const labelsIn = phase(t, 1.5, 0.9) * stay;
       for (const p of particles) {
         if (!p.label) continue;
         const ctx = p.depth > 0 ? fctx! : bctx!;
@@ -412,7 +420,7 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName }: Pro
       document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("pointermove", onPointer);
     };
-  }, [anchor, scale]);
+  }, [anchor, scale, exit]);
 
   return (
     <>

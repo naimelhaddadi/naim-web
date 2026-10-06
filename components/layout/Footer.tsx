@@ -11,7 +11,7 @@ export function Footer() {
             source
           </a>
         </p>
-        <a href="#top" className="label transition-colors hover:text-fg">
+        <a href="#main" className="label transition-colors hover:text-fg">
           Back to top ↑
         </a>
       </div>
