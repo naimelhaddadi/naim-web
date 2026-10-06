@@ -43,12 +43,11 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## El hero
 
-- La foto es mi retrato en blanco y negro, recortado sin fondo. Detrás hay una "pantalla" de la que sobresale la cabeza.
-- Las órbitas se dibujan en dos `<canvas>` que comparten la misma simulación: la mitad lejana de cada órbita va en el canvas de detrás de la foto y la mitad cercana en el de delante. Las órbitas giran a la altura de los hombros, así que los puntos pasan por detrás y por delante sin taparme la cara.
-- Entrada: los puntos aparecen dispersos, se juntan en sus órbitas, sale la foto, se dibujan las órbitas y luego el nombre y el lema. No bloquea nada: se puede hacer scroll desde el principio.
-- Solo hay siete etiquetas y todas son tecnologías que uso (Java, Spring Boot, JPA, SQL, Python, Docker, n8n). El resto del stack está en su sección.
-- Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
-- Se apartan un poco del ratón y la animación se para cuando el hero no está en pantalla.
+- La foto es un recorte sin fondo (brazos cruzados, jersey gris), en el centro de un sistema de órbitas.
+- Las órbitas se dibujan en dos `<canvas>` que comparten la misma simulación: la mitad lejana de cada órbita va en el canvas de detrás de la foto y la mitad cercana en el de delante, así que todo pasa por detrás y por delante de mí.
+- En el sistema solo hay órbitas finas, unos pocos átomos (esferas negras brillantes con un núcleo naranja), chispas con estela y unos anillos en el "suelo". Sin etiquetas: el stack tiene su propia sección.
+- Entrada: se dibujan las órbitas, sube la foto, aparecen los átomos uno a uno y luego el nombre y el lema. No bloquea nada: se puede hacer scroll desde el principio.
+- Parallax con el ratón a tres profundidades (polvo, órbitas, foto); los átomos se apartan un poco del puntero y la animación se para cuando el hero no está en pantalla.
 
 ## How I work
 
