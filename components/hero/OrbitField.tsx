@@ -342,7 +342,7 @@ export function OrbitField({ anchor, scale, backClassName, frontClassName, exit 
         const k = phase(t, 1 + b.delay, 0.9);
         if (k <= 0) continue;
         const near = (b.depth + 1) / 2;
-        const r = base * 0.044 * b.size * (0.72 + near * 0.5) * (0.6 + k * 0.4);
+        const r = base * 0.032 * b.size * (0.72 + near * 0.5) * (0.6 + k * 0.4);
         const alpha = k * Math.max(0, 1 - ex * 0.8) * (0.7 + near * 0.3);
         drawAtom(b.depth > 0 ? fctx! : bctx!, b.x, b.y, r, alpha);
       }
