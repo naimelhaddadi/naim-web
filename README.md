@@ -24,7 +24,7 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 │   └── icon.svg, robots.ts, sitemap.ts
 ├── components/
 │   ├── hero/OrbitField.tsx   # las órbitas del hero, en dos canvas (detrás y delante de la foto)
-│   ├── sections/             # Hero, About, RealWorld, Projects, Stack, Contact
+│   ├── sections/             # Hero, About, HowIWork, RealWorld, Projects, Stack, Contact
 │   ├── case/CaseStudy.tsx    # la página de cada caso real (/work/lh-management y /work/dental-clinic)
 │   ├── work/                 # los diagramas que se construyen con el scroll, sus versiones para móvil,
 │   │                         # las tarjetas de proyectos personales, el panel de detalles y el trazador de peticiones
@@ -49,6 +49,13 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 - Solo hay siete etiquetas y todas son tecnologías que uso (Java, Spring Boot, JPA, SQL, Python, Docker, n8n). El resto del stack está en su sección.
 - Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
 - Se apartan un poco del ratón y la animación se para cuando el hero no está en pantalla.
+
+## How I work
+
+- Va entre el About y el trabajo real: primero dice cómo trabajo y justo después llegan las pruebas.
+- Titular: "I don't start with code. I start with the problem." En escritorio la sección se queda en pantalla un tramo corto mientras el scroll la transforma: "code" se queda en contorno, "problem" se enciende, las dos frases se juntan y se dibuja el proceso (understand → design → build → improve) con una línea que sale enredada del problema y se endereza. Improve vuelve a understand.
+- Termina con "Here's what that looks like in practice." y el hilo baja hasta "Real-world work". Las historias de LH y la clínica empiezan por el problema real, no por la tecnología.
+- En móvil, pantallas bajas o "reducir movimiento" es una columna normal.
 
 ## Trabajo real: scroll vertical normal
 

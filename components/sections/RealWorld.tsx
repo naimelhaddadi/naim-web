@@ -37,8 +37,8 @@ import { useCalm } from "@/lib/useCalm";
 */
 
 const stages: Record<Work["id"], { Stage: ComponentType<StageProps>; range: [number, number]; still: number }> = {
-  // the home page skips LH's "problem" phase; the case study shows it
-  "lh-management": { Stage: LhStage, range: [0.14, 1], still: LH.BUILT },
+  // both start from the problem: the diagram opens on the scattered fragments
+  "lh-management": { Stage: LhStage, range: [0, 1], still: LH.BUILT },
   "dental-clinic": { Stage: DentalStage, range: [0, 1], still: 1 },
 };
 
@@ -62,10 +62,12 @@ export function RealWorld() {
   const reduce = useCalm();
 
   return (
-    <section id="work" aria-labelledby="work-title" className="relative pt-[var(--section-y)]">
+    <section id="work" aria-labelledby="work-title" className="relative">
       <div className="container-x">
+        {/* the thread from "How I work" arrives here */}
+        <Arrival reduce={reduce} />
         <p className="label mb-8 flex items-center gap-3">
-          <span className="text-sodium">(02)</span>
+          <span className="text-sodium">(03)</span>
           <span aria-hidden className="h-px w-8 bg-line-strong" />
           Real-world work
         </p>
@@ -86,6 +88,16 @@ export function RealWorld() {
         </div>
       ))}
     </section>
+  );
+}
+
+function Arrival({ reduce }: { reduce: boolean }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.95", "end 0.55"] });
+  return (
+    <div ref={ref} aria-hidden className="relative h-[calc(var(--section-y)*0.75)]">
+      <motion.span className="absolute bottom-3 left-[3.5px] top-0 w-[1.25px] origin-top bg-sodium" style={{ scaleY: reduce ? 1 : scrollYProgress }} />
+    </div>
   );
 }
 
