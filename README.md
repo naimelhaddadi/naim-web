@@ -43,8 +43,8 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## El hero
 
-- La foto es un recorte de la foto de noche (sin fondo). Detrás hay una "pantalla" de la que sobresalen la cabeza y los hombros.
-- Las órbitas se dibujan en dos `<canvas>` que comparten la misma simulación: la mitad lejana de cada órbita va en el canvas de detrás de la foto y la mitad cercana en el de delante. Por eso los puntos pasan por detrás y por delante de mí.
+- La foto es mi retrato en blanco y negro, recortado sin fondo. Detrás hay una "pantalla" de la que sobresale la cabeza.
+- Las órbitas se dibujan en dos `<canvas>` que comparten la misma simulación: la mitad lejana de cada órbita va en el canvas de detrás de la foto y la mitad cercana en el de delante. Las órbitas giran a la altura de los hombros, así que los puntos pasan por detrás y por delante sin taparme la cara.
 - Entrada: los puntos aparecen dispersos, se juntan en sus órbitas, sale la foto, se dibujan las órbitas y luego el nombre y el lema. No bloquea nada: se puede hacer scroll desde el principio.
 - Solo hay siete etiquetas y todas son tecnologías que uso (Java, Spring Boot, JPA, SQL, Python, Docker, n8n). El resto del stack está en su sección.
 - Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
@@ -67,9 +67,9 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## El stack
 
-- Perfil en T: profundidad en un stack y apertura a otros. La sección se titula "Where I go deep" y enseña cuatro tecnologías (Spring Boot, Java, JPA / Hibernate y SQL) en el orden en que una petición pasa por ellas: la API, la lógica, el mapeo y los datos.
-- Un hilo las une y, al hacer scroll, un punto baja por él (como la petición `POST /games` de GameStore) y cada capa se enciende al llegar. Cada una dice qué hago con ella y enlaza al trabajo que lo demuestra.
-- Debajo, "Beyond Java": Python, JavaScript y PHP, para que se vea que Java es donde más he profundizado, no lo único con lo que trabajo. Las herramientas (Git, Docker, Linux, n8n, Postman) van aparte, en pequeño.
+- "Java is my core, not my limit.": Java, Spring y SQL son lo que mejor sé, pero no lo único. La sección es corta a propósito.
+- Una petición (`POST /games` de GameStore) cruza las cuatro capas: Spring Boot (la API), Java (la lógica), JPA / Hibernate (el mapeo) y SQL (los datos). En escritorio van en fila sobre un hilo y en móvil en columna. Al hacer scroll, un punto recorre el hilo y cada capa se enciende al llegar.
+- Debajo, "I also work with": Python, JavaScript y PHP, visibles y no escondidos. Las herramientas (Git, Docker, Linux, n8n, Postman) van aparte, en pequeño.
 
 ## Sistema visual
 
@@ -82,7 +82,7 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## Cambiar contenido
 
-Casi todo está en `lib/content.ts`. Las capas del stack son `layers`, los otros lenguajes `beyond` y las herramientas `tools`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
+Casi todo está en `lib/content.ts`. Las capas del stack son `layers`, los otros lenguajes `alsoLanguages` y las herramientas `tools`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
 
 ## Probarla en local
 

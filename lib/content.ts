@@ -348,67 +348,50 @@ export const process = [
 /* ── Stack ─────────────────────────────────────────────────────────────── */
 
 /*
-  Where I go deep: the four technologies I build with, in the order a
-  request goes through them, each with what I actually do with it and the
-  work on this site that shows it.
+  Java is the core, not the limit: one request followed through the four
+  layers I know best, then the other languages I work with. Short on
+  purpose, every line backed by the CV or the public repositories.
 */
-export type Layer = {
-  name: string;
-  role: string;
-  /** One request (GameStore's POST /games) followed down through the layers. */
-  trace: string;
-  body: string;
-  tools: string[];
-  proof: { label: string; href: string }[];
-};
+export type Layer = { name: string; role: string; line: string; tools: string[] };
 
-const GAMESTORE = { label: "GameStore", href: `${GITHUB}/GameStore_SpringBoot` };
-const ACADEMIA = { label: "Academia API", href: `${GITHUB}/Spring-Boot-Academy-Project` };
+export const request = "POST /games";
 
 export const layers: Layer[] = [
   {
     name: "Spring Boot",
     role: "The API",
-    trace: "POST /games",
-    body: "REST APIs split into controller, service and repository. Bean Validation checks what comes in; DTOs decide what goes out.",
-    tools: ["Spring Web MVC", "Bean Validation", "REST", "Maven"],
-    proof: [GAMESTORE, ACADEMIA],
+    line: "REST endpoints with validation, split into controller, service and repository.",
+    tools: ["Spring Web MVC", "Bean Validation", "Maven"],
   },
   {
     name: "Java",
     role: "The logic",
-    trace: "GameService",
-    body: "The rules live in plain Java services, kept apart from HTTP and from the database, so they can be tested on their own.",
+    line: "The business rules, in plain services that are easy to test.",
     tools: ["JUnit 5", "Mockito"],
-    proof: [GAMESTORE, ACADEMIA],
   },
   {
     name: "JPA / Hibernate",
     role: "The mapping",
-    trace: "repository.save(game)",
-    body: "Entities mapped to tables and Spring Data JPA repositories, so the service works with objects instead of SQL strings.",
-    tools: ["Spring Data JPA", "Hibernate", "H2"],
-    proof: [GAMESTORE, ACADEMIA],
+    line: "Objects in the code, tables in the database, and repositories in between.",
+    tools: ["Spring Data JPA", "H2"],
   },
   {
     name: "SQL",
     role: "The data",
-    trace: "INSERT INTO game …",
-    body: "Relational models designed from the problem up: tables, keys and relationships in SQL Server, with stored procedures and triggers for the rules that belong in the database.",
-    tools: ["SQL Server", "T-SQL", "Stored procedures", "Triggers", "SSMS"],
-    proof: [{ label: "LH Management", href: "/work/lh-management" }],
+    line: "Relational models in SQL Server, with procedures and triggers.",
+    tools: ["SQL Server", "T-SQL"],
   },
 ];
 
-/*
-  Depth isn't a fence: the other languages I've worked with get their own
-  place, so it's clear Java is where I go deepest, not the only place I work.
-*/
-export const beyond = {
-  languages: ["Python", "JavaScript", "PHP"],
-  note: "Java is where I go deepest, not the only place I work. The habits carry over to any language: understand the problem, model the data, keep the logic clean.",
-  proof: { label: "Financial Market Simulator", href: `${GITHUB}/financial-market-simulator`, context: "in Python" },
-};
+export const stackProof = [
+  { label: "GameStore", href: `${GITHUB}/GameStore_SpringBoot` },
+  { label: "Academia API", href: `${GITHUB}/Spring-Boot-Academy-Project` },
+  { label: "LH Management", href: "/work/lh-management" },
+];
 
-/* Tools around the stack: mentioned, not featured. */
+/* The other languages: clearly part of the picture, not a footnote. */
+export const alsoLanguages = ["Python", "JavaScript", "PHP"];
+export const alsoProof = { label: "Financial Market Simulator", href: `${GITHUB}/financial-market-simulator`, note: "is written in Python." };
+
+/* Tools around all of it: mentioned, not featured. */
 export const tools = ["Git & GitHub", "Docker", "Linux", "n8n", "Postman"];

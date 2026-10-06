@@ -9,7 +9,7 @@ import {
   useTransform,
 } from "motion/react";
 import { useRef } from "react";
-import cutout from "@/assets/photos/naim-cutout.webp";
+import portrait from "@/assets/photos/naim-portrait-cutout.webp";
 import { OrbitField } from "@/components/hero/OrbitField";
 import { Button } from "@/components/ui/Button";
 import { Github } from "@/components/ui/Icons";
@@ -20,10 +20,10 @@ import { useCalm } from "@/lib/useCalm";
 
 const motto = ["think", "build", "solve"];
 
-/* The photo melts into the page at the bottom and at the right edge. */
+/* The portrait melts into the page at the bottom and at both shoulders. */
 const photoMask = {
-  maskImage: "linear-gradient(to top, transparent 2%, #000 26%), linear-gradient(to left, transparent 0%, #000 7%)",
-  WebkitMaskImage: "linear-gradient(to top, transparent 2%, #000 26%), linear-gradient(to left, transparent 0%, #000 7%)",
+  maskImage: "linear-gradient(to top, transparent 2%, #000 30%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%)",
+  WebkitMaskImage: "linear-gradient(to top, transparent 2%, #000 30%), linear-gradient(to right, transparent 0%, #000 12%, #000 88%, transparent 100%)",
   maskComposite: "intersect",
   WebkitMaskComposite: "source-in",
 } as const;
@@ -94,23 +94,23 @@ export function Hero() {
     >
       <OrbitField anchor={coreRef} scale={figureRef} backClassName="z-0" frontClassName="z-20" exit={reduce ? undefined : scrollYProgress} />
 
-      {/* Naim, coming out of the screen */}
+      {/* Naim, rising out of the screen */}
       <motion.div
         ref={figureRef}
-        className="absolute left-1/2 top-[calc(var(--nav-h)-0.5rem)] z-10 aspect-[1086/1102] w-[min(112vw,580px)] -translate-x-[48%] lg:bottom-[-3svh] lg:left-auto lg:right-[2vw] lg:top-auto lg:w-[min(50vw,86svh)] lg:translate-x-0"
+        className="absolute left-1/2 top-[calc(var(--nav-h)-0.5rem)] z-10 aspect-[952/1129] w-[min(94vw,470px)] -translate-x-1/2 lg:bottom-[-3svh] lg:left-auto lg:right-[5vw] lg:top-auto lg:w-[min(40vw,76svh)] lg:translate-x-0"
         style={reduce ? undefined : { y: figureY, scale: figureScale, opacity: figureFade }}
       >
         <motion.div aria-hidden className="absolute inset-0" style={reduce ? undefined : { x: panelX, y: panelY, rotateY: panelTurn, transformPerspective: 1600 }}>
           {/* light behind the head */}
           <motion.div
-            className="absolute inset-[-20%] bg-[radial-gradient(circle_at_52%_34%,rgba(141,180,255,0.17),transparent_42%),radial-gradient(circle_at_30%_70%,rgba(242,161,90,0.08),transparent_40%)]"
+            className="absolute inset-[-20%] bg-[radial-gradient(circle_at_50%_32%,rgba(141,180,255,0.2),transparent_44%),radial-gradient(circle_at_28%_74%,rgba(242,161,90,0.09),transparent_40%)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.6, ease: ease.out, delay: 0.4 }}
           />
-          {/* the screen: the head and shoulders break out over its top edge */}
+          {/* the screen: the head breaks out over its top edge */}
           <motion.div
-            className="absolute bottom-0 left-[7%] right-[3%] top-[33%] overflow-hidden rounded-[28px] border border-line-strong bg-gradient-to-b from-ink-3 to-ink"
+            className="absolute bottom-0 left-[4%] right-[4%] top-[50%] overflow-hidden rounded-[28px] border border-line-strong bg-gradient-to-b from-ink-3 to-ink"
             style={panelMask}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -118,7 +118,6 @@ export function Hero() {
           >
             <div className="hairline-grid absolute inset-0 opacity-60" />
             <div className="absolute inset-x-[12%] top-0 h-px bg-gradient-to-r from-transparent via-signal/70 to-transparent" />
-            <p className="label absolute left-5 top-4 text-[0.62rem] text-dim">core</p>
           </motion.div>
         </motion.div>
 
@@ -131,23 +130,23 @@ export function Hero() {
           >
             <div className="absolute inset-0" style={photoMask}>
               <Image
-                src={cutout}
-                alt="Naim El Haddadi working on his laptop"
+                src={portrait}
+                alt="Portrait of Naim El Haddadi"
                 fill
                 priority
-                sizes="(min-width: 1024px) 50vw, 112vw"
-                className="object-contain object-bottom [filter:drop-shadow(0_36px_48px_rgba(0,0,0,0.6))_drop-shadow(-12px_-8px_36px_rgba(141,180,255,0.14))]"
+                sizes="(min-width: 1024px) 40vw, 94vw"
+                className="object-contain object-bottom [filter:drop-shadow(0_36px_48px_rgba(0,0,0,0.6))_drop-shadow(0_-6px_28px_rgba(141,180,255,0.22))]"
               />
             </div>
           </motion.div>
           {/* the nucleus the orbits turn around */}
-          <span ref={coreRef} aria-hidden className="absolute left-[52%] top-[34%] size-px" />
+          <span ref={coreRef} aria-hidden className="absolute left-1/2 top-[56%] size-px" />
         </motion.div>
       </motion.div>
 
       {/* Copy */}
       <motion.div
-        className="container-x relative z-30 flex min-h-[100svh] flex-col pb-8 pt-[calc(var(--nav-h)+min(112vw,580px)*0.78)] lg:pb-10 lg:pt-[calc(var(--nav-h)+8svh)]"
+        className="container-x relative z-30 flex min-h-[100svh] flex-col pb-8 pt-[calc(var(--nav-h)+min(94vw,470px)*0.98)] lg:pb-10 lg:pt-[calc(var(--nav-h)+8svh)]"
         style={reduce ? undefined : { y: contentY, scale: contentScale, opacity: fade, transformOrigin: "0% 100%" }}
       >
         <div className="lg:max-w-[50%]">
