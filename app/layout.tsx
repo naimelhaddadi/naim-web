@@ -60,7 +60,7 @@ const personSchema = {
   email: `mailto:${site.email}`,
   address: { "@type": "PostalAddress", addressLocality: "Madrid", addressCountry: "ES" },
   sameAs: [site.github, site.linkedin],
-  knowsAbout: ["Java", "Spring Boot", "JPA / Hibernate", "Spring Data JPA", "SQL", "SQL Server", "T-SQL", "REST APIs"],
+  knowsAbout: ["Java", "Spring Boot", "JPA / Hibernate", "SQL", "SQL Server", "REST APIs", "Python", "JavaScript", "PHP"],
   knowsLanguage: ["es", "en", "ar"],
 };
 
