@@ -72,28 +72,28 @@ export const realWorld: Work[] = [
     status: { label: "Left with an official recommendation letter" },
     story: [
       {
-        label: "The database",
-        title: "One relational core, built from scratch.",
-        body: "A SQL Server database with more than 10 entities — players, contracts, transfers, agents, clubs, leagues — and the relations between them.",
-        at: 0.36,
+        label: "Understand",
+        title: "The problem wasn't “build a database”.",
+        body: "It was a large amount of player, club, league, contract and agent information that wasn't organised efficiently — and the repetitive manual work that came with it.",
+        at: 0.08,
       },
       {
-        label: "Business logic",
-        title: "The rules live inside the database.",
-        body: "T-SQL stored procedures and triggers, with referential integrity enforced by the model itself.",
-        at: 0.53,
+        label: "Design",
+        title: "A model of how the agency actually works.",
+        body: "More than 10 entities — players, contracts, transfers, agents, clubs, leagues — designed around the real operations, and how each one relates to the rest.",
+        at: 0.3,
       },
       {
-        label: "Web interface",
-        title: "Where the workflow meets the data.",
-        body: "I also developed the web data-entry interface that connects the agency's operational workflow with the database.",
-        at: 0.64,
+        label: "Build",
+        title: "A relational system, from scratch.",
+        body: "SQL Server with the business logic in T-SQL stored procedures and triggers, referential integrity enforced by the model, and a web data-entry interface on top.",
+        at: 0.52,
       },
       {
         label: "In use",
-        title: "The system the agency works on.",
+        title: "The structure the agency works on.",
         body: "It supports the agency's daily operations, and I left the role with an official recommendation letter.",
-        at: 0.76,
+        at: 0.75,
       },
     ],
     chapters: [
@@ -152,25 +152,25 @@ export const realWorld: Work[] = [
         label: "First",
         title: "A website for a clinic that had just opened.",
         body: "The corporate website for a newly opened private dental clinic.",
-        at: 0.08,
+        at: 0.07,
       },
       {
-        label: "Automation",
-        title: "An appointment starts the conversation.",
-        body: "Webhooks feed n8n workflows that handle appointments, confirmations and reminders.",
-        at: 0.32,
+        label: "Understand",
+        title: "The problem wasn't “use n8n”.",
+        body: "It was repetitive, manual communication with patients around appointments, confirmations and reminders.",
+        at: 0.2,
       },
       {
-        label: "Communication",
-        title: "WhatsApp, with an LLM in the loop.",
-        body: "Messages go out and come back through the WhatsApp Business API, with an LLM integrated into the flow.",
-        at: 0.6,
+        label: "Design & build",
+        title: "An automation shaped around that process.",
+        body: "Webhooks bring appointment events into n8n workflows; messages go through the WhatsApp Business API, with an LLM integrated into the conversation.",
+        at: 0.45,
       },
       {
-        label: "Production",
+        label: "In production",
         title: "Running with real patients.",
-        body: "The system is in production today, on a Linux VPS that I administer.",
-        at: 0.85,
+        body: "The system is live today, on a Linux VPS that I administer.",
+        at: 0.84,
       },
     ],
     chapters: [
@@ -336,6 +336,14 @@ export const personal: Project[] = [
     links: [{ href: `${GITHUB}/financial-market-simulator`, label: "Source on GitHub" }],
   },
 ];
+
+/* How I work: the four steps, in my words. */
+export const process = [
+  { title: "Understand", line: "First I try to understand the problem, the people involved and the way the process currently works." },
+  { title: "Design", line: "Then I think about how the information, logic and systems should fit together." },
+  { title: "Build", line: "Only then does the code become the solution." },
+  { title: "Improve", line: "Once something works, there's always another layer to understand, simplify or improve." },
+] as const;
 
 /* ── Stack ─────────────────────────────────────────────────────────────── */
 

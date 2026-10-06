@@ -41,7 +41,7 @@ export function Projects() {
     <section id="projects" aria-labelledby="projects-title" className="section-y">
       <div className="container-x">
         <SectionHeading
-          index="03"
+          index="04"
           label="Personal projects"
           id="projects-title"
           lines={["Personal projects."]}
