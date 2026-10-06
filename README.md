@@ -25,14 +25,17 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 ├── components/
 │   ├── hero/OrbitField.tsx   # las órbitas del hero, en dos canvas (detrás y delante de la foto)
 │   ├── sections/             # Hero, About, RealWorld, Projects, Stack, Contact
-│   ├── work/                 # tarjetas de proyectos personales, sus diagramas, el panel de detalles y el trazador de peticiones
-│   ├── diagrams/             # diagramas SVG de LH Sport y de la clínica dental (los de la sección horizontal)
+│   ├── case/CaseStudy.tsx    # la página de cada caso real (/work/lh-management y /work/dental-clinic)
+│   ├── work/                 # los diagramas que se construyen con el scroll, sus versiones para móvil,
+│   │                         # las tarjetas de proyectos personales, el panel de detalles y el trazador de peticiones
+│   ├── diagrams/primitives.tsx  # piezas compartidas de los diagramas (paquetes que viajan, tipos)
 │   ├── layout/               # Nav, Footer, cursor, scroll suave
 │   └── ui/                   # piezas reutilizables: botón magnético, textos con máscara, texto que se enciende con el scroll...
 ├── lib/
 │   ├── content.ts            # TODO el contenido: proyectos, stack y cómo se conectan las tecnologías
 │   ├── site.ts               # enlaces y datos de contacto
 │   ├── scroll.ts             # la instancia de Lenis, para pararla cuando se abre un caso
+│   ├── useCalm.ts            # "reducir movimiento" sin errores de hidratación
 │   └── motion.ts             # curvas y duraciones de animación
 ├── assets/photos/            # fotos (se importan y Next las optimiza)
 └── public/assets/            # CV y carta de recomendación
@@ -47,17 +50,18 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 - Tres profundidades con parallax distinto: el polvo del fondo casi no se mueve, las órbitas y las etiquetas algo más, y la foto es la que más se mueve (y gira un poco en perspectiva).
 - Se apartan un poco del ratón y la animación se para cuando el hero no está en pantalla.
 
-## Trabajo real: el scroll horizontal
+## Trabajo real: scroll vertical normal
 
-- LH Sport y la clínica dental son trabajo real (unas prácticas y un cliente freelance), así que van separados de los proyectos personales.
-- La sección mide 420vh y dentro hay un contenedor `sticky` del alto de la pantalla. Con `useScroll` de Motion saco el progreso del scroll dentro de la sección (0 → 1) y lo convierto en un `translateX` del carril: intro → LH → clínica.
-- El carril se queda quieto un rato en cada proyecto, y ese tramo de scroll es el que construye su diagrama paso a paso (problema → modelo → sistema → en marcha).
-- En móvil, en pantallas bajas o con "reducir movimiento" no se fija: es una lista vertical normal y cada diagrama se reproduce una vez al aparecer.
+- LH Management y la clínica dental son trabajo real (unas prácticas y un cliente freelance), así que van separados de los proyectos personales.
+- Todo es scroll vertical. Cada proyecto es una historia a la izquierda y, en pantallas grandes, un diagrama `sticky` a la derecha que se construye con el scroll: cada elemento tiene un rango dentro del progreso (0 → 1), así que al bajar se monta y al subir se desmonta (`components/work/stage.tsx`).
+- Continuidad entre proyectos: el diagrama de LH se pliega en un punto, sale un hilo hacia abajo, cruza el hueco entre los dos proyectos y el diagrama de la clínica nace de ese mismo hilo.
+- "View case" abre la página del caso (`/work/...`), con capítulos que se leen hacia abajo y el mismo diagrama construyéndose capítulo a capítulo.
+- En móvil los diagramas son una columna legible (`MobileFlow`) que se construye al pasar. Con "reducir movimiento" se ven completos y quietos.
 
 ## El stack
 
-- Están todas las tecnologías del CV, agrupadas igual: lenguajes, backend, bases de datos, testing, automatización y herramientas.
-- Cada tecnología pertenece a un "flujo" (`flows` en `lib/content.ts`), por ejemplo Java → Spring Boot → JPA / Hibernate → SQL Server. Al pasar el ratón por una, se ilumina su flujo y se dibuja una línea SVG entre sus pasos, midiendo la posición de cada etiqueta con `getBoundingClientRect`.
+- Están las 34 tecnologías del CV. En escritorio es un ecosistema: el núcleo (Java, Spring Boot, JPA / Hibernate, SQL) en el centro y dos anillos alrededor. Al pasar el ratón por una se dibujan las líneas a las tecnologías con las que trabaja (`relations` en `lib/content.ts`) y abajo se dice dónde la he usado.
+- En móvil y tablet son listas por categoría; al tocar una se resaltan sus relaciones.
 
 ## Sistema visual
 
@@ -65,7 +69,8 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
   `sodium` (la farola, para lo humano) y `signal` (las ventanas de las oficinas, para los datos que se mueven en un sistema).
 - **Tipografía:** títulos grandes y apretados en Archivo, etiquetas técnicas en mono, y una palabra en cursiva serif cuando hay que subrayar una idea ("problem").
 - **Movimiento:** una sola curva (`ease.out`), textos que suben desde una máscara, parallax suave. Todo respeta `prefers-reduced-motion`.
-- **Jerarquía de movimiento:** el hero es lo más animado, los proyectos son interactivos y el stack y el contacto se quedan tranquilos.
+- **Jerarquía de movimiento:** hero y trabajo real son lo más animado; about, proyectos y stack, a medio gas; el contacto, quieto.
+- **Salida del hero:** al bajar, la foto sube y se aleja, las órbitas se abren y sus nodos salen del encuadre, el texto se reduce y la página se oscurece hacia el About.
 
 ## Cambiar contenido
 

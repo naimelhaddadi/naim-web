@@ -10,10 +10,10 @@ import { ease } from "@/lib/motion";
   The small diagrams on the personal project tiles. Each one tells its
   project's story in one move when the tile becomes active (hover, focus,
   or simply being on screen on touch devices):
-    GameStore  a request goes down the layers and comes back as 200 OK
+    GameStore  a request goes down Controller → Service → Repository → JPA → Database and back as 200 OK
     Academia   students → filtered by course → ranked → statistics
-    Market     a price line that reacts to an event, turn by turn
-  (LH Sport and the dental clinic use the bigger diagrams in components/diagrams.)
+    Market     event → price change → market state → next turn, around and around
+  (The real-world projects use the bigger, scroll-built stages in this folder.)
 */
 
 export type VisualProps = { active: boolean };
@@ -56,60 +56,58 @@ function Edge({ d, active, delay = 0, color = C.line, dashed }: { d: string; act
   );
 }
 
-/* ── GameStore: Controller → Service → Repository → Database ── */
+/* ── GameStore: a request down the layers, the response back up ── */
 
 const layers = [
-  { label: "Controller", note: "@RestController · DTO", x: 74 },
-  { label: "Service", note: "@Service", x: 196 },
-  { label: "Repository", note: "JpaRepository", x: 318 },
-  { label: "Database", note: "H2", x: 440 },
+  { label: "Controller", note: "@RestController · DTO" },
+  { label: "Service", note: "@Service · rules" },
+  { label: "Repository", note: "Spring Data JPA" },
+  { label: "JPA", note: "Hibernate" },
+  { label: "Database", note: "H2" },
 ];
+const LX = 232;
+const HW = 98; // half the width of a layer box
+const LY = (i: number) => 24 + i * 40;
 
 export function GameStoreVisual({ active }: VisualProps) {
   return (
-    <svg viewBox="0 0 520 220" className="h-full w-full" aria-hidden>
-      <motion.text
-        x={20}
-        y={44}
-        fontSize={10.5}
-        className="font-mono"
-        initial={false}
-        animate={{ opacity: active ? 1 : 0.5 }}
-        fill={C.fg}
-      >
+    <svg viewBox="0 0 400 220" className="h-full w-full" aria-hidden>
+      <motion.text x={10} y={LY(0) + 4} fontSize={10} className="font-mono" initial={false} animate={{ opacity: active ? 1 : 0.55 }} fill={C.fg}>
         <tspan fill={C.signal}>GET</tspan> /games/top/5
       </motion.text>
 
-      {/* request goes right, response comes back underneath */}
-      <path d="M128 98 H142 M250 98 H264 M372 98 H386" stroke={C.faint} />
-      <Edge d="M128 98 H142" active={active} delay={0.1} />
-      <Edge d="M250 98 H264" active={active} delay={0.2} />
-      <Edge d="M372 98 H386" active={active} delay={0.3} />
-      <Edge d="M440 124 V150 H74 V124" active={active} delay={0.45} color={C.signal} dashed />
+      {layers.slice(1).map((_, i) => (
+        <g key={i}>
+          <line x1={LX} y1={LY(i) + 13} x2={LX} y2={LY(i + 1) - 13} stroke={C.faint} />
+          <Edge d={`M${LX} ${LY(i) + 13} V ${LY(i + 1) - 13}`} active={active} delay={0.1 + i * 0.12} />
+        </g>
+      ))}
+      {/* response path, back up on the right */}
+      <Edge d={`M${LX + HW} ${LY(4)} H ${LX + HW + 16} V ${LY(0)} H ${LX + HW}`} active={active} delay={0.75} color={C.signal} dashed />
 
       {layers.map((l, i) => (
         <motion.g
           key={l.label}
           initial={false}
-          animate={{ y: active ? 0 : 4, opacity: active ? 1 : 0.6 }}
-          transition={{ duration: 0.6, ease: ease.out, delay: active ? i * 0.07 : 0 }}
+          animate={{ x: active ? 0 : (i % 2 ? 6 : -6), opacity: active ? 1 : 0.55 }}
+          transition={{ duration: 0.6, ease: ease.out, delay: active ? i * 0.06 : 0 }}
         >
-          <rect x={l.x - 54} y={72} width={108} height={52} rx={4} fill={C.box} stroke={active && i === 3 ? C.sodium : C.line} style={{ transition: "stroke .5s" }} />
-          <text x={l.x} y={93} textAnchor="middle" dominantBaseline="middle" fontSize={12} fill={C.fg} fontWeight={500} className="font-sans">
+          <rect x={LX - HW} y={LY(i) - 13} width={HW * 2} height={26} rx={4} fill={C.box} stroke={active && i === 4 ? C.sodium : C.line} style={{ transition: "stroke .5s" }} />
+          <text x={LX - HW + 12} y={LY(i) + 1} dominantBaseline="middle" fontSize={11} fill={C.fg} fontWeight={500} className="font-sans">
             {l.label}
           </text>
-          <text x={l.x} y={110} textAnchor="middle" dominantBaseline="middle" fontSize={9} fill={C.muted} className="font-mono">
+          <text x={LX + HW - 12} y={LY(i) + 1} textAnchor="end" dominantBaseline="middle" fontSize={8.5} fill={C.muted} className="font-mono">
             {l.note}
           </text>
         </motion.g>
       ))}
 
-      <Packet show={active} points={[[20, 98], [440, 98]]} duration={2} delay={0.5} />
-      <Packet show={active} color={C.signal} points={[[440, 124], [440, 150], [74, 150], [74, 124]]} duration={1.6} delay={2.1} />
+      <Packet show={active} points={[[LX, LY(0) - 13], [LX, LY(4) - 13]]} duration={1.8} delay={0.4} />
+      <Packet show={active} color={C.signal} points={[[LX + HW, LY(4)], [LX + HW + 16, LY(4)], [LX + HW + 16, LY(0)], [LX + HW, LY(0)]]} duration={1.5} delay={2.1} />
 
-      <motion.g initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.4, delay: active ? 3.4 : 0 }}>
-        <rect x={20} y={168} width={64} height={22} rx={11} fill="#13161b" stroke={C.faint} />
-        <text x={52} y={180} textAnchor="middle" dominantBaseline="middle" fontSize={10} fill={C.live} className="font-mono">
+      <motion.g initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.4, delay: active ? 3.2 : 0 }}>
+        <rect x={10} y={LY(1) - 4} width={64} height={22} rx={11} fill="#13161b" stroke={C.faint} />
+        <text x={42} y={LY(1) + 8} textAnchor="middle" dominantBaseline="middle" fontSize={10} fill={C.live} className="font-mono">
           200 OK
         </text>
       </motion.g>
@@ -117,42 +115,47 @@ export function GameStoreVisual({ active }: VisualProps) {
   );
 }
 
-/* ── Financial Market Simulator: events move the price, turn by turn ── */
+/* ── Financial Market Simulator: event → price change → market state → next turn ── */
 
-const calm = [[20, 120], [70, 112], [120, 118], [170, 104], [220, 110], [270, 98], [320, 104], [370, 96]];
-const shocked = [[20, 120], [70, 112], [120, 118], [170, 104], [220, 150], [270, 140], [320, 128], [370, 132]];
-const line = (pts: number[][]) => pts.map(([x, y], i) => `${i ? "L" : "M"}${x} ${y}`).join(" ");
+const loopNodes = [
+  { label: "Event", x: 92, y: 52 },
+  { label: "Price change", x: 308, y: 52 },
+  { label: "Market state", x: 308, y: 168 },
+  { label: "Next turn", x: 92, y: 168 },
+];
+const LOOP = "M 140 52 H 252 M 308 66 V 154 M 256 168 H 140 M 92 154 V 66";
+const calm = [[140, 128], [162, 122], [184, 126], [206, 114], [228, 118], [250, 108]];
+const moved = [[140, 128], [162, 122], [184, 126], [206, 138], [228, 132], [250, 124]];
+const spark = (pts: number[][]) => pts.map(([x, y], i) => `${i ? "L" : "M"}${x} ${y}`).join(" ");
 
 export function MarketVisual({ active }: VisualProps) {
   return (
     <svg viewBox="0 0 400 220" className="h-full w-full" aria-hidden>
-      {calm.map(([x], i) => (
-        <g key={x}>
-          <line x1={x} y1={40} x2={x} y2={170} stroke={C.faint} strokeDasharray="2 5" />
-          <text x={x} y={188} textAnchor="middle" fontSize={8.5} fill={C.dim} className="font-mono">
-            T{i + 1}
-          </text>
-        </g>
+      <path d={LOOP} stroke={C.faint} fill="none" />
+      <Edge d={LOOP} active={active} delay={0.15} color={C.line} />
+      {loopNodes.map((n, i) => (
+        <motion.g
+          key={n.label}
+          initial={false}
+          animate={{ opacity: active ? 1 : 0.55 }}
+          transition={{ duration: 0.5, delay: active ? i * 0.12 : 0 }}
+        >
+          <Pill x={n.x} y={n.y} w={i === 0 || i === 3 ? 86 : 104} label={n.label} tone={active && i === 0 ? "accent" : active && i === 2 ? "signal" : "default"} />
+        </motion.g>
       ))}
+      {/* the market inside the loop: the event bends the price line */}
       <motion.path
-        d={line(calm)}
+        d={spark(calm)}
         fill="none"
         stroke={C.signal}
         strokeWidth={1.5}
         initial={false}
-        animate={{ d: line(active ? shocked : calm) }}
-        transition={{ duration: 0.9, ease: ease.inOut, delay: active ? 0.5 : 0 }}
+        animate={{ d: spark(active ? moved : calm) }}
+        transition={{ duration: 0.9, ease: ease.inOut, delay: active ? 0.6 : 0 }}
       />
-      {/* the event that moves the market */}
-      <motion.g initial={false} animate={{ opacity: active ? 1 : 0 }} transition={{ duration: 0.4, delay: active ? 0.2 : 0 }}>
-        <line x1={220} y1={46} x2={220} y2={170} stroke={C.sodium} strokeOpacity={0.7} />
-        <rect x={188} y={30} width={64} height={20} rx={10} fill="#13161b" stroke={C.sodium} strokeOpacity={0.6} />
-        <text x={220} y={41} textAnchor="middle" dominantBaseline="middle" fontSize={9.5} fill={C.sodium} className="font-mono">
-          event
-        </text>
-      </motion.g>
-      <text x={20} y={210} fontSize={9} letterSpacing={1.4} fill={C.dim} className="font-mono uppercase">
-        {active ? "input validated · turn processed" : "turn-based · python"}
+      <Packet show={active} points={[[140, 52], [252, 52], [308, 52], [308, 154], [256, 168], [140, 168], [92, 154], [92, 66]]} duration={3.2} delay={0.4} />
+      <text x={200} y={208} textAnchor="middle" fontSize={8.5} letterSpacing={1.4} fill={C.dim} className="font-mono uppercase">
+        {active ? "input validated · turn processed" : "python · turn-based"}
       </text>
     </svg>
   );

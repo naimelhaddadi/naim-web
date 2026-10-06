@@ -13,7 +13,7 @@ export type CaseSection = {
   step: number;
 };
 
-export type ProjectId = "lh-sport" | "dental" | "gamestore" | "market" | "academia";
+export type ProjectId = "gamestore" | "market" | "academia";
 
 export type Project = {
   id: ProjectId;
@@ -34,66 +34,175 @@ export type Project = {
 
 const GITHUB = "https://github.com/naimelhaddadi";
 
-/* Real-world work: an internship and a freelance client. Shown in the pinned horizontal section. */
-export const realWorld: Project[] = [
+/*
+  Real-world work: an internship and a freelance client. Shown as two
+  vertical stories on the home page, each with a diagram that builds with
+  the scroll, and each with its own case-study page under /work.
+
+  `story` is the short home-page version; `chapters` is the case study.
+  `at` is where in the diagram's build (0 → 1) each part of the text lives.
+*/
+export type Chapter = { label: string; title: string; body: string; at: number };
+
+export type Work = {
+  id: "lh-management" | "dental-clinic";
+  index: string;
+  label: string;
+  title: string;
+  fullTitle: string;
+  intro: string;
+  period: string;
+  status?: { label: string; live?: boolean };
+  story: Chapter[];
+  chapters: Chapter[];
+  stack: string[];
+  links: { href: string; label: string }[];
+};
+
+export const realWorld: Work[] = [
   {
-    id: "lh-sport",
+    id: "lh-management",
     index: "01",
-    title: "LH Sport & Entertainment Management",
-    headline: "From scattered information to a structured operational system.",
-    summary: "The relational SQL Server database the agency works on, and the web interface that feeds it.",
-    kind: "Internship · Feb – Apr 2026",
-    meta: [
-      { label: "Context", value: "Internship · Feb – Apr 2026" },
-      { label: "Role", value: "Database design · Web interface" },
+    label: "Real-world experience",
+    title: "LH Management",
+    fullTitle: "LH Sport & Entertainment Management",
+    intro:
+      "Designed and implemented from scratch the relational SQL Server database that supports the daily operations of an international sports agency — and the web interface that feeds it.",
+    period: "Internship · Feb – Apr 2026",
+    status: { label: "Left with an official recommendation letter" },
+    story: [
+      {
+        label: "The database",
+        title: "One relational core, built from scratch.",
+        body: "A SQL Server database with more than 10 entities — players, contracts, transfers, agents, clubs, leagues — and the relations between them.",
+        at: 0.36,
+      },
+      {
+        label: "Business logic",
+        title: "The rules live inside the database.",
+        body: "T-SQL stored procedures and triggers, with referential integrity enforced by the model itself.",
+        at: 0.53,
+      },
+      {
+        label: "Web interface",
+        title: "Where the workflow meets the data.",
+        body: "I also developed the web data-entry interface that connects the agency's operational workflow with the database.",
+        at: 0.64,
+      },
+      {
+        label: "In use",
+        title: "The system the agency works on.",
+        body: "It supports the agency's daily operations, and I left the role with an official recommendation letter.",
+        at: 0.76,
+      },
     ],
-    sections: [
+    chapters: [
       {
-        label: "The problem",
-        body: "Several scouts were managing a lot of player information with no central system behind it. Finding things took time, and nothing was organised the same way twice.",
-        step: 0,
+        label: "Problem",
+        title: "Information without a system.",
+        body: "An international sports agency handles a lot of interconnected information — players, clubs, contracts, agents — and it needed one place where all of it fits together.",
+        at: 0.07,
       },
       {
-        label: "The approach",
-        body: "Model the domain before building any screen: more than 10 entities — players, clubs, leagues, contracts, transfers, agents — and how each one relates to the rest.",
-        step: 1,
+        label: "Data model",
+        title: "The domain first, the screens later.",
+        body: "More than 10 entities — players, contracts, transfers, agents, clubs and leagues among them — and, above all, how each one relates to the rest.",
+        at: 0.3,
       },
       {
-        label: "The system",
-        body: "Built from scratch in SQL Server: business logic in T-SQL stored procedures and triggers, referential integrity enforced by the database, and a web data-entry interface on top. The agency uses it, and I left with an official recommendation letter.",
-        step: 3,
+        label: "Database",
+        title: "Built from scratch in SQL Server.",
+        body: "A relational schema designed and implemented from zero, as the base the agency's daily operations run on.",
+        at: 0.45,
+      },
+      {
+        label: "Business logic",
+        title: "Rules the data can't break.",
+        body: "T-SQL stored procedures and triggers, with referential integrity enforced by the database itself rather than by whoever is typing.",
+        at: 0.57,
+      },
+      {
+        label: "Web interface",
+        title: "Where the workflow meets the data.",
+        body: "A web data-entry interface that connects the agency's operational workflow with the database.",
+        at: 0.68,
+      },
+      {
+        label: "Result",
+        title: "In daily use. Recommended.",
+        body: "The database supports the daily operations of the agency, and the internship ended with an official recommendation letter.",
+        at: 0.8,
       },
     ],
-    stack: ["SQL Server", "T-SQL", "Relational model", "Stored procedures", "Triggers", "Referential integrity"],
+    stack: ["SQL Server", "T-SQL", "Relational database", "Stored procedures", "Triggers", "Web interface"],
     links: [{ href: "/assets/recomendacion-lh.pdf", label: "Recommendation letter" }],
   },
   {
-    id: "dental",
+    id: "dental-clinic",
     index: "02",
-    title: "Dental Clinic Automation",
-    headline: "From manual follow-ups to automated patient communication.",
-    summary: "The website of a private dental clinic, then the system that handles its appointment messages on WhatsApp.",
-    kind: "Freelance · 2026 – present",
+    label: "Freelance · Real-world",
+    title: "Dental Clinic",
+    fullTitle: "Private dental clinic",
+    intro:
+      "Developed the corporate website for a newly opened private dental clinic, then designed and implemented the n8n system that handles its appointments, confirmations and reminders over WhatsApp.",
+    period: "Freelance · 2026 – present",
     status: { label: "In production · real patients", live: true },
-    meta: [
-      { label: "Context", value: "Freelance · 2026 – present" },
-      { label: "Runs on", value: "Linux VPS I administer" },
+    story: [
+      {
+        label: "First",
+        title: "A website for a clinic that had just opened.",
+        body: "The corporate website for a newly opened private dental clinic.",
+        at: 0.08,
+      },
+      {
+        label: "Automation",
+        title: "An appointment starts the conversation.",
+        body: "Webhooks feed n8n workflows that handle appointments, confirmations and reminders.",
+        at: 0.32,
+      },
+      {
+        label: "Communication",
+        title: "WhatsApp, with an LLM in the loop.",
+        body: "Messages go out and come back through the WhatsApp Business API, with an LLM integrated into the flow.",
+        at: 0.6,
+      },
+      {
+        label: "Production",
+        title: "Running with real patients.",
+        body: "The system is in production today, on a Linux VPS that I administer.",
+        at: 0.85,
+      },
     ],
-    sections: [
+    chapters: [
       {
-        label: "The problem",
-        body: "A private dental clinic: first it needed a website, then a way out of messaging every patient by hand to confirm and remind appointments.",
-        step: 1,
+        label: "Problem",
+        title: "A new clinic, and a lot of messages.",
+        body: "A newly opened private dental clinic needed a website — and a way to handle appointment communication with its patients.",
+        at: 0.07,
       },
       {
-        label: "The approach",
-        body: "I built the corporate website first. Then I treated the messages for what they were — repetitive and predictable — and let the appointment start the conversation instead of a person.",
-        step: 2,
+        label: "Manual process",
+        title: "Appointments, confirmations, reminders.",
+        body: "Every appointment means the same conversation: confirm it, remind the patient, handle the reply. Predictable, repetitive work.",
+        at: 0.22,
       },
       {
-        label: "The system",
-        body: "n8n workflows handle appointments, confirmations and reminders through the WhatsApp Business API, with an LLM in the conversation. It runs in production with real patients, on a Linux VPS I administer.",
-        step: 3,
+        label: "Automation",
+        title: "n8n at the centre.",
+        body: "Webhooks bring appointment events into n8n, where the workflows for appointments, confirmations and reminders live.",
+        at: 0.44,
+      },
+      {
+        label: "Communication",
+        title: "Through WhatsApp, with an LLM.",
+        body: "Messages are sent and received through the WhatsApp Business API, with an LLM integrated into the conversation.",
+        at: 0.64,
+      },
+      {
+        label: "Production",
+        title: "Live, on a server I run.",
+        body: "The system is in production with real patients, on a Linux VPS that I administer.",
+        at: 0.92,
       },
     ],
     stack: ["n8n", "WhatsApp Business API", "Webhooks", "LLM integration", "Linux VPS", "HTML5", "CSS3"],
@@ -201,7 +310,7 @@ export const personal: Project[] = [
     title: "Financial Market Simulator",
     headline: "Prices that react to events, one turn at a time.",
     summary: "A turn-based market simulator in Python. Final project for Code in Place 2026, Stanford University.",
-    kind: "Stanford · Personal project",
+    kind: "Academic project · Stanford Code in Place 2026",
     meta: [
       { label: "Context", value: "Code in Place 2026 · Stanford" },
       { label: "Language", value: "Python" },
@@ -230,135 +339,135 @@ export const personal: Project[] = [
 
 /* ── Stack ─────────────────────────────────────────────────────────────── */
 
-/** `sub` items are parts of the item before them (Spring Boot → Web MVC…). */
-export type Tech = { name: string; sub?: boolean };
-export type StackGroup = { id: string; title: string; items: Tech[] };
+/* Every technology from the CV, grouped the same way. */
+export type StackGroup = { id: string; title: string; items: string[] };
 
 export const stack: StackGroup[] = [
+  { id: "languages", title: "Languages", items: ["Java", "Python", "SQL / T-SQL", "HTML5", "CSS3", "JavaScript", "PHP"] },
+  { id: "backend", title: "Backend", items: ["Spring Boot", "Spring Web MVC", "Spring Data JPA", "Bean Validation", "REST APIs", "JPA / Hibernate"] },
+  { id: "databases", title: "Databases", items: ["SQL Server", "Relational modelling", "Stored procedures", "Triggers", "H2"] },
+  { id: "testing", title: "Testing", items: ["JUnit 5", "Mockito"] },
+  { id: "automation", title: "Automation", items: ["n8n", "WhatsApp Business API", "Webhooks", "LLM integration"] },
   {
-    id: "languages",
-    title: "Languages",
-    items: [
-      { name: "Java" },
-      { name: "Python" },
-      { name: "SQL / T-SQL" },
-      { name: "HTML5" },
-      { name: "CSS3" },
-      { name: "JavaScript" },
-      { name: "PHP" },
-    ],
-  },
-  {
-    id: "backend",
-    title: "Backend",
-    items: [
-      { name: "Spring Boot" },
-      { name: "Web MVC", sub: true },
-      { name: "Data JPA", sub: true },
-      { name: "Bean Validation", sub: true },
-      { name: "REST APIs" },
-      { name: "JPA / Hibernate" },
-    ],
-  },
-  {
-    id: "databases",
-    title: "Databases",
-    items: [
-      { name: "SQL Server" },
-      { name: "Relational modelling", sub: true },
-      { name: "Stored procedures", sub: true },
-      { name: "Triggers", sub: true },
-      { name: "H2" },
-    ],
-  },
-  {
-    id: "testing",
-    title: "Testing",
-    items: [{ name: "JUnit 5" }, { name: "Mockito" }],
-  },
-  {
-    id: "automation",
-    title: "Automation",
-    items: [{ name: "n8n" }, { name: "WhatsApp Business API" }, { name: "Webhooks" }, { name: "LLM integrations" }],
-  },
-  {
-    id: "tools",
-    title: "Tools & environment",
-    items: [
-      { name: "Git" },
-      { name: "GitHub" },
-      { name: "Maven" },
-      { name: "IntelliJ IDEA" },
-      { name: "Eclipse" },
-      { name: "Docker" },
-      { name: "Postman" },
-      { name: "SSMS" },
-      { name: "Linux" },
-      { name: "VPS" },
-    ],
+    id: "environment",
+    title: "Environment",
+    items: ["Git", "GitHub", "Maven", "IntelliJ IDEA", "Eclipse", "Docker", "Postman", "SSMS", "Linux", "VPS"],
   },
 ];
 
 /*
-  How the pieces connect. Hovering a technology lights up the first flow
-  it appears in (so the order below matters) and draws the path between
-  its steps.
+  The same stack as an ecosystem: a core, a ring of what the core works
+  with every day, and an outer ring of everything around it. Each ring is
+  listed in order around the circle, so related technologies sit near
+  each other.
 */
-export type Flow = { id: string; label: string; steps: string[]; note: string };
+export const core = ["Java", "Spring Boot", "JPA / Hibernate", "SQL / T-SQL"];
 
-export const flows: Flow[] = [
-  {
-    id: "java",
-    label: "Java backend",
-    steps: ["Java", "Spring Boot", "Data JPA", "JPA / Hibernate", "JUnit 5"],
-    note: "The core of GameStore and Academia API: Spring Boot on top of Java, JPA for the data, JUnit for the logic.",
-  },
-  {
-    id: "data",
-    label: "SQL Server",
-    steps: ["SQL Server", "SQL / T-SQL", "Stored procedures", "Triggers", "Relational modelling", "SSMS"],
-    note: "The LH Sport database: the model and its business rules, living inside SQL Server.",
-  },
-  {
-    id: "automation",
-    label: "Automation",
-    steps: ["n8n", "Webhooks", "WhatsApp Business API", "LLM integrations", "VPS"],
-    note: "The dental clinic system, running in production on a server I administer.",
-  },
-  {
-    id: "api",
-    label: "REST APIs",
-    steps: ["Web MVC", "REST APIs", "Bean Validation", "H2"],
-    note: "How the Spring Boot APIs take a request: an endpoint, validated input, an in-memory database for development.",
-  },
-  {
-    id: "testing",
-    label: "Testing",
-    steps: ["Mockito", "Postman"],
-    note: "Mocked dependencies in unit tests, and endpoints exercised by hand.",
-  },
-  {
-    id: "delivery",
-    label: "Build & ship",
-    steps: ["IntelliJ IDEA", "Maven", "Git", "GitHub", "Docker", "Linux"],
-    note: "From the editor to version control to a running environment.",
-  },
-  {
-    id: "web",
-    label: "Web",
-    steps: ["HTML5", "CSS3", "JavaScript", "PHP"],
-    note: "The front side of things — the clinic's website is HTML5 and CSS3.",
-  },
-  {
-    id: "python",
-    label: "Python",
-    steps: ["Python"],
-    note: "The Financial Market Simulator, my final project for Code in Place 2026 at Stanford.",
-  },
-  {
-    id: "eclipse",
-    label: "Eclipse",
-    steps: ["Eclipse"],
-    note: "The other Java IDE I've worked with, next to IntelliJ IDEA.",
-  },
+export const innerRing = [
+  "Spring Web MVC",
+  "Spring Data JPA",
+  "Bean Validation",
+  "REST APIs",
+  "JUnit 5",
+  "Mockito",
+  "SQL Server",
+  "H2",
+  "n8n",
+  "Docker",
+  "Git",
+  "Python",
 ];
+
+export const outerRing = [
+  "IntelliJ IDEA",
+  "Eclipse",
+  "Maven",
+  "Postman",
+  "Relational modelling",
+  "Stored procedures",
+  "Triggers",
+  "SSMS",
+  "Webhooks",
+  "WhatsApp Business API",
+  "LLM integration",
+  "VPS",
+  "Linux",
+  "GitHub",
+  "HTML5",
+  "CSS3",
+  "JavaScript",
+  "PHP",
+];
+
+/* What works with what (undirected). */
+export const relations: [string, string][] = [
+  ["Java", "Spring Boot"],
+  ["Java", "JPA / Hibernate"],
+  ["Java", "JUnit 5"],
+  ["Java", "Maven"],
+  ["Java", "IntelliJ IDEA"],
+  ["Java", "Eclipse"],
+  ["Spring Boot", "Spring Web MVC"],
+  ["Spring Boot", "Spring Data JPA"],
+  ["Spring Boot", "Bean Validation"],
+  ["Spring Boot", "REST APIs"],
+  ["Spring Boot", "Maven"],
+  ["JPA / Hibernate", "Spring Data JPA"],
+  ["JPA / Hibernate", "H2"],
+  ["JPA / Hibernate", "SQL / T-SQL"],
+  ["SQL / T-SQL", "SQL Server"],
+  ["SQL / T-SQL", "Stored procedures"],
+  ["SQL / T-SQL", "Triggers"],
+  ["SQL Server", "Relational modelling"],
+  ["SQL Server", "Stored procedures"],
+  ["SQL Server", "Triggers"],
+  ["SQL Server", "SSMS"],
+  ["REST APIs", "Postman"],
+  ["REST APIs", "Spring Web MVC"],
+  ["REST APIs", "Bean Validation"],
+  ["JUnit 5", "Mockito"],
+  ["n8n", "Webhooks"],
+  ["n8n", "WhatsApp Business API"],
+  ["n8n", "LLM integration"],
+  ["n8n", "VPS"],
+  ["Webhooks", "WhatsApp Business API"],
+  ["VPS", "Linux"],
+  ["Linux", "Docker"],
+  ["Git", "GitHub"],
+  ["HTML5", "CSS3"],
+  ["HTML5", "JavaScript"],
+  ["JavaScript", "PHP"],
+];
+
+/* Where a technology shows up in the work on this site (only where it's true). */
+export const usedIn: Record<string, string> = {
+  Java: "GameStore · Academia API",
+  "Spring Boot": "GameStore · Academia API",
+  "Spring Web MVC": "GameStore · Academia API",
+  "Spring Data JPA": "GameStore · Academia API",
+  "Bean Validation": "GameStore · Academia API",
+  "REST APIs": "GameStore · Academia API",
+  "JPA / Hibernate": "GameStore · Academia API",
+  H2: "GameStore · Academia API",
+  Maven: "GameStore · Academia API",
+  "JUnit 5": "GameStore",
+  Mockito: "GameStore",
+  "SQL / T-SQL": "LH Management",
+  "SQL Server": "LH Management",
+  "Relational modelling": "LH Management",
+  "Stored procedures": "LH Management",
+  Triggers: "LH Management",
+  n8n: "Dental clinic",
+  "WhatsApp Business API": "Dental clinic",
+  Webhooks: "Dental clinic",
+  "LLM integration": "Dental clinic",
+  VPS: "Dental clinic · Linux VPS I administer",
+  Linux: "Dental clinic · Linux VPS I administer",
+  HTML5: "Dental clinic website",
+  CSS3: "Dental clinic website",
+  Python: "Financial Market Simulator · Stanford Code in Place 2026",
+};
+
+export function relatedTo(name: string) {
+  return relations.flatMap(([a, b]) => (a === name ? [b] : b === name ? [a] : []));
+}

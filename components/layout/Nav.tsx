@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, site } from "@/lib/site";
 import { ease } from "@/lib/motion";
@@ -12,6 +13,9 @@ export function Nav() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  // on a case study the sections live on the home page
+  const home = usePathname() === "/";
+  const to = (hash: string) => (home ? hash : `/${hash}`);
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -42,7 +46,7 @@ export function Nav() {
           className={`pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-transparent transition-opacity duration-500 ${scrolled || open ? "opacity-100" : "opacity-0"}`}
         />
         <div className="container-x relative flex h-(--nav-h) items-center justify-between gap-6">
-          <a href="#top" className="group flex items-baseline gap-3" aria-label={`${site.name}, back to top`}>
+          <a href={home ? "#top" : "/"} className="group flex items-baseline gap-3" aria-label={home ? `${site.name}, back to top` : `${site.name}, home`}>
             <span className="font-display text-[1.05rem] font-semibold tracking-tight">Naim El Haddadi</span>
             <span className="label hidden transition-colors group-hover:text-fg sm:inline">Backend</span>
           </a>
@@ -51,7 +55,7 @@ export function Nav() {
             <ul className="flex items-center gap-8">
               {nav.map((item) => (
                 <li key={item.href}>
-                  <a href={item.href} className="group relative py-2 text-sm text-muted transition-colors hover:text-fg">
+                  <a href={to(item.href)} className="group relative py-2 text-sm text-muted transition-colors hover:text-fg">
                     {item.label}
                     <span className="absolute inset-x-0 bottom-1 h-px origin-right scale-x-0 bg-sodium transition-transform duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
                   </a>
@@ -106,7 +110,7 @@ export function Nav() {
                 {nav.map((item, i) => (
                   <li key={item.href} className="overflow-hidden">
                     <motion.a
-                      href={item.href}
+                      href={to(item.href)}
                       onClick={() => setOpen(false)}
                       className="display block py-1 text-[15vw]"
                       initial={{ y: "100%" }}

@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useMotionValue, useReducedMotion, useSpring } from "motion/react";
+import { motion, useMotionValue, useSpring } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import { useCalm } from "@/lib/useCalm";
 
 /* Pulls its child gently towards the pointer. Fine pointers only. */
 export function Magnetic({ children, strength = 0.35, className }: { children: ReactNode; strength?: number; className?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const reduce = useReducedMotion();
+  const reduce = useCalm();
   const x = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
   const y = useSpring(useMotionValue(0), { stiffness: 220, damping: 18, mass: 0.4 });
 
