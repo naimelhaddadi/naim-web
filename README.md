@@ -67,8 +67,9 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## El stack
 
-- Están las 34 tecnologías del CV. En escritorio es un ecosistema: el núcleo (Java, Spring Boot, JPA / Hibernate, SQL) en el centro y dos anillos alrededor. Al pasar el ratón por una se dibujan las líneas a las tecnologías con las que trabaja (`relations` en `lib/content.ts`) y abajo se dice dónde la he usado.
-- En móvil y tablet son listas por categoría; al tocar una se resaltan sus relaciones.
+- Mejor saber mucho de un stack que poco de muchos: la sección solo enseña cuatro tecnologías (Spring Boot, Java, JPA / Hibernate y SQL), en el orden en que una petición pasa por ellas: la API, la lógica, el mapeo y los datos.
+- Un hilo las une y, al hacer scroll, un punto baja por él (como la petición `POST /games` de GameStore) y cada capa se enciende al llegar. Cada una dice qué hago con ella y enlaza al trabajo que lo demuestra.
+- El resto de herramientas va en una sola línea discreta ("Also worked with"). Lo demás está en el CV.
 
 ## Sistema visual
 
@@ -81,7 +82,7 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## Cambiar contenido
 
-Casi todo está en `lib/content.ts`. Para añadir una tecnología al stack basta con añadirla a su grupo; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
+Casi todo está en `lib/content.ts`. Las capas del stack son `layers` y la línea secundaria es `alsoUsed`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
 
 ## Probarla en local
 

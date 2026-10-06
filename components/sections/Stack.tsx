@@ -1,52 +1,26 @@
 "use client";
 
-import { AnimatePresence, motion, useInView } from "motion/react";
-import { useMemo, useRef, useState } from "react";
-import { core, innerRing, outerRing, relatedTo, stack, usedIn } from "@/lib/content";
+import Link from "next/link";
+import { motion, useScroll, useTransform } from "motion/react";
+import { useRef } from "react";
+import { alsoUsed, layers, type Layer } from "@/lib/content";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { ease } from "@/lib/motion";
+import { Reveal } from "@/components/ui/Reveal";
 import { useCalm } from "@/lib/useCalm";
 
 /*
-  The stack as an ecosystem rather than a wall of badges: the core in the
-  middle (Java, Spring Boot, JPA / Hibernate, SQL), what it works with every
-  day around it, and everything else on the outer ring. Hover or focus any
-  technology and the lines to the ones it actually works with are drawn,
-  the rest steps back. On phones it's the same data as grouped lists,
-  where a tap does the highlighting.
-
-  Positions are percentages of the stage, so it scales with the layout.
+  Depth over breadth: four technologies, not a wall of badges. They are
+  listed in the order a request goes through them (the API, the logic, the
+  mapping, the data), on one thread. While scrolling, a point travels down
+  that thread and each layer lights up as the request reaches it. Every
+  layer says what I do with it and links to the work that shows it.
 */
-
-type Spot = { name: string; x: number; y: number; ring: 0 | 1 | 2 };
-
-const CORE_POS: [number, number][] = [
-  [40, 43],
-  [60, 43],
-  [40, 57],
-  [60, 57],
-];
-
-function ring(names: string[], start: number, rx: number, ry: number, r: 1 | 2): Spot[] {
-  const step = 360 / names.length;
-  return names.map((name, i) => {
-    const a = ((start + i * step) * Math.PI) / 180;
-    // rounded: Math.cos/sin can differ in the last digit between server and browser
-    const round = (v: number) => Math.round(v * 1000) / 1000;
-    return { name, x: round(50 + rx * Math.cos(a)), y: round(50 + ry * Math.sin(a)), ring: r };
-  });
-}
-
-const spots: Spot[] = [
-  ...core.map((name, i) => ({ name, x: CORE_POS[i][0], y: CORE_POS[i][1], ring: 0 as const })),
-  ...ring(innerRing, -150, 25, 29, 1),
-  ...ring(outerRing, -100, 44, 44, 2),
-];
-const byName = Object.fromEntries(spots.map((s) => [s.name, s]));
-
 export function Stack() {
-  const [active, setActive] = useState<string | null>(null);
-  const related = useMemo(() => (active ? relatedTo(active) : []), [active]);
+  const ref = useRef<HTMLOListElement>(null);
+  const calm = useCalm();
+  // offset so the point sits on the 60% line of the viewport while it travels
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.6", "end 0.6"] });
+  const top = useTransform(scrollYProgress, (v) => `${v * 100}%`);
 
   return (
     <section id="stack" aria-labelledby="stack-title" className="section-y">
@@ -55,222 +29,111 @@ export function Stack() {
           index="05"
           label="Stack"
           id="stack-title"
-          lines={["The system", "I build with."]}
+          lines={["One stack,", "end to end."]}
           aside={
             <p className="max-w-xs">
-              <span className="pointer-coarse:hidden">Hover</span>
-              <span className="hidden pointer-coarse:inline">Tap</span> a technology to see what it works with.
+              I&apos;d rather know one stack properly than many by name. These four are mine: the path a request takes, from the endpoint down to the table.
             </p>
           }
         />
 
-        <Ecosystem active={active} related={related} setActive={setActive} />
-        <Grouped active={active} related={related} setActive={setActive} />
-        <Detail active={active} related={related} />
+        <div className="relative mt-16 lg:mt-24">
+          <span aria-hidden className="absolute inset-y-0 left-[3.5px] w-px bg-line" />
+          <motion.span
+            aria-hidden
+            className="absolute inset-y-0 left-[3.5px] w-px origin-top bg-sodium/70"
+            style={{ scaleY: calm ? 1 : scrollYProgress }}
+          />
+          {!calm && (
+            <motion.span
+              aria-hidden
+              className="absolute left-0 z-10 size-2 -translate-y-1/2 rounded-full bg-sodium shadow-[0_0_14px_3px_rgba(242,161,90,0.45)]"
+              style={{ top }}
+            />
+          )}
+
+          <ol ref={ref}>
+            {layers.map((layer, i) => (
+              <Row key={layer.name} layer={layer} i={i} calm={calm} />
+            ))}
+          </ol>
+        </div>
+
+        <Reveal className="mt-14 flex flex-wrap items-baseline gap-x-4 gap-y-2 border-t border-line pt-6 pl-8 text-sm">
+          <span className="label">Also worked with</span>
+          <span className="text-muted">{alsoUsed.join(" · ")}</span>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-type Props = { active: string | null; related: string[]; setActive: (name: string | null) => void };
-
-function Ecosystem({ active, related, setActive }: Props) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, amount: 0.35 });
-  const reduce = useCalm();
-  const shown = inView || reduce;
-
-  // with nothing hovered, the core's own connections are drawn faintly
-  const lines = active
-    ? related.map((r) => [active, r] as const)
-    : core.flatMap((c) => relatedTo(c).map((r) => [c, r] as const));
+function Row({ layer, i, calm }: { layer: Layer; i: number; calm: boolean }) {
+  const node = useRef<HTMLSpanElement>(null);
+  // lights up as the travelling point (on the 60% line) reaches this layer
+  const { scrollYProgress } = useScroll({ target: node, offset: ["start 0.64", "start 0.56"] });
+  const lit = calm ? 1 : scrollYProgress;
+  const ring = useTransform(scrollYProgress, [0, 1], ["rgba(255,255,255,0.16)", "rgba(242,161,90,1)"]);
+  const fill = useTransform(scrollYProgress, [0, 1], ["rgba(7,8,10,1)", "rgba(242,161,90,1)"]);
 
   return (
-    <div
-      ref={ref}
-      className="relative mx-auto mt-16 hidden aspect-[16/10] w-full max-w-[1240px] lg:block"
-      onMouseLeave={() => setActive(null)}
-    >
-      {/* the rings and the connections */}
-      <svg aria-hidden viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full overflow-visible">
-        {[
-          [25, 29],
-          [44, 44],
-        ].map(([rx, ry], i) => (
-          <motion.ellipse
-            key={i}
-            cx={50}
-            cy={50}
-            rx={rx}
-            ry={ry}
-            fill="none"
-            stroke="rgba(255,255,255,0.07)"
-            strokeDasharray={i ? "0.6 1.2" : undefined}
-            vectorEffect="non-scaling-stroke"
-            initial={false}
-            animate={{ pathLength: shown ? 1 : 0, opacity: shown ? 1 : 0 }}
-            transition={{ duration: 1.6, ease: ease.inOut, delay: 0.2 + i * 0.2 }}
-          />
-        ))}
-        <AnimatePresence>
-          {shown &&
-            lines.map(([a, b]) => (
-              <motion.line
-                key={`${active ?? "core"}-${a}-${b}`}
-                x1={byName[a].x}
-                y1={byName[a].y}
-                x2={byName[b].x}
-                y2={byName[b].y}
-                stroke={active ? "#f2a15a" : "rgba(255,255,255,0.1)"}
-                strokeOpacity={active ? 0.7 : 1}
-                strokeWidth={1}
-                vectorEffect="non-scaling-stroke"
-                initial={{ pathLength: 0, opacity: 0 }}
-                animate={{ pathLength: 1, opacity: 1 }}
-                exit={{ opacity: 0, transition: { duration: 0.15 } }}
-                transition={{ duration: active ? 0.45 : 1.2, ease: ease.out, delay: active ? 0 : 0.9 }}
-              />
+    <li className="relative border-t border-line py-10 pl-8 lg:py-14">
+      <motion.span
+        ref={node}
+        aria-hidden
+        className="absolute left-0 top-[3.1rem] size-2 rounded-full border lg:top-[4.1rem]"
+        style={calm ? { borderColor: "#f2a15a", background: "#f2a15a" } : { borderColor: ring, background: fill }}
+      />
+
+      <Reveal y={16} className="grid gap-6 lg:grid-cols-12 lg:gap-8">
+        <div className="lg:col-span-5">
+          <p className="label mb-3 flex items-center gap-3">
+            <span className="text-sodium">0{i + 1}</span>
+            {layer.role}
+          </p>
+          <h3 className="display text-[clamp(2.4rem,5vw,4.75rem)]">
+            {layer.name}
+            <motion.span
+              aria-hidden
+              className="mt-3 block h-px w-16 origin-left bg-sodium"
+              style={{ scaleX: lit }}
+            />
+          </h3>
+        </div>
+
+        <div className="lg:col-span-4">
+          <p className="max-w-md text-[1.05rem] leading-relaxed text-muted">{layer.body}</p>
+          <ul className="mt-5 flex flex-wrap gap-2" aria-label={`${layer.name}: tools`}>
+            {layer.tools.map((t) => (
+              <li key={t} className="rounded-full border border-line-strong px-3 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-fg/90">
+                {t}
+              </li>
             ))}
-        </AnimatePresence>
-      </svg>
-
-      {spots.map((s, i) => {
-        const on = s.name === active;
-        const near = related.includes(s.name);
-        const dim = active !== null && !on && !near;
-        const order = s.ring === 0 ? i : s.ring === 1 ? 4 + (i - 4) * 0.5 : 10 + (i - 16) * 0.35;
-        return (
-          <motion.button
-            key={s.name}
-            type="button"
-            onMouseEnter={() => setActive(s.name)}
-            onFocus={() => setActive(s.name)}
-            onBlur={() => setActive(null)}
-            onClick={() => setActive(s.name)}
-            aria-describedby="stack-detail"
-            className={`absolute z-10 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full border bg-ink transition-[color,border-color,background-color,opacity] duration-300 ${
-              s.ring === 0
-                ? "px-4 py-2 font-display text-[clamp(0.95rem,1.3vw,1.15rem)] font-semibold tracking-tight"
-                : s.ring === 1
-                  ? "px-3.5 py-1.5 text-[13px]"
-                  : "px-3 py-1 font-mono text-[11px] uppercase tracking-[0.06em]"
-            } ${
-              on
-                ? "border-sodium bg-sodium text-ink"
-                : near
-                  ? "border-sodium/70 text-fg"
-                  : s.ring === 0
-                    ? "border-fg/40 text-fg"
-                    : dim
-                      ? "border-line/60 text-dim"
-                      : s.ring === 1
-                        ? "border-line-strong text-fg/90"
-                        : "border-line text-muted"
-            } ${dim ? "opacity-50" : ""}`}
-            style={{ left: `${s.x}%`, top: `${s.y}%` }}
-            initial={false}
-            animate={shown ? { scale: 1, opacity: dim ? 0.5 : 1 } : { scale: 0.6, opacity: 0 }}
-            transition={{ duration: 0.7, ease: ease.out, delay: shown && !active ? 0.15 + order * 0.035 : 0 }}
-          >
-            {s.name}
-          </motion.button>
-        );
-      })}
-
-      <p aria-hidden className="label pointer-events-none absolute left-1/2 top-[33%] -translate-x-1/2 text-[0.62rem] text-dim">
-        core
-      </p>
-    </div>
-  );
-}
-
-/* Phones: the same technologies by category; a tap highlights what it works with. */
-function Grouped({ active, related, setActive }: Props) {
-  return (
-    <div className="mt-12 space-y-8 lg:hidden">
-      <div>
-        <h3 className="label mb-3 text-sodium">Core</h3>
-        <ul className="flex flex-wrap gap-2">
-          {core.map((name) => (
-            <li key={name}>
-              <Chip name={name} big active={active} related={related} setActive={setActive} />
-            </li>
-          ))}
-        </ul>
-      </div>
-      {stack.map((g) => (
-        <div key={g.id}>
-          <h3 className="label mb-3 border-b border-line pb-2">{g.title}</h3>
-          <ul className="flex flex-wrap gap-2">
-            {g.items
-              .filter((n) => !core.includes(n))
-              .map((name) => (
-                <li key={name}>
-                  <Chip name={name} active={active} related={related} setActive={setActive} />
-                </li>
-              ))}
           </ul>
         </div>
-      ))}
-    </div>
-  );
-}
 
-function Chip({ name, big, active, related, setActive }: Props & { name: string; big?: boolean }) {
-  const on = name === active;
-  const near = related.includes(name);
-  const dim = active !== null && !on && !near;
-  return (
-    <button
-      type="button"
-      aria-pressed={on}
-      aria-describedby="stack-detail"
-      onClick={() => setActive(on ? null : name)}
-      className={`rounded-full border transition-colors duration-300 ${big ? "px-4 py-2 font-display font-semibold" : "px-3 py-1.5 text-sm"} ${
-        on ? "border-sodium bg-sodium text-ink" : near ? "border-sodium/70 text-fg" : dim ? "border-line/60 text-dim" : "border-line-strong text-fg/90"
-      }`}
-    >
-      {name}
-    </button>
-  );
-}
-
-function Detail({ active, related }: { active: string | null; related: string[] }) {
-  return (
-    <div id="stack-detail" className="mt-10 min-h-[6.5rem] border-t border-line pt-5 lg:mt-6" aria-live="polite">
-      <AnimatePresence mode="wait" initial={false}>
-        <motion.div
-          key={active ?? "none"}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.3, ease: ease.out }}
-          className="grid gap-3 lg:grid-cols-12 lg:items-baseline"
-        >
-          {active ? (
-            <>
-              <p className="display text-3xl lg:col-span-3">{active}</p>
-              <p className="font-mono text-sm lg:col-span-5">
-                {related.length ? (
-                  <>
-                    <span className="text-dim">works with → </span>
-                    {related.join(" · ")}
-                  </>
-                ) : (
-                  <span className="text-dim">used on its own</span>
-                )}
-              </p>
-              <p className="text-muted lg:col-span-4">{usedIn[active] ? <>Used in: <span className="text-fg">{usedIn[active]}</span></> : "Part of my everyday toolkit."}</p>
-            </>
-          ) : (
-            <>
-              <p className="label text-sodium lg:col-span-3">The core</p>
-              <p className="font-mono text-sm lg:col-span-5">Java → Spring Boot → JPA / Hibernate → SQL</p>
-              <p className="text-muted lg:col-span-4">Everything else connects to one of these four. All {stack.reduce((n, g) => n + g.items.length, 0)} technologies from my CV are on this map.</p>
-            </>
-          )}
-        </motion.div>
-      </AnimatePresence>
-    </div>
+        <div className="flex flex-col gap-5 lg:col-span-3 lg:items-end lg:text-right">
+          <p className="font-mono text-sm text-signal">
+            <span className="sr-only">In GameStore&apos;s POST /games, this layer is: </span>
+            {layer.trace}
+          </p>
+          <p className="text-sm">
+            <span className="label mb-1.5 block">Shown in</span>
+            {layer.proof.map((p, j) => (
+              <span key={p.label}>
+                {j > 0 && <span className="text-dim"> · </span>}
+                <Link
+                  href={p.href}
+                  {...(p.href.startsWith("http") ? { target: "_blank", rel: "noreferrer" } : {})}
+                  className="text-fg underline decoration-line-strong underline-offset-4 transition-colors hover:text-sodium hover:decoration-sodium"
+                >
+                  {p.label}
+                </Link>
+              </span>
+            ))}
+          </p>
+        </div>
+      </Reveal>
+    </li>
   );
 }
