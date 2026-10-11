@@ -4,8 +4,11 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll, useSpring } fr
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { nav, site } from "@/lib/site";
+import { home as homePath } from "@/lib/dictionary";
+import { useLang, useT } from "@/lib/lang";
 import { ease } from "@/lib/motion";
 import { ArrowUpRight } from "@/components/ui/Icons";
+import { LangSwitch } from "./LangSwitch";
 
 export function Nav() {
   const { scrollY, scrollYProgress } = useScroll();
@@ -13,9 +16,11 @@ export function Nav() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  // on a case study the sections live on the home page
-  const home = usePathname() === "/";
-  const to = (hash: string) => (home ? hash : `/${hash}`);
+  const t = useT();
+  const lang = useLang();
+  // on a case study the sections live on the home page (of the same language)
+  const home = usePathname() === homePath[lang];
+  const to = (hash: string) => (home ? hash : `${homePath[lang]}${hash}`.replace("//", "/"));
 
   useMotionValueEvent(scrollY, "change", (y) => {
     const prev = scrollY.getPrevious() ?? 0;
@@ -46,17 +51,17 @@ export function Nav() {
           className={`pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/80 to-transparent transition-opacity duration-500 ${scrolled || open ? "opacity-100" : "opacity-0"}`}
         />
         <div className="container-x relative flex h-(--nav-h) items-center justify-between gap-6">
-          <a href={home ? "#top" : "/"} className="group flex items-baseline gap-3" aria-label={home ? `${site.name}, back to top` : `${site.name}, home`}>
+          <a href={home ? "#top" : homePath[lang]} className="group flex items-baseline gap-3" aria-label={`${site.name}, ${home ? t.nav.home : t.nav.homeLink}`}>
             <span className="font-display text-[1.05rem] font-semibold tracking-tight">Naim El Haddadi</span>
-            <span className="label hidden transition-colors group-hover:text-fg sm:inline">Backend</span>
+            <span className="label hidden transition-colors group-hover:text-fg sm:inline">{t.nav.tag}</span>
           </a>
 
-          <nav aria-label="Primary" className="hidden md:block">
-            <ul className="flex items-center gap-8">
+          <nav aria-label={t.nav.primary} className="hidden lg:block">
+            <ul className="flex items-center gap-6 xl:gap-8">
               {nav.map((item) => (
                 <li key={item.href}>
                   <a href={to(item.href)} className="group relative py-2 text-sm text-muted transition-colors hover:text-fg">
-                    {item.label}
+                    {t.nav.links[item.key]}
                     <span className="absolute inset-x-0 bottom-1 h-px origin-right scale-x-0 bg-sodium transition-transform duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
                   </a>
                 </li>
@@ -64,7 +69,8 @@ export function Nav() {
             </ul>
           </nav>
 
-          <div className="flex items-center gap-7">
+          <div className="flex items-center gap-4 md:gap-5">
+            <LangSwitch />
             <a
               href={site.cv}
               target="_blank"
@@ -75,12 +81,12 @@ export function Nav() {
             </a>
             <button
               type="button"
-              className="label relative z-10 -mr-2 p-2 text-fg md:hidden"
+              className="label relative z-10 -mr-2 p-2 text-fg lg:hidden"
               aria-expanded={open}
               aria-controls="mobile-menu"
               onClick={() => setOpen((v) => !v)}
             >
-              {open ? "Close" : "Menu"}
+              {open ? t.nav.close : t.nav.menu}
             </button>
           </div>
         </div>
@@ -98,26 +104,26 @@ export function Nav() {
             id="mobile-menu"
             role="dialog"
             aria-modal="true"
-            aria-label="Menu"
-            className="fixed inset-0 z-40 flex flex-col justify-between bg-ink px-(--gutter) pb-10 pt-[calc(var(--nav-h)+2rem)] md:hidden"
+            aria-label={t.nav.menu}
+            className="fixed inset-0 z-40 flex flex-col justify-between bg-ink px-(--gutter) pb-10 pt-[calc(var(--nav-h)+2rem)] lg:hidden"
             initial={{ clipPath: "inset(0 0 100% 0)" }}
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.7, ease: ease.inOut }}
           >
-            <nav aria-label="Mobile">
+            <nav aria-label={t.nav.mobile}>
               <ul className="space-y-1">
                 {nav.map((item, i) => (
                   <li key={item.href} className="overflow-hidden">
                     <motion.a
                       href={to(item.href)}
                       onClick={() => setOpen(false)}
-                      className="display block py-1 text-[15vw]"
+                      className="display block py-1 text-[min(12vw,4.75rem)]"
                       initial={{ y: "100%" }}
                       animate={{ y: "0%" }}
                       transition={{ duration: 0.8, ease: ease.out, delay: 0.25 + i * 0.06 }}
                     >
-                      {item.label}
+                      {t.nav.links[item.key]}
                     </motion.a>
                   </li>
                 ))}

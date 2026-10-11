@@ -2,10 +2,12 @@
 
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
+import { useT } from "@/lib/lang";
 import { Check, Copy } from "./Icons";
 
 export function CopyEmail({ email, className }: { email: string; className?: string }) {
   const [copied, setCopied] = useState(false);
+  const t = useT();
 
   async function copy() {
     try {
@@ -18,7 +20,7 @@ export function CopyEmail({ email, className }: { email: string; className?: str
   }
 
   return (
-    <button type="button" onClick={copy} className={className} aria-label={`Copy ${email} to clipboard`}>
+    <button type="button" onClick={copy} className={className} aria-label={t.copy.aria}>
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={copied ? "done" : "idle"}
@@ -29,11 +31,11 @@ export function CopyEmail({ email, className }: { email: string; className?: str
           className="flex items-center gap-1.5"
         >
           {copied ? <Check className="text-live" /> : <Copy />}
-          <span className="font-mono text-[11px] uppercase tracking-[0.12em]">{copied ? "Copied" : "Copy"}</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.12em]">{copied ? t.copy.done : t.copy.idle}</span>
         </motion.span>
       </AnimatePresence>
       <span className="sr-only" aria-live="polite">
-        {copied ? "Email copied" : ""}
+        {copied ? t.copy.announce : ""}
       </span>
     </button>
   );

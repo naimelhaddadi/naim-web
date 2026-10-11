@@ -18,8 +18,9 @@ import { MaskLines } from "@/components/ui/MaskLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { DentalStage } from "@/components/work/DentalStage";
 import { LH, LhStage } from "@/components/work/LhStage";
-import { MobileFlow, type FlowRow } from "@/components/work/MobileFlow";
+import { MobileFlow } from "@/components/work/MobileFlow";
 import type { StageProps } from "@/components/work/stage";
+import { useLocalePath, useT } from "@/lib/lang";
 import { ease } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
 import { useCalm } from "@/lib/useCalm";
@@ -36,25 +37,11 @@ const stages: Record<Work["id"], { Stage: ComponentType<StageProps>; end: number
   "dental-clinic": { Stage: DentalStage, end: 1 },
 };
 
-const flows: Record<Work["id"], FlowRow[]> = {
-  "lh-management": [
-    { kind: "node", label: "Web form", sub: "data entry" },
-    { kind: "node", label: "SQL Server", sub: "T-SQL · procedures · triggers", accent: true },
-    { kind: "grid", caption: "10+ entities · referential integrity", items: ["Players", "Clubs", "Leagues", "Contracts", "Agents", "Transfers"] },
-  ],
-  "dental-clinic": [
-    { kind: "node", label: "Clinic website", sub: "HTML5 · CSS3" },
-    { kind: "node", label: "Appointment", sub: "booked" },
-    { kind: "node", label: "Webhook", sub: "event in" },
-    { kind: "pair", left: { label: "n8n", sub: "workflows" }, right: { label: "LLM", sub: "integration" } },
-    { kind: "node", label: "WhatsApp Business API", sub: "messages" },
-    { kind: "node", label: "Patient", sub: "in production · Linux VPS", accent: true },
-  ],
-};
-
 export function CaseStudy({ work, next }: { work: Work; next: Work }) {
   const wide = useMedia("(min-width: 1024px)");
   const reduce = useCalm();
+  const t = useT();
+  const to = useLocalePath();
   const { Stage, end } = stages[work.id];
   const n = work.chapters.length;
 
@@ -94,9 +81,9 @@ export function CaseStudy({ work, next }: { work: Work; next: Work }) {
           className="container-x relative flex min-h-[92svh] flex-col justify-end pb-[10svh] pt-[calc(var(--nav-h)+8svh)]"
           style={reduce ? undefined : { y: headY, opacity: headFade }}
         >
-          <Link href="/#work" className="label group mb-auto inline-flex w-fit items-center gap-2 text-fg">
+          <Link href={`${to("/")}#work`} className="label group mb-auto inline-flex w-fit items-center gap-2 text-fg">
             <ArrowRight className="rotate-180 transition-transform duration-500 ease-out-expo group-hover:-translate-x-1" />
-            Back to work
+            {t.case.back}
           </Link>
 
           <p className="label mb-6 mt-16 flex flex-wrap items-center gap-3">
@@ -127,7 +114,7 @@ export function CaseStudy({ work, next }: { work: Work; next: Work }) {
                 {work.status.label}
               </p>
             )}
-            <ul className="flex flex-wrap gap-2" aria-label="Technologies">
+            <ul className="flex flex-wrap gap-2" aria-label={t.realWorld.technologies}>
               {work.stack.map((t) => (
                 <li key={t} className="rounded-full border border-line px-3 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
                   {t}
@@ -176,6 +163,7 @@ export function CaseStudy({ work, next }: { work: Work; next: Work }) {
 }
 
 function CaseStage({ work, Stage, p, still }: { work: Work; Stage: ComponentType<StageProps>; p: MotionValue<number>; still: boolean }) {
+  const t = useT();
   const [inspect, setInspect] = useState<Inspect>(null);
   return (
     <div className="sticky top-(--nav-h) flex h-[calc(100svh-var(--nav-h))] items-center justify-center">
@@ -200,7 +188,7 @@ function CaseStage({ work, Stage, p, still }: { work: Work; Stage: ComponentType
                   <span className="text-fg">{inspect.name}</span> — {inspect.detail}
                 </>
               ) : (
-                "hover a node to inspect it"
+                t.realWorld.hint
               )}
             </motion.span>
           </AnimatePresence>
@@ -211,19 +199,22 @@ function CaseStage({ work, Stage, p, still }: { work: Work; Stage: ComponentType
 }
 
 function MobileCaseFlow({ work, reduce }: { work: Work; reduce: boolean }) {
+  const t = useT();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.9", "end 0.5"] });
   const fixed = useMotionValue(1);
   return (
     <div ref={ref} className="mb-6 rounded-md border border-line bg-ink-2/50 p-4">
       <p className="label mb-4">{work.id}.system</p>
-      <MobileFlow rows={flows[work.id]} p={reduce ? fixed : scrollYProgress} label={`${work.title} system diagram`} />
+      <MobileFlow rows={work.caseFlow} p={reduce ? fixed : scrollYProgress} label={`${work.title} — ${t.realWorld.diagram}`} />
     </div>
   );
 }
 
 /* The end of a case leads into the next one: same thread, next system. */
 function NextCase({ work, next }: { work: Work; next: Work }) {
+  const t = useT();
+  const to = useLocalePath();
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useCalm();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.4"] });
@@ -236,8 +227,10 @@ function NextCase({ work, next }: { work: Work; next: Work }) {
       </div>
       <div className="mt-10 grid gap-10 border-t border-line pt-10 md:grid-cols-12 md:items-end">
         <div className="md:col-span-8">
-          <p className="label mb-5">Next case · {next.index}</p>
-          <Link href={`/work/${next.id}`} className="group block" data-cursor="Next">
+          <p className="label mb-5">
+            {t.case.next} · {next.index}
+          </p>
+          <Link href={to(`/work/${next.id}`)} className="group block" data-cursor={t.cursor.next}>
             <span className="display block text-[clamp(3rem,8vw,8.5rem)] leading-[0.88] transition-colors duration-500 group-hover:text-sodium">
               {next.title}
             </span>
@@ -254,11 +247,11 @@ function NextCase({ work, next }: { work: Work; next: Work }) {
               <ArrowUpRight />
             </a>
           ))}
-          <Link href="/#projects" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
-            Personal projects <ArrowRight />
+          <Link href={`${to("/")}#projects`} className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
+            {t.case.projects} <ArrowRight />
           </Link>
-          <Link href="/#contact" className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
-            Contact <ArrowRight />
+          <Link href={`${to("/")}#contact`} className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-fg">
+            {t.case.contact} <ArrowRight />
           </Link>
         </div>
       </div>

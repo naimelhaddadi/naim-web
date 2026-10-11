@@ -17,10 +17,13 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ```
 ├── app/
-│   ├── layout.tsx            # fuentes, metadatos SEO, JSON-LD, nav, footer
-│   ├── page.tsx              # el orden de las secciones
+│   ├── [lang]/               # todo por idioma: /en (servido en /) y /es
+│   │   ├── layout.tsx        # fuentes, metadatos SEO por idioma, JSON-LD, nav, footer
+│   │   ├── page.tsx          # el orden de las secciones
+│   │   ├── template.tsx      # la transición entre páginas
+│   │   ├── work/[slug]/      # la página de cada caso real
+│   │   └── opengraph-image.tsx  # imagen para compartir, una por idioma
 │   ├── globals.css           # tokens: colores, tipografía, easing, grano
-│   ├── opengraph-image.tsx   # imagen para compartir (se genera en el build)
 │   └── icon.svg, robots.ts, sitemap.ts
 ├── components/
 │   ├── hero/OrbitField.tsx   # las órbitas del hero, en dos canvas (detrás y delante de la foto)
@@ -29,10 +32,12 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 │   ├── work/                 # los diagramas que se construyen con el scroll, sus versiones para móvil,
 │   │                         # las tarjetas de proyectos personales, el panel de detalles y el trazador de peticiones
 │   ├── diagrams/primitives.tsx  # piezas compartidas de los diagramas (paquetes que viajan, tipos)
-│   ├── layout/               # Nav, Footer, cursor, scroll suave
+│   ├── layout/               # Nav, Footer, interruptor EN / ES, cursor, scroll suave
 │   └── ui/                   # piezas reutilizables: botón magnético, textos con máscara, texto que se enciende con el scroll...
 ├── lib/
-│   ├── content.ts            # TODO el contenido: proyectos, stack y cómo se conectan las tecnologías
+│   ├── content.ts            # proyectos, proceso y stack, en inglés y en español
+│   ├── dictionary.ts         # todos los textos de la interfaz, en inglés y en español
+│   ├── lang.tsx              # el idioma actual (contexto de React) y los hooks useT() y useContent()
 │   ├── site.ts               # enlaces y datos de contacto
 │   ├── scroll.ts             # la instancia de Lenis, para pararla cuando se abre un caso
 │   ├── useCalm.ts            # "reducir movimiento" sin errores de hidratación
@@ -40,6 +45,14 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 ├── assets/photos/            # fotos (se importan y Next las optimiza)
 └── public/assets/            # CV y carta de recomendación
 ```
+
+## Idiomas (inglés / español)
+
+- Cada idioma tiene sus propias páginas: `/` y `/work/…` en inglés, `/es` y `/es/work/…` en español. Se generan todas como HTML estático con `generateStaticParams`, así Google indexa ambas versiones y cada una carga ya en su idioma, sin parpadeos.
+- En `next.config.ts`, un `rewrite` sirve las páginas `/en…` en `/` y `/work/…` sin cambiar la URL, y `/en…` redirige ahí, para que cada página tenga una sola dirección.
+- El layout pone `<html lang>`, el título, la descripción y los enlaces `hreflang` de cada página, y pasa el idioma a todos los componentes con un contexto de React (`lib/lang.tsx`).
+- Los componentes sacan los textos de la interfaz con `useT()` (de `lib/dictionary.ts`) y los proyectos y el stack con `useContent()` (de `lib/content.ts`). El español está tipado igual que el inglés, así que si falta una traducción el build falla. Las etiquetas de los diagramas están junto a cada diagrama, en un objeto `text` con `en` y `es`.
+- El interruptor EN / ES del menú (`LangSwitch`) enlaza a la misma página en el otro idioma con `scroll={false}`, por eso al cambiar te quedas en el mismo punto.
 
 ## El hero
 
@@ -81,7 +94,7 @@ Es un portfolio, no un CV: quién soy, qué he construido, cómo pienso y cómo 
 
 ## Cambiar contenido
 
-Casi todo está en `lib/content.ts`. Las capas del stack son `layers`, los otros lenguajes `alsoLanguages` y las herramientas `tools`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
+Los textos de la interfaz están en `lib/dictionary.ts` y todo lo demás en `lib/content.ts`, cada uno en inglés y en español. Las capas del stack son `layers`, los otros lenguajes `alsoLanguages` y las herramientas `tools`; cada proyecto tiene sus textos (problema, enfoque, sistema) y sus tecnologías en el mismo archivo.
 
 ## Probarla en local
 

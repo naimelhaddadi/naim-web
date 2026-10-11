@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useInView, useMotionValue, useSpring, useTrans
 import { useRef, useState, type ComponentType } from "react";
 import type { Project } from "@/lib/content";
 import { ease } from "@/lib/motion";
+import { useT } from "@/lib/lang";
 import { useMedia } from "@/lib/useMedia";
 import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
 import type { VisualProps } from "./Visuals";
@@ -21,6 +22,7 @@ type Props = {
   screens have no hover, so there it plays when the tile is on screen.
 */
 export function ProjectCard({ project, Visual, onOpen }: Props) {
+  const t = useT();
   const ref = useRef<HTMLElement>(null);
   const [hover, setHover] = useState(false);
   const touch = useMedia("(hover: none)");
@@ -80,7 +82,7 @@ export function ProjectCard({ project, Visual, onOpen }: Props) {
       {/* Text */}
       <div className="flex min-w-0 flex-col gap-4 p-6">
         <p className="label">
-          <span className="inline-block whitespace-nowrap rounded-full border border-line-strong px-2.5 py-1 text-[0.64rem] tracking-[0.1em]">{project.kind}</span>
+          <span className="inline-block max-w-full rounded-full border border-line-strong px-2.5 py-1 text-[0.64rem] leading-snug tracking-[0.1em]">{project.kind}</span>
         </p>
         <h3 id={`${project.id}-title`} className="display text-[clamp(1.6rem,2.1vw,2.15rem)] leading-[0.95]">
           {project.title}
@@ -114,7 +116,7 @@ export function ProjectCard({ project, Visual, onOpen }: Props) {
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.35, ease: ease.out }}
                 className="flex flex-wrap gap-2"
-                aria-label="Technologies"
+                aria-label={t.realWorld.technologies}
               >
                 {project.stack.slice(0, 4).map((t) => (
                   <li key={t} className="rounded-full border border-line px-3 py-1 font-mono text-[11px] text-muted">
@@ -132,10 +134,10 @@ export function ProjectCard({ project, Visual, onOpen }: Props) {
             type="button"
             onClick={(e) => onOpen(e.currentTarget)}
             aria-haspopup="dialog"
-            data-cursor="View"
+            data-cursor={t.cursor.view}
             className="inline-flex items-center gap-2 border-b border-sodium/50 pb-1 text-sm font-medium transition-colors after:absolute after:inset-0 after:content-[''] hover:border-sodium hover:text-sodium"
           >
-            Details
+            {t.projects.details}
             <ArrowRight className="transition-transform duration-500 ease-out-expo group-hover/card:translate-x-1" />
           </button>
           {repo && (

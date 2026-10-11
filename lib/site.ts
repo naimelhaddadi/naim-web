@@ -8,16 +8,14 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/naimelhaddadi",
   cv: "/assets/CV_Naim_El_Haddadi.pdf",
   source: "https://github.com/naimelhaddadi/naim-web",
-  title: "Naim El Haddadi — Backend Developer",
-  description:
-    "Backend developer in Madrid working with Java, Spring Boot and SQL. A SQL Server database for a sports agency, a WhatsApp automation running with real patients, Spring Boot APIs and a Python market simulator.",
 } as const;
 
+/* The menu: section anchors, labelled from the dictionary (nav.links). */
 export const nav = [
-  { href: "#about", label: "About" },
-  { href: "#how", label: "How I work" },
-  { href: "#work", label: "Work" },
-  { href: "#projects", label: "Projects" },
-  { href: "#stack", label: "Stack" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", key: "about" },
+  { href: "#how", key: "how" },
+  { href: "#work", key: "work" },
+  { href: "#projects", key: "projects" },
+  { href: "#stack", key: "stack" },
+  { href: "#contact", key: "contact" },
 ] as const;

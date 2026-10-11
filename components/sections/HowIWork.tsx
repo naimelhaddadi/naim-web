@@ -2,7 +2,8 @@
 
 import { motion, useInView, useScroll, useTransform, type MotionValue } from "motion/react";
 import { useLayoutEffect, useRef, useState, type ReactNode } from "react";
-import { process } from "@/lib/content";
+import type { Step as ProcessStep } from "@/lib/content";
+import { useContent, useT } from "@/lib/lang";
 import { ease } from "@/lib/motion";
 import { useCalm } from "@/lib/useCalm";
 import { useMedia } from "@/lib/useMedia";
@@ -28,18 +29,15 @@ import { useMedia } from "@/lib/useMedia";
   column that builds as it scrolls past.
 */
 
-const INTRO =
-  "Before building something, I want to understand why it needs to exist, how people are solving it today and where the real friction is.";
-const HANDOFF = "Here's what that looks like in practice.";
-
 export function HowIWork() {
   const wide = useMedia("(min-width: 1024px) and (min-height: 640px)");
   const calm = useCalm();
+  const t = useT();
 
   return (
     <section id="how" aria-labelledby="how-title" className="relative">
       <h2 id="how-title" className="sr-only">
-        How I work: I don&apos;t start with code. I start with the problem.
+        {t.how.title}
       </h2>
       {wide && !calm ? <Scene /> : <Column calm={calm} />}
     </section>
@@ -63,6 +61,8 @@ function useBox<T extends HTMLElement>() {
 }
 
 function Scene() {
+  const t = useT();
+  const { process } = useContent();
   const track = useRef<HTMLDivElement>(null);
   const { scrollYProgress: p } = useScroll({ target: track, offset: ["start start", "end end"] });
   const [stageRef, { w: W, h: H }] = useBox<HTMLDivElement>();
@@ -111,7 +111,7 @@ function Scene() {
             <p className="label absolute left-0 top-0 flex items-center gap-3">
               <span className="text-sodium">(02)</span>
               <span aria-hidden className="h-px w-8 bg-line-strong" />
-              How I work
+              {t.how.label}
             </p>
 
             <div aria-hidden style={{ visibility: W > 0 ? "visible" : "hidden" }}>
@@ -120,13 +120,13 @@ function Scene() {
                 className="display absolute left-0 origin-top-left whitespace-nowrap"
                 style={{ top: top1, fontSize: fs, lineHeight: 0.92, scale }}
               >
-                <MaskOnView>I don&apos;t start</MaskOnView>
+                <MaskOnView>{t.how.code.first}</MaskOnView>
                 <MaskOnView delay={0.08}>
-                  with{" "}
+                  {t.how.code.before}
                   <span className="relative inline-block">
-                    <span className="text-outline">code.</span>
+                    <span className="text-outline">{t.how.code.word}</span>
                     <motion.span className="absolute inset-0" style={{ opacity: codeSolid }}>
-                      code.
+                      {t.how.code.word}
                     </motion.span>
                   </span>
                 </MaskOnView>
@@ -138,11 +138,11 @@ function Scene() {
                 className="display absolute left-0 origin-top-left whitespace-nowrap"
                 style={{ top: top2, fontSize: fs, lineHeight: 0.92, x: x2, y: y2, scale, clipPath: clip2 }}
               >
-                <span className="block">I start with</span>
+                <span className="block">{t.how.problem.first}</span>
                 <span className="block">
-                  the{" "}
+                  {t.how.problem.before}
                   <motion.span className="font-serif font-normal italic tracking-normal" style={{ color: problemColor }}>
-                    problem.
+                    {t.how.problem.word}
                   </motion.span>
                 </span>
               </motion.div>
@@ -151,7 +151,7 @@ function Scene() {
                 className="absolute max-w-[40ch] text-[clamp(1.05rem,1.35vw,1.3rem)] leading-relaxed text-muted"
                 style={{ left: W * 0.5, top: top1 + fs * 0.1, opacity: intro, y: introY }}
               >
-                {INTRO}
+                {t.how.intro}
               </motion.p>
 
               {/* the process, drawn: tangled at the problem, straight once it's understood */}
@@ -161,7 +161,7 @@ function Scene() {
                   <Line key={i} p={p} at={[at[i] - 0.02, at[i + 1]]} d={`M ${xs[i] + 8} ${y0} H ${xs[i + 1] - 8}`} solid />
                 ))}
                 <Line p={p} at={[0.8, 0.86]} d={loop} dashed accent />
-                <Marker p={p} at={0.84} x={(xs[1] + xs[4]) / 2} y={y0 - 86} />
+                <Marker p={p} at={0.84} x={(xs[1] + xs[4]) / 2} y={y0 - 86} text={t.how.again} />
 
                 <ProblemNode p={p} at={at[0]} x={xs[0]} y={y0} />
                 {[1, 2, 3, 4].map((i) => (
@@ -173,12 +173,12 @@ function Scene() {
               </svg>
 
               <motion.p className="label absolute text-sodium" style={{ left: xs[0] - 4, top: y0 + 22, opacity: problemLabel }}>
-                the problem
+                {t.how.theProblem}
               </motion.p>
             </div>
 
             {/* the four steps are real text, placed under their nodes */}
-            <ol className="absolute inset-0" aria-label="How I work">
+            <ol className="absolute inset-0" aria-label={t.how.label}>
               {process.map((step, i) => (
                 <Step
                   key={step.title}
@@ -196,7 +196,7 @@ function Scene() {
               style={{ top: H * 0.88 - 14, opacity: handoff, x: handoffX }}
             >
               <span aria-hidden className="block size-2 rounded-full bg-sodium" />
-              {HANDOFF}
+              {t.how.handoff}
             </motion.p>
           </div>
         </div>
@@ -237,11 +237,11 @@ function Line({ p, at, d, dashed, solid, accent }: { p: MotionValue<number>; at:
   );
 }
 
-function Marker({ p, at, x, y }: { p: MotionValue<number>; at: number; x: number; y: number }) {
+function Marker({ p, at, x, y, text }: { p: MotionValue<number>; at: number; x: number; y: number; text: string }) {
   const opacity = useTransform(p, [at, at + 0.03], [0, 1]);
   return (
     <motion.text x={x} y={y} textAnchor="middle" fontSize={10} letterSpacing={1.6} fill="#f2a15a" className="font-mono uppercase" style={{ opacity }}>
-      and again
+      {text}
     </motion.text>
   );
 }
@@ -270,7 +270,7 @@ function StepNode({ p, at, x, y }: { p: MotionValue<number>; at: number; x: numb
   );
 }
 
-function Step({ p, at, style, step, n }: { p: MotionValue<number>; at: number; style: React.CSSProperties; step: (typeof process)[number]; n: number }) {
+function Step({ p, at, style, step, n }: { p: MotionValue<number>; at: number; style: React.CSSProperties; step: ProcessStep; n: number }) {
   const v = useTransform(p, [at - 0.01, at + 0.04], [0, 1]);
   const y = useTransform(v, (t) => (1 - t) * 14);
   return (
@@ -285,6 +285,8 @@ function Step({ p, at, style, step, n }: { p: MotionValue<number>; at: number; s
 /* ── phones, short screens, reduced motion ─────────────────────────────── */
 
 function Column({ calm }: { calm: boolean }) {
+  const t = useT();
+  const { process } = useContent();
   const listRef = useRef<HTMLOListElement>(null);
   const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 0.85", "end 0.6"] });
   const headRef = useRef<HTMLDivElement>(null);
@@ -295,29 +297,29 @@ function Column({ calm }: { calm: boolean }) {
       <p className="label mb-8 flex items-center gap-3">
         <span className="text-sodium">(02)</span>
         <span aria-hidden className="h-px w-8 bg-line-strong" />
-        How I work
+        {t.how.label}
       </p>
 
       <div ref={headRef} aria-hidden className="display text-[clamp(2.6rem,11vw,6rem)] leading-[0.92]">
-        <MaskOnView>I don&apos;t start</MaskOnView>
+        <MaskOnView>{t.how.code.first}</MaskOnView>
         <MaskOnView delay={0.08}>
-          with{" "}
-          <span className={`transition-all duration-1000 ${headIn || calm ? "text-outline" : ""}`}>code.</span>
+          {t.how.code.before}
+          <span className={`transition-all duration-1000 ${headIn || calm ? "text-outline" : ""}`}>{t.how.code.word}</span>
         </MaskOnView>
         <div className="mt-[0.35em]">
-          <MaskOnView delay={0.2}>I start with</MaskOnView>
+          <MaskOnView delay={0.2}>{t.how.problem.first}</MaskOnView>
           <MaskOnView delay={0.28}>
-            the{" "}
+            {t.how.problem.before}
             <span className={`font-serif font-normal italic tracking-normal transition-colors duration-1000 ${headIn || calm ? "text-sodium" : ""}`}>
-              problem.
+              {t.how.problem.word}
             </span>
           </MaskOnView>
         </div>
       </div>
 
-      <p className="mt-10 max-w-[44ch] text-lg leading-relaxed text-muted">{INTRO}</p>
+      <p className="mt-10 max-w-[44ch] text-lg leading-relaxed text-muted">{t.how.intro}</p>
 
-      <ol ref={listRef} className="relative mt-12" aria-label="How I work">
+      <ol ref={listRef} className="relative mt-12" aria-label={t.how.label}>
         <motion.span
           aria-hidden
           className="absolute bottom-0 left-[5px] top-2 w-px origin-top bg-line-strong"
@@ -325,7 +327,7 @@ function Column({ calm }: { calm: boolean }) {
         />
         <li className="relative pb-8 pl-9" aria-hidden>
           <span className="absolute left-0 top-0.5 size-[11px] rounded-full border border-dashed border-sodium bg-ink" />
-          <p className="label text-sodium">the problem</p>
+          <p className="label text-sodium">{t.how.theProblem}</p>
         </li>
         {process.map((step, i) => (
           <li key={step.title} className="relative pb-9 pl-9">
@@ -339,7 +341,7 @@ function Column({ calm }: { calm: boolean }) {
 
       <p className="mt-4 flex items-center gap-3 font-display text-xl font-medium tracking-tight">
         <span aria-hidden className="block size-2 rounded-full bg-sodium" />
-        {HANDOFF}
+        {t.how.handoff}
       </p>
       <div aria-hidden className="ml-[3.5px] mt-4 h-16 w-[1.25px] bg-sodium" />
     </div>

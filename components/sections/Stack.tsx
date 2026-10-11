@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { Fragment, useRef } from "react";
-import { alsoLanguages, alsoProof, layers, request, stackProof, tools, type Layer } from "@/lib/content";
+import { alsoLanguages, request, type Layer } from "@/lib/content";
+import { useContent, useT } from "@/lib/lang";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { useCalm } from "@/lib/useCalm";
@@ -18,6 +19,8 @@ import { useCalm } from "@/lib/useCalm";
 export function Stack() {
   const ref = useRef<HTMLOListElement>(null);
   const calm = useCalm();
+  const t = useT();
+  const { layers, stackProof, alsoProof, tools } = useContent();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.8", "end 0.45"] });
   const at = useTransform(scrollYProgress, (v) => `${v * 100}%`);
 
@@ -26,18 +29,18 @@ export function Stack() {
       <div className="container-x">
         <SectionHeading
           index="05"
-          label="Stack"
+          label={t.stack.label}
           id="stack-title"
-          lines={["Java is my core,", "not my limit."]}
-          aside={<p className="max-w-xs">One request through the stack I know best, and the languages I also work with.</p>}
+          lines={t.stack.title}
+          aside={<p className="max-w-xs">{t.stack.aside}</p>}
         />
 
         <div className="mt-14 flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2 lg:mt-20">
           <p className="font-mono text-sm text-signal">
-            {request} <span className="text-muted">· one request, four layers</span>
+            {request} <span className="text-muted">· {t.stack.oneRequest}</span>
           </p>
           <p className="text-sm text-muted">
-            Shown in{" "}
+            {t.stack.shownIn}{" "}
             {stackProof.map((p, i) => (
               <Fragment key={p.label}>
                 {i > 0 && <span className="text-dim"> · </span>}
@@ -76,14 +79,14 @@ export function Stack() {
 
           <ol ref={ref} className="grid gap-9 lg:grid-cols-4 lg:gap-8">
             {layers.map((layer, i) => (
-              <Step key={layer.name} layer={layer} i={i} p={scrollYProgress} calm={calm} />
+              <Step key={layer.name} layer={layer} i={i} count={layers.length} p={scrollYProgress} calm={calm} />
             ))}
           </ol>
         </div>
 
         <Reveal className="mt-16 grid gap-6 border-t border-line pt-8 lg:mt-20 lg:grid-cols-12 lg:items-baseline lg:gap-8">
           <div className="lg:col-span-6">
-            <p className="label mb-3">I also work with</p>
+            <p className="label mb-3">{t.stack.also}</p>
             <p className="display text-[clamp(1.9rem,2.8vw,2.6rem)]">
               {alsoLanguages.map((l, i) => (
                 <Fragment key={l}>
@@ -94,7 +97,7 @@ export function Stack() {
             </p>
           </div>
           <p className="text-muted lg:col-span-3">
-            Same way of working, different syntax. My{" "}
+            {t.stack.sameWay}{" "}
             <Link
               href={alsoProof.href}
               target="_blank"
@@ -106,7 +109,7 @@ export function Stack() {
             {alsoProof.note}
           </p>
           <div className="text-sm lg:col-span-3 lg:text-right">
-            <p className="label mb-1.5">Tools</p>
+            <p className="label mb-1.5">{t.stack.tools}</p>
             <p className="text-muted">{tools.join(" · ")}</p>
           </div>
         </Reveal>
@@ -117,9 +120,9 @@ export function Stack() {
 
 const packet = "absolute z-10 size-2 rounded-full bg-sodium shadow-[0_0_14px_3px_rgba(242,161,90,0.45)]";
 
-function Step({ layer, i, p, calm }: { layer: Layer; i: number; p: MotionValue<number>; calm: boolean }) {
+function Step({ layer, i, count, p, calm }: { layer: Layer; i: number; count: number; p: MotionValue<number>; calm: boolean }) {
   // the layer lights up as the travelling point reaches its node
-  const start = i / layers.length;
+  const start = i / count;
   const lit = useTransform(p, [start - 0.02, start + 0.06], [0, 1]);
   const ring = useTransform(lit, [0, 1], ["rgba(255,255,255,0.16)", "rgba(242,161,90,1)"]);
   const fill = useTransform(lit, [0, 1], ["rgba(7,8,10,1)", "rgba(242,161,90,1)"]);

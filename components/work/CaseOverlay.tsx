@@ -5,6 +5,7 @@ import { useEffect, useRef, useSyncExternalStore, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import type { Project } from "@/lib/content";
 import { ArrowUpRight } from "@/components/ui/Icons";
+import { useT } from "@/lib/lang";
 import { ease } from "@/lib/motion";
 import { smooth } from "@/lib/scroll";
 import { RequestTracer } from "./RequestTracer";
@@ -54,6 +55,7 @@ export function CaseOverlay({ project, onClose, returnFocus }: Props) {
 }
 
 function Panel({ project, onClose }: { project: Project; onClose: () => void }) {
+  const t = useT();
   const closeRef = useRef<HTMLButtonElement>(null);
   const Visual = visuals[project.id];
 
@@ -98,7 +100,7 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
             onClick={onClose}
             className="label flex items-center gap-3 rounded-full border border-line px-4 py-2 text-fg transition-colors hover:border-fg/60"
           >
-            Close
+            {t.overlay.close}
             <span aria-hidden className="text-dim pointer-coarse:hidden">Esc</span>
           </button>
         </header>
@@ -118,7 +120,7 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
               ))}
               {project.status && (
                 <div className="flex items-center gap-2.5">
-                  <dt className="sr-only">Status</dt>
+                  <dt className="sr-only">{t.overlay.status}</dt>
                   <span className="live-dot relative size-1.5 rounded-full bg-live text-live" aria-hidden />
                   <dd>{project.status.label}</dd>
                 </div>
@@ -138,7 +140,7 @@ function Panel({ project, onClose }: { project: Project; onClose: () => void }) 
                 </ol>
 
                 <div className="mt-10 border-l border-line pl-5">
-                  <p className="label">Technology</p>
+                  <p className="label">{t.overlay.technology}</p>
                   <ul className="mt-3 flex flex-wrap gap-2">
                     {project.stack.map((t) => (
                       <li key={t} className="rounded-full border border-line px-3 py-1 font-mono text-[11px] text-muted">

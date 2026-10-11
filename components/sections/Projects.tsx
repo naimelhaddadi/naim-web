@@ -2,7 +2,8 @@
 
 import { motion, useScroll, useTransform } from "motion/react";
 import { useCallback, useRef, useState } from "react";
-import { personal, type Project } from "@/lib/content";
+import type { Project } from "@/lib/content";
+import { useContent, useT } from "@/lib/lang";
 import { site } from "@/lib/site";
 import { useMedia } from "@/lib/useMedia";
 import { ArrowUpRight } from "@/components/ui/Icons";
@@ -18,6 +19,8 @@ import { useCalm } from "@/lib/useCalm";
   slightly different speeds while the section scrolls past.
 */
 export function Projects() {
+  const t = useT();
+  const { personal } = useContent();
   const [open, setOpen] = useState<Project | null>(null);
   const trigger = useRef<HTMLElement | null>(null);
   const close = useCallback(() => setOpen(null), []);
@@ -42,21 +45,19 @@ export function Projects() {
       <div className="container-x">
         <SectionHeading
           index="04"
-          label="Personal projects"
+          label={t.projects.label}
           id="projects-title"
-          lines={["Personal projects."]}
+          lines={[t.projects.title]}
           aside={
             <div className="space-y-4">
-              <p className="max-w-sm text-lg">
-                Projects built while learning, experimenting and going deeper into software development.
-              </p>
+              <p className="max-w-sm text-lg">{t.projects.subtitle}</p>
               <a
                 href={site.github}
                 target="_blank"
                 rel="noopener"
                 className="group inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-fg"
               >
-                All repositories
+                {t.projects.allRepos}
                 <ArrowUpRight className="transition-transform duration-500 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </a>
             </div>

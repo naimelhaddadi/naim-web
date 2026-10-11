@@ -2,6 +2,7 @@
 
 import { motion, useInView, useScroll, useTransform } from "motion/react";
 import { useRef, type ReactNode } from "react";
+import { useT } from "@/lib/lang";
 import { site } from "@/lib/site";
 import { ArrowUpRight } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
@@ -43,6 +44,7 @@ export function About() {
   const listRef = useRef<HTMLOListElement>(null);
   const headRef = useRef<HTMLDivElement>(null);
   const reduce = useCalm();
+  const t = useT();
 
   // the thread is drawn by the scroll, from the top of the section to the last statement
   const { scrollYProgress } = useScroll({ target: listRef, offset: ["start 0.95", "end 0.6"] });
@@ -56,7 +58,7 @@ export function About() {
         <p className="label flex items-center gap-3 self-start lg:col-span-3 lg:pt-4">
           <span className="text-sodium">(01)</span>
           <span aria-hidden className="h-px w-8 bg-line-strong" />
-          About
+          {t.about.label}
         </p>
 
         <div className="lg:col-span-9">
@@ -64,9 +66,10 @@ export function About() {
             <h2 id="about-title" className="display text-[clamp(2.8rem,7vw,7.25rem)] leading-[0.9]">
               <MaskLines
                 lines={[
-                  "Curious by nature.",
+                  t.about.headline.first,
                   <span key="2" className="text-muted">
-                    Built to <span className="font-serif font-normal italic tracking-normal text-sodium">solve.</span>
+                    {t.about.headline.before}
+                    <span className="font-serif font-normal italic tracking-normal text-sodium">{t.about.headline.accent}</span>
                   </span>,
                 ]}
               />
@@ -80,17 +83,20 @@ export function About() {
               style={{ scaleY: reduce ? 1 : scrollYProgress }}
             />
             <Statement>
-              Computers have always been something I liked to experiment with — opening things up to see how they
-              work. <span className="text-fg">Programming became the natural extension of that curiosity.</span>
+              {t.about.curiosity.text} <span className="text-fg">{t.about.curiosity.strong}</span>
             </Statement>
             <Statement quote>
-              I enjoy the part of software development where a vague problem becomes a system you can actually reason
-              about.
+              {t.about.quote}
             </Statement>
             <Statement>
-              Today I focus on backend development: <span className="text-fg">Java</span>,{" "}
-              <span className="text-fg">Spring Boot</span>, <span className="text-fg">databases</span> and the systems
-              that connect them.
+              {t.about.focus.before}
+              {t.about.focus.highlights.map((h, i) => (
+                <span key={h}>
+                  {i > 0 && ", "}
+                  <span className="text-fg">{h}</span>
+                </span>
+              ))}
+              {t.about.focus.after}
             </Statement>
           </ol>
 
@@ -105,10 +111,10 @@ export function About() {
               href={site.cv}
               target="_blank"
               rel="noopener"
-              data-cursor="Open"
-              className="group inline-flex items-center gap-2 border-b border-sodium/50 pb-1 text-sm font-medium tracking-wide transition-colors hover:border-sodium hover:text-sodium"
+              data-cursor={t.cursor.open}
+              className="group inline-flex items-center gap-2 border-b border-sodium/50 pb-1 text-sm font-medium uppercase tracking-wide transition-colors hover:border-sodium hover:text-sodium"
             >
-              VIEW CV
+              {t.about.cv}
               <ArrowUpRight className="transition-transform duration-500 ease-out-expo group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </motion.div>

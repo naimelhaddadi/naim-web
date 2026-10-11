@@ -3,6 +3,7 @@
 import { AnimatePresence, motion, useInView } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { Endpoint } from "@/lib/content";
+import { useT } from "@/lib/lang";
 import { ease } from "@/lib/motion";
 
 const methodTone: Record<Endpoint["method"], string> = {
@@ -26,7 +27,8 @@ type Props = {
   Repository → Database, then the response comes back up.
 */
 export function RequestTracer({ endpoints, layers: appLayers, label }: Props) {
-  const layers = [{ name: "Client", detail: "HTTP request" }, ...appLayers];
+  const t = useT();
+  const layers = [{ name: t.tracer.client, detail: t.tracer.request }, ...appLayers];
   const depth = layers.length; // phases: 0..depth-1 going down, then back up
   const [active, setActive] = useState(0);
   const [phase, setPhase] = useState(-1);
@@ -83,7 +85,7 @@ export function RequestTracer({ endpoints, layers: appLayers, label }: Props) {
       onMouseLeave={() => setHovering(false)}
     >
       <div className="bg-ink-2 p-3">
-        <p className="label mb-2 px-2 pt-1">Endpoints</p>
+        <p className="label mb-2 px-2 pt-1">{t.tracer.endpoints}</p>
         <ul className="space-y-0.5" aria-label={`${label} endpoints`}>
           {endpoints.map((e, i) => (
             <li key={e.method + e.path}>
@@ -106,7 +108,7 @@ export function RequestTracer({ endpoints, layers: appLayers, label }: Props) {
       </div>
 
       <div className="hairline-grid relative bg-ink-2 p-3" aria-live="polite">
-        <p className="label mb-2 px-2 pt-1">Request path</p>
+        <p className="label mb-2 px-2 pt-1">{t.tracer.path}</p>
         <ol className="relative space-y-1.5 pl-5">
           <span aria-hidden className="absolute bottom-3 left-[7px] top-3 w-px bg-line-strong" />
           {layers.map((l, i) => {

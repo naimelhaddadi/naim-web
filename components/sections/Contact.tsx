@@ -1,4 +1,7 @@
+"use client";
+
 import { Fragment } from "react";
+import { useT } from "@/lib/lang";
 import { site } from "@/lib/site";
 import { Button } from "@/components/ui/Button";
 import { CopyEmail } from "@/components/ui/CopyEmail";
@@ -6,14 +9,14 @@ import { ArrowUpRight } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
 import { Reveal } from "@/components/ui/Reveal";
 
-const links = [
-  { href: `mailto:${site.email}`, label: "Email", handle: site.email },
-  { href: site.linkedin, label: "LinkedIn", handle: "in/naimelhaddadi" },
-  { href: site.github, label: "GitHub", handle: "naimelhaddadi" },
-  { href: site.cv, label: "CV", handle: "PDF" },
-];
-
 export function Contact() {
+  const t = useT();
+  const links = [
+    { href: `mailto:${site.email}`, label: "Email", handle: site.email },
+    { href: site.linkedin, label: "LinkedIn", handle: "in/naimelhaddadi" },
+    { href: site.github, label: "GitHub", handle: "naimelhaddadi" },
+    { href: site.cv, label: "CV", handle: t.contact.cv },
+  ];
   return (
     <section id="contact" aria-labelledby="contact-title" className="relative overflow-hidden pb-14 pt-[var(--section-y)]">
       <div
@@ -24,15 +27,16 @@ export function Contact() {
         <p className="label mb-10 flex items-center gap-3">
           <span className="text-sodium">(06)</span>
           <span aria-hidden className="h-px w-8 bg-line-strong" />
-          Contact
+          {t.contact.label}
         </p>
 
         <h2 id="contact-title" className="display text-[clamp(3rem,9.6vw,11rem)] leading-[0.88]">
           <MaskLines
             lines={[
-              "Let's build",
+              t.contact.title[0],
               <Fragment key="2">
-                something <span className="font-serif font-normal italic tracking-normal text-sodium">useful.</span>
+                {t.contact.title[1]}{" "}
+                <span className="font-serif font-normal italic tracking-normal text-sodium">{t.contact.title[2]}</span>
               </Fragment>,
             ]}
           />
@@ -40,19 +44,19 @@ export function Contact() {
 
         <Reveal className="mt-12 flex flex-col gap-8 md:mt-16 md:flex-row md:items-center md:justify-between">
           <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg">
-            Junior Backend Developer
+            {t.contact.role}
             <span aria-hidden className="h-px w-6 bg-line-strong" />
-            <span className="text-muted">Madrid, Spain</span>
+            <span className="text-muted">{t.contact.place}</span>
           </p>
-          <Button href={`mailto:${site.email}?subject=Hi%20Naim`} size="lg" data-cursor="Write">
-            Let&apos;s talk
+          <Button href={`mailto:${site.email}?subject=${encodeURIComponent(t.contact.subject)}`} size="lg" data-cursor={t.cursor.write}>
+            {t.contact.talk}
           </Button>
         </Reveal>
 
         <Reveal delay={0.1}>
           <ul className="mt-16 grid border-t border-line sm:grid-cols-2 md:mt-20 lg:grid-cols-4">
             {links.map((l) => (
-              <li key={l.label} className="flex items-center gap-3 border-b border-line lg:border-b-0 lg:border-r lg:pr-6 lg:last:border-r-0 lg:[&:not(:first-child)]:pl-6">
+              <li key={l.label} className="flex min-w-0 items-center gap-3 border-b border-line lg:border-b-0 lg:border-r lg:pr-6 lg:last:border-r-0 lg:[&:not(:first-child)]:pl-6">
                 <a
                   href={l.href}
                   {...(l.href.startsWith("mailto") ? {} : { target: "_blank", rel: "noopener" })}

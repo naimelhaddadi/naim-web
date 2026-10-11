@@ -11,14 +11,15 @@ import {
   type MotionValue,
 } from "motion/react";
 import { useRef, useState, type ComponentType } from "react";
-import { realWorld, type Work } from "@/lib/content";
+import type { Work } from "@/lib/content";
+import { useContent, useLocalePath, useT } from "@/lib/lang";
 import type { Inspect } from "@/components/diagrams/primitives";
 import { ArrowRight, ArrowUpRight } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
 import { Reveal } from "@/components/ui/Reveal";
 import { DentalStage } from "@/components/work/DentalStage";
 import { LH, LhStage } from "@/components/work/LhStage";
-import { MobileFlow, type FlowRow } from "@/components/work/MobileFlow";
+import { MobileFlow } from "@/components/work/MobileFlow";
 import type { StageProps } from "@/components/work/stage";
 import { ease } from "@/lib/motion";
 import { useMedia } from "@/lib/useMedia";
@@ -42,24 +43,11 @@ const stages: Record<Work["id"], { Stage: ComponentType<StageProps>; range: [num
   "dental-clinic": { Stage: DentalStage, range: [0, 1], still: 1 },
 };
 
-const flows: Record<Work["id"], FlowRow[]> = {
-  "lh-management": [
-    { kind: "node", label: "Web form", sub: "data entry" },
-    { kind: "node", label: "SQL Server", sub: "T-SQL · procedures · triggers", accent: true },
-    { kind: "grid", caption: "10+ entities", items: ["Players", "Clubs", "Leagues", "Contracts", "Agents", "Transfers"] },
-  ],
-  "dental-clinic": [
-    { kind: "node", label: "Appointment", sub: "booked" },
-    { kind: "node", label: "Webhook", sub: "event in" },
-    { kind: "pair", left: { label: "n8n", sub: "workflows" }, right: { label: "LLM", sub: "integration" } },
-    { kind: "node", label: "WhatsApp Business API", sub: "messages" },
-    { kind: "node", label: "Patient", sub: "in production", accent: true },
-  ],
-};
-
 export function RealWorld() {
   const wide = useMedia("(min-width: 1024px)");
   const reduce = useCalm();
+  const t = useT();
+  const { realWorld } = useContent();
 
   return (
     <section id="work" aria-labelledby="work-title" className="relative">
@@ -69,14 +57,14 @@ export function RealWorld() {
         <p className="label mb-8 flex items-center gap-3">
           <span className="text-sodium">(03)</span>
           <span aria-hidden className="h-px w-8 bg-line-strong" />
-          Real-world work
+          {t.realWorld.label}
         </p>
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <h2 id="work-title" className="display text-[clamp(3rem,8.4vw,9.25rem)] leading-[0.86] lg:col-span-8">
-            <MaskLines lines={["Real-world", "work."]} />
+            <MaskLines lines={t.realWorld.title} />
           </h2>
           <Reveal className="lg:col-span-4 lg:pb-3">
-            <p className="max-w-[30ch] text-lg text-muted">Software built for problems outside the classroom.</p>
+            <p className="max-w-[30ch] text-lg text-muted">{t.realWorld.subtitle}</p>
           </Reveal>
         </div>
       </div>
@@ -166,6 +154,9 @@ function Story({ work, wide, reduce, thread }: { work: Work; wide: boolean; redu
 }
 
 function Header({ work }: { work: Work }) {
+  const t = useT();
+  const to = useLocalePath();
+
   return (
     <header>
       <div className="flex items-end gap-5">
@@ -190,7 +181,7 @@ function Header({ work }: { work: Work }) {
         </p>
       )}
 
-      <ul className="mt-6 flex flex-wrap gap-2" aria-label="Technologies">
+      <ul className="mt-6 flex flex-wrap gap-2" aria-label={t.realWorld.technologies}>
         {work.stack.map((t) => (
           <li key={t} className="rounded-full border border-line px-3 py-1 font-mono text-[11px] uppercase tracking-[0.06em] text-muted">
             {t}
@@ -200,11 +191,11 @@ function Header({ work }: { work: Work }) {
 
       <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
         <Link
-          href={`/work/${work.id}`}
-          data-cursor="Case"
+          href={to(`/work/${work.id}`)}
+          data-cursor={t.cursor.case}
           className="group inline-flex items-center gap-2 rounded-full bg-fg px-5 py-2.5 text-sm font-medium text-ink transition-colors duration-500 hover:bg-sodium"
         >
-          View case
+          {t.realWorld.viewCase}
           <ArrowRight className="transition-transform duration-500 ease-out-expo group-hover:translate-x-1" />
         </Link>
         {work.links.map((l) => (
@@ -245,6 +236,7 @@ function StickyStage({
   progress: MotionValue<number>;
   arrive: MotionValue<number>;
 }) {
+  const t = useT();
   const [inspect, setInspect] = useState<Inspect>(null);
   const threadIn = arrive;
   const threadOut = useTransform(progress, [0.9, 1], [0, 1]);
@@ -287,7 +279,7 @@ function StickyStage({
                   <span className="text-fg">{inspect.name}</span> — {inspect.detail}
                 </>
               ) : (
-                "hover a node to inspect it"
+                t.realWorld.hint
               )}
             </motion.span>
           </AnimatePresence>
@@ -315,13 +307,14 @@ function Bridge({ wide, reduce }: { wide: boolean; reduce: boolean }) {
 }
 
 function MobileDiagram({ work, reduce }: { work: Work; reduce: boolean }) {
+  const t = useT();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.9", "end 0.55"] });
   const fixed = useMotionValue(1);
   return (
     <div ref={ref} className="mt-12">
       <p className="label mb-4">{work.id}.system</p>
-      <MobileFlow rows={flows[work.id]} p={reduce ? fixed : scrollYProgress} label={`${work.title} system diagram`} />
+      <MobileFlow rows={work.flow} p={reduce ? fixed : scrollYProgress} label={`${work.title} — ${t.realWorld.diagram}`} />
     </div>
   );
 }

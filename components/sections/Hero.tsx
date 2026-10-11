@@ -14,11 +14,10 @@ import { OrbitField } from "@/components/hero/OrbitField";
 import { Button } from "@/components/ui/Button";
 import { Github } from "@/components/ui/Icons";
 import { MaskLines } from "@/components/ui/MaskLines";
+import { useT } from "@/lib/lang";
 import { site } from "@/lib/site";
 import { ease } from "@/lib/motion";
 import { useCalm } from "@/lib/useCalm";
-
-const motto = ["think", "build", "solve"];
 
 /* The portrait melts into the page at the bottom and at both shoulders. */
 const photoMask = {
@@ -38,6 +37,7 @@ export function Hero() {
   const figureRef = useRef<HTMLDivElement>(null);
   const coreRef = useRef<HTMLSpanElement>(null);
   const reduce = useCalm();
+  const t = useT();
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   /*
@@ -115,7 +115,7 @@ export function Hero() {
             <div className="absolute inset-0" style={photoMask}>
               <Image
                 src={portrait}
-                alt="Naim El Haddadi, arms crossed"
+                alt={t.hero.photo}
                 fill
                 priority
                 sizes="(min-width: 1024px) 40vw, 92vw"
@@ -143,16 +143,16 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: ease.out, delay: 1.55 }}
           >
-            <span className="text-fg">Backend Developer</span>
+            <span className="text-fg">{t.hero.role}</span>
           </motion.p>
         </div>
 
         <div className="flex flex-1 items-end py-10 lg:py-12">
           <p className="display text-[clamp(3.25rem,7.6vw,9rem)] leading-[0.86]">
-            <span className="sr-only">I think. I build. I solve.</span>
-            {motto.map((word, i) => (
+            <span className="sr-only">{t.hero.motto.map((line) => `${line}.`).join(" ")}</span>
+            {t.hero.motto.map((line, i) => (
               <motion.span
-                key={word}
+                key={line}
                 aria-hidden
                 className="block"
                 style={{ marginLeft: `${i * 0.6}em`, ...(reduce ? {} : { x: mottoX[i] }) }}
@@ -162,7 +162,7 @@ export function Hero() {
                   delay={1.7 + i * 0.13}
                   lines={[
                     <>
-                      I {word}
+                      {line}
                       <span className="text-sodium">.</span>
                     </>,
                   ]}
@@ -180,7 +180,7 @@ export function Hero() {
         >
           <p className="label">Java · Spring Boot · SQL · Python</p>
           <div className="flex items-center gap-3">
-            <Button href="#work">View work</Button>
+            <Button href="#work">{t.hero.viewWork}</Button>
             <Button href={site.github} target="_blank" rel="noopener" variant="ghost" icon={<Github />}>
               GitHub
             </Button>
