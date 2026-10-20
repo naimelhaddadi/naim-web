@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://naimelhaddadi.com/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://naimelhaddadi.com/es"/>
+  </url>
+  <url>
+    <loc>https://naimelhaddadi.com/es</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://naimelhaddadi.com/"/>
+  </url>
+  <url>
+    <loc>https://naimelhaddadi.com/work/lh-management</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://naimelhaddadi.com/es/work/lh-management"/>
+  </url>
+  <url>
+    <loc>https://naimelhaddadi.com/es/work/lh-management</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://naimelhaddadi.com/work/lh-management"/>
+  </url>
+  <url>
+    <loc>https://naimelhaddadi.com/work/dental-clinic</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://naimelhaddadi.com/es/work/dental-clinic"/>
+  </url>
+  <url>
+    <loc>https://naimelhaddadi.com/es/work/dental-clinic</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://naimelhaddadi.com/work/dental-clinic"/>
+  </url>
+</urlset>
